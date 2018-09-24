@@ -139,6 +139,9 @@ case $1 in
        <% if p("tsa.registration_mode", nil) %> \
          --registration-mode=<%= p("tsa.registration_mode") %> \
        <% end %> \
+       <% if p("tsa.registration_rebalance_time", nil) %> \
+         --registration-rebalance-time=<%= p("tsa.registration_rebalance_time") %> \
+       <% end %> \
        <% tsa_addrs.each do |tsa_addr| %> \
          --tsa-host=<%= tsa_addr %> \
        <% end %> \

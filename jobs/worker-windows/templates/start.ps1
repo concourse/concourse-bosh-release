@@ -90,3 +90,6 @@ C:\var\vcap\packages\worker-windows\bin\worker.exe `
   <% if_p("no_proxy") do |url| %> `
     --no-proxy "<%= url.join(',') %>" `
   <% end %>
+  <% if p("tsa.registration_rebalance_time", nil) %> \
+    --registration-rebalance-time=<%= p("tsa.registration_rebalance_time") %> \
+  <% end %> \
