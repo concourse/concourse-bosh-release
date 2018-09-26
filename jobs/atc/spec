@@ -581,6 +581,18 @@ properties:
     description: |
       An optional prefix for emitted Datadog events.
 
+  newrelic.account_id:
+    description: |
+      New Relic Account ID.
+
+  newrelic.api_key:
+    description: |
+      New Relic Insights API Key.
+
+  newrelic.service_prefix:
+    description: |
+      An optional prefix for emitted New Relic events.
+
   riemann.host:
     description: |
       If configured, detailed metrics will be emitted to the specified Riemann
