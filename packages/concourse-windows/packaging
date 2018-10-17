@@ -1,0 +1,10 @@
+# vim: set ft=ps1
+
+. ./exiter.ps1
+
+trap {
+  write-error $_
+  exit 1
+}
+
+Expand-Archive -Path .\concourse\concourse-*.zip -DestinationPath $env:BOSH_INSTALL_TARGET

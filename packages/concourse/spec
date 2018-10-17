@@ -1,0 +1,5 @@
+---
+name: concourse
+
+files:
+- concourse/concourse-*.tgz

@@ -1,0 +1,5 @@
+check process web
+  with pidfile /var/vcap/sys/run/bpm/web/web.pid
+  start program "/var/vcap/jobs/bpm/bin/bpm start web"
+  stop program "/var/vcap/jobs/bpm/bin/bpm stop web"
+  group vcap

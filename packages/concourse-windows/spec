@@ -1,0 +1,6 @@
+---
+name: concourse-windows
+
+files:
+- exiter.ps1
+- concourse/concourse-*.zip

@@ -1,0 +1,177 @@
+---
+<%
+  postgres_host = ""
+  postgres_port = ""
+  postgres_role_name = ""
+  postgres_role_password = ""
+  postgres_database = ""
+  postgres_sslmode = p("postgresql.sslmode", "verify-ca")
+
+  if_p("postgresql.address") do |addr|
+    postgres_host, postgres_port = addr.split(":")
+  end
+
+  postgres_host = p("postgresql.host", "")
+  postgres_port = p("postgresql.port")
+  postgres_database = p("postgresql.database")
+  postgres_role_name = p("postgresql.role.name")
+  postgres_role_password = p("postgresql.role.password", "")
+
+  if_link("db") do |db|
+    postgres_host = db.instances.first.address
+    postgres_port = db.p("bind_port")
+    postgres_database = p("postgresql_database")
+
+    postgres_db = db.p("databases").find { |db| db["name"] == postgres_database }
+    if postgres_db.nil?
+      raise "database '#{db_name}' not provided by 'postgresql' link"
+    end
+
+    postgres_role_name = postgres_db["role"]
+    postgres_role_password = postgres_db["password"]
+  end if postgres_host.empty?
+
+  if_link("postgres") do |l|
+    postgres_host = l.instances.first.address
+  end if postgres_host.empty?
+
+  if postgres_host.empty?
+    raise "postgres.host not set and no 'db' or 'postgres' link available"
+  end
+
+  postgres_sslmode = p("postgresql.sslmode", "disable")
+
+  if !spec.address or spec.address == ""
+    tsa_peer_ip = "127.0.0.1"
+  else
+    tsa_peer_ip = spec.address
+  end
+
+  if_p("worker_gateway.forward_host") do |host|
+    tsa_peer_ip = host
+  end
+
+  web_urls = []
+  if_link("web") do |web|
+    web.instances.each do |instance|
+      web_urls << "http://#{instance.address}:#{web.p("bind_port")}"
+    end
+  end
+
+  web_urls = p("worker_gateway.web.urls") if web_urls.empty?
+%>
+
+# XXX: bail on typoed env?
+processes:
+- name: web
+  executable: /var/vcap/packages/concourse/bin/concourse
+  args: [web]
+  capabilities: [NET_BIND_SERVICE]
+  env:
+    CONCOURSE_BIND_IP: <%= p("bind_ip").to_json %>
+    CONCOURSE_BIND_PORT: <%= p("bind_port").to_json %>
+
+    CONCOURSE_LOG_LEVEL: <%= p("log_level").to_json %>
+    CONCOURSE_LOG_DB_QUERIES: <%= p("log_db_queries").to_json %>
+
+    CONCOURSE_SESSION_SIGNING_KEY: /var/vcap/jobs/web/config/token_signing_key
+
+    CONCOURSE_POSTGRES_HOST: <%= postgres_host.to_json %>
+    CONCOURSE_POSTGRES_PORT: <%= postgres_port.to_json %>
+    CONCOURSE_POSTGRES_DATABASE: <%= postgres_database.to_json %>
+    CONCOURSE_POSTGRES_SSLMODE: <%= postgres_sslmode.to_json %>
+    CONCOURSE_POSTGRES_USER: <%= postgres_role_name.to_json %>
+    CONCOURSE_POSTGRES_PASSWORD: <%= postgres_role_password.to_json %>
+    CONCOURSE_POSTGRES_CONNECT_TIMEOUT: <%= p("postgresql.connect_timeout").to_json %>
+<% if_p("postgresql.ca_cert") do |_| -%>
+    CONCOURSE_POSTGRES_CA_CERT: /var/vcap/jobs/web/config/postgres_ca_cert
+<% end -%>
+<% if_p("postgresql.client_cert") do |_| -%>
+    CONCOURSE_POSTGRES_CLIENT_CERT: /var/vcap/jobs/web/config/postgres_client_cert
+    CONCOURSE_POSTGRES_CLIENT_KEY: /var/vcap/jobs/web/config/postgres_client_key
+<% end -%>
+
+<% if_p("build_log_retention.default") do |default| -%>
+    CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN: <%= default.to_json %>
+<% end -%>
+<% if_p("build_log_retention.maximum") do |maximum| -%>
+    CONCOURSE_MAX_BUILD_LOGS_TO_RETAIN: <%= maximum.to_json %>
+<% end -%>
+
+<% if_p("default_task_cpu_limit") do |limit| -%>
+    CONCOURSE_DEFAULT_TASK_CPU_LIMIT: <%= limit.to_json %>
+<% end -%>
+<% if_p("default_task_memory_limit") do |limit| -%>
+    CONCOURSE_DEFAULT_TASK_MEMORY_LIMIT: <%= limit.to_json %>
+<% end -%>
+
+    CONCOURSE_GC_INTERVAL: <%= p("gc_interval").to_json %>
+    CONCOURSE_BUILD_TRACKER_INTERVAL: <%= p("build_tracker_interval").to_json %>
+    CONCOURSE_RESOURCE_CHECKING_INTERVAL: <%= p("default_check_interval").to_json %>
+    CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL: <%= p("default_resource_type_check_interval").to_json %>
+
+    CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= p("container_placement_strategy").to_json %>
+
+    CONCOURSE_BAGGAGECLAIM_RESPONSE_HEADER_TIMEOUT: <%= p("baggageclaim_response_header_timeout").to_json %>
+
+<% if_p("intercept_idle_timeout") do |timeout| -%>
+    CONCOURSE_INTERCEPT_IDLE_TIMEOUT: <%= timeout.to_json %>
+<% end -%>
+
+    CONCOURSE_ADD_LOCAL_USER: <%= p("add_local_users").join(",").to_json %>
+
+    CONCOURSE_GITHUB_HOST: <%= p("github_auth.host").to_json %>
+<% if_p("github_auth.client_id", "github_auth.client_secret") do |id, secret| -%>
+    CONCOURSE_GITHUB_CLIENT_ID: <%= id.to_json %>
+    CONCOURSE_GITHUB_CLIENT_SECRET: <%= secret.to_json %>
+<% end -%>
+
+<% if p("main_team.auth.allow_all_users") -%>
+    CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS: true
+<% end -%>
+
+<% unless p("main_team.auth.local.users").empty? -%>
+    CONCOURSE_MAIN_TEAM_LOCAL_USER: <%= p("main_team.auth.local.users").join(",").to_json %>
+<% end -%>
+
+<% unless p("main_team.auth.github.users").empty? -%>
+    CONCOURSE_MAIN_TEAM_GITHUB_USER: <%= p("main_team.auth.github.users").join(",").to_json %>
+<% end -%>
+<% unless p("main_team.auth.github.orgs").empty? -%>
+    CONCOURSE_MAIN_TEAM_GITHUB_ORG: <%= p("main_team.auth.github.orgs").join(",").to_json %>
+<% end -%>
+<% unless p("main_team.auth.github.teams").empty? -%>
+    CONCOURSE_MAIN_TEAM_GITHUB_ORG: <%= p("main_team.auth.github.teams").join(",").to_json %>
+<% end -%>
+
+<% if_p("tls_bind_port", "tls_cert", "tls_key") do |port, _, _| -%>
+    CONCOURSE_TLS_BIND_PORT: <%= port.to_json %>
+    CONCOURSE_TLS_CERT: /var/vcap/jobs/web/config/tls_cert
+    CONCOURSE_TLS_KEY: /var/vcap/jobs/web/config/tls_key
+<% end -%>
+
+<% if_p("encryption_key") do |key| -%>
+    CONCOURSE_ENCRYPTION_KEY: <%= key.to_json %>
+<% end -%>
+<% if_p("old_encryption_key") do |key| -%>
+    CONCOURSE_OLD_ENCRYPTION_KEY: <%= key.to_json %>
+<% end -%>
+
+    CONCOURSE_EXTERNAL_URL: <%= p("external_url").to_json %>
+    CONCOURSE_PEER_URL: <%= p("peer_url", "http://#{spec.address}:#{p("bind_port")}").to_json %>
+
+    CONCOURSE_X_FRAME_OPTIONS: <%= p("x_frame_options").to_json %>
+
+<% if p("cookie_secure") -%>
+    CONCOURSE_COOKIE_SECURE: true
+<% end -%>
+
+    CONCOURSE_AUTH_DURATION: <%= p("auth_duration").to_json %>
+
+    CONCOURSE_TSA_LOG_LEVEL: <%= p("worker_gateway.log_level").to_json %>
+    CONCOURSE_TSA_ATC_URL: <%= web_urls.join(",").to_json %>
+    CONCOURSE_TSA_HEARTBEAT_INTERVAL: <%= p("worker_gateway.heartbeat_interval").to_json %>
+    CONCOURSE_TSA_PEER_IP: <%= tsa_peer_ip.to_json %>
+    CONCOURSE_TSA_BIND_PORT: <%= p("worker_gateway.bind_port").to_json %>
+    CONCOURSE_TSA_HOST_KEY: /var/vcap/jobs/web/config/worker_gateway_host_key
+    CONCOURSE_TSA_AUTHORIZED_KEYS: /var/vcap/jobs/web/config/worker_gateway_authorized_keys

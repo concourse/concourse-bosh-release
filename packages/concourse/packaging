@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e -x
+
+tar -zxf concourse/concourse-*.tgz \
+  -C ${BOSH_INSTALL_TARGET} \
+  --strip-components=1

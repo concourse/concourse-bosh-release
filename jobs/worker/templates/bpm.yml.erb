@@ -1,0 +1,78 @@
+---
+<%
+  worker_gateway_addrs = nil
+  worker_gateway_port = nil
+
+  if_p("worker_gateway.host", "worker_gateway.port") do |host, port|
+    worker_gateway_addrs = ["#{host}:#{port}"]
+  end
+
+  if worker_gateway_addrs.nil? && worker_gateway_port.nil?
+    web = link("web")
+    worker_gateway_port = web.p("worker_gateway.bind_port")
+    worker_gateway_addrs = web.instances.collect do |instance|
+      "#{instance.address}:#{worker_gateway_port}"
+    end
+  end
+
+  name_prefix = spec.id.split("-")[0]
+%>
+
+processes:
+- name: worker
+  executable: /var/vcap/packages/concourse/bin/concourse
+  args: [worker]
+
+  unsafe:
+    privileged: true
+    unrestricted_volumes:
+    - path: /var/run
+      writable: true
+      mount_only: true
+
+  ephemeral_disk: true
+
+  env:
+<% if_p("http_proxy_url") do |v| -%>
+    http_proxy: <%= v.to_json %>
+<% end -%>
+<% if_p("https_proxy_url") do |v| -%>
+    https_proxy: <%= v.to_json %>
+<% end -%>
+<% unless p("no_proxy").empty? -%>
+    no_proxy: <%= p("no_proxy").join(",").to_json %>
+<% end -%>
+
+    CONCOURSE_LOG_LEVEL: <%= p("log_level").to_json %>
+
+    # XXX: put instance guid in prefix
+    # CONCOURSE_NAME:
+
+    CONCOURSE_WORK_DIR: /var/vcap/data/worker
+
+    CONCOURSE_TSA_HOST: <%= worker_gateway_addrs.join(",").to_json %>
+    CONCOURSE_TSA_PUBLIC_KEY: /var/vcap/jobs/worker/config/worker_gateway_host_key.pub
+    CONCOURSE_TSA_WORKER_PRIVATE_KEY: /var/vcap/jobs/worker/config/worker_key
+
+<% if_p("team") do |team| -%>
+    CONCOURSE_TEAM: <%= team.to_json %>
+<% end -%>
+
+<% unless p("tags").empty? -%>
+    CONCOURSE_TAG: <%= p("tags").join(",") %>
+<% end -%>
+
+    CONCOURSE_CERTS_DIR: <%= p("certs_path").to_json %>
+
+<% if p("ephemeral") -%>
+    CONCOURSE_EPHEMERAL: true
+<% end -%>
+
+<% if p("worker_gateway.registration_mode") == "direct" %>
+    CONCOURSE_PEER_IP: <%= spec.address %>
+    CONCOURSE_BIND_IP: 0.0.0.0
+    CONCOURSE_BAGGAGECLAIM_BIND_IP: 0.0.0.0
+<% end -%>
+
+    CONCOURSE_BAGGAGECLAIM_DRIVER: <%= p("baggageclaim.driver").to_json %>
+    CONCOURSE_BAGGAGECLAIM_BIND_PORT: <%= p("baggageclaim.bind_port").to_json %>

@@ -4,9 +4,9 @@ name: ((deployment_name))
 releases:
 - name: concourse
   version: ((concourse_version))
-- name: garden-runc
-  version: ((garden_runc_version))
 - name: postgres
+  version: latest
+- name: bpm
   version: latest
 
 instance_groups:
@@ -21,8 +21,11 @@ instance_groups:
   vm_type: ((vm_type))
   stemcell: xenial
   jobs:
+  - release: bpm
+    name: bpm
+
   - release: concourse
-    name: atc
+    name: web
     properties:
       log_level: debug
 
@@ -39,17 +42,19 @@ instance_groups:
           allow_all_users: true
 
       add_local_users:
-      - test:$2a$10$sDB6AsH2HheOWHILrnHVJOCZq/GYtUYE02ypJJTQBmWJNivYNhP3y
+      - test:test
 
       token_signing_key: ((token_signing_key))
+
+      worker_gateway:
+        host_key: ((tsa_host_key))
+        authorized_keys: [((worker_key.public_key))]
 
   - release: concourse
-    name: tsa
+    name: worker
     properties:
-      log_level: debug
-      host_key: ((tsa_host_key))
-      token_signing_key: ((token_signing_key))
-      authorized_keys: [((worker_key.public_key))]
+      worker_gateway:
+        worker_key: ((worker_key))
 
   - release: postgres
     name: postgres
@@ -61,26 +66,6 @@ instance_groups:
         roles:
         - name: atc
           password: ((postgres_password))
-
-  - release: concourse
-    name: worker
-    properties:
-      drain_timeout: 10m
-      tsa: {worker_key: ((worker_key))}
-      log_level: debug
-
-  - release: concourse
-    name: baggageclaim
-    properties:
-      log_level: debug
-
-  - release: garden-runc
-    name: garden
-    properties:
-      garden:
-        listen_network: tcp
-        listen_address: 0.0.0.0:7777
-        allow_host_access: true
 
 variables:
 - name: postgres_password
