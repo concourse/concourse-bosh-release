@@ -39,7 +39,8 @@ instance_groups:
 
       main_team:
         auth:
-          allow_all_users: true
+          local:
+            users: [test]
 
       add_local_users:
       - test:test
