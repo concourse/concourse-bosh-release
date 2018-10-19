@@ -91,14 +91,14 @@ processes:
 {{ range $prop := .EnvProperties -}}
 {{- if $prop.Env -}}
 <% if_p("{{$prop.Name}}") do |v| -%>
-    {{$prop.Env}}: <%= env_flag(v) %>
+    {{$prop.Env}}: <%= env_flag(v).to_json %>
 <% end -%>
 
 {{ end -}}
 
 {{- if $prop.EnvFile -}}
 <% if_p("{{$prop.Name}}") do |v| -%>
-    {{$prop.EnvFile}}: <%= env_file_flag(v, "{{$prop.EnvFile}}") %>
+    {{$prop.EnvFile}}: <%= env_file_flag(v, "{{$prop.EnvFile}}").to_json %>
 <% end -%>
 
 {{ end -}}

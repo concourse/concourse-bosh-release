@@ -1,5 +1,5 @@
 check process worker
-  with pidfile /var/vcap/sys/run/bpm/worker/worker.pid
-  start program "/var/vcap/jobs/bpm/bin/bpm start worker"
-  stop program "/var/vcap/jobs/bpm/bin/bpm stop worker"
+  with pidfile /var/vcap/sys/run/worker/worker.pid
+  start program "/var/vcap/jobs/worker/bin/ctl start"
+  stop program "/var/vcap/jobs/worker/bin/ctl stop"
   group vcap

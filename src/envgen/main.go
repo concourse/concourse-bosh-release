@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"text/template"
 
@@ -76,6 +77,8 @@ func run(cmd *cobra.Command, args []string) {
 		}
 	}
 
+	sort.Sort(byName(ctx.EnvProperties))
+
 	templatesPath := filepath.Join(jobPath, "templates")
 
 	templates, err := filepath.Glob(filepath.Join(templatesPath, "*.tmpl"))
@@ -106,3 +109,9 @@ func failIf(msg string, err error) {
 		os.Exit(1)
 	}
 }
+
+type byName []EnvProperty
+
+func (bn byName) Len() int           { return len(bn) }
+func (bn byName) Less(i, j int) bool { return bn[i].Name < bn[j].Name }
+func (bn byName) Swap(i, j int)      { bn[i], bn[j] = bn[j], bn[i] }

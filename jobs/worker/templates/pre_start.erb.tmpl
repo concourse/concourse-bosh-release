@@ -1,1 +1,9 @@
+#!/bin/bash
+# vim: ft=sh
+
+set -e -u -x
+
+# permit unprivileged containers to see their rootfs
+chmod o+x /var/vcap/data/worker
+
 {{template "create_env_files.erb.tmpl" .}}

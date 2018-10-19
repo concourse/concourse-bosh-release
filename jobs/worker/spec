@@ -7,8 +7,9 @@ description: >
   shutdown.
 
 templates:
-  bpm.yml.erb: config/bpm.yml
+  ctl.erb: bin/ctl
   pre_start.erb: bin/pre_start
+  env.sh.erb: config/env.sh
   worker_gateway_host_key.pub.erb: config/worker_gateway_host_key.pub
   # drain.erb: bin/drain
 

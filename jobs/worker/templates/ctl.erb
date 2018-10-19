@@ -1,0 +1,36 @@
+#!/bin/bash
+# vim: ft=sh
+
+RUN_DIR=/var/vcap/sys/run/worker
+DATA_DIR=/var/vcap/data/worker
+LOG_DIR=/var/vcap/sys/log/worker
+
+PIDFILE=${RUN_DIR}/worker.pid
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+
+    /var/vcap/jobs/worker/bin/pre_start
+
+    source /var/vcap/jobs/worker/config/env.sh
+
+    start-stop-daemon --pidfile $PIDFILE --make-pidfile --start \
+      --exec /var/vcap/packages/concourse/bin/concourse worker \
+         >> $LOG_DIR/worker.stdout.log \
+        2>> $LOG_DIR/worker.stderr.log
+
+    ;;
+
+  stop)
+    start-stop-daemon --pidfile $PIDFILE --remove-pidfile --stop --retry=TERM/15/QUIT/2/KILL/5
+
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+
+    ;;
+
+esac

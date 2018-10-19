@@ -4,22 +4,22 @@
   def env_flag(v)
     case v
     when Array
-      v.join(",").to_json
+      v.join(",")
     when Hash
-      v.collect { |k, v| "#{k}:#{v}" }.join(",").to_json
+      v.collect { |k, v| "#{k}:#{v}" }.join(",")
     else
-      v.to_json
+      v.to_s
     end
   end
 
   def env_file_flag(v, env)
     case v
     when Array
-      v.collect.with_index { |v, i| "/var/vcap/jobs/{{.Name}}/config/env/#{env}_#{i}" }.join(",").to_json
+      v.collect.with_index { |v, i| "/var/vcap/jobs/{{.Name}}/config/env/#{env}_#{i}" }.join(",")
     when Hash
-      v.collect { |k, v| "#{k}:/var/vcap/jobs/{{.Name}}/config/env/#{env}_#{k}" }.join(",").to_json
+      v.collect { |k, v| "#{k}:/var/vcap/jobs/{{.Name}}/config/env/#{env}_#{k}" }.join(",")
     else
-      "/var/vcap/jobs/{{.Name}}/config/env/#{env}".to_json
+      "/var/vcap/jobs/{{.Name}}/config/env/#{env}"
     end
   end
 -%>
