@@ -1,12 +1,9 @@
-<%
-  host_public_key=""
+<%=
+  host_key = ""
 
-  if_p("worker_gateway.host_public_key") do |key|
-    host_public_key=key
+  if_link("web") do |link|
+    host_key = link.p("worker_gateway.host_key.public_key")
   end
 
-  if host_public_key == ""
-    host_public_key = link("web").p("worker_gateway.host_key.public_key")
-  end
-%>
-<%= host_public_key %>
+  host_key
+-%>

@@ -1,0 +1,105 @@
+---
+<%
+  postgres_host = ""
+  postgres_port = ""
+  postgres_role_name = ""
+  postgres_role_password = ""
+  postgres_database = ""
+  postgres_sslmode = p("postgresql.sslmode", "verify-ca")
+
+  if_p("postgresql.address") do |addr|
+    postgres_host, postgres_port = addr.split(":")
+  end
+
+  postgres_host = p("postgresql.host", "")
+  postgres_port = p("postgresql.port")
+  postgres_database = p("postgresql.database")
+  postgres_role_name = p("postgresql.role.name")
+  postgres_role_password = p("postgresql.role.password", "")
+
+  if postgres_host.empty?
+    if_link("db") do |db|
+      postgres_host = db.instances.first.address
+      postgres_port = db.p("bind_port")
+      postgres_database = p("postgresql_database")
+
+      postgres_db = db.p("databases").find { |db| db["name"] == postgres_database }
+      if postgres_db.nil?
+        raise "database '#{db_name}' not provided by 'postgresql' link"
+      end
+
+      postgres_role_name = postgres_db["role"]
+      postgres_role_password = postgres_db["password"]
+    end
+  end
+
+  if postgres_host.empty?
+    if_link("postgres") do |l|
+      postgres_host = l.instances.first.address
+    end
+  end
+
+  if postgres_host.empty?
+    raise "postgres.host not set and no 'db' or 'postgres' link available"
+  end
+
+  postgres_sslmode = p("postgresql.sslmode", "disable")
+
+  if !spec.address or spec.address == ""
+    tsa_peer_ip = "127.0.0.1"
+  else
+    tsa_peer_ip = spec.address
+  end
+
+  if_p("worker_gateway.forward_host") do |host|
+    tsa_peer_ip = host
+  end
+
+  web_urls = []
+  if_link("web") do |web|
+    web.instances.each do |instance|
+      web_urls << "http://#{instance.address}:#{web.p("bind_port")}"
+    end
+  end
+
+  web_urls = p("worker_gateway.web.urls") if web_urls.empty?
+%>
+
+# XXX: bail on typoed env?
+processes:
+- name: web
+  executable: /var/vcap/packages/concourse/bin/concourse
+  args: [web]
+  capabilities: [NET_BIND_SERVICE]
+
+  hooks:
+    pre_start: /var/vcap/jobs/web/bin/pre_start
+
+  env:
+    CONCOURSE_POSTGRES_HOST: <%= postgres_host.to_json %>
+    CONCOURSE_POSTGRES_PORT: <%= postgres_port.to_json %>
+    CONCOURSE_POSTGRES_DATABASE: <%= postgres_database.to_json %>
+    CONCOURSE_POSTGRES_SSLMODE: <%= postgres_sslmode.to_json %>
+    CONCOURSE_POSTGRES_USER: <%= postgres_role_name.to_json %>
+    CONCOURSE_POSTGRES_PASSWORD: <%= postgres_role_password.to_json %>
+
+    CONCOURSE_TSA_ATC_URL: <%= web_urls.join(",").to_json %>
+    CONCOURSE_TSA_PEER_IP: <%= tsa_peer_ip.to_json %>
+
+{{template "env_helpers.erb.tmpl" .}}
+
+{{ range $prop := .EnvProperties -}}
+{{- if $prop.Env -}}
+<% if_p("{{$prop.Name}}") do |v| -%>
+    {{$prop.Env}}: <%= env_flag(v) %>
+<% end -%>
+
+{{ end -}}
+
+{{- if $prop.EnvFile -}}
+<% if_p("{{$prop.Name}}") do |v| -%>
+    {{$prop.EnvFile}}: <%= env_file_flag(v, "{{$prop.EnvFile}}") %>
+<% end -%>
+
+{{ end -}}
+{{- end -}}

@@ -1,0 +1,25 @@
+<%
+  # vim: ft=eruby
+
+  def env_flag(v)
+    case v
+    when Array
+      v.join(",").to_json
+    when Hash
+      v.collect { |k, v| "#{k}:#{v}" }.join(",").to_json
+    else
+      v.to_json
+    end
+  end
+
+  def env_file_flag(v, env)
+    case v
+    when Array
+      v.collect.with_index { |v, i| "/var/vcap/jobs/{{.Name}}/config/env/#{env}_#{i}" }.join(",").to_json
+    when Hash
+      v.collect { |k, v| "#{k}:/var/vcap/jobs/{{.Name}}/config/env/#{env}_#{k}" }.join(",").to_json
+    else
+      "/var/vcap/jobs/{{.Name}}/config/env/#{env}".to_json
+    end
+  end
+-%>

@@ -7,10 +7,10 @@ description: >
   shutdown.
 
 templates:
-  # drain.erb: bin/drain
   bpm.yml.erb: config/bpm.yml
+  pre_start.erb: bin/pre_start
   worker_gateway_host_key.pub.erb: config/worker_gateway_host_key.pub
-  worker_key.erb: config/worker_key
+  # drain.erb: bin/drain
 
 packages:
 - concourse
@@ -21,76 +21,78 @@ consumes:
   optional: true
 
 properties:
-  log_level: # done
+  log_level:
+    env: CONCOURSE_LOG_LEVEL
     description: |
       The log level for the worker. When set to debug, you'll see a lot more
       information.
     default: info
 
-  team: # done
+  team:
+    env: CONCOURSE_TEAM
     description: |
       Register the worker for a single team.
 
       If not specified, the worker will be shared across all teams.
 
-  tags: # done
+  tags:
+    env: CONCOURSE_TAG
     description: |
       An array of tags to advertise for each worker.
-    default: []
+    example: [special]
 
-  http_proxy_url: # done
+  http_proxy_url:
+    env: http_proxy
     description: |
       Proxy to use for outgoing http requests from containers.
 
-  https_proxy_url: # done
+  https_proxy_url:
+    env: https_proxy
     description: |
       Proxy to use for outgoing https requests from containers.
 
-  no_proxy: # done
+  no_proxy:
+    env: no_proxy
     description: |
       A list domains and IPs with optional port for which the proxy should be bypassed, e.g. [localhost, 127.0.0.1, example.com, domain.com:8080]
-    default: []
 
-  certs_path: # done
+  certs_path:
+    env: CONCOURSE_CERTS_DIR
     description: |
       A path to a directory on the instance to create the resource certificates volume from.
     default: "/etc/ssl/certs"
 
-  drain_timeout: # done
+  drain_timeout: # XXX: no env
     description: |
       Maximum wait time in Go duration format (1m = 1 minute) for worker drain
       to be finished. Only applies when worker is getting shutdown.
 
       If not specified, it will be indefinite.
 
-  ephemeral: # done
+  ephemeral:
+    env: CONCOURSE_EPHEMERAL
     description: |
       If set, the worker will immediately disappear upon stalling.
     default: false
 
-  worker_gateway.host: # done
+  worker_gateway.hosts:
+    env: CONCOURSE_TSA_HOST
     description: |
-      IP or DNS address of the TSA server to register with.
+      Addresses (host:port) of TSA servers to register with.
 
       If not specified, the `web` link is used.
 
-  worker_gateway.port: # done
-    description: |
-      Port of the TSA server to register with.
-
-      Only used when `worker_gateway.host` is also specified. Otherwise the
-      port is autodiscovered via the `web` link.
-    default: 2222
-
-  worker_gateway.host_public_key: # done
+  worker_gateway.host_public_key:
+    env_file: CONCOURSE_TSA_PUBLIC_KEY
     description: >
       Public key to verify for the TSA server.
 
       If not specified, the `web` link is used.
     example: 'ssh-rsa ...'
 
-  worker_gateway.worker_key: # done
+  worker_gateway.worker_key:
     type: ssh
+    env_fields: {private_key: {env_file: CONCOURSE_TSA_WORKER_PRIVATE_KEY}}
     description: |
       SSH key to use when authenticating with the TSA.
     example:
@@ -100,10 +102,11 @@ properties:
         -----END RSA PRIVATE KEY-----
       public_key: 'ssh-rsa ...'
 
-  worker_gateway.registration_mode: # done
+  worker_gateway.registration_mode:
     description: |
       The registration 'mode' (direct, or forward), to use when registering the
       worker with the ATC.
+
       If "forward" is specified, the worker's Baggageclaim and Garden address
       will be forwarded through SSH to the TSA.
 
@@ -111,7 +114,7 @@ properties:
       forwarding over SSH.
     default: direct
 
-  worker_gateway.registration_rebalance_time: # XXX
+  worker_gateway.registration_rebalance_time: # XXX: this can't be configured on the binary!
     description: |
       For forwarded mode only. The interval on which a new connection will be
       created by the worker, also acts as the idle timeout time of the stale
@@ -120,16 +123,13 @@ properties:
     default: 0s
 
   baggageclaim.driver:
+    env: CONCOURSE_BAGGAGECLAIM_DRIVER
     description: |
       Driver to use for the volume store. One of detect, overlay, btrfs, or naive.
     default: detect
 
-  baggageclaim.bind_ip:
-    description: |
-      IP address on which Baggageclaim should listen for HTTP traffic.
-    default: 0.0.0.0
-
   baggageclaim.bind_port:
+    env: CONCOURSE_BAGGAGECLAIM_BIND_PORT
     description: |
       Port on which Baggageclaim should listen for HTTP traffic.
     default: 7788
