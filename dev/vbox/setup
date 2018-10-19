@@ -49,12 +49,12 @@ bosh -n -e vbox update-cloud-config ./cloud_config.yml
 
 if ! bosh -e vbox stemcells | grep bosh-warden-boshlite-ubuntu-xenial-go_agent >/dev/null; then
   by "uploading an initial ubuntu xenial stemcell..."
-  bosh -n -e vbox upload-stemcell "https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-xenial-go_agent?v=87"
+  bosh -n -e vbox upload-stemcell "https://bosh.io/d/stemcells/bosh-warden-boshlite-ubuntu-xenial-go_agent"
 fi
 
-if ! bosh -e vbox releases | grep garden-runc >/dev/null; then
-  by "uploading an initial garden-runc release..."
-  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/cloudfoundry/garden-runc-release"
+if ! bosh -e vbox releases | grep bpm >/dev/null; then
+  by "uploading an initial bpm release..."
+  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/cloudfoundry-incubator/bpm-release"
 fi
 
 if ! bosh -e vbox releases | grep postgres >/dev/null; then
