@@ -1,71 +1,4 @@
 ---
-<%
-  postgres_host = ""
-  postgres_port = ""
-  postgres_role_name = ""
-  postgres_role_password = ""
-  postgres_database = ""
-  postgres_sslmode = p("postgresql.sslmode", "verify-ca")
-
-  if_p("postgresql.address") do |addr|
-    postgres_host, postgres_port = addr.split(":")
-  end
-
-  postgres_host = p("postgresql.host", "")
-  postgres_port = p("postgresql.port")
-  postgres_database = p("postgresql.database")
-  postgres_role_name = p("postgresql.role.name")
-  postgres_role_password = p("postgresql.role.password", "")
-
-  if postgres_host.empty?
-    if_link("db") do |db|
-      postgres_host = db.instances.first.address
-      postgres_port = db.p("bind_port")
-      postgres_database = p("postgresql_database")
-
-      postgres_db = db.p("databases").find { |db| db["name"] == postgres_database }
-      if postgres_db.nil?
-        raise "database '#{db_name}' not provided by 'postgresql' link"
-      end
-
-      postgres_role_name = postgres_db["role"]
-      postgres_role_password = postgres_db["password"]
-    end
-  end
-
-  if postgres_host.empty?
-    if_link("postgres") do |l|
-      postgres_host = l.instances.first.address
-    end
-  end
-
-  if postgres_host.empty?
-    raise "postgres.host not set and no 'db' or 'postgres' link available"
-  end
-
-  postgres_sslmode = p("postgresql.sslmode", "disable")
-
-  if !spec.address or spec.address == ""
-    tsa_peer_ip = "127.0.0.1"
-  else
-    tsa_peer_ip = spec.address
-  end
-
-  if_p("worker_gateway.forward_host") do |host|
-    tsa_peer_ip = host
-  end
-
-  web_urls = []
-  if_link("web") do |web|
-    web.instances.each do |instance|
-      web_urls << "http://#{instance.address}:#{web.p("bind_port")}"
-    end
-  end
-
-  web_urls = p("worker_gateway.web.urls") if web_urls.empty?
-%>
-
-# XXX: bail on typoed env?
 processes:
 - name: web
   executable: /var/vcap/packages/concourse/bin/concourse
@@ -76,15 +9,37 @@ processes:
     pre_start: /var/vcap/jobs/web/bin/pre_start
 
   env:
-    CONCOURSE_POSTGRES_HOST: <%= postgres_host.to_json %>
-    CONCOURSE_POSTGRES_PORT: <%= postgres_port.to_json %>
-    CONCOURSE_POSTGRES_DATABASE: <%= postgres_database.to_json %>
-    CONCOURSE_POSTGRES_SSLMODE: <%= postgres_sslmode.to_json %>
-    CONCOURSE_POSTGRES_USER: <%= postgres_role_name.to_json %>
-    CONCOURSE_POSTGRES_PASSWORD: <%= postgres_role_password.to_json %>
-
+<%
+  if p("worker_gateway.web.urls").empty?
+    if_link("web") do |l|
+      web_urls = []
+      web.instances.each do |instance|
+        web_urls << "http://#{instance.address}:#{web.p("bind_port")}"
+      end
+-%>
     CONCOURSE_TSA_ATC_URL: <%= web_urls.join(",").to_json %>
-    CONCOURSE_TSA_PEER_IP: <%= tsa_peer_ip.to_json %>
+<%
+    end
+  end
+-%>
+
+<%
+  if p("postgresql.host", "").empty?
+    if_link("postgres") do |l|
+-%>
+    CONCOURSE_POSTGRES_HOST: <%= l.instances.first.address.to_json %>
+<%
+    end
+  end
+-%>
+
+<%
+  if p("worker_gateway.forward_host", "").empty?
+-%>
+    CONCOURSE_TSA_PEER_IP: <%= spec.address.to_json %>
+<%
+  end
+-%>
 
 <%
   # vim: ft=eruby
@@ -545,6 +500,46 @@ processes:
     CONCOURSE_PEER_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("postgresql.ca_cert.certificate") do |v| -%>
+    CONCOURSE_POSTGRES_CA_CERT: <%= env_file_flag(v, "CONCOURSE_POSTGRES_CA_CERT").to_json %>
+<% end -%>
+
+<% if_p("postgresql.client_cert.certificate") do |v| -%>
+    CONCOURSE_POSTGRES_CLIENT_CERT: <%= env_file_flag(v, "CONCOURSE_POSTGRES_CLIENT_CERT").to_json %>
+<% end -%>
+
+<% if_p("postgresql.client_cert.private_key") do |v| -%>
+    CONCOURSE_POSTGRES_CLIENT_KEY: <%= env_file_flag(v, "CONCOURSE_POSTGRES_CLIENT_KEY").to_json %>
+<% end -%>
+
+<% if_p("postgresql.connect_timeout") do |v| -%>
+    CONCOURSE_POSTGRES_CONNECT_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.database") do |v| -%>
+    CONCOURSE_POSTGRES_DATABASE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.host") do |v| -%>
+    CONCOURSE_POSTGRES_HOST: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.port") do |v| -%>
+    CONCOURSE_POSTGRES_PORT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.role.name") do |v| -%>
+    CONCOURSE_POSTGRES_USER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.role.password") do |v| -%>
+    CONCOURSE_POSTGRES_PASSWORD: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.sslmode") do |v| -%>
+    CONCOURSE_POSTGRES_SSLMODE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("prometheus.bind_ip") do |v| -%>
     CONCOURSE_PROMETHEUS_BIND_IP: <%= env_flag(v).to_json %>
 <% end -%>
@@ -669,6 +664,10 @@ processes:
     CONCOURSE_TSA_BIND_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("worker_gateway.forward_host") do |v| -%>
+    CONCOURSE_TSA_PEER_IP: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("worker_gateway.heartbeat_interval") do |v| -%>
     CONCOURSE_TSA_HEARTBEAT_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -683,6 +682,10 @@ processes:
 
 <% if_p("worker_gateway.team_authorized_keys") do |v| -%>
     CONCOURSE_TSA_TEAM_AUTHORIZED_KEYS: <%= env_file_flag(v, "CONCOURSE_TSA_TEAM_AUTHORIZED_KEYS").to_json %>
+<% end -%>
+
+<% if_p("worker_gateway.web.urls") do |v| -%>
+    CONCOURSE_TSA_ATC_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("x_frame_options") do |v| -%>

@@ -1,3 +1,4 @@
+# vim: ft=yaml
 ---
 name: web
 
@@ -13,9 +14,6 @@ packages:
 - concourse
 
 consumes:
-- name: db
-  type: postgresql
-  optional: true
 - name: postgres
   type: database
   optional: true
@@ -57,17 +55,17 @@ properties:
 
       If not specified, only HTTP will be enabled.
 
-  tls_bind_port: # deprecated
+  tls_bind_port:
     env: CONCOURSE_TLS_BIND_PORT
     description: |
       Deprecated in favor of tls.bind_port.
 
-  tls_cert: # deprecated
+  tls_cert:
     env_file: CONCOURSE_TLS_CERT
     description: |
       Deprecated in favor of tls.cert.
 
-  tls_key: # deprecated
+  tls_key:
     env_file: CONCOURSE_TLS_KEY
     description: |
       Deprecated in favor of tls.cert.
@@ -147,7 +145,7 @@ properties:
       Set secure flag on auth cookies.
     default: false
 
-  auth_duration: # done
+  auth_duration:
     env: CONCOURSE_AUTH_DURATION
     description: |
       Length of time for which tokens are valid. Afterwards, users will have to log back in.
@@ -177,7 +175,7 @@ properties:
       password can be bcrypted. Bcrypted password must have a strength of 10 or
       higher or the user will not be able to login.
     default: {}
-    example: # XXX: this was an array before, but technically both should work now
+    example:
       some-user: $2a$10$sKZelZprWWcBAWbp28rB1uFef0Ybxsiqh05uo.H8EIm0sWc6IZGJu
       some-other-user: $2a$10$.YIYH.5EWQcCvfE49xH/.OhIhGFiNtn.tQq.4pznpcrqZvoLxuKeC
       some-plaintext-user: a-plaintext-password
@@ -425,7 +423,7 @@ properties:
       Whitelist all authenticated users for the main team.
     default: false
 
-  main_team.auth.local.users: # done
+  main_team.auth.local.users:
     env: CONCOURSE_MAIN_TEAM_LOCAL_USER
     description: |
       An array of local users that are authorized for the main team.
@@ -581,17 +579,15 @@ properties:
       format (1m = 1 minute).
     default: 1m
 
-  postgresql_database: # XXX: no env
-    description: |
-      Name of the database to use from the `postgresql` link.
-
-  postgresql.host: # XXX: no env
+  postgresql.host:
+    env: CONCOURSE_POSTGRES_HOST
     description: |
       IP address or DNS name of a PostgreSQL server to connect to.
 
       If not specified, one will be autodiscovered via BOSH links.
 
-  postgresql.port: # XXX: no env
+  postgresql.port:
+    env: CONCOURSE_POSTGRES_PORT
     description: |
       Port on which to connect to the server specified by `postgresql.host`.
 
@@ -599,41 +595,43 @@ properties:
       BOSH links, along with the host.
     default: 5432
 
-  postgresql.address: # XXX: no env
-    description: |
-      Deprecated. Shorthand for specifying `postgresql.host` and
-      `postgresql.port`.
-
-  postgresql.database: # XXX: no env
+  postgresql.database:
+    env: CONCOURSE_POSTGRES_DATABASE
     description: |
       Name of the database to use.
-    default: atc
 
-  postgresql.role.name: # XXX: no env
+  postgresql.role.name:
+    env: CONCOURSE_POSTGRES_USER
     description: |
       Name of role to connect with.
-    default: atc
 
-  postgresql.role.password: # XXX: no env
+  postgresql.role.password:
+    env: CONCOURSE_POSTGRES_PASSWORD
     description: |
       Password to use when connecting.
 
-  postgresql.sslmode: # XXX: no env
+  postgresql.sslmode:
+    env: CONCOURSE_POSTGRES_SSLMODE
     description: |
       Whether or not to use SSL. Defaults to `verify-ca` when `postgresql.address`
       or `postgresql.host` is provided. Otherwise, defaults to `disable`.
 
-  postgresql.ca_cert: # XXX: no env
+  postgresql.ca_cert:
     type: certificate
+    env_fields: {certificate: {env_file: CONCOURSE_POSTGRES_CA_CERT}}
     description: |
       CA certificate to verify the server against.
 
-  postgresql.client_cert: # XXX: no env
+  postgresql.client_cert:
     type: certificate
+    env_fields:
+      certificate: {env_file: CONCOURSE_POSTGRES_CLIENT_CERT}
+      private_key: {env_file: CONCOURSE_POSTGRES_CLIENT_KEY}
     description: |
       Client certificate to use when connecting with the server.
 
-  postgresql.connect_timeout: # XXX: no env
+  postgresql.connect_timeout:
+    env: CONCOURSE_POSTGRES_CONNECT_TIMEOUT
     description: |
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
@@ -926,6 +924,7 @@ properties:
     default: 30s
 
   worker_gateway.forward_host:
+    env: CONCOURSE_TSA_PEER_IP
     description: |
       Address to advertise forwarded worker connections to.
 
@@ -965,14 +964,15 @@ properties:
         ssh-rsa key key@pivotal.io
     default: {}
 
-  worker_gateway.log_level: # done
+  worker_gateway.log_level:
     env: CONCOURSE_TSA_LOG_LEVEL
     description: |
       The log level for the TSA.
     default: info
 
-  worker_gateway.web.urls: # XXX: no env
+  worker_gateway.web.urls:
+    env: CONCOURSE_TSA_ATC_URL
     description: |
       Web API endpoints to which workers will be advertised. If not specified,
       they will be autodiscovered via BOSH links.
-    default: ["http://127.0.0.1:8080"]
+    default: []
