@@ -1,4 +1,20 @@
 #!/bin/bash
+# vim: ft=sh
+
+<%
+  def seconds(duration)
+    case duration
+    when /^(\d+)s?$/
+      $1.to_i
+    when /^(\d+)m$/
+      $1.to_i * 60
+    when /^(\d+)h$/
+      $1.to_i * 60 * 60
+    else
+      raise "malformed duration: %s", duration
+    end
+  end
+%>
 
 set -e
 
@@ -15,53 +31,23 @@ exec 3>&1 # make stdout available as fd 3 for the drain result
 exec 1>>$LOG_DIR/drain.stdout.log
 exec 2>>$LOG_DIR/drain.stderr.log
 
-shutdown_flag=""
-
 if [ "$1" == "job_shutdown" ]; then
-  shutdown_flag="--shutdown"
+  cmd="retire-worker"
+else
+  cmd="land-worker"
 fi
 
-<%
-  worker_gateway_addrs = nil
-  worker_gateway_port = nil
+/var/vcap/jobs/worker/bin/pre_start
 
-  if_p("worker_gateway.host", "worker_gateway.port") do |host, port|
-    worker_gateway_addrs = ["#{host}:#{port}"]
-  end
+source /var/vcap/jobs/worker/config/env.sh
 
-  if worker_gateway_addrs.nil? && worker_gateway_port.nil?
-    web = link("web")
-    worker_gateway_port = web.p("worker_gateway.bind_port")
-    worker_gateway_addrs = web.instances.collect do |instance|
-      "#{instance.address}:#{worker_gateway_port}"
-    end
-  end
+chpst -u vcap:vcap /var/vcap/packages/concourse/bin/concourse \
+  $cmd
 
-  name_prefix = spec.id.split("-")[0]
-%>
-
-WORKER_KEY=/var/vcap/jobs/worker/config/worker_key
-chown vcap:vcap $WORKER_KEY
-chmod 0400 $WORKER_KEY
-
-TSA_HOST_KEY=/var/vcap/jobs/worker/config/worker_gateway_host_key.pub
-chown vcap:vcap $TSA_HOST_KEY
-chmod 0400 $TSA_HOST_KEY
-
-WORKER_VERSION=$(cat /var/vcap/packages/worker_version/version)
-
-chpst -u vcap:vcap /var/vcap/packages/worker/bin/worker \
-  drain \
-  --name=<%= name_prefix %>-$(hostname | cut -d '-' -f 2-) \
-  --tsa-public-key=${TSA_HOST_KEY} \
-  --tsa-worker-private-key=${WORKER_KEY} \
-  <% worker_gateway_addrs.each do |worker_gateway_addr| %> \
-  --tsa-host <%= worker_gateway_addr %>:<%= worker_gateway_port %> \
-  <% end %> \
-  --beacon-pid-file=$RUN_DIR/beacon.pid \
-  <% if_p("drain_timeout") do |drain_timeout| %> \
-  --timeout=<%= drain_timeout %> \
-  <% end %> \
-  $shutdown_flag \
+start-stop-daemon \
+  --stop \
+  --oknodo \
+  --pidfile $RUN_DIR/worker.pid \
+  --retry 0/<%= seconds(p("drain_timeout")) %>/TERM/60/KILL
 
 echo 0 >&3

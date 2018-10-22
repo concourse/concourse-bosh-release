@@ -1,3 +1,4 @@
+# vim: ft=yaml
 ---
 name: worker
 
@@ -8,10 +9,10 @@ description: >
 
 templates:
   ctl.erb: bin/ctl
+  drain.erb: bin/drain
   pre_start.erb: bin/pre_start
   env.sh.erb: config/env.sh
   worker_gateway_host_key.pub.erb: config/worker_gateway_host_key.pub
-  # drain.erb: bin/drain
 
 packages:
 - concourse
@@ -64,7 +65,7 @@ properties:
       A path to a directory on the instance to create the resource certificates volume from.
     default: "/etc/ssl/certs"
 
-  drain_timeout: # XXX: no env
+  drain_timeout:
     description: |
       Maximum wait time in Go duration format (1m = 1 minute) for worker drain
       to be finished. Only applies when worker is getting shutdown.
