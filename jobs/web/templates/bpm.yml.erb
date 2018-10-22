@@ -24,6 +24,20 @@ processes:
 -%>
 
 <%
+  if p("external_url", "").empty?
+    if_p("tls.bind_port") do |tls_port|
+-%>
+    CONCOURSE_EXTERNAL_URL: https://<%= spec.address %>:<%= tls_port %>
+<%
+    end.else do
+-%>
+    CONCOURSE_EXTERNAL_URL: http://<%= spec.address %>:<%= p("bind_port") %>
+<%
+    end
+  end
+-%>
+
+<%
   if p("postgresql.host", "").empty?
     if_link("postgres") do |l|
 -%>
