@@ -1,30 +1,40 @@
 #!/bin/bash
 # vim: ft=sh
 
-RUN_DIR=/var/vcap/sys/run/worker
-DATA_DIR=/var/vcap/data/worker
-LOG_DIR=/var/vcap/sys/log/worker
+set -e -u
 
+RUN_DIR=/var/vcap/sys/run/worker
+mkdir -p $RUN_DIR
 PIDFILE=${RUN_DIR}/worker.pid
 
+LOG_DIR=/var/vcap/sys/log/worker
+mkdir -p $LOG_DIR
+exec 1>> $LOG_DIR/worker.stdout.log
+exec 2>> $LOG_DIR/worker.stderr.log
+
+/var/vcap/jobs/worker/bin/pre_start
+
+source /var/vcap/jobs/worker/config/env.sh
+
+set -x
+
 case $1 in
-
   start)
-    mkdir -p $RUN_DIR $LOG_DIR
-
-    /var/vcap/jobs/worker/bin/pre_start
-
-    source /var/vcap/jobs/worker/config/env.sh
-
-    start-stop-daemon --pidfile $PIDFILE --make-pidfile --start \
-      --exec /var/vcap/packages/concourse/bin/concourse worker \
-         >> $LOG_DIR/worker.stdout.log \
-        2>> $LOG_DIR/worker.stderr.log
+    start-stop-daemon \
+      --pidfile $PIDFILE \
+      --make-pidfile \
+      --start \
+      --exec /var/vcap/packages/concourse/bin/concourse worker
 
     ;;
 
   stop)
-    start-stop-daemon --pidfile $PIDFILE --remove-pidfile --stop --retry=TERM/15/QUIT/2/KILL/5
+    start-stop-daemon \
+      --pidfile $PIDFILE \
+      --remove-pidfile \
+      --stop \
+      --oknodo \
+      --retry=TERM/15/QUIT/2/KILL
 
     ;;
 
@@ -32,5 +42,4 @@ case $1 in
     echo "Usage: $0 {start|stop}"
 
     ;;
-
 esac

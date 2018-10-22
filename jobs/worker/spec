@@ -71,6 +71,7 @@ properties:
       to be finished. Only applies when worker is getting shutdown.
 
       If not specified, it will be indefinite.
+    default: 1h
 
   ephemeral:
     env: CONCOURSE_EPHEMERAL
