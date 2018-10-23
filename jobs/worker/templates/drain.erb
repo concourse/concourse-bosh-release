@@ -1,6 +1,8 @@
 #!/bin/bash
 # vim: ft=sh
 
+set -e -u -x
+
 <%
   def seconds(duration)
     case duration
@@ -16,8 +18,6 @@
   end
 %>
 
-set -e -u
-
 RUN_DIR=/var/vcap/sys/run/worker
 mkdir -p $RUN_DIR
 PIDFILE=${RUN_DIR}/worker.pid
@@ -28,26 +28,17 @@ exec 3>&1 # make stdout available as fd 3 for the drain result
 exec 1>> $LOG_DIR/drain.stdout.log
 exec 2>> $LOG_DIR/drain.stderr.log
 
-/var/vcap/jobs/worker/bin/pre_start
-
-source /var/vcap/jobs/worker/config/env.sh
-
-set -x
-
 if [ "$1" == "job_shutdown" ]; then
-  cmd="retire-worker"
+  DRAIN_SIGNAL="USR2"
 else
-  cmd="land-worker"
+  DRAIN_SIGNAL="USR1"
 fi
-
-chpst -u vcap:vcap \
-  /var/vcap/packages/concourse/bin/concourse $cmd
 
 start-stop-daemon \
   --pidfile $RUN_DIR/worker.pid \
   --remove-pidfile \
   --stop \
   --oknodo \
-  --retry <%= seconds(p("drain_timeout")) %>/TERM/15/QUIT/2/KILL
+  --retry ${DRAIN_SIGNAL}/<%= seconds(p("drain_timeout")) %>/TERM/15/QUIT/2/KILL
 
 echo 0 >&3
