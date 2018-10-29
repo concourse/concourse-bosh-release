@@ -10,16 +10,22 @@ processes:
 
   env:
 <%
-  if p("worker_gateway.web.urls").empty?
-    if_link("web") do |l|
-      web_urls = []
-      web.instances.each do |instance|
-        web_urls << "http://#{instance.address}:#{web.p("bind_port")}"
-      end
+  if_link("web") do |l|
+    web_urls = []
+    web.instances.each do |instance|
+      web_urls << "http://#{instance.address}:#{web.p("bind_port")}"
+    end
 -%>
     CONCOURSE_TSA_ATC_URL: <%= web_urls.join(",").to_json %>
 <%
-    end
+  end
+-%>
+
+<%
+  if p("peer_url", "").empty?
+-%>
+    CONCOURSE_PEER_URL: http://<%= spec.address %>:<%= p("bind_port") %>
+<%
   end
 -%>
 
@@ -44,14 +50,6 @@ processes:
     CONCOURSE_POSTGRES_HOST: <%= l.instances.first.address.to_json %>
 <%
     end
-  end
--%>
-
-<%
-  if p("worker_gateway.forward_host", "").empty?
--%>
-    CONCOURSE_TSA_PEER_IP: <%= spec.address.to_json %>
-<%
   end
 -%>
 

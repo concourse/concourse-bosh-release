@@ -89,7 +89,7 @@ properties:
 
       Note that this refers to an *individual ATC*, not the whole cluster. This
       property is only useful if you're deploying in a way that cannot
-      autodetect its own IP, e.g. a `bosh-init` deployment.
+      autodetect its own IP, e.g. a `bosh create-env` deployment.
 
       You should otherwise leave this value blank.
 
@@ -99,7 +99,6 @@ properties:
         The value to set for X-Frame-Options.
 
         If omitted, the header is not set.
-    default: ""
 
   log_level:
     env: CONCOURSE_LOG_LEVEL
@@ -174,7 +173,6 @@ properties:
       List of username:password combinations for all your local users. The
       password can be bcrypted. Bcrypted password must have a strength of 10 or
       higher or the user will not be able to login.
-    default: {}
     example:
       some-user: $2a$10$sKZelZprWWcBAWbp28rB1uFef0Ybxsiqh05uo.H8EIm0sWc6IZGJu
       some-other-user: $2a$10$.YIYH.5EWQcCvfE49xH/.OhIhGFiNtn.tQq.4pznpcrqZvoLxuKeC
@@ -188,7 +186,6 @@ properties:
       The application must be configured with its callback URL as
       `{external_url}/sky/issuer/callback` (replacing `{external_url}`
       with the actual value).
-    default: ""
 
   github_auth.client_secret:
     env: CONCOURSE_GITHUB_CLIENT_SECRET
@@ -198,14 +195,12 @@ properties:
       The application must be configured with its callback URL as
       `{external_url}/sky/issuer/callback` (replacing `{external_url}`
       with the actual value).
-    default: ""
 
   github_auth.host:
     env: CONCOURSE_GITHUB_HOST
     description: |
       Override default hostname for Github Enterprise. (No scheme, No trailing slash)
     example: "github.example.com"
-    default: ""
 
   github_auth.ca_cert:
     type: certificate
@@ -216,17 +211,14 @@ properties:
   cf_auth.client_id:
     env: CONCOURSE_CF_CLIENT_ID
     description: UAA client ID to use for OAuth.
-    default: ""
 
   cf_auth.client_secret:
     env: CONCOURSE_CF_CLIENT_SECRET
     description: UAA client secret to use for OAuth.
-    default: ""
 
   cf_auth.api_url:
     env: CONCOURSE_CF_API_URL
     description: Cloud Foundry api endpoint url.
-    default: ""
 
   cf_auth.ca_cert:
     type: certificate
@@ -237,17 +229,14 @@ properties:
   ldap_auth.host:
     env: CONCOURSE_LDAP_HOST
     description: The host and optional port of the LDAP server. If port isn't supplied, it will be guessed based on the TLS configuration. 389 or 636.
-    default: ""
 
   ldap_auth.bind_dn:
     env: CONCOURSE_LDAP_BIND_DN
     description: Bind DN for searching LDAP users and groups. Typically this is a read-only user.
-    default: ""
 
   ldap_auth.bind_pw:
     env: CONCOURSE_LDAP_BIND_PW
     description: Bind Password for the user specified by 'bind-dn'.
-    default: ""
 
   ldap_auth.insecure_no_ssl:
     env: CONCOURSE_LDAP_INSECURE_NO_SSL
@@ -273,107 +262,86 @@ properties:
   ldap_auth.user_search_base_dn:
     env: CONCOURSE_LDAP_USER_SEARCH_BASE_DN
     description: BaseDN to start the search from. For example 'cn=users,dc=example,dc=com'.
-    default: ""
 
   ldap_auth.user_search_filter:
     env: CONCOURSE_LDAP_USER_SEARCH_FILTER
     description: Optional filter to apply when searching the directory. For example '(objectClass=person)'.
-    default: ""
 
   ldap_auth.user_search_username:
     env: CONCOURSE_LDAP_USER_SEARCH_USERNAME
     description: Attribute to match against the inputted username. This will be translated and combined with the other filter as '(<attr>=<username>)'.
-    default: ""
 
   ldap_auth.user_search_scope:
     env: CONCOURSE_LDAP_USER_SEARCH_SCOPE
     description: Can either be 'sub' - search the whole sub tree or 'one' - only search one level. Defaults to 'sub' if empty.
-    default: ""
 
   ldap_auth.user_search_id_attr:
     env: CONCOURSE_LDAP_USER_SEARCH_ID_ATTR
     description: A mapping of attributes on the user entry to claims. Defaults to 'uid' if empty.
-    default: ""
 
   ldap_auth.user_search_email_attr:
     env: CONCOURSE_LDAP_USER_SEARCH_EMAIL_ATTR
     description: A mapping of attributes on the user entry to claims. Defaults to 'mail' if empty.
-    default: ""
 
   ldap_auth.user_search_name_attr:
     env: CONCOURSE_LDAP_USER_SEARCH_NAME_ATTR
     description: A mapping of attributes on the user entry to claims.
-    default: ""
 
   ldap_auth.group_search_base_dn:
     env: CONCOURSE_LDAP_GROUP_SEARCH_BASE_DN
     description: BaseDN to start the search from. For example 'cn=groups,dc=example,dc=com'.
-    default: ""
 
   ldap_auth.group_search_filter:
     env: CONCOURSE_LDAP_GROUP_SEARCH_FILTER
     description: Optional filter to apply when searching the directory. For example '(objectClass=posixGroup)'.
-    default: ""
 
   ldap_auth.group_search_scope:
     env: CONCOURSE_LDAP_GROUP_SEARCH_SCOPE
     description: Can either be 'sub' - search the whole sub tree or 'one' - only search one level. Defaults to 'sub' if empty.
-    default: ""
 
   ldap_auth.group_search_user_attr:
     env: CONCOURSE_LDAP_GROUP_SEARCH_USER_ATTR
     description: Adds an additional requirement to the filter that an attribute in the group match the user's attribute value. The exact filter being added is (<groupAttr>=<userAttrvalue>).
-    default: ""
 
   ldap_auth.group_search_group_attr:
     env: CONCOURSE_LDAP_GROUP_SEARCH_GROUP_ATTR
     description: Adds an additional requirement to the filter that an attribute in the group match the user's attribute value. The exact filter being added is (<groupAttr>=<userAttrvalue>)
-    default: ""
 
   ldap_auth.group_search_name_attr:
     env: CONCOURSE_LDAP_GROUP_SEARCH_NAME_ATTR
     description: The attribute of the group that represents its name.
-    default: ""
 
   generic_oauth.client_id:
     env: CONCOURSE_OAUTH_CLIENT_ID
     description: Application client ID for enabling generic OAuth.
-    default: ""
 
   generic_oauth.client_secret:
     env: CONCOURSE_OAUTH_CLIENT_SECRET
     description: Application client secret for enabling generic OAuth.
-    default: ""
 
   generic_oauth.auth_url:
     env: CONCOURSE_OAUTH_AUTH_URL
     description: Generic OAuth provider authorization endpoint url.
-    default: ""
 
   generic_oauth.token_url:
     env: CONCOURSE_OAUTH_TOKEN_URL
     description: Generic OAuth provider token endpoint URL.
-    default: ""
 
   generic_oauth.userinfo_url:
     env: CONCOURSE_OAUTH_USERINFO_URL
     description: Generic OAuth provider user info endpoint URL.
-    default: ""
 
   generic_oauth.scopes:
     env: CONCOURSE_OAUTH_SCOPE
     description: OAuth scopes to request during authorization.
-    default: []
 
   generic_oauth.groups_key:
     env: CONCOURSE_OAUTH_GROUPS_KEY
     description: Groups claim key used to map groups from the OAuth userinfo/token
-    default: ""
 
   generic_oauth.display_name:
     env: CONCOURSE_OAUTH_DISPLAY_NAME
     description: Name of the authentication method to be displayed on the Web UI
-    default: ""
 
   generic_oauth.ca_cert:
     type: certificate
@@ -384,17 +352,14 @@ properties:
   generic_oidc.client_id:
     env: CONCOURSE_OIDC_CLIENT_ID
     description: Application client ID for enabling generic OIDC.
-    default: ""
 
   generic_oidc.client_secret:
     env: CONCOURSE_OIDC_CLIENT_SECRET
     description: Application client secret for enabling generic OIDC.
-    default: ""
 
   generic_oidc.issuer:
     env: CONCOURSE_OIDC_ISSUER
     description: Generic OIDC provider issuer url.
-    default: ""
 
   generic_oidc.scopes:
     env: CONCOURSE_OIDC_SCOPE
@@ -404,12 +369,10 @@ properties:
   generic_oidc.groups_key:
     env: CONCOURSE_OIDC_GROUPS_KEY
     description: Groups claim key used to map groups from the OIDC userinfo/token
-    default: ""
 
   generic_oidc.display_name:
     env: CONCOURSE_OIDC_DISPLAY_NAME
     description: Name of the authentication method to be displayed on the Web UI
-    default: ""
 
   generic_oidc.ca_cert:
     type: certificate
@@ -427,11 +390,9 @@ properties:
     env: CONCOURSE_MAIN_TEAM_LOCAL_USER
     description: |
       An array of local users that are authorized for the main team.
-    default: []
 
   main_team.auth.github.users:
     env: CONCOURSE_MAIN_TEAM_GITHUB_USER
-    default: []
     description: |
       An array of GitHub userids/logins that are authorized for the main team
     example:
@@ -439,7 +400,6 @@ properties:
 
   main_team.auth.github.orgs:
     env: CONCOURSE_MAIN_TEAM_GITHUB_ORG
-    default: []
     description: |
       An array of GitHub orgs that are authorized for the main team
     example:
@@ -447,7 +407,6 @@ properties:
 
   main_team.auth.github.teams:
     env: CONCOURSE_MAIN_TEAM_GITHUB_TEAM
-    default: []
     description: |
       An array of GitHub teams that are authorized for the main team
     example:
@@ -457,7 +416,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_CF_USER
     description: |
       List of CloudFoundry userids/usernames that are authorized for the main team
-    default: []
     example:
     - my-username
 
@@ -465,7 +423,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_CF_ORG
     description: |
       List of CloudFoundry Orgs that are authorized for the main team
-    default: []
     example:
     - myorg
 
@@ -473,7 +430,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_CF_SPACE
     description: |
       List of CloudFoundry Spaces that are authorized for the main team
-    default: []
     example:
     - myorg:myspace
 
@@ -481,7 +437,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_LDAP_USER
     description: |
       List of LDAP users that are authorized for the main team
-    default: []
     example:
     - my-username
 
@@ -489,7 +444,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_LDAP_GROUP
     description: |
       List of LDAP groups that are authorized for the main team
-    default: []
     example:
     - my-group
 
@@ -497,7 +451,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_OAUTH_USER
     description: |
       List of Generic OAuth users that are authorized for the main team
-    default: []
     example:
     - my-username
 
@@ -505,7 +458,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_OAUTH_GROUP
     description: |
       List of Generic OAuth groups that are authorized for the main team
-    default: []
     example:
     - my-group
 
@@ -513,7 +465,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_OIDC_USER
     description: |
       List of Generic OIDC users that are authorized for the main team
-    default: []
     example:
     - my-username
 
@@ -521,7 +472,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_OIDC_GROUP
     description: |
       List of Generic OIDC groups that are authorized for the main team
-    default: []
     example:
     - my-group
 
@@ -670,13 +620,11 @@ properties:
     env: CONCOURSE_RIEMANN_SERVICE_PREFIX
     description: |
       An optional prefix for emitted Riemann services
-    default: ""
 
   riemann.tags:
     env: CONCOURSE_RIEMANN_TAG
     description: |
       An optional map of tags in key: value format
-    default: {}
     example:
       env: dev
       foo: bar
@@ -700,17 +648,14 @@ properties:
     env: CONCOURSE_INFLUXDB_DATABASE
     description: |
       InfluxDB database to which metrics will be emitted.
-    default: ""
   influxdb.username:
     env: CONCOURSE_INFLUXDB_USERNAME
     description: |
       InfluxDB username for authorizing access.
-    default: ""
   influxdb.password:
     env: CONCOURSE_INFLUXDB_PASSWORD
     description: |
       InfluxDB password for authorizing access.
-    default: ""
   influxdb.insecure_skip_verify:
     env: CONCOURSE_INFLUXDB_INSECURE_SKIP_VERIFY
     description: |
@@ -740,7 +685,6 @@ properties:
     env: CONCOURSE_VAULT_SERVER_NAME
     description: |
       If set, is used to set the SNI host when connecting via TLS.
-    default: ""
   vault.tls.insecure_skip_verify:
     env: CONCOURSE_VAULT_INSECURE_SKIP_VERIFY
     description: |
@@ -757,17 +701,14 @@ properties:
     env: CONCOURSE_VAULT_CLIENT_TOKEN
     description: |
       Client token to use for accessing your Vault server.
-    default: ""
   vault.auth.backend:
     env: CONCOURSE_VAULT_AUTH_BACKEND
     description: |
       Auth backend to use for logging in to Vault.
-    default: ""
   vault.auth.params:
     env: CONCOURSE_VAULT_AUTH_PARAMS
     description: |
       Key-value parameters to provide when logging in with the backend.
-    default: {}
     example: {role_id: abc123, secret_id: def456}
 
   credhub.url:
@@ -923,13 +864,6 @@ properties:
       Interval on which to register workers with the ATC.
     default: 30s
 
-  worker_gateway.forward_host:
-    env: CONCOURSE_TSA_PEER_IP
-    description: |
-      Address to advertise forwarded worker connections to.
-
-      If not specified, the instance's address is used.
-
   worker_gateway.bind_port:
     env: CONCOURSE_TSA_BIND_PORT
     description: |
@@ -952,13 +886,17 @@ properties:
   worker_gateway.authorized_keys:
     env_file: CONCOURSE_TSA_AUTHORIZED_KEYS
     description: |
-      Public keys to authorize for SSH connections.
+      Public keys to authorize for SSH connections. Either a string with one
+      public key per line, or an array of public keys.
     default: ""
 
   worker_gateway.team_authorized_keys:
     env_file: CONCOURSE_TSA_TEAM_AUTHORIZED_KEYS
     description: |
-      Public keys to authorize team workers for SSH connections.
+      Public keys to authorize for per-team workers.
+
+      Map from team name to authorized keys, either as a string with one key
+      per line or an array of public keys.
     example:
       concourse: |
         ssh-rsa key key@pivotal.io
@@ -969,10 +907,3 @@ properties:
     description: |
       The log level for the TSA.
     default: info
-
-  worker_gateway.web.urls:
-    env: CONCOURSE_TSA_ATC_URL
-    description: |
-      Web API endpoints to which workers will be advertised. If not specified,
-      they will be autodiscovered via BOSH links.
-    default: []
