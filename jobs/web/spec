@@ -96,9 +96,9 @@ properties:
   x_frame_options:
     env: CONCOURSE_X_FRAME_OPTIONS
     description: |
-        The value to set for X-Frame-Options.
+      The value to set for X-Frame-Options.
 
-        If omitted, the header is not set.
+      If omitted, the header is not set.
 
   log_level:
     env: CONCOURSE_LOG_LEVEL
