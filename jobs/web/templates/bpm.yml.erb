@@ -448,10 +448,6 @@ processes:
     CONCOURSE_LOG_LEVEL: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("main_team.auth.allow_all_users") do |v| -%>
-    CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("main_team.auth.cf.orgs") do |v| -%>
     CONCOURSE_MAIN_TEAM_CF_ORG: <%= env_flag(v).to_json %>
 <% end -%>

@@ -380,12 +380,6 @@ properties:
     description: |
       The CA certificate for the Generic OIDC provider's endpoints.
 
-  main_team.auth.allow_all_users:
-    env: CONCOURSE_MAIN_TEAM_ALLOW_ALL_USERS
-    description: |
-      Whitelist all authenticated users for the main team.
-    default: false
-
   main_team.auth.local.users:
     env: CONCOURSE_MAIN_TEAM_LOCAL_USER
     description: |
