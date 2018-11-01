@@ -700,7 +700,7 @@ properties:
     description: |
       Auth backend to use for logging in to Vault.
   vault.auth.params:
-    env: CONCOURSE_VAULT_AUTH_PARAMS
+    env: CONCOURSE_VAULT_AUTH_PARAM
     description: |
       Key-value parameters to provide when logging in with the backend.
     example: {role_id: abc123, secret_id: def456}

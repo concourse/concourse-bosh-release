@@ -629,7 +629,7 @@ processes:
 <% end -%>
 
 <% if_p("vault.auth.params") do |v| -%>
-    CONCOURSE_VAULT_AUTH_PARAMS: <%= env_flag(v).to_json %>
+    CONCOURSE_VAULT_AUTH_PARAM: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("vault.cache") do |v| -%>
