@@ -79,6 +79,13 @@ properties:
       If set, the worker will immediately disappear upon stalling.
     default: false
 
+  sweep_interval:
+    env: CONCOURSE_SWEEP_INTERVAL
+    description: |
+      Interval on which to destroy containers and volumes marked for garbage
+      collection.
+    default: 30s
+
   worker_gateway.hosts:
     env: CONCOURSE_TSA_HOST
     description: |
@@ -106,24 +113,15 @@ properties:
         -----END RSA PRIVATE KEY-----
       public_key: 'ssh-rsa ...'
 
-  worker_gateway.registration_mode:
+  worker_gateway.rebalance_interval:
+    env: CONCOURSE_REBALANCE_INTERVAL
     description: |
-      The registration 'mode' (direct, or forward), to use when registering the
-      worker with the ATC.
+      The interval on which the worker will connect to a new SSH gateway and
+      drain the old connection. This has the effect of rebalancing the
+      forwarded workers across the SSH gateways over time.
 
-      If "forward" is specified, the worker's Baggageclaim and Garden address
-      will be forwarded through SSH to the TSA.
-
-      If "direct" is specified, the worker will be registered directly without
-      forwarding over SSH.
-    default: direct
-
-  worker_gateway.registration_rebalance_time: # XXX: this can't be configured on the binary!
-    description: |
-      For forwarded mode only. The interval on which a new connection will be
-      created by the worker, also acts as the idle timeout time of the stale
-      connections. A value of 0 would mean that the Worker will not create
-      additional connections.
+      A value of 0 means that the worker will not rebalance over time, and
+      instead stick with whichever SSH gateway it initially connected to.
     default: 0s
 
   baggageclaim.driver:
