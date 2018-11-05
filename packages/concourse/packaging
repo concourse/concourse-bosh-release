@@ -2,6 +2,12 @@
 
 set -e -x
 
-tar -zxf concourse/concourse-*.tgz \
-  -C ${BOSH_INSTALL_TARGET} \
-  --strip-components=1
+if [ -e concourse/dev.tgz ]; then
+  tar -zxf concourse/dev.tgz \
+    -C ${BOSH_INSTALL_TARGET} \
+    --strip-components=1
+else
+  tar -zxf concourse/concourse-*.tgz \
+    -C ${BOSH_INSTALL_TARGET} \
+    --strip-components=1
+fi

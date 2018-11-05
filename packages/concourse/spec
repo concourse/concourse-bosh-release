@@ -2,4 +2,4 @@
 name: concourse
 
 files:
-- concourse/concourse-*.tgz
+- concourse/*.tgz # concourse-*.tgz and (optionally) dev.tgz
