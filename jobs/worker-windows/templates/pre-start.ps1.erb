@@ -1,16 +1,9 @@
-#!/bin/bash
-# vim: ft=sh
+$ErrorActionPreference = "Stop";
+trap { $host.SetShouldExit(1) }
 
-set -e -u -x
-
-# permit unprivileged containers to see their rootfs
-chmod o+x /var/vcap/data/worker
-
-mkdir -p /var/vcap/jobs/worker/config/env
+mkdir C:\var\vcap\jobs\worker-windows\config\env -ErrorAction SilentlyContinue
 
 <%
-  # vim: ft=eruby
-
   def env_file_content(v)
     case v
     when Array
@@ -23,19 +16,19 @@ mkdir -p /var/vcap/jobs/worker/config/env
   end
 
   def env_file_writer(v, env)
-    path = "/var/vcap/jobs/worker/config/env/#{env}"
+    path = "C:\\var\\vcap\\jobs\\worker-windows\\config\\env\\#{env}"
 
     case v
     when Array
       v.collect.with_index do |v, i|
-        "cat > #{path}_#{i} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n"
+        "[IO.File]::WriteAllLines(\"#{path}_#{i}\", @'\n#{env_file_content(v)}\n'@)"
       end.join("\n\n")
     when Hash
       v.collect do |k, v|
-        "cat > #{path}_#{k} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n"
+        "[IO.File]::WriteAllLines(\"#{path}_#{k}\", @'\n#{env_file_content(v)}\n'@)"
       end.join("\n\n")
     else
-      "cat > #{path} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n\n"
+      "[IO.File]::WriteAllLines(\"#{path}\", @'\n#{env_file_content(v)}\n'@)"
     end
   end
 -%>
@@ -46,4 +39,3 @@ mkdir -p /var/vcap/jobs/worker/config/env
 <% if_p("worker_gateway.worker_key.private_key") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_TSA_WORKER_PRIVATE_KEY") %>
 <% end -%>
-

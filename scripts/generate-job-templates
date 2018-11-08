@@ -6,3 +6,4 @@ cd src/envgen
 
 go run *.go -t ../../tmpl -j ../../jobs/web
 go run *.go -t ../../tmpl -j ../../jobs/worker
+go run *.go -t ../../tmpl -j ../../jobs/worker-windows

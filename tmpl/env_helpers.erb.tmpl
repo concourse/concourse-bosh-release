@@ -22,4 +22,15 @@
       "/var/vcap/jobs/{{.Name}}/config/env/#{env}"
     end
   end
+
+  def env_windows_file_flag(v, env)
+    case v
+    when Array
+      v.collect.with_index { |v, i| "C:\\var\\vcap\\jobs\\{{.Name}}\\config\\env\\#{env}_#{i}" }.join(",")
+    when Hash
+      v.collect { |k, v| "#{k}:C:\\var\\vcap\\jobs\\{{.Name}}\\config\\env\\#{env}_#{k}" }.join(",")
+    else
+      "C:\\var\\vcap\\jobs\\{{.Name}}\\config\\env\\#{env}"
+    end
+  end
 -%>

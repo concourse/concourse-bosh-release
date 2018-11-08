@@ -28,7 +28,7 @@ mkdir -p /var/vcap/jobs/web/config/env
         "cat > #{path}_#{i} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n"
       end.join("\n\n")
     when Hash
-      v.collect do |i, v|
+      v.collect do |k, v|
         "cat > #{path}_#{k} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n"
       end.join("\n\n")
     else
