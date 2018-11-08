@@ -57,12 +57,15 @@ properties:
   no_proxy:
     env: no_proxy
     description: |
-      A list domains and IPs with optional port for which the proxy should be bypassed, e.g. [localhost, 127.0.0.1, example.com, domain.com:8080]
+      A list domains and IPs with optional port for which the proxy should be
+      bypassed.
+    example: [localhost, 127.0.0.1, example.com, 'domain.com:8080']
 
   certs_path:
     env: CONCOURSE_CERTS_DIR
     description: |
-      A path to a directory on the instance to create the resource certificates volume from.
+      A path to a directory on the instance to create the resource certificates
+      volume from.
     default: "/etc/ssl/certs"
 
   drain_timeout:
@@ -120,9 +123,8 @@ properties:
       drain the old connection. This has the effect of rebalancing the
       forwarded workers across the SSH gateways over time.
 
-      A value of 0 means that the worker will not rebalance over time, and
-      instead stick with whichever SSH gateway it initially connected to.
-    default: 0s
+      If not specified, the worker will not rebalance over time, and instead
+      stick with whichever SSH gateway it initially connected to.
 
   baggageclaim.driver:
     env: CONCOURSE_BAGGAGECLAIM_DRIVER
