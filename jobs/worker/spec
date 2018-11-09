@@ -137,3 +137,22 @@ properties:
     description: |
       Port on which Baggageclaim should listen for HTTP traffic.
     default: 7788
+
+  garden.deny_networks:
+    env: CONCOURSE_GARDEN_DENY_NETWORK
+    description: |
+      Network ranges to which traffic from containers will be denied.
+    example: []
+
+  garden.dns_servers:
+    env: CONCOURSE_GARDEN_DNS_SERVER
+    description: |
+      DNS servers IP addresses to use instead of automatically
+      propagating the host's DNS configuration.
+    example: []
+
+  garden.allow_host_access:
+    env: CONCOURSE_GARDEN_ALLOW_HOST_ACCESS
+    description: |
+      Allow containers to reach the worker VM's network.
+    default: false

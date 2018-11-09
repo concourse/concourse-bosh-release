@@ -24,6 +24,7 @@ provides:
   properties:
   - bind_port
   - tls_bind_port
+  - tls.bind_port
   - worker_gateway.bind_port
   - worker_gateway.host_key
 
