@@ -20,6 +20,7 @@ set -x
 
 case $1 in
   start)
+    ulimit -n 65536
     start-stop-daemon \
       --pidfile $PIDFILE \
       --make-pidfile \
