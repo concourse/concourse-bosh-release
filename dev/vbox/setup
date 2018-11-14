@@ -62,6 +62,21 @@ if ! bosh -e vbox releases | grep postgres >/dev/null; then
   bosh -n -e vbox upload-release "https://bosh.io/d/github.com/cloudfoundry/postgres-release"
 fi
 
+if ! bosh -e vbox releases | grep git-server >/dev/null; then
+  by "uploading an initial git-server release..."
+  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/cloudfoundry-community/git-server-release"
+fi
+
+if ! bosh -e vbox releases | grep vault >/dev/null; then
+  by "uploading an initial vault release..."
+  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/vito/vault-boshrelease"
+fi
+
+if ! bosh -e vbox releases | grep credhub >/dev/null; then
+  by "uploading an initial credhub release..."
+  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/pivotal-cf/credhub-release?v=1.9.5"
+fi
+
 by "updating route table for single-vm deployment..."
 ./route 10.244.0.0/16 192.168.50.6 vboxnet0
 
