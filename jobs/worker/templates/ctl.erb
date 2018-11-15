@@ -18,9 +18,20 @@ source /var/vcap/jobs/worker/config/env.sh
 
 set -x
 
+function increase_max_open_fds() {
+  ulimit -n 65536
+}
+
+function increase_max_procs() {
+  echo 4194304 > /proc/sys/kernel/pid_max
+  ulimit -u unlimited
+}
+
 case $1 in
   start)
-    ulimit -n 65536
+    increase_max_open_fds
+    increase_max_procs
+
     start-stop-daemon \
       --pidfile $PIDFILE \
       --make-pidfile \

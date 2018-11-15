@@ -8,6 +8,9 @@ processes:
   hooks:
     pre_start: /var/vcap/jobs/web/bin/pre_start
 
+  limits:
+    open_files: 65536
+
   env:
 <%
   if_link("web") do |l|
