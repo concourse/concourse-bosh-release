@@ -1,4 +1,5 @@
 src/concourse/dev.tgz
+dev/vbox/local-ops/*.yml
 
 config/dev.yml
 config/private.yml

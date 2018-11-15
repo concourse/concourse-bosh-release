@@ -32,7 +32,7 @@ else
 fi
 
 by "creating the environment..."
-./bosh-env create
+./bosh-env create "$@"
 
 by "targeting..."
 bosh -e 192.168.50.6 \

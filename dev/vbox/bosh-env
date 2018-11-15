@@ -4,6 +4,11 @@ set -e -u
 
 cd $(dirname $0)
 
+ops=()
+for o in local-ops/*.yml; do
+  ops+=("--ops-file=$o")
+done
+
 bosh ${1}-env bosh-deployment/bosh.yml \
   --state ./state.json \
   -o bosh-deployment/virtualbox/cpi.yml \
@@ -16,4 +21,5 @@ bosh ${1}-env bosh-deployment/bosh.yml \
   -v internal_ip=192.168.50.6 \
   -v internal_gw=192.168.50.1 \
   -v internal_cidr=192.168.50.0/24 \
-  -v outbound_network_name=NatNetwork
+  -v outbound_network_name=NatNetwork \
+  "${ops[@]}"
