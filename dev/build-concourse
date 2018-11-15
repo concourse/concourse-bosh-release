@@ -25,4 +25,5 @@ pushd $dir
     ./bin/cmd/concourse
 popd
 
+mkdir -p $release/src/concourse
 tar -C $release/dev/base/$rc -czf $release/src/concourse/dev.tgz concourse
