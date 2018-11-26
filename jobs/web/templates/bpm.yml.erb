@@ -514,6 +514,18 @@ processes:
     CONCOURSE_MAIN_TEAM_OIDC_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("newrelic.account_id") do |v| -%>
+    CONCOURSE_NEWRELIC_ACCOUNT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("newrelic.api_key") do |v| -%>
+    CONCOURSE_NEWRELIC_API_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("newrelic.service_prefix") do |v| -%>
+    CONCOURSE_NEWRELIC_SERVICE_PREFIX: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("old_encryption_key") do |v| -%>
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>

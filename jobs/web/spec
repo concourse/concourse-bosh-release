@@ -657,6 +657,19 @@ properties:
       Skip SSL verification when emitting to InfluxDB.
     default: false
 
+  newrelic.account_id:
+    env: CONCOURSE_NEWRELIC_ACCOUNT_ID
+    description: |
+      New Relic Account ID.
+  newrelic.api_key:
+    env: CONCOURSE_NEWRELIC_API_KEY
+    description: |
+      New Relic Insights API Key.
+  newrelic.service_prefix:
+    env: CONCOURSE_NEWRELIC_SERVICE_PREFIX
+    description: |
+      An optional prefix for emitted New Relic events.
+
   vault.url:
     env: CONCOURSE_VAULT_URL
     description: |
