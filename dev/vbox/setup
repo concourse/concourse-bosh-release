@@ -79,6 +79,3 @@ fi
 
 by "updating route table for single-vm deployment..."
 ./route 10.244.0.0/16 192.168.50.6 vboxnet0
-
-by "updating route table for topgun..."
-./route 10.234.0.0/16 192.168.50.6 vboxnet0

@@ -13,10 +13,10 @@ bosh -n -e vbox \
   -d concourse \
   deploy ./manifests/single-vm.yml \
   --vars-store dev/vbox/deploy-creds.yml \
-  -v web_ip=10.244.15.2 \
-  -v network_name=testflight \
-  -v vm_type=testflight \
-  -v deployment_name=concourse \
   -v concourse_version=latest \
+  -v deployment_name=concourse \
   -v garden_runc_version=latest \
+  -v network_name=test \
+  -v vm_type=test \
+  -v web_ip=10.244.15.2 \
   "$@"

@@ -8,8 +8,9 @@ networks:
   subnets:
   - az: z1
     dns: [8.8.8.8]
-    range: 10.234.0.0/16
-    gateway: 10.234.0.1
+    range: 10.244.0.0/16
+    gateway: 10.244.0.1
+    static: [10.244.15.2]
 
 vm_types:
 - name: test

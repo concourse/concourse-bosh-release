@@ -16,7 +16,6 @@ instance_groups:
   networks:
   - name: ((network_name))
     static_ips: [&web-ip ((web_ip))]
-  azs: [z1]
   persistent_disk: 10240
   vm_type: ((vm_type))
   stemcell: xenial
