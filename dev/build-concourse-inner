@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e -u -x
+
+if [ "$#" != "1" ]; then
+  echo "usage: $0 <rc-version>"
+  exit 1
+fi
+
+release=$(cd $(dirname $0)/.. && pwd)
+
+rc=${1}
+
+pushd /src
+  go install github.com/gobuffalo/packr/packr
+  packr build \
+    -o /release/dev/base/$rc/concourse/bin/concourse \
+    ./bin/cmd/concourse
+popd
+
+mkdir -p /release/src/concourse
+tar -C /release/dev/base/$rc -czf /release/src/concourse/dev.tgz concourse

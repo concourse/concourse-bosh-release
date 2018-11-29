@@ -18,12 +18,4 @@ if ! [ -e $release/dev/base/$rc ]; then
     tar -C $release/dev/base/$rc -zxf -
 fi
 
-pushd $dir
-  go install github.com/gobuffalo/packr/packr
-  GOOS=linux GOARCH=amd64 packr build \
-    -o $release/dev/base/$rc/concourse/bin/concourse \
-    ./bin/cmd/concourse
-popd
-
-mkdir -p $release/src/concourse
-tar -C $release/dev/base/$rc -czf $release/src/concourse/dev.tgz concourse
+docker run -v $dir:/src -v $release:/release --entrypoint /release/dev/build-concourse-inner concourse/dev $rc
