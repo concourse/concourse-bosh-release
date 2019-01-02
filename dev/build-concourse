@@ -1,21 +1,24 @@
 #!/bin/bash
 
-set -e -u -x
+set -e -u
 
-if [ "$#" != "2" ]; then
-  echo "usage: $0 <path/to/concourse/repo> <rc-version>"
+cd $(dirname $0)/..
+source ./dev/common.bash
+
+if [ "$#" != "1" ]; then
+  echo "usage: $0 <path/to/concourse/repo>"
   exit 1
 fi
 
-release=$(cd $(dirname $0)/.. && pwd)
+src=${1}
 
-dir=${1}
-rc=${2}
+by "syncing blobs..."
+bosh sync-blobs
 
-if ! [ -e $release/dev/base/$rc ]; then
-  mkdir -p $release/dev/base/$rc
-  curl https://storage.googleapis.com/concourse-artifacts/rcs/concourse-$rc-linux-amd64.tgz | \
-    tar -C $release/dev/base/$rc -zxf -
-fi
+by "extracting current rc..."
+rm -rf ./dev/base
+mkdir -p ./dev/base
+tar -C ./dev/base -zxf blobs/concourse/concourse-*-linux-amd64.tgz
+echo done
 
-docker run -v $dir:/src -v $release:/release --entrypoint /release/dev/build-concourse-inner concourse/dev $rc
+docker run -v $src:/src -v $(pwd):/release --entrypoint /release/dev/build-concourse-inner concourse/dev

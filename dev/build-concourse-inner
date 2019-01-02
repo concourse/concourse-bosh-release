@@ -1,22 +1,21 @@
 #!/bin/bash
 
-set -e -u -x
+set -e -u
 
-if [ "$#" != "1" ]; then
-  echo "usage: $0 <rc-version>"
-  exit 1
-fi
+cd $(dirname $0)/..
+source ./dev/common.bash
 
-release=$(cd $(dirname $0)/.. && pwd)
+ran_by="true"
 
-rc=${1}
-
+by "building concourse from source..."
 pushd /src
   go install github.com/gobuffalo/packr/packr
   packr build \
-    -o /release/dev/base/$rc/concourse/bin/concourse \
+    -o /release/dev/base/concourse/bin/concourse \
     ./bin/cmd/concourse
 popd
 
+by "creating dev.tgz..."
 mkdir -p /release/src/concourse
-tar -C /release/dev/base/$rc -czf /release/src/concourse/dev.tgz concourse
+tar -C /release/dev/base -czf /release/src/concourse/dev.tgz concourse
+echo done

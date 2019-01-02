@@ -2,9 +2,8 @@
 
 set -e -u
 
-cd $(dirname $0)
-
-source ./common.bash
+cd $(dirname $0)/../..
+source ./dev/common.bash
 
 by "destroying the environment..."
-./bosh-env delete
+./dev/vbox/bosh-env delete

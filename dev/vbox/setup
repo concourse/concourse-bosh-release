@@ -2,7 +2,8 @@
 
 set -e -u
 
-source $(dirname $0)/common.bash
+cd $(dirname $0)/../..
+source ./dev/common.bash
 
 if bosh --version | grep "1\.0" >/dev/null; then
   abort "requires BOSH CLI 2.0+: https://bosh.io/docs/cli-v2.html"
@@ -22,7 +23,7 @@ if VBoxManage list natnetworks | grep -A5 NatNetwork | grep 'DHCP Enabled:\s\+No
   abort "'NatNetwork' network has DHCP disabled; please enable it"
 fi
 
-cd $(dirname $0)
+cd dev/vbox
 
 by "fetching latest bosh-deployment..."
 if ! [ -e bosh-deployment ]; then

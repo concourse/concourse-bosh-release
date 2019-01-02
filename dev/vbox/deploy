@@ -2,9 +2,8 @@
 
 set -e -u
 
-source $(dirname $0)/common.bash
-
 cd $(dirname $0)/../..
+source ./dev/common.bash
 
 ./dev/vbox/upload
 
