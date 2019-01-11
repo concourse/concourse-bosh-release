@@ -5,8 +5,10 @@ releases:
 - name: concourse
   version: ((concourse_version))
 - name: postgres
-  version: latest
+  version: 31
 - name: bpm
+  version: latest
+- name: backup-and-restore-sdk
   version: latest
 
 instance_groups:
@@ -62,8 +64,25 @@ instance_groups:
         databases:
         - name: atc
         roles:
+        - name: admin
+          password: ((postgres_password))
+          permissions:
+          - SUPERUSER
         - name: atc
           password: ((postgres_password))
+  - release: concourse
+    name: bbr-atcdb
+    properties:
+      postgresql_database: atc
+      postgresql:
+        database: atc
+        role:
+          name: atc
+          password: ((postgres_password))
+
+  - release: backup-and-restore-sdk
+    name: database-backup-restorer
+    properties: {}
 
 variables:
 - name: postgres_password

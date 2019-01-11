@@ -1,0 +1,10 @@
+instances:
+- name: concourse
+  index: "0"
+  artifacts:
+  - name: bbr-atcdb
+    checksums:
+      ./atcdb-artifact-file: 665ff528e0e6e9ebba7f88086540b9baf78eb484a2a9c75fa2bf48bc78594bcb
+backup_activity:
+  start_time: 2019/01/10 17:23:10 EST
+  finish_time: 2019/01/10 17:23:11 EST

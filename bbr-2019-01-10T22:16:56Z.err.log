@@ -1,0 +1,36 @@
+1 error occurred:
+error 1:
+Fetching info: Performing request GET 'https://vbox:25555/info': Performing GET request: Retry: Get https://vbox:25555/info: dial tcp: lookup vbox on [2607:fea8:4ea0:b8e:be4d:fbff:fea2:9482]:53: no such host
+bosh director unreachable or unhealthy
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/bosh.getDirectorInfo
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/bosh/build_client.go:57
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/bosh.BuildClient
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/bosh/build_client.go:24
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/factory.BuildBoshClient
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/factory/bosh_deployment_manager.go:23
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/factory.BuildDeploymentBackuper
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/factory/deployment_backuper.go:23
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command.backupSingleDeployment
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command/deployment_backup.go:112
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command.DeploymentBackupCommand.Action
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command/deployment_backup.go:51
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command.DeploymentBackupCommand.Action-fm
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command/deployment_backup.go:27
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.HandleAction
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/app.go:490
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.Command.Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/command.go:210
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.(*App).RunAsSubcommand
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/app.go:379
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.Command.startApp
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/command.go:298
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.Command.Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/command.go:98
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.(*App).Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/app.go:255
+main.main
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/cmd/bbr/main.go:73
+runtime.main
+	/usr/local/go/src/runtime/proc.go:201
+runtime.goexit
+	/usr/local/go/src/runtime/asm_amd64.s:1333

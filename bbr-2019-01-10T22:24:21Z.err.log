@@ -1,0 +1,797 @@
+1 error occurred:
+error 1:
+1 error occurred:
+error 1:
+Error attempting to run restore for job bbr-atcdb on concourse/7ae618da-b4a6-4fad-aecf-639399dec3c8: pg_restore: connecting to database for restore
+pg_restore: dropping MATERIALIZED VIEW DATA transition_builds_per_job
+pg_restore: dropping MATERIALIZED VIEW DATA next_builds_per_job
+pg_restore: dropping MATERIALIZED VIEW DATA latest_completed_builds_per_job
+pg_restore: dropping FK CONSTRAINT workers workers_team_id_fkey
+pg_restore: dropping FK CONSTRAINT worker_task_caches worker_task_caches_worker_name_fkey
+pg_restore: dropping FK CONSTRAINT worker_task_caches worker_task_caches_job_id_fkey
+pg_restore: dropping FK CONSTRAINT worker_resource_certs worker_resource_certs_worker_name_fkey
+pg_restore: dropping FK CONSTRAINT volumes worker_resource_certs_id_fkey
+pg_restore: dropping FK CONSTRAINT worker_resource_caches worker_resource_caches_worker_base_resource_type_id_fkey
+pg_restore: dropping FK CONSTRAINT worker_resource_caches worker_resource_caches_resource_cache_id_fkey
+pg_restore: dropping FK CONSTRAINT worker_base_resource_types worker_base_resource_types_worker_name_fkey
+pg_restore: dropping FK CONSTRAINT worker_base_resource_types worker_base_resource_types_base_resource_type_id_fkey
+pg_restore: dropping FK CONSTRAINT volumes volumes_worker_task_cache_id_fkey
+pg_restore: dropping FK CONSTRAINT volumes volumes_worker_resource_cache_id_fkey
+pg_restore: dropping FK CONSTRAINT volumes volumes_worker_name_fkey
+pg_restore: dropping FK CONSTRAINT volumes volumes_worker_base_resource_type_id_fkey
+pg_restore: dropping FK CONSTRAINT volumes volumes_team_id_fkey
+pg_restore: dropping FK CONSTRAINT volumes volumes_parent_id_fkey
+pg_restore: dropping FK CONSTRAINT resources resources_resource_config_id_fkey
+pg_restore: dropping FK CONSTRAINT resources resources_pipeline_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_types resource_types_resource_config_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_types resource_types_pipeline_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_disabled_versions resource_disabled_versions_resource_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_configs resource_configs_resource_cache_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_configs resource_configs_base_resource_type_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_config_versions resource_config_versions_resource_config_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_config_check_sessions resource_config_check_sessions_worker_base_resource_type_id_fke
+pg_restore: dropping FK CONSTRAINT resource_config_check_sessions resource_config_check_sessions_resource_config_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_caches resource_caches_resource_config_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_cache_uses resource_cache_uses_resource_cache_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_cache_uses resource_cache_uses_container_id_fkey
+pg_restore: dropping FK CONSTRAINT resource_cache_uses resource_cache_uses_build_id_fkey
+pg_restore: dropping FK CONSTRAINT pipelines pipelines_team_id_fkey
+pg_restore: dropping FK CONSTRAINT next_build_inputs next_build_inputs_resource_id_fkey
+pg_restore: dropping FK CONSTRAINT next_build_inputs next_build_inputs_resource_config_version_id_fkey
+pg_restore: dropping FK CONSTRAINT next_build_inputs next_build_inputs_job_id_fkey
+pg_restore: dropping FK CONSTRAINT jobs jobs_transition_build_id_fkey
+pg_restore: dropping FK CONSTRAINT jobs jobs_pipeline_id_fkey
+pg_restore: dropping FK CONSTRAINT jobs jobs_next_build_id_fkey
+pg_restore: dropping FK CONSTRAINT jobs jobs_latest_completed_build_id_fkey
+pg_restore: dropping FK CONSTRAINT independent_build_inputs independent_build_inputs_resource_id_fkey
+pg_restore: dropping FK CONSTRAINT independent_build_inputs independent_build_inputs_resource_config_version_id_fkey
+pg_restore: dropping FK CONSTRAINT independent_build_inputs independent_build_inputs_job_id_fkey
+pg_restore: dropping FK CONSTRAINT versioned_resources fkey_resource_id
+pg_restore: dropping FK CONSTRAINT builds fkey_job_id
+pg_restore: dropping FK CONSTRAINT jobs_serial_groups fkey_job_id
+pg_restore: dropping FK CONSTRAINT volumes fkey_container_id
+pg_restore: dropping FK CONSTRAINT containers containers_worker_name_fkey
+pg_restore: dropping FK CONSTRAINT containers containers_team_id_fkey
+pg_restore: dropping FK CONSTRAINT containers containers_resource_config_check_session_id_fkey
+pg_restore: dropping FK CONSTRAINT containers containers_image_get_container_id_fkey
+pg_restore: dropping FK CONSTRAINT containers containers_image_check_container_id_fkey
+pg_restore: dropping FK CONSTRAINT containers containers_build_id_fkey
+pg_restore: dropping FK CONSTRAINT builds builds_team_id_fkey
+pg_restore: dropping FK CONSTRAINT builds builds_pipeline_id_fkey
+pg_restore: dropping FK CONSTRAINT build_resource_config_version_outputs build_resource_config_version_outputs_resource_id_fkey
+pg_restore: dropping FK CONSTRAINT build_resource_config_version_outputs build_resource_config_version_outputs_build_id_fkey
+pg_restore: dropping FK CONSTRAINT build_resource_config_version_inputs build_resource_config_version_inputs_resource_id_fkey
+pg_restore: dropping FK CONSTRAINT build_resource_config_version_inputs build_resource_config_version_inputs_build_id_fkey
+pg_restore: dropping FK CONSTRAINT build_outputs build_outputs_versioned_resource_id_fkey
+pg_restore: dropping FK CONSTRAINT build_outputs build_outputs_build_id_fkey
+pg_restore: dropping FK CONSTRAINT build_inputs build_inputs_versioned_resource_id_fkey
+pg_restore: dropping FK CONSTRAINT build_inputs build_inputs_build_id_fkey
+pg_restore: dropping FK CONSTRAINT build_image_resource_caches build_image_resource_caches_resource_cache_id_fkey
+pg_restore: dropping FK CONSTRAINT build_image_resource_caches build_image_resource_caches_build_id_fkey
+pg_restore: dropping TRIGGER teams team_build_events_insert_trigger
+pg_restore: dropping TRIGGER teams team_build_events_delete_trigger
+pg_restore: dropping TRIGGER pipelines pipeline_build_events_insert_trigger
+pg_restore: dropping TRIGGER pipelines pipeline_build_events_delete_trigger
+pg_restore: dropping INDEX workers_team_id
+pg_restore: dropping INDEX worker_task_caches_worker_name
+pg_restore: dropping INDEX worker_task_caches_uniq
+pg_restore: dropping INDEX worker_task_caches_job_id
+pg_restore: dropping INDEX worker_resource_caches_worker_base_resource_type_id
+pg_restore: dropping INDEX worker_resource_caches_uniq
+pg_restore: dropping INDEX worker_resource_caches_resource_cache_id
+pg_restore: dropping INDEX worker_base_resource_types_worker_name
+pg_restore: dropping INDEX worker_base_resource_types_base_resource_type_id
+pg_restore: dropping INDEX volumes_worker_task_cache_id
+pg_restore: dropping INDEX volumes_worker_resource_cache_unique
+pg_restore: dropping INDEX volumes_worker_resource_cache_id
+pg_restore: dropping INDEX volumes_worker_name
+pg_restore: dropping INDEX volumes_worker_base_resource_type_id
+pg_restore: dropping INDEX volumes_team_id
+pg_restore: dropping INDEX volumes_parent_id
+pg_restore: dropping INDEX volumes_handle
+pg_restore: dropping INDEX volumes_container_id
+pg_restore: dropping INDEX versioned_resources_resource_id_type_version
+pg_restore: dropping INDEX versioned_resources_resource_id_idx
+pg_restore: dropping INDEX transition_builds_per_job_id
+pg_restore: dropping INDEX resources_resource_config_id
+pg_restore: dropping INDEX resources_pipeline_id
+pg_restore: dropping INDEX resource_types_resource_config_id
+pg_restore: dropping INDEX resource_types_pipeline_id
+pg_restore: dropping INDEX resource_disabled_versions_resource_id_version_md5_uniq
+pg_restore: dropping INDEX resource_configs_resource_cache_id
+pg_restore: dropping INDEX resource_configs_base_resource_type_id
+pg_restore: dropping INDEX resource_config_check_sessions_uniq
+pg_restore: dropping INDEX resource_config_check_sessions_resource_config_id
+pg_restore: dropping INDEX resource_caches_resource_config_id_version_params_hash_uniq
+pg_restore: dropping INDEX resource_caches_resource_config_id
+pg_restore: dropping INDEX resource_cache_uses_resource_cache_id
+pg_restore: dropping INDEX resource_cache_uses_container_id
+pg_restore: dropping INDEX resource_cache_uses_build_id
+pg_restore: dropping INDEX pipelines_team_id
+pg_restore: dropping INDEX next_builds_per_job_id
+pg_restore: dropping INDEX next_build_inputs_resource_config_version_id
+pg_restore: dropping INDEX next_build_inputs_job_id
+pg_restore: dropping INDEX latest_completed_builds_per_job_id
+pg_restore: dropping INDEX jobs_transition_build_id
+pg_restore: dropping INDEX jobs_serial_groups_job_id_idx
+pg_restore: dropping INDEX jobs_pipeline_id
+pg_restore: dropping INDEX jobs_next_build_id
+pg_restore: dropping INDEX jobs_latest_completed_build_id
+pg_restore: dropping INDEX index_teams_name_unique_case_insensitive
+pg_restore: dropping INDEX independent_build_inputs_resource_config_version_id
+pg_restore: dropping INDEX independent_build_inputs_job_id
+pg_restore: dropping INDEX containers_worker_name
+pg_restore: dropping INDEX containers_team_id
+pg_restore: dropping INDEX containers_resource_config_check_session_id
+pg_restore: dropping INDEX containers_plan_id
+pg_restore: dropping INDEX containers_image_get_container_id
+pg_restore: dropping INDEX containers_image_check_container_id
+pg_restore: dropping INDEX containers_build_id
+pg_restore: dropping INDEX builds_team_id
+pg_restore: dropping INDEX builds_status
+pg_restore: dropping INDEX builds_pipeline_id
+pg_restore: dropping INDEX builds_name
+pg_restore: dropping INDEX builds_job_id
+pg_restore: dropping INDEX builds_interceptible_completed
+pg_restore: dropping INDEX build_resource_config_version_outputs_uniq
+pg_restore: dropping INDEX build_resource_config_version_inputs_uniq
+pg_restore: dropping INDEX build_outputs_versioned_resource_id_idx
+pg_restore: dropping INDEX build_outputs_build_id_versioned_resource_id
+pg_restore: dropping INDEX build_outputs_build_id_idx
+pg_restore: dropping INDEX build_inputs_versioned_resource_id_idx
+pg_restore: dropping INDEX build_inputs_build_id_versioned_resource_id
+pg_restore: dropping INDEX build_inputs_build_id_idx
+pg_restore: dropping INDEX build_image_resource_caches_resource_cache_id
+pg_restore: dropping INDEX build_image_resource_caches_build_id
+pg_restore: dropping INDEX build_events_build_id_idx
+pg_restore: dropping INDEX build_events_build_id_event_id
+pg_restore: dropping CONSTRAINT workers workers_pkey
+pg_restore: dropping CONSTRAINT workers workers_addr_key
+pg_restore: dropping CONSTRAINT worker_task_caches worker_task_caches_pkey
+pg_restore: dropping CONSTRAINT worker_resource_certs worker_resource_certs_pkey
+pg_restore: dropping CONSTRAINT worker_resource_caches worker_resource_caches_pkey
+pg_restore: dropping CONSTRAINT worker_base_resource_types worker_base_resource_types_worker_name_base_resource_type_i_key
+pg_restore: dropping CONSTRAINT worker_base_resource_types worker_base_resource_types_pkey
+pg_restore: dropping CONSTRAINT volumes volumes_worker_name_handle_key
+pg_restore: dropping CONSTRAINT volumes volumes_pkey
+pg_restore: dropping CONSTRAINT volumes volumes_id_state_key
+pg_restore: dropping CONSTRAINT versioned_resources versioned_resources_pkey
+pg_restore: dropping CONSTRAINT resources unique_pipeline_id_name
+pg_restore: dropping CONSTRAINT teams teams_pkey
+pg_restore: dropping CONSTRAINT resources resources_pkey
+pg_restore: dropping CONSTRAINT resource_types resource_types_pkey
+pg_restore: dropping CONSTRAINT resource_types resource_types_pipeline_id_name_key
+pg_restore: dropping CONSTRAINT resource_configs resource_configs_resource_cache_id_so_key
+pg_restore: dropping CONSTRAINT resource_configs resource_configs_pkey
+pg_restore: dropping CONSTRAINT resource_configs resource_configs_base_resource_type_id_so_key
+pg_restore: dropping CONSTRAINT resource_config_versions resource_config_versions_pkey
+pg_restore: dropping CONSTRAINT resource_config_versions resource_config_id_and_version_md5_unique
+pg_restore: dropping CONSTRAINT resource_config_check_sessions resource_config_check_sessions_pkey
+pg_restore: dropping CONSTRAINT resource_caches resource_caches_pkey
+pg_restore: dropping CONSTRAINT refresh_token refresh_token_pkey
+pg_restore: dropping CONSTRAINT pipelines pipelines_pkey
+pg_restore: dropping CONSTRAINT pipelines pipelines_name_team_id
+pg_restore: dropping CONSTRAINT password password_pkey
+pg_restore: dropping CONSTRAINT offline_session offline_session_pkey
+pg_restore: dropping CONSTRAINT next_build_inputs next_build_inputs_unique_job_id_input_name
+pg_restore: dropping CONSTRAINT next_build_inputs next_build_inputs_pkey
+pg_restore: dropping CONSTRAINT keys keys_pkey
+pg_restore: dropping CONSTRAINT jobs jobs_unique_pipeline_id_name
+pg_restore: dropping CONSTRAINT jobs_serial_groups jobs_serial_groups_pkey
+pg_restore: dropping CONSTRAINT jobs jobs_pkey
+pg_restore: dropping CONSTRAINT independent_build_inputs independent_build_inputs_unique_job_id_input_name
+pg_restore: dropping CONSTRAINT independent_build_inputs independent_build_inputs_pkey
+pg_restore: dropping CONSTRAINT containers containers_pkey
+pg_restore: dropping CONSTRAINT containers containers_handle_key
+pg_restore: dropping CONSTRAINT workers constraint_workers_name_unique
+pg_restore: dropping CONSTRAINT connector connector_pkey
+pg_restore: dropping CONSTRAINT client client_pkey
+pg_restore: dropping CONSTRAINT builds builds_pkey
+pg_restore: dropping CONSTRAINT base_resource_types base_resource_types_pkey
+pg_restore: dropping CONSTRAINT base_resource_types base_resource_types_name_key
+pg_restore: dropping CONSTRAINT auth_request auth_request_pkey
+pg_restore: dropping CONSTRAINT auth_code auth_code_pkey
+pg_restore: dropping TABLE DATA workers
+pg_restore: dropping SEQUENCE SET worker_task_caches_id_seq
+pg_restore: dropping TABLE DATA worker_task_caches
+pg_restore: dropping SEQUENCE SET worker_resource_certs_id_seq
+pg_restore: dropping TABLE DATA worker_resource_certs
+pg_restore: dropping SEQUENCE SET worker_resource_caches_id_seq
+pg_restore: dropping TABLE DATA worker_resource_caches
+pg_restore: dropping SEQUENCE SET worker_base_resource_types_id_seq
+pg_restore: dropping TABLE DATA worker_base_resource_types
+pg_restore: dropping SEQUENCE SET volumes_id_seq
+pg_restore: dropping TABLE DATA volumes
+pg_restore: dropping SEQUENCE SET versioned_resources_id_seq
+pg_restore: dropping TABLE DATA versioned_resources
+pg_restore: dropping SEQUENCE SET teams_id_seq
+pg_restore: dropping TABLE DATA teams
+pg_restore: dropping TABLE DATA team_build_events_1
+pg_restore: dropping SEQUENCE SET resources_id_seq
+pg_restore: dropping TABLE DATA resources
+pg_restore: dropping SEQUENCE SET resource_types_id_seq
+pg_restore: dropping TABLE DATA resource_types
+pg_restore: dropping TABLE DATA resource_disabled_versions
+pg_restore: dropping SEQUENCE SET resource_configs_id_seq
+pg_restore: dropping TABLE DATA resource_configs
+pg_restore: dropping SEQUENCE SET resource_config_versions_id_seq
+pg_restore: dropping TABLE DATA resource_config_versions
+pg_restore: dropping SEQUENCE SET resource_config_check_sessions_id_seq
+pg_restore: dropping TABLE DATA resource_config_check_sessions
+pg_restore: dropping SEQUENCE SET resource_caches_id_seq
+pg_restore: dropping TABLE DATA resource_caches
+pg_restore: dropping TABLE DATA resource_cache_uses
+pg_restore: dropping TABLE DATA refresh_token
+pg_restore: dropping SEQUENCE SET pipelines_id_seq
+pg_restore: dropping TABLE DATA pipelines
+pg_restore: dropping TABLE DATA password
+pg_restore: dropping SEQUENCE SET one_off_name
+pg_restore: dropping TABLE DATA offline_session
+pg_restore: dropping SEQUENCE SET next_build_inputs_id_seq
+pg_restore: dropping TABLE DATA next_build_inputs
+pg_restore: dropping TABLE DATA migrations_history
+pg_restore: dropping TABLE DATA migrations
+pg_restore: dropping TABLE DATA keys
+pg_restore: dropping SEQUENCE SET jobs_serial_groups_id_seq
+pg_restore: dropping TABLE DATA jobs_serial_groups
+pg_restore: dropping SEQUENCE SET jobs_id_seq
+pg_restore: dropping TABLE DATA jobs
+pg_restore: dropping SEQUENCE SET independent_build_inputs_id_seq
+pg_restore: dropping TABLE DATA independent_build_inputs
+pg_restore: dropping SEQUENCE SET containers_id_seq
+pg_restore: dropping TABLE DATA containers
+pg_restore: dropping TABLE DATA connector
+pg_restore: dropping SEQUENCE SET config_version_seq
+pg_restore: dropping TABLE DATA client
+pg_restore: dropping TABLE DATA cache_invalidator
+pg_restore: dropping SEQUENCE SET builds_id_seq
+pg_restore: dropping TABLE DATA builds
+pg_restore: dropping TABLE DATA build_resource_config_version_outputs
+pg_restore: dropping TABLE DATA build_resource_config_version_inputs
+pg_restore: dropping TABLE DATA build_outputs
+pg_restore: dropping TABLE DATA build_inputs
+pg_restore: dropping TABLE DATA build_image_resource_caches
+pg_restore: dropping TABLE DATA build_events
+pg_restore: dropping SEQUENCE SET base_resource_types_id_seq
+pg_restore: dropping TABLE DATA base_resource_types
+pg_restore: dropping TABLE DATA auth_request
+pg_restore: dropping TABLE DATA auth_code
+pg_restore: dropping DEFAULT worker_task_caches id
+pg_restore: dropping DEFAULT worker_resource_certs id
+pg_restore: dropping DEFAULT worker_resource_caches id
+pg_restore: dropping DEFAULT worker_base_resource_types id
+pg_restore: dropping DEFAULT volumes id
+pg_restore: dropping DEFAULT versioned_resources id
+pg_restore: dropping DEFAULT teams id
+pg_restore: dropping DEFAULT resources id
+pg_restore: dropping DEFAULT resource_types id
+pg_restore: dropping DEFAULT resource_configs id
+pg_restore: dropping DEFAULT resource_config_versions id
+pg_restore: dropping DEFAULT resource_config_check_sessions id
+pg_restore: dropping DEFAULT resource_caches id
+pg_restore: dropping DEFAULT pipelines id
+pg_restore: dropping DEFAULT next_build_inputs id
+pg_restore: dropping DEFAULT jobs_serial_groups id
+pg_restore: dropping DEFAULT jobs id
+pg_restore: dropping DEFAULT independent_build_inputs id
+pg_restore: dropping DEFAULT containers id
+pg_restore: dropping DEFAULT builds id
+pg_restore: dropping DEFAULT base_resource_types id
+pg_restore: dropping TABLE workers
+pg_restore: dropping SEQUENCE OWNED BY worker_task_caches_id_seq
+pg_restore: dropping SEQUENCE worker_task_caches_id_seq
+pg_restore: dropping TABLE worker_task_caches
+pg_restore: dropping SEQUENCE OWNED BY worker_resource_certs_id_seq
+pg_restore: dropping SEQUENCE worker_resource_certs_id_seq
+pg_restore: dropping TABLE worker_resource_certs
+pg_restore: dropping SEQUENCE OWNED BY worker_resource_caches_id_seq
+pg_restore: dropping SEQUENCE worker_resource_caches_id_seq
+pg_restore: dropping TABLE worker_resource_caches
+pg_restore: dropping SEQUENCE OWNED BY worker_base_resource_types_id_seq
+pg_restore: dropping SEQUENCE worker_base_resource_types_id_seq
+pg_restore: dropping TABLE worker_base_resource_types
+pg_restore: dropping SEQUENCE OWNED BY volumes_id_seq
+pg_restore: dropping SEQUENCE volumes_id_seq
+pg_restore: dropping TABLE volumes
+pg_restore: dropping SEQUENCE OWNED BY versioned_resources_id_seq
+pg_restore: dropping SEQUENCE versioned_resources_id_seq
+pg_restore: dropping TABLE versioned_resources
+pg_restore: dropping MATERIALIZED VIEW transition_builds_per_job
+pg_restore: dropping SEQUENCE OWNED BY teams_id_seq
+pg_restore: dropping SEQUENCE teams_id_seq
+pg_restore: dropping TABLE teams
+pg_restore: dropping TABLE team_build_events_1
+pg_restore: dropping SEQUENCE OWNED BY resources_id_seq
+pg_restore: dropping SEQUENCE resources_id_seq
+pg_restore: dropping TABLE resources
+pg_restore: dropping SEQUENCE OWNED BY resource_types_id_seq
+pg_restore: dropping SEQUENCE resource_types_id_seq
+pg_restore: dropping TABLE resource_types
+pg_restore: dropping TABLE resource_disabled_versions
+pg_restore: dropping SEQUENCE OWNED BY resource_configs_id_seq
+pg_restore: dropping SEQUENCE resource_configs_id_seq
+pg_restore: dropping TABLE resource_configs
+pg_restore: dropping SEQUENCE OWNED BY resource_config_versions_id_seq
+pg_restore: dropping SEQUENCE resource_config_versions_id_seq
+pg_restore: dropping TABLE resource_config_versions
+pg_restore: dropping SEQUENCE OWNED BY resource_config_check_sessions_id_seq
+pg_restore: dropping SEQUENCE resource_config_check_sessions_id_seq
+pg_restore: dropping TABLE resource_config_check_sessions
+pg_restore: dropping SEQUENCE OWNED BY resource_caches_id_seq
+pg_restore: dropping SEQUENCE resource_caches_id_seq
+pg_restore: dropping TABLE resource_caches
+pg_restore: dropping TABLE resource_cache_uses
+pg_restore: dropping TABLE refresh_token
+pg_restore: dropping SEQUENCE OWNED BY pipelines_id_seq
+pg_restore: dropping SEQUENCE pipelines_id_seq
+pg_restore: dropping TABLE pipelines
+pg_restore: dropping TABLE password
+pg_restore: dropping SEQUENCE one_off_name
+pg_restore: dropping TABLE offline_session
+pg_restore: dropping MATERIALIZED VIEW next_builds_per_job
+pg_restore: dropping SEQUENCE OWNED BY next_build_inputs_id_seq
+pg_restore: dropping SEQUENCE next_build_inputs_id_seq
+pg_restore: dropping TABLE next_build_inputs
+pg_restore: dropping TABLE migrations_history
+pg_restore: dropping TABLE migrations
+pg_restore: dropping MATERIALIZED VIEW latest_completed_builds_per_job
+pg_restore: dropping TABLE keys
+pg_restore: dropping SEQUENCE OWNED BY jobs_serial_groups_id_seq
+pg_restore: dropping SEQUENCE jobs_serial_groups_id_seq
+pg_restore: dropping TABLE jobs_serial_groups
+pg_restore: dropping SEQUENCE OWNED BY jobs_id_seq
+pg_restore: dropping SEQUENCE jobs_id_seq
+pg_restore: dropping TABLE jobs
+pg_restore: dropping SEQUENCE OWNED BY independent_build_inputs_id_seq
+pg_restore: dropping SEQUENCE independent_build_inputs_id_seq
+pg_restore: dropping TABLE independent_build_inputs
+pg_restore: dropping SEQUENCE OWNED BY containers_id_seq
+pg_restore: dropping SEQUENCE containers_id_seq
+pg_restore: dropping TABLE containers
+pg_restore: dropping TABLE connector
+pg_restore: dropping SEQUENCE config_version_seq
+pg_restore: dropping TABLE client
+pg_restore: dropping TABLE cache_invalidator
+pg_restore: dropping SEQUENCE OWNED BY builds_id_seq
+pg_restore: dropping SEQUENCE builds_id_seq
+pg_restore: dropping TABLE builds
+pg_restore: dropping TABLE build_resource_config_version_outputs
+pg_restore: dropping TABLE build_resource_config_version_inputs
+pg_restore: dropping TABLE build_outputs
+pg_restore: dropping TABLE build_inputs
+pg_restore: dropping TABLE build_image_resource_caches
+pg_restore: dropping TABLE build_events
+pg_restore: [archiver (db)] Error while PROCESSING TOC:
+pg_restore: [archiver (db)] Error from TOC entry 189; 1259 16507 TABLE build_events atc
+pg_restore: [archiver (db)] could not execute query: ERROR:  cannot drop table public.build_events because other objects depend on it
+DETAIL:  table public.pipeline_build_events_1 depends on table public.build_events
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+    Command was: DROP TABLE IF EXISTS public.build_events;
+
+pg_restore: dropping SEQUENCE OWNED BY base_resource_types_id_seq
+pg_restore: dropping SEQUENCE base_resource_types_id_seq
+pg_restore: dropping TABLE base_resource_types
+pg_restore: dropping TABLE auth_request
+pg_restore: dropping TABLE auth_code
+pg_restore: dropping FUNCTION on_team_insert()
+pg_restore: dropping FUNCTION on_team_delete()
+pg_restore: dropping FUNCTION on_pipeline_insert()
+pg_restore: dropping FUNCTION on_pipeline_delete()
+pg_restore: dropping TYPE worker_state
+pg_restore: dropping TYPE volume_state_old
+pg_restore: dropping TYPE volume_state
+pg_restore: dropping TYPE container_state_old
+pg_restore: dropping TYPE container_state
+pg_restore: dropping TYPE container_stage
+pg_restore: dropping TYPE build_status
+pg_restore: creating TYPE "public.build_status"
+pg_restore: creating TYPE "public.container_stage"
+pg_restore: creating TYPE "public.container_state"
+pg_restore: creating TYPE "public.container_state_old"
+pg_restore: creating TYPE "public.volume_state"
+pg_restore: creating TYPE "public.volume_state_old"
+pg_restore: creating TYPE "public.worker_state"
+pg_restore: creating FUNCTION "public.on_pipeline_delete()"
+pg_restore: creating FUNCTION "public.on_pipeline_insert()"
+pg_restore: creating FUNCTION "public.on_team_delete()"
+pg_restore: creating FUNCTION "public.on_team_insert()"
+pg_restore: creating TABLE "public.auth_code"
+pg_restore: creating TABLE "public.auth_request"
+pg_restore: creating TABLE "public.base_resource_types"
+pg_restore: creating SEQUENCE "public.base_resource_types_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.base_resource_types_id_seq"
+pg_restore: creating TABLE "public.build_events"
+pg_restore: [archiver (db)] could not execute query: ERROR:  relation "build_events" already exists
+    Command was: CREATE TABLE public.build_events (
+    build_id integer,
+    type character varying(32) NOT NULL,
+    payload text NOT NULL,...
+pg_restore: creating TABLE "public.build_image_resource_caches"
+pg_restore: creating TABLE "public.build_inputs"
+pg_restore: creating TABLE "public.build_outputs"
+pg_restore: creating TABLE "public.build_resource_config_version_inputs"
+pg_restore: creating TABLE "public.build_resource_config_version_outputs"
+pg_restore: creating TABLE "public.builds"
+pg_restore: creating SEQUENCE "public.builds_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.builds_id_seq"
+pg_restore: creating TABLE "public.cache_invalidator"
+pg_restore: creating TABLE "public.client"
+pg_restore: creating SEQUENCE "public.config_version_seq"
+pg_restore: creating TABLE "public.connector"
+pg_restore: creating TABLE "public.containers"
+pg_restore: creating SEQUENCE "public.containers_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.containers_id_seq"
+pg_restore: creating TABLE "public.independent_build_inputs"
+pg_restore: creating SEQUENCE "public.independent_build_inputs_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.independent_build_inputs_id_seq"
+pg_restore: creating TABLE "public.jobs"
+pg_restore: creating SEQUENCE "public.jobs_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.jobs_id_seq"
+pg_restore: creating TABLE "public.jobs_serial_groups"
+pg_restore: creating SEQUENCE "public.jobs_serial_groups_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.jobs_serial_groups_id_seq"
+pg_restore: creating TABLE "public.keys"
+pg_restore: creating MATERIALIZED VIEW "public.latest_completed_builds_per_job"
+pg_restore: creating TABLE "public.migrations"
+pg_restore: creating TABLE "public.migrations_history"
+pg_restore: creating TABLE "public.next_build_inputs"
+pg_restore: creating SEQUENCE "public.next_build_inputs_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.next_build_inputs_id_seq"
+pg_restore: creating MATERIALIZED VIEW "public.next_builds_per_job"
+pg_restore: creating TABLE "public.offline_session"
+pg_restore: creating SEQUENCE "public.one_off_name"
+pg_restore: creating TABLE "public.password"
+pg_restore: creating TABLE "public.pipelines"
+pg_restore: creating SEQUENCE "public.pipelines_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.pipelines_id_seq"
+pg_restore: creating TABLE "public.refresh_token"
+pg_restore: creating TABLE "public.resource_cache_uses"
+pg_restore: creating TABLE "public.resource_caches"
+pg_restore: creating SEQUENCE "public.resource_caches_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.resource_caches_id_seq"
+pg_restore: creating TABLE "public.resource_config_check_sessions"
+pg_restore: creating SEQUENCE "public.resource_config_check_sessions_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.resource_config_check_sessions_id_seq"
+pg_restore: creating TABLE "public.resource_config_versions"
+pg_restore: creating SEQUENCE "public.resource_config_versions_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.resource_config_versions_id_seq"
+pg_restore: creating TABLE "public.resource_configs"
+pg_restore: creating SEQUENCE "public.resource_configs_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.resource_configs_id_seq"
+pg_restore: creating TABLE "public.resource_disabled_versions"
+pg_restore: creating TABLE "public.resource_types"
+pg_restore: creating SEQUENCE "public.resource_types_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.resource_types_id_seq"
+pg_restore: creating TABLE "public.resources"
+pg_restore: creating SEQUENCE "public.resources_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.resources_id_seq"
+pg_restore: creating TABLE "public.team_build_events_1"
+pg_restore: creating TABLE "public.teams"
+pg_restore: creating SEQUENCE "public.teams_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.teams_id_seq"
+pg_restore: creating MATERIALIZED VIEW "public.transition_builds_per_job"
+pg_restore: creating TABLE "public.versioned_resources"
+pg_restore: creating SEQUENCE "public.versioned_resources_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.versioned_resources_id_seq"
+pg_restore: creating TABLE "public.volumes"
+pg_restore: creating SEQUENCE "public.volumes_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.volumes_id_seq"
+pg_restore: creating TABLE "public.worker_base_resource_types"
+pg_restore: creating SEQUENCE "public.worker_base_resource_types_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.worker_base_resource_types_id_seq"
+pg_restore: creating TABLE "public.worker_resource_caches"
+pg_restore: creating SEQUENCE "public.worker_resource_caches_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.worker_resource_caches_id_seq"
+pg_restore: creating TABLE "public.worker_resource_certs"
+pg_restore: creating SEQUENCE "public.worker_resource_certs_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.worker_resource_certs_id_seq"
+pg_restore: creating TABLE "public.worker_task_caches"
+pg_restore: creating SEQUENCE "public.worker_task_caches_id_seq"
+pg_restore: creating SEQUENCE OWNED BY "public.worker_task_caches_id_seq"
+pg_restore: creating TABLE "public.workers"
+pg_restore: creating DEFAULT "public.base_resource_types id"
+pg_restore: creating DEFAULT "public.builds id"
+pg_restore: creating DEFAULT "public.containers id"
+pg_restore: creating DEFAULT "public.independent_build_inputs id"
+pg_restore: creating DEFAULT "public.jobs id"
+pg_restore: creating DEFAULT "public.jobs_serial_groups id"
+pg_restore: creating DEFAULT "public.next_build_inputs id"
+pg_restore: creating DEFAULT "public.pipelines id"
+pg_restore: creating DEFAULT "public.resource_caches id"
+pg_restore: creating DEFAULT "public.resource_config_check_sessions id"
+pg_restore: creating DEFAULT "public.resource_config_versions id"
+pg_restore: creating DEFAULT "public.resource_configs id"
+pg_restore: creating DEFAULT "public.resource_types id"
+pg_restore: creating DEFAULT "public.resources id"
+pg_restore: creating DEFAULT "public.teams id"
+pg_restore: creating DEFAULT "public.versioned_resources id"
+pg_restore: creating DEFAULT "public.volumes id"
+pg_restore: creating DEFAULT "public.worker_base_resource_types id"
+pg_restore: creating DEFAULT "public.worker_resource_caches id"
+pg_restore: creating DEFAULT "public.worker_resource_certs id"
+pg_restore: creating DEFAULT "public.worker_task_caches id"
+pg_restore: processing data for table "public.auth_code"
+pg_restore: processing data for table "public.auth_request"
+pg_restore: processing data for table "public.base_resource_types"
+pg_restore: executing SEQUENCE SET base_resource_types_id_seq
+pg_restore: processing data for table "public.build_events"
+pg_restore: processing data for table "public.build_image_resource_caches"
+pg_restore: processing data for table "public.build_inputs"
+pg_restore: processing data for table "public.build_outputs"
+pg_restore: processing data for table "public.build_resource_config_version_inputs"
+pg_restore: processing data for table "public.build_resource_config_version_outputs"
+pg_restore: processing data for table "public.builds"
+pg_restore: executing SEQUENCE SET builds_id_seq
+pg_restore: processing data for table "public.cache_invalidator"
+pg_restore: processing data for table "public.client"
+pg_restore: executing SEQUENCE SET config_version_seq
+pg_restore: processing data for table "public.connector"
+pg_restore: processing data for table "public.containers"
+pg_restore: executing SEQUENCE SET containers_id_seq
+pg_restore: processing data for table "public.independent_build_inputs"
+pg_restore: executing SEQUENCE SET independent_build_inputs_id_seq
+pg_restore: processing data for table "public.jobs"
+pg_restore: executing SEQUENCE SET jobs_id_seq
+pg_restore: processing data for table "public.jobs_serial_groups"
+pg_restore: executing SEQUENCE SET jobs_serial_groups_id_seq
+pg_restore: processing data for table "public.keys"
+pg_restore: processing data for table "public.migrations"
+pg_restore: processing data for table "public.migrations_history"
+pg_restore: processing data for table "public.next_build_inputs"
+pg_restore: executing SEQUENCE SET next_build_inputs_id_seq
+pg_restore: processing data for table "public.offline_session"
+pg_restore: executing SEQUENCE SET one_off_name
+pg_restore: processing data for table "public.password"
+pg_restore: processing data for table "public.pipelines"
+pg_restore: executing SEQUENCE SET pipelines_id_seq
+pg_restore: processing data for table "public.refresh_token"
+pg_restore: processing data for table "public.resource_cache_uses"
+pg_restore: processing data for table "public.resource_caches"
+pg_restore: executing SEQUENCE SET resource_caches_id_seq
+pg_restore: processing data for table "public.resource_config_check_sessions"
+pg_restore: executing SEQUENCE SET resource_config_check_sessions_id_seq
+pg_restore: processing data for table "public.resource_config_versions"
+pg_restore: executing SEQUENCE SET resource_config_versions_id_seq
+pg_restore: processing data for table "public.resource_configs"
+pg_restore: executing SEQUENCE SET resource_configs_id_seq
+pg_restore: processing data for table "public.resource_disabled_versions"
+pg_restore: processing data for table "public.resource_types"
+pg_restore: executing SEQUENCE SET resource_types_id_seq
+pg_restore: processing data for table "public.resources"
+pg_restore: executing SEQUENCE SET resources_id_seq
+pg_restore: processing data for table "public.team_build_events_1"
+pg_restore: processing data for table "public.teams"
+pg_restore: executing SEQUENCE SET teams_id_seq
+pg_restore: processing data for table "public.versioned_resources"
+pg_restore: executing SEQUENCE SET versioned_resources_id_seq
+pg_restore: processing data for table "public.volumes"
+pg_restore: executing SEQUENCE SET volumes_id_seq
+pg_restore: processing data for table "public.worker_base_resource_types"
+pg_restore: executing SEQUENCE SET worker_base_resource_types_id_seq
+pg_restore: processing data for table "public.worker_resource_caches"
+pg_restore: executing SEQUENCE SET worker_resource_caches_id_seq
+pg_restore: processing data for table "public.worker_resource_certs"
+pg_restore: executing SEQUENCE SET worker_resource_certs_id_seq
+pg_restore: processing data for table "public.worker_task_caches"
+pg_restore: executing SEQUENCE SET worker_task_caches_id_seq
+pg_restore: processing data for table "public.workers"
+pg_restore: creating CONSTRAINT "public.auth_code auth_code_pkey"
+pg_restore: creating CONSTRAINT "public.auth_request auth_request_pkey"
+pg_restore: creating CONSTRAINT "public.base_resource_types base_resource_types_name_key"
+pg_restore: creating CONSTRAINT "public.base_resource_types base_resource_types_pkey"
+pg_restore: creating CONSTRAINT "public.builds builds_pkey"
+pg_restore: creating CONSTRAINT "public.client client_pkey"
+pg_restore: creating CONSTRAINT "public.connector connector_pkey"
+pg_restore: creating CONSTRAINT "public.workers constraint_workers_name_unique"
+pg_restore: creating CONSTRAINT "public.containers containers_handle_key"
+pg_restore: creating CONSTRAINT "public.containers containers_pkey"
+pg_restore: creating CONSTRAINT "public.independent_build_inputs independent_build_inputs_pkey"
+pg_restore: creating CONSTRAINT "public.independent_build_inputs independent_build_inputs_unique_job_id_input_name"
+pg_restore: creating CONSTRAINT "public.jobs jobs_pkey"
+pg_restore: creating CONSTRAINT "public.jobs_serial_groups jobs_serial_groups_pkey"
+pg_restore: creating CONSTRAINT "public.jobs jobs_unique_pipeline_id_name"
+pg_restore: creating CONSTRAINT "public.keys keys_pkey"
+pg_restore: creating CONSTRAINT "public.next_build_inputs next_build_inputs_pkey"
+pg_restore: creating CONSTRAINT "public.next_build_inputs next_build_inputs_unique_job_id_input_name"
+pg_restore: creating CONSTRAINT "public.offline_session offline_session_pkey"
+pg_restore: creating CONSTRAINT "public.password password_pkey"
+pg_restore: creating CONSTRAINT "public.pipelines pipelines_name_team_id"
+pg_restore: creating CONSTRAINT "public.pipelines pipelines_pkey"
+pg_restore: creating CONSTRAINT "public.refresh_token refresh_token_pkey"
+pg_restore: creating CONSTRAINT "public.resource_caches resource_caches_pkey"
+pg_restore: creating CONSTRAINT "public.resource_config_check_sessions resource_config_check_sessions_pkey"
+pg_restore: creating CONSTRAINT "public.resource_config_versions resource_config_id_and_version_md5_unique"
+pg_restore: creating CONSTRAINT "public.resource_config_versions resource_config_versions_pkey"
+pg_restore: creating CONSTRAINT "public.resource_configs resource_configs_base_resource_type_id_so_key"
+pg_restore: creating CONSTRAINT "public.resource_configs resource_configs_pkey"
+pg_restore: creating CONSTRAINT "public.resource_configs resource_configs_resource_cache_id_so_key"
+pg_restore: creating CONSTRAINT "public.resource_types resource_types_pipeline_id_name_key"
+pg_restore: creating CONSTRAINT "public.resource_types resource_types_pkey"
+pg_restore: creating CONSTRAINT "public.resources resources_pkey"
+pg_restore: creating CONSTRAINT "public.teams teams_pkey"
+pg_restore: creating CONSTRAINT "public.resources unique_pipeline_id_name"
+pg_restore: creating CONSTRAINT "public.versioned_resources versioned_resources_pkey"
+pg_restore: creating CONSTRAINT "public.volumes volumes_id_state_key"
+pg_restore: creating CONSTRAINT "public.volumes volumes_pkey"
+pg_restore: creating CONSTRAINT "public.volumes volumes_worker_name_handle_key"
+pg_restore: creating CONSTRAINT "public.worker_base_resource_types worker_base_resource_types_pkey"
+pg_restore: creating CONSTRAINT "public.worker_base_resource_types worker_base_resource_types_worker_name_base_resource_type_i_key"
+pg_restore: creating CONSTRAINT "public.worker_resource_caches worker_resource_caches_pkey"
+pg_restore: creating CONSTRAINT "public.worker_resource_certs worker_resource_certs_pkey"
+pg_restore: creating CONSTRAINT "public.worker_task_caches worker_task_caches_pkey"
+pg_restore: creating CONSTRAINT "public.workers workers_addr_key"
+pg_restore: creating CONSTRAINT "public.workers workers_pkey"
+pg_restore: creating INDEX "public.build_events_build_id_event_id"
+pg_restore: creating INDEX "public.build_events_build_id_idx"
+pg_restore: creating INDEX "public.build_image_resource_caches_build_id"
+pg_restore: creating INDEX "public.build_image_resource_caches_resource_cache_id"
+pg_restore: creating INDEX "public.build_inputs_build_id_idx"
+pg_restore: creating INDEX "public.build_inputs_build_id_versioned_resource_id"
+pg_restore: creating INDEX "public.build_inputs_versioned_resource_id_idx"
+pg_restore: creating INDEX "public.build_outputs_build_id_idx"
+pg_restore: creating INDEX "public.build_outputs_build_id_versioned_resource_id"
+pg_restore: creating INDEX "public.build_outputs_versioned_resource_id_idx"
+pg_restore: creating INDEX "public.build_resource_config_version_inputs_uniq"
+pg_restore: creating INDEX "public.build_resource_config_version_outputs_uniq"
+pg_restore: creating INDEX "public.builds_interceptible_completed"
+pg_restore: creating INDEX "public.builds_job_id"
+pg_restore: creating INDEX "public.builds_name"
+pg_restore: creating INDEX "public.builds_pipeline_id"
+pg_restore: creating INDEX "public.builds_status"
+pg_restore: creating INDEX "public.builds_team_id"
+pg_restore: creating INDEX "public.containers_build_id"
+pg_restore: creating INDEX "public.containers_image_check_container_id"
+pg_restore: creating INDEX "public.containers_image_get_container_id"
+pg_restore: creating INDEX "public.containers_plan_id"
+pg_restore: creating INDEX "public.containers_resource_config_check_session_id"
+pg_restore: creating INDEX "public.containers_team_id"
+pg_restore: creating INDEX "public.containers_worker_name"
+pg_restore: creating INDEX "public.independent_build_inputs_job_id"
+pg_restore: creating INDEX "public.independent_build_inputs_resource_config_version_id"
+pg_restore: creating INDEX "public.index_teams_name_unique_case_insensitive"
+pg_restore: creating INDEX "public.jobs_latest_completed_build_id"
+pg_restore: creating INDEX "public.jobs_next_build_id"
+pg_restore: creating INDEX "public.jobs_pipeline_id"
+pg_restore: creating INDEX "public.jobs_serial_groups_job_id_idx"
+pg_restore: creating INDEX "public.jobs_transition_build_id"
+pg_restore: creating INDEX "public.latest_completed_builds_per_job_id"
+pg_restore: creating INDEX "public.next_build_inputs_job_id"
+pg_restore: creating INDEX "public.next_build_inputs_resource_config_version_id"
+pg_restore: creating INDEX "public.next_builds_per_job_id"
+pg_restore: creating INDEX "public.pipelines_team_id"
+pg_restore: creating INDEX "public.resource_cache_uses_build_id"
+pg_restore: creating INDEX "public.resource_cache_uses_container_id"
+pg_restore: creating INDEX "public.resource_cache_uses_resource_cache_id"
+pg_restore: creating INDEX "public.resource_caches_resource_config_id"
+pg_restore: creating INDEX "public.resource_caches_resource_config_id_version_params_hash_uniq"
+pg_restore: creating INDEX "public.resource_config_check_sessions_resource_config_id"
+pg_restore: creating INDEX "public.resource_config_check_sessions_uniq"
+pg_restore: creating INDEX "public.resource_configs_base_resource_type_id"
+pg_restore: creating INDEX "public.resource_configs_resource_cache_id"
+pg_restore: creating INDEX "public.resource_disabled_versions_resource_id_version_md5_uniq"
+pg_restore: creating INDEX "public.resource_types_pipeline_id"
+pg_restore: creating INDEX "public.resource_types_resource_config_id"
+pg_restore: creating INDEX "public.resources_pipeline_id"
+pg_restore: creating INDEX "public.resources_resource_config_id"
+pg_restore: creating INDEX "public.transition_builds_per_job_id"
+pg_restore: creating INDEX "public.versioned_resources_resource_id_idx"
+pg_restore: creating INDEX "public.versioned_resources_resource_id_type_version"
+pg_restore: creating INDEX "public.volumes_container_id"
+pg_restore: creating INDEX "public.volumes_handle"
+pg_restore: creating INDEX "public.volumes_parent_id"
+pg_restore: creating INDEX "public.volumes_team_id"
+pg_restore: creating INDEX "public.volumes_worker_base_resource_type_id"
+pg_restore: creating INDEX "public.volumes_worker_name"
+pg_restore: creating INDEX "public.volumes_worker_resource_cache_id"
+pg_restore: creating INDEX "public.volumes_worker_resource_cache_unique"
+pg_restore: creating INDEX "public.volumes_worker_task_cache_id"
+pg_restore: creating INDEX "public.worker_base_resource_types_base_resource_type_id"
+pg_restore: creating INDEX "public.worker_base_resource_types_worker_name"
+pg_restore: creating INDEX "public.worker_resource_caches_resource_cache_id"
+pg_restore: creating INDEX "public.worker_resource_caches_uniq"
+pg_restore: creating INDEX "public.worker_resource_caches_worker_base_resource_type_id"
+pg_restore: creating INDEX "public.worker_task_caches_job_id"
+pg_restore: creating INDEX "public.worker_task_caches_uniq"
+pg_restore: creating INDEX "public.worker_task_caches_worker_name"
+pg_restore: creating INDEX "public.workers_team_id"
+pg_restore: creating TRIGGER "public.pipelines pipeline_build_events_delete_trigger"
+pg_restore: creating TRIGGER "public.pipelines pipeline_build_events_insert_trigger"
+pg_restore: creating TRIGGER "public.teams team_build_events_delete_trigger"
+pg_restore: creating TRIGGER "public.teams team_build_events_insert_trigger"
+pg_restore: creating FK CONSTRAINT "public.build_image_resource_caches build_image_resource_caches_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_image_resource_caches build_image_resource_caches_resource_cache_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_inputs build_inputs_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_inputs build_inputs_versioned_resource_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_outputs build_outputs_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_outputs build_outputs_versioned_resource_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_resource_config_version_inputs build_resource_config_version_inputs_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_resource_config_version_inputs build_resource_config_version_inputs_resource_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_resource_config_version_outputs build_resource_config_version_outputs_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.build_resource_config_version_outputs build_resource_config_version_outputs_resource_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.builds builds_pipeline_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.builds builds_team_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.containers containers_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.containers containers_image_check_container_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.containers containers_image_get_container_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.containers containers_resource_config_check_session_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.containers containers_team_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.containers containers_worker_name_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes fkey_container_id"
+pg_restore: creating FK CONSTRAINT "public.jobs_serial_groups fkey_job_id"
+pg_restore: creating FK CONSTRAINT "public.builds fkey_job_id"
+pg_restore: creating FK CONSTRAINT "public.versioned_resources fkey_resource_id"
+pg_restore: creating FK CONSTRAINT "public.independent_build_inputs independent_build_inputs_job_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.independent_build_inputs independent_build_inputs_resource_config_version_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.independent_build_inputs independent_build_inputs_resource_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.jobs jobs_latest_completed_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.jobs jobs_next_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.jobs jobs_pipeline_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.jobs jobs_transition_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.next_build_inputs next_build_inputs_job_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.next_build_inputs next_build_inputs_resource_config_version_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.next_build_inputs next_build_inputs_resource_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.pipelines pipelines_team_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_cache_uses resource_cache_uses_build_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_cache_uses resource_cache_uses_container_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_cache_uses resource_cache_uses_resource_cache_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_caches resource_caches_resource_config_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_config_check_sessions resource_config_check_sessions_resource_config_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_config_check_sessions resource_config_check_sessions_worker_base_resource_type_id_fke"
+pg_restore: creating FK CONSTRAINT "public.resource_config_versions resource_config_versions_resource_config_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_configs resource_configs_base_resource_type_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_configs resource_configs_resource_cache_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_disabled_versions resource_disabled_versions_resource_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_types resource_types_pipeline_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resource_types resource_types_resource_config_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resources resources_pipeline_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.resources resources_resource_config_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes volumes_parent_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes volumes_team_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes volumes_worker_base_resource_type_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes volumes_worker_name_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes volumes_worker_resource_cache_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes volumes_worker_task_cache_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.worker_base_resource_types worker_base_resource_types_base_resource_type_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.worker_base_resource_types worker_base_resource_types_worker_name_fkey"
+pg_restore: creating FK CONSTRAINT "public.worker_resource_caches worker_resource_caches_resource_cache_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.worker_resource_caches worker_resource_caches_worker_base_resource_type_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.volumes worker_resource_certs_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.worker_resource_certs worker_resource_certs_worker_name_fkey"
+pg_restore: creating FK CONSTRAINT "public.worker_task_caches worker_task_caches_job_id_fkey"
+pg_restore: creating FK CONSTRAINT "public.worker_task_caches worker_task_caches_worker_name_fkey"
+pg_restore: creating FK CONSTRAINT "public.workers workers_team_id_fkey"
+pg_restore: creating MATERIALIZED VIEW DATA "public.latest_completed_builds_per_job"
+pg_restore: creating MATERIALIZED VIEW DATA "public.next_builds_per_job"
+pg_restore: creating MATERIALIZED VIEW DATA "public.transition_builds_per_job"
+WARNING: errors ignored on restore: 2
+2019/01/10 22:24:21 You may need to delete the artifact-file that was created before re-running.
+exit status 1 - exit code 1
+Failed to restore
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/orchestrator.(*RestoreStep).Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/orchestrator/restore_step.go:17
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/orchestrator.(*Workflow).Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/orchestrator/workflow.go:17
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/orchestrator.Restorer.Restore
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/orchestrator/restorer.go:38
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command.DeploymentRestoreCommand.Action
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command/deployment_restore.go:50
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command.DeploymentRestoreCommand.Action-fm
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/cli/command/deployment_restore.go:22
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.HandleAction
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/app.go:490
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.Command.Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/command.go:210
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.(*App).RunAsSubcommand
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/app.go:379
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.Command.startApp
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/command.go:298
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.Command.Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/command.go:98
+github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli.(*App).Run
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/vendor/github.com/urfave/cli/app.go:255
+main.main
+	/tmp/build/80754af9/src/github.com/cloudfoundry-incubator/bosh-backup-and-restore/cmd/bbr/main.go:73
+runtime.main
+	/usr/local/go/src/runtime/proc.go:201
+runtime.goexit
+	/usr/local/go/src/runtime/asm_amd64.s:1333
