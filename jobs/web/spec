@@ -475,6 +475,13 @@ properties:
     description: Length of time for a intercepted session to be idle before terminating, in Go duration format.
     example: 5m
 
+  enable_global_resources:
+    env: CONCOURSE_ENABLE_GLOBAL_RESOURCES
+    description: |
+      Enable equivalent resources across pipelines and teams to share a single
+      version history.
+    default: false
+
   default_check_interval:
     env: CONCOURSE_RESOURCE_CHECKING_INTERVAL
     description: |
