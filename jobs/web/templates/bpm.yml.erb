@@ -258,6 +258,10 @@ processes:
     CONCOURSE_DEFAULT_TASK_MEMORY_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("enable_global_resources") do |v| -%>
+    CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("encryption_key") do |v| -%>
     CONCOURSE_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
