@@ -12,6 +12,8 @@ processes:
     open_files: 65536
 
   env:
+    CONCOURSE_METRICS_ATTRIBUTE: <%= "bosh-deployment:#{spec.deployment},bosh-job:#{name}".to_json %>
+
 <%
   if_link("web") do |l|
     web_urls = []
