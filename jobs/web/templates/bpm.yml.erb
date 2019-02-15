@@ -668,6 +668,10 @@ processes:
     CONCOURSE_VAULT_CACHE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.max_lease") do |v| -%>
+    CONCOURSE_VAULT_MAX_LEASE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.path_prefix") do |v| -%>
     CONCOURSE_VAULT_PATH_PREFIX: <%= env_flag(v).to_json %>
 <% end -%>
