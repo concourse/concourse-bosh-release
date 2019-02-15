@@ -1,11 +1,12 @@
 resources:
-- name: concourse
+- name: concourse-head
   type: git
   source:
-    uri: https://github.com/concourse/concourse.git
-    branch: release/4.2.x
+    uri: git@github.com:concourse/concourse-bosh-release.git
+    branch: release/v4.2.3
+    private_key: ((concourse_repo_private_key))
 
-- name: concourse-head
+- name: concourse
   type: git
   source:
     uri: git@github.com:concourse/concourse-bosh-release.git
@@ -807,10 +808,6 @@ jobs:
       passed: [bin-smoke, bin-docker, bin-testflight, bosh-upgrade]
     - get: concourse-image-rc
       passed: [bin-docker]
-
-    # TODO: concourse-head (repo we push releases to) should be a branch
-    # off concourse-bosh-release@v4.2.1, so that we can add the final release
-    # in the right place
     - get: concourse-head
       resource: concourse
   - task: finalize-release
