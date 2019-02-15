@@ -691,6 +691,10 @@ properties:
     description: |
       Path under which to namespace team/pipeline credentials.
     default: /concourse
+  vault.max_lease:
+    env: CONCOURSE_VAULT_MAX_LEASE
+    description: |
+      If the cache is enabled, and this is set, override secrets lease duration with a maximum value.
   vault.tls.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_VAULT_CA_CERT}}
