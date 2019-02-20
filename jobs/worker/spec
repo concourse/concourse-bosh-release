@@ -138,6 +138,21 @@ properties:
       Port on which Baggageclaim should listen for HTTP traffic.
     default: 7788
 
+  baggageclaim.disable_user_namespaces:
+    env: CONCOURSE_BAGGAGECLAIM_DISABLE_USER_NAMESPACES
+    description: |
+      Disable remapping of user/group IDs in unprivileged volumes.
+
+      For use in combination with 'garden.use_houdini'.
+    default: detect
+
+  garden.use_houdini:
+    env: CONCOURSE_GARDEN_USE_HOUDINI
+    description: |
+      Use the insecure Houdini Garden backend.
+
+      If specified, the other garden.* properties have no effect.
+
   garden.deny_networks:
     env: CONCOURSE_GARDEN_DENY_NETWORK
     description: |
@@ -156,3 +171,30 @@ properties:
     description: |
       Allow containers to reach the worker VM's network.
     default: false
+
+  debug.bind_ip:
+    env: CONCOURSE_DEBUG_BIND_IP
+    description: |
+      IP address on which to listen for the pprof debugger endpoints.
+    default: 127.0.0.1
+
+  debug.bind_port:
+    env: CONCOURSE_DEBUG_BIND_PORT
+    description: |
+      Port on which to listen for the pprof debugger endpoints.
+    default: 8079
+
+  healthcheck.bind_ip:
+    env: CONCOURSE_HEALTHCHECK_BIND_IP
+    description: |
+      IP address on which to listen for health checking requests.
+
+  healthcheck.bind_port:
+    env: CONCOURSE_HEALTHCHECK_BIND_PORT
+    description: |
+      Port on which to listen for health checking requests.
+
+  healthcheck.timeout:
+    env: CONCOURSE_HEALTHCHECK_TIMEOUT
+    description: |
+      HTTP timeout for the full duration of health checking.

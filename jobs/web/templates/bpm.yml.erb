@@ -164,6 +164,14 @@ processes:
     CONCOURSE_BIND_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("bitbucket_cloud_auth.client_id") do |v| -%>
+    CONCOURSE_BITBUCKET_CLOUD_CLIENT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("bitbucket_cloud_auth.client_secret") do |v| -%>
+    CONCOURSE_BITBUCKET_CLOUD_CLIENT_SECRET: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("build_log_retention.default") do |v| -%>
     CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN: <%= env_flag(v).to_json %>
 <% end -%>
@@ -174,6 +182,10 @@ processes:
 
 <% if_p("build_tracker_interval") do |v| -%>
     CONCOURSE_BUILD_TRACKER_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("capture_error_metrics") do |v| -%>
+    CONCOURSE_CAPTURE_ERROR_METRICS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("cf_auth.api_url") do |v| -%>
@@ -190,6 +202,10 @@ processes:
 
 <% if_p("cf_auth.client_secret") do |v| -%>
     CONCOURSE_CF_CLIENT_SECRET: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("cf_auth.skip_ssl_validation") do |v| -%>
+    CONCOURSE_CF_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("container_placement_strategy") do |v| -%>
@@ -244,6 +260,14 @@ processes:
     CONCOURSE_DATADOG_PREFIX: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("debug.bind_ip") do |v| -%>
+    CONCOURSE_DEBUG_BIND_IP: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("debug.bind_port") do |v| -%>
+    CONCOURSE_DEBUG_BIND_PORT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("default_check_interval") do |v| -%>
     CONCOURSE_RESOURCE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -260,6 +284,10 @@ processes:
     CONCOURSE_DEFAULT_TASK_MEMORY_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("emit_metrics_to_logs") do |v| -%>
+    CONCOURSE_EMIT_TO_LOGS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("enable_global_resources") do |v| -%>
     CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
 <% end -%>
@@ -270,6 +298,18 @@ processes:
 
 <% if_p("external_url") do |v| -%>
     CONCOURSE_EXTERNAL_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gc.interval") do |v| -%>
+    CONCOURSE_GC_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gc.missing_grace_period") do |v| -%>
+    CONCOURSE_GC_MISSING_GRACE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gc.one_off_grace_period") do |v| -%>
+    CONCOURSE_GC_ONE_OFF_GRACE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("gc_interval") do |v| -%>
@@ -304,6 +344,10 @@ processes:
     CONCOURSE_OAUTH_SCOPE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("generic_oauth.skip_ssl_validation") do |v| -%>
+    CONCOURSE_OAUTH_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("generic_oauth.token_url") do |v| -%>
     CONCOURSE_OAUTH_TOKEN_URL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -332,12 +376,20 @@ processes:
     CONCOURSE_OIDC_GROUPS_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("generic_oidc.hosted_domains") do |v| -%>
+    CONCOURSE_OIDC_HOSTED_DOMAINS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("generic_oidc.issuer") do |v| -%>
     CONCOURSE_OIDC_ISSUER: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("generic_oidc.scopes") do |v| -%>
     CONCOURSE_OIDC_SCOPE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("generic_oidc.skip_ssl_validation") do |v| -%>
+    CONCOURSE_OIDC_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("github_auth.ca_cert.certificate") do |v| -%>
@@ -354,6 +406,22 @@ processes:
 
 <% if_p("github_auth.host") do |v| -%>
     CONCOURSE_GITHUB_HOST: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitlab_auth.client_id") do |v| -%>
+    CONCOURSE_GITLAB_CLIENT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitlab_auth.client_secret") do |v| -%>
+    CONCOURSE_GITLAB_CLIENT_SECRET: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitlab_auth.host") do |v| -%>
+    CONCOURSE_GITLAB_HOST: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("global_resource_check_timeout") do |v| -%>
+    CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("influxdb.database") do |v| -%>
@@ -390,6 +458,10 @@ processes:
 
 <% if_p("ldap_auth.ca_cert.certificate") do |v| -%>
     CONCOURSE_LDAP_CA_CERT: <%= env_file_flag(v, "CONCOURSE_LDAP_CA_CERT").to_json %>
+<% end -%>
+
+<% if_p("ldap_auth.display_name") do |v| -%>
+    CONCOURSE_LDAP_DISPLAY_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("ldap_auth.group_search_base_dn") do |v| -%>
@@ -468,8 +540,20 @@ processes:
     CONCOURSE_LOG_LEVEL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("main_team.auth.bitbucket_cloud.teams") do |v| -%>
+    CONCOURSE_MAIN_TEAM_BITBUCKET_CLOUD_TEAM: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.bitbucket_cloud.users") do |v| -%>
+    CONCOURSE_MAIN_TEAM_BITBUCKET_CLOUD_USER: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("main_team.auth.cf.orgs") do |v| -%>
     CONCOURSE_MAIN_TEAM_CF_ORG: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.space_guids") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_GUID: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("main_team.auth.cf.spaces") do |v| -%>
@@ -490,6 +574,14 @@ processes:
 
 <% if_p("main_team.auth.github.users") do |v| -%>
     CONCOURSE_MAIN_TEAM_GITHUB_USER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.gitlab.groups") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITLAB_GROUP: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.gitlab.users") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITLAB_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("main_team.auth.ldap.groups") do |v| -%>
@@ -576,6 +668,10 @@ processes:
     CONCOURSE_POSTGRES_PASSWORD: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("postgresql.socket") do |v| -%>
+    CONCOURSE_POSTGRES_SOCKET: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("postgresql.sslmode") do |v| -%>
     CONCOURSE_POSTGRES_SSLMODE: <%= env_flag(v).to_json %>
 <% end -%>
@@ -602,6 +698,14 @@ processes:
 
 <% if_p("riemann.tags") do |v| -%>
     CONCOURSE_RIEMANN_TAG: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("secrets.retry_attempts") do |v| -%>
+    CONCOURSE_SECRET_RETRY_ATTEMPTS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("secrets.retry_interval") do |v| -%>
+    CONCOURSE_SECRET_RETRY_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("syslog.address") do |v| -%>
@@ -656,6 +760,10 @@ processes:
     CONCOURSE_VAULT_AUTH_BACKEND: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.auth.backend_max_ttl") do |v| -%>
+    CONCOURSE_VAULT_AUTH_BACKEND_MAX_TTL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.auth.client_token") do |v| -%>
     CONCOURSE_VAULT_CLIENT_TOKEN: <%= env_flag(v).to_json %>
 <% end -%>
@@ -674,6 +782,14 @@ processes:
 
 <% if_p("vault.path_prefix") do |v| -%>
     CONCOURSE_VAULT_PATH_PREFIX: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("vault.retry.initial") do |v| -%>
+    CONCOURSE_VAULT_RETRY_INITIAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("vault.retry.max") do |v| -%>
+    CONCOURSE_VAULT_RETRY_MAX: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("vault.tls.ca_cert.certificate") do |v| -%>
