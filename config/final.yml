@@ -1,6 +1,6 @@
 ---
 final_name: concourse
 blobstore:
-  provider: s3
+  provider: gcs
   options:
-    bucket_name: concourse-blobs
+    bucket_name: concourse-bosh-blobs
