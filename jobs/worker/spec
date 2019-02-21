@@ -182,7 +182,7 @@ properties:
     env: CONCOURSE_DEBUG_BIND_PORT
     description: |
       Port on which to listen for the pprof debugger endpoints.
-    default: 8079
+    default: 7776
 
   healthcheck.bind_ip:
     env: CONCOURSE_HEALTHCHECK_BIND_IP
