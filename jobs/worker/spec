@@ -126,6 +126,13 @@ properties:
       If not specified, the worker will not rebalance over time, and instead
       stick with whichever SSH gateway it initially connected to.
 
+  connection_drain_timeout:
+    env: CONCOURSE_CONNECTION_DRAIN_TIMEOUT
+    description: |
+      Duration after which a worker should give up draining forwarded
+      connections on shutdown.
+    default: 1h
+
   baggageclaim.driver:
     env: CONCOURSE_BAGGAGECLAIM_DRIVER
     description: |
