@@ -21,9 +21,13 @@ resources:
     access_token: ((concourse_github_release.access_token))
 
 - name: version
-  type: mock
+  type: semver
   source:
-    force_version: 4.2.3
+    bucket: concourse-semver-resource-versions
+    driver: gcs
+    initial_version: 4.2.4-rc.3
+    json_key: ((gcs_version_bucket_key))
+    key: hotfix-4.2.x
 
 - name: final-release
   type: s3
@@ -150,10 +154,12 @@ resources:
     password: ((docker.password))
 
 jobs:
+
 - name: fly
   public: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - aggregate:
     - task: linux
@@ -167,6 +173,7 @@ jobs:
   public: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - task: go-unit
     file: concourse/ci/go-concourse.yml
@@ -175,6 +182,7 @@ jobs:
   public: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - task: go-unit
     file: concourse/ci/worker.yml
@@ -184,6 +192,7 @@ jobs:
   serial: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - task: go-unit
     file: concourse/ci/atc-go.yml
@@ -194,6 +203,7 @@ jobs:
   serial: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - task: build
     privileged: true
@@ -204,6 +214,7 @@ jobs:
   serial: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - task: build
     file: concourse/ci/skymarshal.yml
@@ -213,6 +224,7 @@ jobs:
   serial: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - aggregate:
     - task: build
@@ -224,23 +236,52 @@ jobs:
   public: true
   plan:
   - get: concourse
+  - get: version
     trigger: true
   - task: build
     file: concourse/ci/tsa.yml
+
+- name: promote-rc
+  public: true
+  plan:
+  - get: version
+  - put: version
+    params:
+      bump: final
+
+- name: bump-patch
+  public: true
+  plan:
+  - get: version
+  - put: version
+    params:
+      bump: patch
+      pre: rc
+
+- name: bump-rc
+  public: true
+  plan:
+  - get: concourse
+    trigger: true
+  - get: version
+  - get: garden-runc
+    trigger: true
+  - put: version
+    params:
+      pre: rc
+
 
 - name: fly-rc
   public: true
   plan:
   - get: concourse
-    trigger: true
     passed: [atc, fly, go-concourse, tsa, baggageclaim, skymarshal, web, worker]
-  - get: version
-    trigger: true
   - get: final-version
     resource: version
+    passed: [atc, fly, go-concourse, tsa, baggageclaim, skymarshal, web, worker]
     trigger: true
+  - get: version
   - get: garden-runc
-    trigger: true
   - aggregate:
     - task: build-linux
       file: concourse/ci/fly-build-linux.yml
