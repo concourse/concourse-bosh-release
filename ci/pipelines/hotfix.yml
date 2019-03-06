@@ -670,24 +670,24 @@ jobs:
   plan:
   - aggregate:
     - get: concourse
-      passed: [bin-smoke]
+      passed: [bosh-upgrade, bosh-watsjs, bin-docker, bin-testflight, bin-smoke]
     - get: version
-      passed: [bosh-upgrade, bin-smoke]
+      passed: [bosh-upgrade, bosh-watsjs, bin-docker, bin-testflight, bin-smoke]
     - get: garden-runc-release
-      passed: [bosh-upgrade]
       resource: garden-runc
+      passed: [bosh-upgrade, bosh-watsjs]
     - get: postgres-release
-      passed: [bosh-upgrade]
+      passed: [bosh-upgrade, bosh-watsjs]
     - get: bosh-rc
       passed: [bosh-upgrade, bosh-watsjs]
     - get: concourse-bosh-deployment
-      passed: [bosh-upgrade]
+      passed: [bosh-upgrade, bosh-watsjs]
     - get: gcp-xenial-stemcell
-      passed: [bosh-upgrade]
+      passed: [bosh-upgrade, bosh-watsjs]
     - get: bin-rc
       passed: [bin-smoke, bin-docker, bin-testflight]
     - get: fly-rc
-      passed: [bin-smoke, bin-docker, bin-testflight, bosh-upgrade]
+      passed: [bosh-upgrade, bosh-watsjs, bin-docker, bin-testflight, bin-smoke]
     - get: concourse-image-rc
       passed: [bin-docker]
     - get: concourse-head
