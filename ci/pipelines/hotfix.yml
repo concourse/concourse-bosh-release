@@ -696,7 +696,7 @@ jobs:
       resource: concourse
   - task: finalize-release
     file: concourse/ci/finalize-release.yml
-    params: {BOSH_PRIVATE_CONFIG: ((concourse_release_private_config))}
+    params: {GCP_JSON_KEY: ((concourse_artifacts_json_key))}
   - aggregate:
     - put: version
       params: {file: version/version}
