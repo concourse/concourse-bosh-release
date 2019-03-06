@@ -41,7 +41,6 @@ resources:
   type: bosh-io-release
   source:
     repository: cloudfoundry/garden-runc-release
-    regexp: 1.18.2
 
 - name: garden-runc-src
   type: git
@@ -53,7 +52,6 @@ resources:
   type: bosh-io-release
   source:
     repository: cloudfoundry/postgres-release
-    regexp: 30
 
 - name: gcp-xenial-stemcell
   type: bosh-io-stemcell
