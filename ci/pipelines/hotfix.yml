@@ -151,6 +151,15 @@ resources:
     username: ((docker.username))
     password: ((docker.password))
 
+- name: daily-timer
+  type: time
+  source:
+    interval: 1h
+    location: America/Toronto
+    start: 2:00 AM
+    stop: 3:00 AM
+    days: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+
 jobs:
 
 - name: fly
@@ -263,6 +272,8 @@ jobs:
     trigger: true
   - get: version
   - get: garden-runc
+    trigger: true
+  - get: daily-timer
     trigger: true
   - put: version
     params:
