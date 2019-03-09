@@ -12,7 +12,12 @@ mkdir -p /var/vcap/jobs/worker/config/env
   # vim: ft=eruby
 
   def env_file_perms(fn)
-    "chown vcap:vcap #{fn}\nchmod 0600 #{fn}\n"
+    <<~EOS
+      if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+        chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} #{fn}
+      fi
+      chmod 0600 #{fn}
+    EOS
   end
 
   def env_file_content(v)

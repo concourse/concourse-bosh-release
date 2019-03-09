@@ -28,7 +28,9 @@ describe "env_file_write" do
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0 <<"ENVGEN_EOF"
         bar
         ENVGEN_EOF
-        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0
+        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0
+        fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0
 
 
@@ -37,14 +39,18 @@ describe "env_file_write" do
         quuux
         quuuux
         ENVGEN_EOF
-        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1
+        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1
+        fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1
 
 
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2 <<"ENVGEN_EOF"
         {"grunt":"gorp"}
         ENVGEN_EOF
-        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2
+        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2
+        fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2
       EOS
     }
@@ -65,7 +71,9 @@ describe "env_file_write" do
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_foo <<"ENVGEN_EOF"
         bar
         ENVGEN_EOF
-        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_foo
+        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_foo
+        fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_foo
 
 
@@ -74,14 +82,18 @@ describe "env_file_write" do
         quuux
         quuuux
         ENVGEN_EOF
-        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_baz
+        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_baz
+        fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_baz
 
 
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_thud <<"ENVGEN_EOF"
         {"grunt":"gorp"}
         ENVGEN_EOF
-        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_thud
+        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_thud
+        fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_thud
       EOS
     }
@@ -96,7 +108,9 @@ describe "env_file_write" do
         hello there
         i am fine
         ENVGEN_EOF
-        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv
+        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv
+        fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv
 
       EOS
