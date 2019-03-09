@@ -28,6 +28,8 @@ describe "env_file_write" do
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0 <<"ENVGEN_EOF"
         bar
         ENVGEN_EOF
+        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0
 
 
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1 <<"ENVGEN_EOF"
@@ -35,11 +37,15 @@ describe "env_file_write" do
         quuux
         quuuux
         ENVGEN_EOF
+        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1
 
 
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2 <<"ENVGEN_EOF"
         {"grunt":"gorp"}
         ENVGEN_EOF
+        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2
       EOS
     }
     it { expect(env_file_writer(value, "MyEnv")).to eq(expected) }
@@ -59,6 +65,8 @@ describe "env_file_write" do
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_foo <<"ENVGEN_EOF"
         bar
         ENVGEN_EOF
+        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_foo
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_foo
 
 
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_baz <<"ENVGEN_EOF"
@@ -66,11 +74,15 @@ describe "env_file_write" do
         quuux
         quuuux
         ENVGEN_EOF
+        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_baz
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_baz
 
 
         cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_thud <<"ENVGEN_EOF"
         {"grunt":"gorp"}
         ENVGEN_EOF
+        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv_thud
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_thud
       EOS
     }
     it { expect(env_file_writer(value, "MyEnv")).to eq(expected) }
@@ -84,6 +96,8 @@ describe "env_file_write" do
         hello there
         i am fine
         ENVGEN_EOF
+        chown vcap:vcap /var/vcap/jobs/{{.Name}}/config/env/MyEnv
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv
 
       EOS
     }
