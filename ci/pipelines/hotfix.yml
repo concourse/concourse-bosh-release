@@ -54,10 +54,16 @@ resources:
     repository: cloudfoundry/postgres-release
 
 - name: gcp-xenial-stemcell
-  type: bosh-io-stemcell
+  type: pivnet
   source:
-    name: bosh-google-kvm-ubuntu-xenial-go_agent
-    version_family: 170.latest
+    api_token: ((concourse_pivnet_token))
+    product_slug: stemcells-ubuntu-xenial
+    sort_by: semver
+
+- name: concourse-boshio
+  type: bosh-io-release
+  source:
+    repository: concourse/concourse-bosh-release
 
 - name: concourse-bosh-deployment
   type: git
@@ -333,6 +339,8 @@ jobs:
       trigger: true
     - get: gcp-xenial-stemcell
       trigger: true
+      params:
+        globs: []
     - get: concourse-bosh-deployment
       trigger: true
   - task: create-bosh-rc
@@ -527,6 +535,8 @@ jobs:
     - get: gcp-xenial-stemcell
       trigger: true
       passed: [bosh-rc]
+      params:
+        globs: [light-bosh-stemcell-*-google-kvm-ubuntu-xenial-go_agent.tgz]
     - get: concourse-bosh-deployment
       trigger: true
       passed: [bosh-rc]
@@ -631,6 +641,8 @@ jobs:
     - get: gcp-xenial-stemcell
       passed: [bosh-rc]
       trigger: true
+      params:
+        globs: [light-bosh-stemcell-*-google-kvm-ubuntu-xenial-go_agent.tgz]
     - get: concourse-bosh-deployment
       passed: [bosh-rc]
       trigger: true
@@ -694,6 +706,8 @@ jobs:
     - get: concourse-bosh-deployment
       passed: [bosh-upgrade, bosh-watsjs]
     - get: gcp-xenial-stemcell
+      params:
+        globs: []
       passed: [bosh-upgrade, bosh-watsjs]
     - get: bin-rc
       passed: [bin-smoke, bin-docker, bin-testflight]
@@ -772,6 +786,11 @@ jobs:
       tag_as_latest: true
 
 resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
 - name: bosh-io-release
   type: registry-image
   source: {repository: concourse/bosh-io-release-resource}
