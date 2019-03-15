@@ -417,6 +417,7 @@ jobs:
       params:
         globs: [light-bosh-stemcell-*-google-kvm-ubuntu-xenial-go_agent.tgz]
     - get: concourse-bosh-deployment
+      resource: concourse-bosh-deployment-latest
       passed: [bosh-rc]
       trigger: true
   - put: wats-deployment
@@ -476,7 +477,7 @@ jobs:
       passed: [bosh-upgrade, bosh-watsjs]
     - get: bosh-rc
       passed: [bosh-upgrade, bosh-watsjs]
-    - get: concourse-bosh-deployment
+    - get: concourse-bosh-deployment-latest
       passed: [bosh-upgrade, bosh-watsjs]
     - get: gcp-xenial-stemcell
       params:
@@ -513,7 +514,7 @@ jobs:
       passed: [shipit]
       params:
         globs: []
-    - get: concourse-bosh-deployment
+    - get: concourse-bosh-deployment-latest
     - get: postgres-release
   - aggregate:
     - task: build-release-notes
@@ -524,11 +525,11 @@ jobs:
       tag: release-notes/release-name
       commitish: concourse/.git/ref
 
-- name: bump-concourse-bosh-deployment-master
+- name: bump-concourse-bosh-deployment-released
   serial: true
   plan:
   - aggregate:
-    - get: concourse-bosh-deployment
+    - get: concourse-bosh-deployment-latest
     - get: concourse-boshio
     - get: garden-runc
       passed:
@@ -537,9 +538,9 @@ jobs:
       passed:
       - shipit
   - task: bump-versions
-    file: concourse-bosh-deployment/ci/bump-versions.yml
+    file: concourse-bosh-deployment-latest/ci/bump-versions.yml
   - aggregate:
-    - put: concourse-bosh-deployment-master
+    - put: concourse-bosh-deployment-released
       params:
         merge: true
         repository: bumped-repo
