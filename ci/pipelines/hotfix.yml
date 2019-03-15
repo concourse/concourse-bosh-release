@@ -56,7 +56,7 @@ resources:
   type: git
   source:
     uri: git@github.com:chenbh/concourse-bosh-deployment.git
-    branch: release/v4.2.x
+    branch: release/4.2.x
     private_key: ((chenbh_concourse_repo_private_key))
 
 - name: concourse-bosh-deployment-released

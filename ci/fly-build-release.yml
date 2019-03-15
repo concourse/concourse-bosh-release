@@ -17,4 +17,4 @@ outputs:
 - name: release
 
 run:
-  path: concourse/src/github.com/concourse/fly/ci/build-release
+  path: concourse/ci/scripts/fly-build-release
