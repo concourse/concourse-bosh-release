@@ -3,6 +3,6 @@
 set -e -x
 
 pushd fly-rc
-  tar xzvf fly*.tgz
+  tar -xvf fly*.tgz
   rm fly*.tgz
 popd

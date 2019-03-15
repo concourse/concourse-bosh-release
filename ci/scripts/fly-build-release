@@ -9,4 +9,4 @@ for platform in linux windows darwin; do
   cp ${platform}-binary/* release/
 done
 
-tar czvf "release/fly-$(cat version/version).tgz" release/* 
+tar -cvf "release/fly-$(cat version/version).tgz" release/* 
