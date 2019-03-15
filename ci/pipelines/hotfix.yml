@@ -2,9 +2,9 @@ resources:
 - name: concourse
   type: git
   source:
-    uri: git@github.com:concourse/concourse-bosh-release.git
+    uri: git@github.com:chenbh/concourse-bosh-release.git
     branch: release/4.2.x
-    private_key: ((concourse_repo_private_key))
+    private_key: ((chenbh_concourse_repo_private_key))
 
 - name: github-bosh-release
   type: github-release
@@ -55,14 +55,16 @@ resources:
 - name: concourse-bosh-deployment-latest
   type: git
   source:
-    uri: https://github.com/concourse/concourse-bosh-deployment.git
+    uri: git@github.com:chenbh/concourse-bosh-deployment.git
     branch: release/v4.2.x
+    private_key: ((chenbh_concourse_repo_private_key))
 
 - name: concourse-bosh-deployment-released
   type: git
   source:
-    uri: https://github.com/concourse/concourse-bosh-deployment.git
+    uri: git@github.com:chenbh/concourse-bosh-deployment.git
     tag_filter: v4.2.3
+    private_key: ((chenbh_concourse_repo_private_key))
 
 - name: fly-rc
   type: gcs
@@ -268,8 +270,6 @@ jobs:
     - get: fly-rc
       trigger: true
       passed: [fly-rc]
-      params:
-        globs: [fly_*]
     - get: postgres-release
       trigger: true
     - get: gcp-xenial-stemcell
@@ -278,6 +278,8 @@ jobs:
         globs: []
     - get: concourse-bosh-deployment-latest
       trigger: true
+  - task: fly-unpack-release
+    file: concourse/ci/fly-unpack-release.yml
   - task: create-bosh-rc
     file: concourse/ci/create-bosh-rc.yml
   - put: bosh-rc
@@ -376,6 +378,8 @@ jobs:
         network_name: test
         web_vm_type: test
         worker_vm_type: test
+  - task: fly-unpack-release
+    file: concourse/ci/fly-unpack-release.yml
   - task: verify-test-pipeline
     file: concourse/ci/verify-uber-pipeline.yml
     params:
@@ -452,6 +456,8 @@ jobs:
       BOSH_CLIENT_SECRET: ((bosh_client.secret))
       BOSH_DEPLOYMENT: concourse-wats-4-2-x
       BOSH_INSTANCE_GROUP: web
+  - task: fly-unpack-release
+    file: concourse/ci/fly-unpack-release.yml
   - task: wats
     file: concourse/ci/wats.yml
     timeout: 1h

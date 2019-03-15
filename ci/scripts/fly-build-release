@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e -x
+
+echo "$(cat concourse/.git/ref)" > release/git-sha
+echo "v$(cat version/version)" > release/name
+
+for platform in linux windows darwin; do
+  cp ${platform}-binary/* release/
+done
+
+tar czvf "release/fly-$(cat version/version).tgz" release/* 
