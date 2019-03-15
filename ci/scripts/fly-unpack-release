@@ -2,8 +2,10 @@
 
 set -e -x
 
+mkdir fly-rc-unpacked
+
 pushd fly-rc
   tar -xvf fly*.tgz
-  cp release/* .
+  cp release/* ../fly-rc-unpacked/ 
   rm fly*.tgz
 popd

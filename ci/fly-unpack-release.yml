@@ -10,5 +10,8 @@ inputs:
 - name: fly-rc
 - name: concourse
 
+outputs:
+- name: fly-rc-unpacked
+
 run:
   path: concourse/ci/scripts/fly-unpack-release
