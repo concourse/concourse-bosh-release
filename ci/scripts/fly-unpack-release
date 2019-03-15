@@ -4,5 +4,6 @@ set -e -x
 
 pushd fly-rc
   tar -xvf fly*.tgz
+  cp release/* .
   rm fly*.tgz
 popd
