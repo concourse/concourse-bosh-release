@@ -8,6 +8,7 @@ image_resource:
 
 inputs:
 - name: fly-rc
+- name: concourse
 
 run:
-  path: concourse/ci/fly-unpack-release
+  path: concourse/ci/scripts/fly-unpack-release
