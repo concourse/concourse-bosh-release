@@ -65,13 +65,11 @@ resources:
     tag_filter: v4.2.3
 
 - name: fly-rc
-  type: github-release
+  type: gcs
   source:
-    owner: concourse
-    repository: fly
-    release: false
-    pre_release: true
-    access_token: ((concourse_github_release.access_token))
+    bucket: fly-artifacts
+    json_key: ((concourse_artifacts_json_key))
+    regexp: rcs/fly-(.*).tgz
 
 - name: bosh-rc
   type: s3
@@ -243,15 +241,12 @@ jobs:
     - task: build-windows
       file: concourse/ci/fly-build-windows.yml
   - task: build-release
-    file: concourse/src/github.com/concourse/fly/ci/build-release.yml
+    file: concourse/ci/fly-build-release.yml
     input_mapping:
       version: final-version
   - put: fly-rc
     params:
-      name: release/name
-      tag: release/tag
-      body: release/body
-      globs: [release/artifacts/*]
+      file: release/fly*.tgz
 
 - name: bosh-rc
   public: true
@@ -579,3 +574,7 @@ resource_types:
 - name: bosh-deployment
   type: registry-image
   source: {repository: cloudfoundry/bosh-deployment-resource}
+
+- name: gcs
+  type: registry-image
+  source: {repository: frodenas/gcs-resource}
