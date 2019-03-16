@@ -94,18 +94,6 @@ properties:
       For multiple ATCs it would go to some sort of load balancer.
     example: https://ci.concourse-ci.org
 
-  peer_url:
-    env: CONCOURSE_PEER_URL
-    description: |
-      Address used internally to reach the ATC. This will be auto-generated
-      using the IP of each ATC VM if not specified.
-
-      Note that this refers to an *individual ATC*, not the whole cluster. This
-      property is only useful if you're deploying in a way that cannot
-      autodetect its own IP, e.g. a `bosh create-env` deployment.
-
-      You should otherwise leave this value blank.
-
   x_frame_options:
     env: CONCOURSE_X_FRAME_OPTIONS
     description: |

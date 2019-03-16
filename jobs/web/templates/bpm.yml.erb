@@ -12,6 +12,13 @@ processes:
     open_files: 65536
 
   env:
+<%
+  # fall back to 127.0.0.1 to support single-instance create-env deployed
+  # Concourses, which cannot detect their own address
+  peer_address = spec.address || "127.0.0.1"
+-%>
+    CONCOURSE_TSA_PEER_ADDRESS: <%= peer_address %>
+
     CONCOURSE_METRICS_ATTRIBUTE: <%= "bosh-deployment:#{spec.deployment},bosh-job:#{name}".to_json %>
 
 <%
@@ -24,31 +31,19 @@ processes:
     CONCOURSE_TSA_ATC_URL: <%= web_urls.join(",").to_json %>
 <%
   end
--%>
 
-<%
-  if p("peer_url", "").empty?
--%>
-    CONCOURSE_PEER_URL: http://<%= spec.address %>:<%= p("bind_port") %>
-<%
-  end
--%>
-
-<%
   if p("external_url", "").empty?
     if_p("tls.bind_port") do |tls_port|
 -%>
-    CONCOURSE_EXTERNAL_URL: https://<%= spec.address %>:<%= tls_port %>
+    CONCOURSE_EXTERNAL_URL: https://<%= peer_address %>:<%= tls_port %>
 <%
     end.else do
 -%>
-    CONCOURSE_EXTERNAL_URL: http://<%= spec.address %>:<%= p("bind_port") %>
+    CONCOURSE_EXTERNAL_URL: http://<%= peer_address %>:<%= p("bind_port") %>
 <%
     end
   end
--%>
 
-<%
   if p("postgresql.host", "").empty?
     if_link("postgres") do |l|
 -%>
@@ -626,10 +621,6 @@ processes:
 
 <% if_p("old_encryption_key") do |v| -%>
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("peer_url") do |v| -%>
-    CONCOURSE_PEER_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("postgresql.ca_cert.certificate") do |v| -%>
