@@ -282,6 +282,8 @@ jobs:
     file: concourse/ci/fly-unpack-release.yml
   - task: create-bosh-rc
     file: concourse/ci/create-bosh-rc.yml
+    input_mapping:
+      fly-rc: fly-rc-unpacked
   - put: bosh-rc
     params: {file: bosh-rc/concourse-*.tgz}
 
@@ -352,8 +354,12 @@ jobs:
       BOSH_CLIENT_SECRET: ((bosh_client.secret))
       BOSH_DEPLOYMENT: concourse-test-upgrade-4-2-x
       BOSH_INSTANCE_GROUP: web
+  - task: fly-unpack-release
+    file: concourse/ci/fly-unpack-release.yml
   - task: create-test-pipeline
     file: concourse/ci/create-uber-pipeline.yml
+    input_mapping:
+      fly-rc: fly-rc-unpacked
     params:
       WEB_USERNAME: "test"
       WEB_PASSWORD: "test"
@@ -378,10 +384,10 @@ jobs:
         network_name: test
         web_vm_type: test
         worker_vm_type: test
-  - task: fly-unpack-release
-    file: concourse/ci/fly-unpack-release.yml
   - task: verify-test-pipeline
     file: concourse/ci/verify-uber-pipeline.yml
+    input_mapping:
+      fly-rc: fly-rc-unpacked
     params:
       WEB_USERNAME: "test"
       WEB_PASSWORD: "test"
@@ -456,13 +462,15 @@ jobs:
       BOSH_CLIENT_SECRET: ((bosh_client.secret))
       BOSH_DEPLOYMENT: concourse-wats-4-2-x
       BOSH_INSTANCE_GROUP: web
-  - task: fly-unpack-release
-    file: concourse/ci/fly-unpack-release.yml
   - task: wats
     file: concourse/ci/wats.yml
     timeout: 1h
+  - task: fly-unpack-release
+    file: concourse/ci/fly-unpack-release.yml
   - task: watsjs
     file: concourse/ci/watsjs.yml
+    input_mapping:
+      fly-rc: fly-rc-unpacked
     params:
       ATC_USERNAME: "test"
       ATC_PASSWORD: "test"
@@ -545,6 +553,8 @@ jobs:
       - shipit
   - task: bump-versions
     file: concourse-bosh-deployment-latest/ci/bump-versions.yml
+    input_mapping:
+      concourse-bosh-deployment: concourse-bosh-deployment-latest
   - aggregate:
     - put: concourse-bosh-deployment-released
       params:
