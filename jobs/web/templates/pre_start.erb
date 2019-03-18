@@ -3,10 +3,21 @@
 
 set -e -u -x
 
+ENV_FILE_OWNER=vcap
+
 mkdir -p /var/vcap/jobs/web/config/env
 
 <%
   # vim: ft=eruby
+
+  def env_file_perms(fn)
+    <<~EOS
+      if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+        chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} #{fn}
+      fi
+      chmod 0600 #{fn}
+    EOS
+  end
 
   def env_file_content(v)
     case v
@@ -25,14 +36,16 @@ mkdir -p /var/vcap/jobs/web/config/env
     case v
     when Array
       v.collect.with_index do |v, i|
-        "cat > #{path}_#{i} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n"
+        fn = "#{path}_#{i}"
+        "cat > #{fn} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n#{env_file_perms(fn)}"
       end.join("\n\n")
     when Hash
       v.collect do |k, v|
-        "cat > #{path}_#{k} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n"
+        fn = "#{path}_#{k}"
+        "cat > #{fn} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n#{env_file_perms(fn)}"
       end.join("\n\n")
     else
-      "cat > #{path} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n\n"
+      "cat > #{path} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n#{env_file_perms(path)}\n"
     end
   end
 -%>

@@ -3,4 +3,6 @@
 
 set -e -u -x
 
+ENV_FILE_OWNER=vcap
+
 {{template "create_env_files.erb.tmpl" .}}
