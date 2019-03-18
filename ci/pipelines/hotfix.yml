@@ -51,6 +51,7 @@ resources:
   type: bosh-io-release
   source:
     repository: concourse/concourse-bosh-release
+    regexp: 4.2.*
 
 - name: concourse-bosh-deployment-latest
   type: git
@@ -63,7 +64,7 @@ resources:
   type: git
   source:
     uri: git@github.com:chenbh/concourse-bosh-deployment.git
-    tag_filter: v4.2.3
+    branch: release/4.2.x
     private_key: ((chenbh_concourse_repo_private_key))
 
 - name: fly-rc
@@ -545,6 +546,7 @@ jobs:
   - aggregate:
     - get: concourse-bosh-deployment-latest
     - get: concourse-boshio
+      trigger: true
     - get: garden-runc
       passed:
       - shipit
