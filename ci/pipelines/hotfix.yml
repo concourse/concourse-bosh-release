@@ -2,9 +2,9 @@ resources:
 - name: concourse
   type: git
   source:
-    uri: git@github.com:chenbh/concourse-bosh-release.git
+    uri: git@github.com:concourse/concourse-bosh-release.git
     branch: release/4.2.x
-    private_key: ((chenbh_concourse_repo_private_key))
+    private_key: ((concourse_repo_private_key))
 
 - name: github-bosh-release
   type: github-release
@@ -56,16 +56,16 @@ resources:
 - name: concourse-bosh-deployment-latest
   type: git
   source:
-    uri: git@github.com:chenbh/concourse-bosh-deployment.git
+    uri: git@github.com:concourse/concourse-bosh-deployment.git
     branch: release/4.2.x
-    private_key: ((chenbh_concourse_repo_private_key))
+    private_key: ((concourse_repo_private_key))
 
 - name: concourse-bosh-deployment-released
   type: git
   source:
-    uri: git@github.com:chenbh/concourse-bosh-deployment.git
+    uri: git@github.com:concourse/concourse-bosh-deployment.git
     branch: release/4.2.x
-    private_key: ((chenbh_concourse_repo_private_key))
+    private_key: ((concourse_repo_private_key))
 
 - name: fly-rc
   type: gcs
