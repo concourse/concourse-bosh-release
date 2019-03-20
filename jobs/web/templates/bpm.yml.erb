@@ -783,6 +783,10 @@ processes:
     CONCOURSE_VAULT_RETRY_MAX: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.shared_path") do |v| -%>
+    CONCOURSE_VAULT_SHARED_PATH: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.tls.ca_cert.certificate") do |v| -%>
     CONCOURSE_VAULT_CA_CERT: <%= env_file_flag(v, "CONCOURSE_VAULT_CA_CERT").to_json %>
 <% end -%>

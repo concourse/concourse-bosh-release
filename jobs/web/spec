@@ -858,6 +858,10 @@ properties:
     description: |
       Path under which to namespace team/pipeline credentials.
     default: /concourse
+  vault.shared_path:
+    env: CONCOURSE_VAULT_SHARED_PATH
+    description: |
+      Path under which to lookup shared credentials.
   vault.max_lease:
     env: CONCOURSE_VAULT_MAX_LEASE
     description: |
