@@ -630,7 +630,6 @@ properties:
     description: |
       The interval, in Go duration format (1m = 1 minute), on which to garbage
       collect containers, volumes, and other internal data.
-    default: 30s
 
   gc.interval:
     env: CONCOURSE_GC_INTERVAL
