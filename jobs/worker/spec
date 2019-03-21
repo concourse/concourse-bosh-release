@@ -89,6 +89,16 @@ properties:
       collection.
     default: 30s
 
+  container_sweeper_max_in_flight:
+    env: CONCOURSE_CONTAINER_SWEEPER_MAX_IN_FLIGHT
+    description: |
+      Maximum number of containers which can be swept in parallel.
+
+  volume_sweeper_max_in_flight:
+    env: CONCOURSE_VOLUME_SWEEPER_MAX_IN_FLIGHT
+    description: |
+      Maximum number of volumes which can be swept in parallel.
+
   worker_gateway.hosts:
     env: CONCOURSE_TSA_HOST
     description: |
