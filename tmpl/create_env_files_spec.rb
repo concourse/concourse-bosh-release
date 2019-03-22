@@ -13,45 +13,27 @@
 require "rspec"
 require "json"
 
-describe "env_file_write" do
+describe "env_file_writer" do
   context "Array" do
     let(:value) {
       [
-        "bar",
-        ["quux", "quuux", "quuuux"],
-        { "grunt" => "gorp" },
+        "foo",
+        "bar\n", # public_key variable attrs have a trailing linebreak
+        "baz",
       ]
     }
 
     let(:expected) {
       <<~EOS
-        cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0 <<"ENVGEN_EOF"
+        cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv <<"ENVGEN_EOF"
+        foo
         bar
+        baz
         ENVGEN_EOF
         if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
-          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0
+          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv
         fi
-        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_0
-
-
-        cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1 <<"ENVGEN_EOF"
-        quux
-        quuux
-        quuuux
-        ENVGEN_EOF
-        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
-          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1
-        fi
-        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_1
-
-
-        cat > /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2 <<"ENVGEN_EOF"
-        {"grunt":"gorp"}
-        ENVGEN_EOF
-        if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
-          chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2
-        fi
-        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv_2
+        chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv
       EOS
     }
     it { expect(env_file_writer(value, "MyEnv")).to eq(expected) }
@@ -112,7 +94,6 @@ describe "env_file_write" do
           chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} /var/vcap/jobs/{{.Name}}/config/env/MyEnv
         fi
         chmod 0600 /var/vcap/jobs/{{.Name}}/config/env/MyEnv
-
       EOS
     }
     it { expect(env_file_writer(value, "MyEnv")).to eq(expected) }
