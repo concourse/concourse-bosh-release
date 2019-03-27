@@ -381,6 +381,14 @@ properties:
     env: CONCOURSE_OAUTH_SCOPE
     description: OAuth scopes to request during authorization.
 
+  generic_oauth.user_id_key:
+    env: CONCOURSE_OAUTH_USER_ID_KEY
+    description: User ID claim key used to map groups from the OAuth userinfo/token
+
+  generic_oauth.user_name_key:
+    env: CONCOURSE_OAUTH_USER_NAME_KEY
+    description: User name claim key used to map groups from the OAuth userinfo/token
+
   generic_oauth.groups_key:
     env: CONCOURSE_OAUTH_GROUPS_KEY
     description: Groups claim key used to map groups from the OAuth userinfo/token
@@ -415,6 +423,10 @@ properties:
     env: CONCOURSE_OIDC_SCOPE
     description: OIDC scopes to request during authorization.
     default: []
+
+  generic_oidc.user_name_key:
+    env: CONCOURSE_OIDC_USER_NAME_KEY
+    description: User name claim key used to map groups from the OIDC userinfo/token
 
   generic_oidc.groups_key:
     env: CONCOURSE_OIDC_GROUPS_KEY

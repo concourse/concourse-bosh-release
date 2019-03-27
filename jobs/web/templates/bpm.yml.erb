@@ -343,6 +343,14 @@ processes:
     CONCOURSE_OAUTH_TOKEN_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("generic_oauth.user_id_key") do |v| -%>
+    CONCOURSE_OAUTH_USER_ID_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("generic_oauth.user_name_key") do |v| -%>
+    CONCOURSE_OAUTH_USER_NAME_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("generic_oauth.userinfo_url") do |v| -%>
     CONCOURSE_OAUTH_USERINFO_URL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -381,6 +389,10 @@ processes:
 
 <% if_p("generic_oidc.skip_ssl_validation") do |v| -%>
     CONCOURSE_OIDC_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("generic_oidc.user_name_key") do |v| -%>
+    CONCOURSE_OIDC_USER_NAME_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("github_auth.ca_cert.certificate") do |v| -%>
