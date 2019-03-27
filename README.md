@@ -1,45 +1,28 @@
-# concourse 
+# concourse-bosh-release
 
-[Concourse](https://concourse-ci.org) is a pipeline-based CI system written in Go.
+> A [BOSH](https://bosh.io) release for the `concourse` binary.
 
-* Website: [concourse-ci.org](https://concourse-ci.org)
-* Documentation:
-  * [About](https://concourse-ci.org/about.html)
-  * [Setting Up](https://concourse-ci.org/install.html)
-  * [Using Concourse / Docs](https://concourse-ci.org/)
-* Forum 
-  * [Concourse Discourse](https://discuss.concourse-ci.org)
-* Chat
-  * [Discord](https://discord.gg/MeRxXKW)
-* Roadmap:
-  * [GitHub Milestones](https://github.com/concourse/concourse/milestones)
-  * [GitHub Issues](https://github.com/concourse/concourse/issues)
+This repository contains the official BOSH release of
+[Concourse](https://concourse-ci.org). It packages up the `concourse` binary
+and exposes all flags via properties on the `web` and `worker` jobs. These jobs
+represent the [`web` node](https://concourse-ci.org/concourse-web.html) and the
+[`worker` node](https://concourse-ci.org/concourse-worker.html), respectively.
 
-## Contributing
 
-Concourse is built on a few components, all written in Go with cutesy
-aerospace-themed names. This repository is actually its [BOSH](https://bosh.io)
-release, which ties everything together and also serves as the central hub for
-GitHub issues.
+## Requirements
 
-Each component has its own repository:
+- [Bosh CLI V2](https://bosh.io/docs/cli-v2.html#install)
 
-* [ATC](https://github.com/concourse/atc) is most of Concourse: it provides
-  the API, web UI, and all pipeline orchestration
-* [Fly](https://github.com/concourse/fly) is the CLI for interacting with and
-  configuring Concourse pipelines
-* [TSA](https://github.com/concourse/tsa) is a SSH server used for authorizing
-  worker registration
-* [Garden](https://github.com/cloudfoundry-incubator/garden) is a generic
-  interface for orchestrating containers remotely on a worker
-* [Baggageclaim](https://github.com/concourse/baggageclaim) is a server for
-  managing caches and artifacts on the workers
 
-You can get Concourse up and running on your local machine by following the Contributors guide in [`CONTRIBUTING.md`](https://github.com/concourse/concourse/blob/master/CONTRIBUTING.md)
+## Usage
 
-To learn more about how they fit together, see [Concourse
-Architecture](https://concourse-ci.org/concepts.html).
+Check out the [`concourse-bosh-deployment`
+repository](https://github.com/concourse/concourse-bosh-deployment) repository
+for a stub manifest and various ops files.
 
-Please note that Concourse is released with a Contributor Code of Conduct.
-By participating in this project you agree to abide by its terms. You can review
-the Code of Code of Conduct in [`CODE_OF_CONDUCT.md`](https://github.com/concourse/concourse/blob/master/CODE_OF_CONDUCT.md) 
+If you're not familiar with BOSH, you may want to check out the [BOSH
+documentation](https://bosh.io/docs/) first.
+
+If you're just looking to get Concourse running quickly and kick the tires, you
+may want to try the [Quick Start](https://concourse-ci.org/install.html)
+instead.
