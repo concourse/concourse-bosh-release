@@ -17,7 +17,7 @@ processes:
   # Concourses, which cannot detect their own address
   peer_address = spec.address || "127.0.0.1"
 -%>
-    CONCOURSE_TSA_PEER_ADDRESS: <%= peer_address %>
+    CONCOURSE_PEER_ADDRESS: <%= peer_address %>
 
     CONCOURSE_METRICS_ATTRIBUTE: <%= "bosh-deployment:#{spec.deployment},bosh-job:#{name}".to_json %>
 
