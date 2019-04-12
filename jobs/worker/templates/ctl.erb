@@ -3,55 +3,47 @@
 
 set -e -u
 
-RUN_DIR=/var/vcap/sys/run/worker
-mkdir -p $RUN_DIR
-PIDFILE=${RUN_DIR}/worker.pid
-
 LOG_DIR=/var/vcap/sys/log/worker
 mkdir -p $LOG_DIR
-exec 1>> $LOG_DIR/worker.stdout.log
-exec 2>> $LOG_DIR/worker.stderr.log
-
-/var/vcap/jobs/worker/bin/pre_start
+exec 1>> "${LOG_DIR}/ctl.stdout.log"
+exec 2>> "${LOG_DIR}/ctl.stderr.log"
 
 source /var/vcap/jobs/worker/config/env.sh
 
+IS_RUNNING_SYSTEMD=false
+if [ -d "/run/systemd/system" ]; then
+  IS_RUNNING_SYSTEMD=true
+fi
+
 set -x
 
-function increase_max_open_fds() {
-  ulimit -n 65536
+install_systemd_service() {
+  if [ -n "${IS_RUNNING_SYSTEMD}" ]; then
+    rm -f /lib/systemd/system/concourse.service
+    cp /var/vcap/jobs/worker/config/concourse.service /lib/systemd/system/
+    /bin/systemctl daemon-reload
+  fi
 }
 
-function increase_max_procs() {
-  echo 4194304 > /proc/sys/kernel/pid_max
-  ulimit -u unlimited
+
+worker() {
+  if [ -n "${IS_RUNNING_SYSTEMD}" ]; then
+    /bin/systemctl "${1}" concourse.service
+  else
+    /var/vcap/jobs/worker/bin/concourse_"${1}"
+  fi
 }
+
 
 case $1 in
   start)
-    increase_max_open_fds
-    increase_max_procs
-
-    start-stop-daemon \
-      --pidfile $PIDFILE \
-      --make-pidfile \
-      --start \
-      --exec /var/vcap/packages/concourse/bin/concourse worker
-
-    ;;
-
+    install_systemd_service
+    worker "start"
+  ;;
   stop)
-    start-stop-daemon \
-      --pidfile $PIDFILE \
-      --remove-pidfile \
-      --stop \
-      --oknodo \
-      --retry=TERM/15/QUIT/2/KILL
-
-    ;;
-
+    worker "stop"
+  ;;
   *)
     echo "Usage: $0 {start|stop}"
-
-    ;;
+  ;;
 esac
