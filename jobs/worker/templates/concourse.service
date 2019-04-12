@@ -1,0 +1,9 @@
+[Unit]
+Description=Concourse worker runtime
+
+[Service]
+Type=exec
+ExecStart=/var/vcap/jobs/worker/bin/concourse_start
+ExecStop=/var/vcap/jobs/worker/bin/concourse_stop
+Delegate=yes
+KillMode=none
