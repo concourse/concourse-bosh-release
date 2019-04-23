@@ -41,6 +41,11 @@ properties:
       Port on which the ATC should listen for HTTP traffic.
     default: 8080
 
+  cluster_name:
+    env: CONCOURSE_CLUSTER_NAME
+    description: |
+      A name for this Concourse cluster, to be displayed on the dashboard page.
+
   tls.bind_port:
     env: CONCOURSE_TLS_BIND_PORT
     description: |
