@@ -179,6 +179,10 @@ processes:
     CONCOURSE_CAPTURE_ERROR_METRICS: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("cluster_name") do |v| -%>
+    CONCOURSE_CLUSTER_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("cf_auth.api_url") do |v| -%>
     CONCOURSE_CF_API_URL: <%= env_flag(v).to_json %>
 <% end -%>
