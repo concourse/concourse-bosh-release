@@ -189,6 +189,11 @@ properties:
       Allow containers to reach the worker VM's network.
     default: false
 
+  garden.external_address:
+    env: CONCOURSE_EXTERNAL_GARDEN_ADDRESS
+    description: |
+      Garden server connection address, when specified will not use embedded garden
+
   debug.bind_ip:
     env: CONCOURSE_DEBUG_BIND_IP
     description: |
