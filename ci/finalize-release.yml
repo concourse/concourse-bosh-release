@@ -7,7 +7,8 @@ image_resource:
     repository: concourse/bosh-cli
 
 inputs:
-- name: concourse #cbr
+- name: concourse #cbr branch
+- name: concourse-bosh-release # cbr master
 - name: version
 - name: bosh-rc
 

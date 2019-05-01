@@ -14,7 +14,7 @@ if [ -z "$VERSION" ]; then
   exit 1
 fi
 
-git clone ./concourse $FINAL_RELEASE_REPO
+git clone ./concourse-bosh-release $FINAL_RELEASE_REPO
 
 export GOOGLE_APPLICATION_CREDENTIALS=/tmp/gcp.key.json
 cat > $GOOGLE_APPLICATION_CREDENTIALS <<EOF

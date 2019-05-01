@@ -6,6 +6,13 @@ resources:
     branch: release/4.2.x
     private_key: ((concourse_repo_private_key))
 
+- name: concourse-bosh-release
+  type: git
+  source:
+    uri: git@github.com:concourse/concourse-bosh-release.git
+    branch: master
+    private_key: ((concourse_repo_private_key))
+
 - name: github-bosh-release
   type: github-release
   source:
@@ -483,6 +490,7 @@ jobs:
   - aggregate:
     - get: concourse
       passed: [bosh-upgrade, bosh-watsjs]
+    - get: concourse-bosh-release
     - get: version
       passed: [bosh-upgrade, bosh-watsjs]
     - get: garden-runc-release
@@ -504,7 +512,7 @@ jobs:
     file: concourse/ci/finalize-release.yml
     params: {GCP_JSON_KEY: ((concourse_artifacts_json_key))}
   - aggregate:
-    - put: concourse
+    - put: concourse-bosh-release
       params:
         repository: final-release-repo
         merge: true
