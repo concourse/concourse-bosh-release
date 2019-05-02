@@ -70,10 +70,6 @@
 	path = src/golang.org/x/oauth2
 	url = https://go.googlesource.com/oauth2
 	branch = master
-[submodule "src/github.com/docker/distribution"]
-	path = src/github.com/docker/distribution
-	url = https://github.com/docker/distribution
-	branch = master
 [submodule "src/github.com/fatih/color"]
 	path = src/github.com/fatih/color
 	url = https://github.com/fatih/color
