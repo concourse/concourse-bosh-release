@@ -65,7 +65,7 @@ resources:
   source:
     uri: git@github.com:concourse/concourse-bosh-deployment.git
     branch: release/4.2.x
-    private_key: ((concourse_repo_private_key))
+    private_key: ((concourse_deployment_repo_private_key))
 
 - name: concourse-bosh-deployment-released
   type: git
@@ -572,12 +572,6 @@ jobs:
         repository: bumped-repo
 
 resource_types:
-- name: git
-  type: registry-image
-  source:
-    repository: concourse/git-resource
-    tag: 1.3.0
-
 - name: pivnet
   type: docker-image
   source:
