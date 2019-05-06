@@ -157,6 +157,51 @@ properties:
       Use Go duration format (48h = 48 hours).
     default: 24h
 
+  audit.build:
+    env: CONCOURSE_ENABLE_BUILD_AUDITING
+    description: |
+      Enable auditing of build API requests.
+
+  audit.container:
+    env: CONCOURSE_ENABLE_CONTAINER_AUDITING
+    description: |
+      Enable auditing of container API requests.
+
+  audit.job:
+    env: CONCOURSE_ENABLE_JOB_AUDITING
+    description: |
+      Enable auditing of job API requests.
+
+  audit.pipeline:
+    env: CONCOURSE_ENABLE_PIPELINE_AUDITING
+    description: |
+      Enable auditing of pipeline API requests.
+
+  audit.resource:
+    env: CONCOURSE_ENABLE_RESOURCE_AUDITING
+    description: |
+      Enable auditing of resource API requests.
+
+  audit.system:
+    env: CONCOURSE_ENABLE_SYSTEM_AUDITING
+    description: |
+      Enable auditing of system API requests.
+
+  audit.team:
+    env: CONCOURSE_ENABLE_TEAM_AUDITING
+    description: |
+      Enable auditing of team API requests.
+
+  audit.volume:
+    env: CONCOURSE_ENABLE_VOLUME_AUDITING
+    description: |
+      Enable auditing of volume API requests.
+
+  audit.worker:
+    env: CONCOURSE_ENABLE_WORKER_AUDITING
+    description: |
+      Enable auditing of worker API requests.
+
   token_signing_key:
     type: rsa
     env_fields:
@@ -860,15 +905,27 @@ properties:
     description: |
       The interval between secret retry retrieval attempts.
 
+  secrets.cache.enabled:
+    env: CONCOURSE_SECRET_CACHE_ENABLED
+    description: |
+      Enable in-memory caching of secrets fetched from the credential manager.
+
+  secrets.cache.duration:
+    env: CONCOURSE_SECRET_CACHE_DURATION
+    description: |
+      Maximum duration for which to keep cached credentials.
+    default: 1m
+
+  secrets.cache.purge_interval:
+    env: CONCOURSE_SECRET_CACHE_PURGE_INTERVAL
+    description: |
+      Interval on which to purge expired cached credentials.
+    default: 10m
+
   vault.url:
     env: CONCOURSE_VAULT_URL
     description: |
       Vault server URL to use for parameterizing credentials.
-  vault.cache:
-    env: CONCOURSE_VAULT_CACHE
-    description: |
-      Enable Vault cache for secrets lease duration in memory.
-    default: false
   vault.path_prefix:
     env: CONCOURSE_VAULT_PATH_PREFIX
     description: |
@@ -878,10 +935,6 @@ properties:
     env: CONCOURSE_VAULT_SHARED_PATH
     description: |
       Path under which to lookup shared credentials.
-  vault.max_lease:
-    env: CONCOURSE_VAULT_MAX_LEASE
-    description: |
-      If the cache is enabled, and this is set, override secrets lease duration with a maximum value.
   vault.tls.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_VAULT_CA_CERT}}

@@ -91,6 +91,42 @@ processes:
     CONCOURSE_ADD_LOCAL_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("audit.build") do |v| -%>
+    CONCOURSE_ENABLE_BUILD_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.container") do |v| -%>
+    CONCOURSE_ENABLE_CONTAINER_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.job") do |v| -%>
+    CONCOURSE_ENABLE_JOB_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.pipeline") do |v| -%>
+    CONCOURSE_ENABLE_PIPELINE_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.resource") do |v| -%>
+    CONCOURSE_ENABLE_RESOURCE_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.system") do |v| -%>
+    CONCOURSE_ENABLE_SYSTEM_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.team") do |v| -%>
+    CONCOURSE_ENABLE_TEAM_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.volume") do |v| -%>
+    CONCOURSE_ENABLE_VOLUME_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("audit.worker") do |v| -%>
+    CONCOURSE_ENABLE_WORKER_AUDITING: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("auth_duration") do |v| -%>
     CONCOURSE_AUTH_DURATION: <%= env_flag(v).to_json %>
 <% end -%>
@@ -179,10 +215,6 @@ processes:
     CONCOURSE_CAPTURE_ERROR_METRICS: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("cluster_name") do |v| -%>
-    CONCOURSE_CLUSTER_NAME: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("cf_auth.api_url") do |v| -%>
     CONCOURSE_CF_API_URL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -201,6 +233,10 @@ processes:
 
 <% if_p("cf_auth.skip_ssl_validation") do |v| -%>
     CONCOURSE_CF_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("cluster_name") do |v| -%>
+    CONCOURSE_CLUSTER_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("container_placement_strategy") do |v| -%>
@@ -703,6 +739,18 @@ processes:
     CONCOURSE_RIEMANN_TAG: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("secrets.cache.duration") do |v| -%>
+    CONCOURSE_SECRET_CACHE_DURATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("secrets.cache.enabled") do |v| -%>
+    CONCOURSE_SECRET_CACHE_ENABLED: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("secrets.cache.purge_interval") do |v| -%>
+    CONCOURSE_SECRET_CACHE_PURGE_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("secrets.retry_attempts") do |v| -%>
     CONCOURSE_SECRET_RETRY_ATTEMPTS: <%= env_flag(v).to_json %>
 <% end -%>
@@ -773,14 +821,6 @@ processes:
 
 <% if_p("vault.auth.params") do |v| -%>
     CONCOURSE_VAULT_AUTH_PARAM: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("vault.cache") do |v| -%>
-    CONCOURSE_VAULT_CACHE: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("vault.max_lease") do |v| -%>
-    CONCOURSE_VAULT_MAX_LEASE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("vault.path_prefix") do |v| -%>
