@@ -1,0 +1,17 @@
+#!/bin/bash
+# vim: ft=sh
+
+set -e -u
+
+RUN_DIR=/var/vcap/sys/run/worker
+PIDFILE=${RUN_DIR}/worker.pid
+
+set -x
+
+start-stop-daemon \
+    --pidfile $PIDFILE \
+    --remove-pidfile \
+    --stop \
+    --oknodo \
+    --retry=TERM/15/QUIT/2/KILL
+

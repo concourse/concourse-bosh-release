@@ -11,7 +11,10 @@ templates:
   ctl.erb: bin/ctl
   drain.erb: bin/drain
   pre_start.erb: bin/pre_start
+  concourse_start.erb: bin/concourse_start
+  concourse_stop.erb: bin/concourse_stop
   env.sh.erb: config/env.sh
+  concourse.service: config/concourse.service
   worker_gateway_host_key.pub.erb: config/worker_gateway_host_key.pub
 
 packages:
