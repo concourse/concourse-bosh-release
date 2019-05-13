@@ -27,6 +27,20 @@ provides:
   - tls.bind_port
   - worker_gateway.bind_port
   - worker_gateway.host_key
+- name: concourse_db
+  type: concoruse_db
+  properties:
+  - postgresql.host
+  - postgresql.port
+  - postgresql.socket
+  - postgresql.database
+  - postgresql.role.name
+  - postgresql.role.password
+  - postgresql.sslmode
+  - postgresql.ca_cert
+  - postgresql.client_cert
+  - postgresql.connect_timeout
+
 
 properties:
   bind_ip:

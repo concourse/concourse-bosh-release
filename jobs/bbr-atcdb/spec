@@ -15,7 +15,10 @@ consumes:
 - name: postgres
   type: database
   optional: true
-  
+- name: concourse_db
+  type: concourse_db
+  optional: true
+
 properties:
   postgresql_database:
     description: |

@@ -35,8 +35,16 @@
       postgres_host = l.instances.first.address
     end if postgres_host.empty?
 
+    if_link("concourse_db") do |cdb|
+      postgres_host = cdb.p("postgressql.host", "")
+      postgres_port = cdb.p("postgressql.port")
+      postgres_role_name = cdb.p("postgressql.role.name")
+      postgres_role_password = cdb.p("postgressql.role.password")
+      postgres_database = cdb.p("postgressql.database")
+    end if postgres_host.empty?
+
     if postgres_host.empty?
-      raise "postgres.host not set and no 'db' or 'postgres' link available"
+      raise "postgres.host not set and no 'db', 'postgres' or 'concourse_db' link available"
     end
 
     JSON.pretty_generate(
