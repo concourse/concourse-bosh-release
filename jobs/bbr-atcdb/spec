@@ -15,7 +15,10 @@ consumes:
 - name: postgres
   type: database
   optional: true
-  
+- name: concourse_db
+  type: concourse_db
+  optional: true
+
 properties:
   postgresql_database:
     description: |
@@ -54,3 +57,24 @@ properties:
     description: |
       Password to use when connecting.
 
+  postgresql.tls.enabled:
+    description: |
+      Whether or not to use TLS when connecting to the database.
+    default: false
+
+  postgresql.tls.skip_host_verify:
+    description: |
+      Skip host verification for Server CA certificate. Needs to be set to `true` on GCP.
+    default: false
+
+  postgresql.tls.cert.ca:
+    description: |
+      Server CA certificate. This must be included if any of the tls block is specified.
+
+  postgresql.tls.cert.certificate:
+    description: |
+      Client certificate for Mutual TLS. This must be specified if `private_key` is given.
+
+  postgresql.tls.cert.private_key:
+    description: |
+      Client private key for Mutual TLS. This must be specified if `certificate` is given.

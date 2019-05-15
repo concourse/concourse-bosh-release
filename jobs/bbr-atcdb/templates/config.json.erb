@@ -6,6 +6,11 @@
     postgres_role_name = ""
     postgres_role_password = ""
     postgres_database = ""
+    postgres_tls_enabled = false
+    postgres_tls_skip_host_verify = false
+    postgres_tls_ca = ""
+    postgres_tls_public_cert = ""
+    postgres_tls_private_key = ""
 
     if_p("postgresql.address") do |addr|
       postgres_host, postgres_port = addr.split(":")
@@ -16,6 +21,13 @@
     postgres_database = p("postgresql.database")
     postgres_role_name = p("postgresql.role.name")
     postgres_role_password = p("postgresql.role.password", "")
+    postgres_tls_enabled = p("postgresql.tls.enabled", false)
+    if postgres_tls_enabled
+      postgres_tls_skip_host_verify = p("postgresql.tls.skip_host_verify", false)
+      postgres_tls_ca = p("postgresql.tls.cert.ca")
+      postgres_tls_public_cert = p("postgresql.tls.cert.certificate")
+      postgres_tls_private_key = p("postgresql.tls.cert.private_key")
+    end
 
     if_link("db") do |db|
       postgres_host = db.instances.first.address
@@ -35,16 +47,42 @@
       postgres_host = l.instances.first.address
     end if postgres_host.empty?
 
-    if postgres_host.empty?
-      raise "postgres.host not set and no 'db' or 'postgres' link available"
+    if_link("concourse_db") do |cdb|
+      postgres_host = cdb.p("postgressql.host", "")
+      postgres_port = cdb.p("postgressql.port")
+      postgres_role_name = cdb.p("postgressql.role.name")
+      postgres_role_password = cdb.p("postgressql.role.password")
+      postgres_database = cdb.p("postgressql.database")
+    end if postgres_host.empty?
+
+    if_link("concourse_db") do |cdb|
+      postgres_tls_enabled = cdb.p("postgresql.sslmode", false)
+      if postgres_tls_enabled
+        postgres_tls_ca = cdb.p("postgresql.ca_cert")
+        postgres_tls_public_cert = cdb.p("postgresql.client_cert.certificate")
+        postgres_tls_private_key = cdb.p("postgresql.client_cert.private_key")
+      end
     end
 
-    JSON.pretty_generate(
+    if postgres_host.empty?
+      raise "postgres.host not set and no 'db', 'postgres' or 'concourse_db' link available"
+    end
+
+    config_data = {
       'username' => postgres_role_name,
       'password' => postgres_role_password,
       'host' => postgres_host,
       'port' => postgres_port,
       'database' => postgres_database,
       'adapter' => 'postgres'
-    )
+    }
+
+    if postgres_tls_enabled
+      config_data['tls.skip_host_verify'] = postgres_tls_skip_host_verify
+      config_data['tls.cert.ca'] = postgres_tls_ca
+      config_data['tls.cert.certificate'] = postgres_tls_public_cert
+      config_data['tls.cert.private_key'] = postgres_tls_private_key
+    end
+
+    JSON.pretty_generate(config_data)
 %>
