@@ -102,6 +102,12 @@ properties:
     description: |
       Maximum number of volumes which can be swept in parallel.
 
+  external_garden_url:
+    env: CONCOURSE_EXTERNAL_GARDEN_URL
+    description: |
+      API endpoint of an externally managed Garden server to use instead of
+      running the embedded Garden server.
+
   worker_gateway.hosts:
     env: CONCOURSE_TSA_HOST
     description: |

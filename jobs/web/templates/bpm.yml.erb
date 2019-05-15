@@ -203,8 +203,24 @@ processes:
     CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("build_log_retention.default_builds") do |v| -%>
+    CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("build_log_retention.default_days") do |v| -%>
+    CONCOURSE_DEFAULT_DAYS_TO_RETAIN_BUILD_LOGS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("build_log_retention.maximum") do |v| -%>
     CONCOURSE_MAX_BUILD_LOGS_TO_RETAIN: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("build_log_retention.maximum_builds") do |v| -%>
+    CONCOURSE_MAX_BUILD_LOGS_TO_RETAIN: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("build_log_retention.maximum_days") do |v| -%>
+    CONCOURSE_MAX_DAYS_TO_RETAIN_BUILD_LOGS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("build_tracker_interval") do |v| -%>

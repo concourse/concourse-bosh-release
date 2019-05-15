@@ -1079,15 +1079,34 @@ properties:
   build_log_retention.default:
     env: CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN
     description: |
-      Default (can be overriden by job) number of build logs to retain,
-      0 (or not set) means retain all (database will grow indefinitely).
+      Deprecated. See build_log_retention.default_builds.
     example: 100
   build_log_retention.maximum:
     env: CONCOURSE_MAX_BUILD_LOGS_TO_RETAIN
     description: |
-      If set, this will cap the maximum number of build logs to retain for any job,
-      capping any value set in a job itself or the build_log_retention.default.
-      0 (or not set) means no maximum is specified.
+      Deprecated. See build_log_retention.maximum_builds.
+    example: 1000
+
+  build_log_retention.default_builds:
+    env: CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN
+    description: |
+      Default days to retain build logs. 0 means unlimited.
+    example: 100
+  build_log_retention.maximum_builds:
+    env: CONCOURSE_MAX_BUILD_LOGS_TO_RETAIN
+    description: |
+      Maximum builds logs to retain. Will override values configured in jobs.
+    example: 1000
+  build_log_retention.default_days:
+    env: CONCOURSE_DEFAULT_DAYS_TO_RETAIN_BUILD_LOGS
+    description: |
+      Default days to retain build logs. 0 means unlimited.
+    example: 100
+  build_log_retention.maximum_days:
+    env: CONCOURSE_MAX_DAYS_TO_RETAIN_BUILD_LOGS
+    description: |
+      Maximum days to retain build logs. Will override values configured in
+      jobs.
     example: 1000
 
   default_task_cpu_limit:
