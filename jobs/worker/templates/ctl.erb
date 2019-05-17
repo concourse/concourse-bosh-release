@@ -18,7 +18,7 @@ fi
 set -x
 
 install_systemd_service() {
-  if [ -n "${IS_RUNNING_SYSTEMD}" ]; then
+  if [ "${IS_RUNNING_SYSTEMD}" != "false" ]; then
     rm -f /lib/systemd/system/concourse.service
     cp /var/vcap/jobs/worker/config/concourse.service /lib/systemd/system/
     /bin/systemctl daemon-reload
@@ -27,7 +27,7 @@ install_systemd_service() {
 
 
 worker() {
-  if [ -n "${IS_RUNNING_SYSTEMD}" ]; then
+  if [ "${IS_RUNNING_SYSTEMD}" != "false" ]; then
     /bin/systemctl "${1}" concourse.service
   else
     /var/vcap/jobs/worker/bin/concourse_"${1}"
