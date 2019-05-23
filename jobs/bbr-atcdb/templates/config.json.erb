@@ -1,27 +1,17 @@
 <%=
     require 'json'
 
-    postgres_host = ""
-    postgres_port = ""
-    postgres_role_name = ""
-    postgres_role_password = ""
-    postgres_database = ""
-    postgres_tls_enabled = false
-    postgres_tls_skip_host_verify = false
-    postgres_tls_ca = ""
-    postgres_tls_public_cert = ""
-    postgres_tls_private_key = ""
-
-    if_p("postgresql.address") do |addr|
-      postgres_host, postgres_port = addr.split(":")
-    end
-
     postgres_host = p("postgresql.host", "")
     postgres_port = p("postgresql.port")
     postgres_database = p("postgresql.database")
     postgres_role_name = p("postgresql.role.name")
     postgres_role_password = p("postgresql.role.password", "")
     postgres_tls_enabled = p("postgresql.tls.enabled", false)
+    postgres_tls_skip_host_verify = false
+    postgres_tls_ca = ""
+    postgres_tls_public_cert = ""
+    postgres_tls_private_key = ""
+
     if postgres_tls_enabled
       postgres_tls_skip_host_verify = p("postgresql.tls.skip_host_verify", false)
       postgres_tls_ca = p("postgresql.tls.cert.ca")
@@ -29,43 +19,53 @@
       postgres_tls_private_key = p("postgresql.tls.cert.private_key")
     end
 
-    if_link("db") do |db|
-      postgres_host = db.instances.first.address
-      postgres_port = db.p("bind_port")
-      postgres_database = p("postgresql_database")
-
-      postgres_db = db.p("databases").find { |db| db["name"] == postgres_database }
-      if postgres_db.nil?
-        raise "database '#{db_name}' not provided by 'postgresql' link"
+    if postgres_host.empty?
+      if_link("concourse_db") do |cdb|
+        postgres_host = cdb.p("postgresql.host", "")
       end
 
-      postgres_role_name = postgres_db["role"]
-      postgres_role_password = postgres_db["password"]
-    end if postgres_host.empty?
+      if postgres_host.empty?
+        if_link("postgres") do |p|
+          postgres_host = p.instances.first.address
+        end
+      end
 
-    if_link("postgres") do |l|
-      postgres_host = l.instances.first.address
-    end if postgres_host.empty?
-
-    if_link("concourse_db") do |cdb|
-      postgres_host = cdb.p("postgressql.host", "")
-      postgres_port = cdb.p("postgressql.port")
-      postgres_role_name = cdb.p("postgressql.role.name")
-      postgres_role_password = cdb.p("postgressql.role.password")
-      postgres_database = cdb.p("postgressql.database")
-    end if postgres_host.empty?
-
-    if_link("concourse_db") do |cdb|
-      postgres_tls_enabled = cdb.p("postgresql.sslmode", false)
-      if postgres_tls_enabled
-        postgres_tls_ca = cdb.p("postgresql.ca_cert")
-        postgres_tls_public_cert = cdb.p("postgresql.client_cert.certificate")
-        postgres_tls_private_key = cdb.p("postgresql.client_cert.private_key")
+      if postgres_host.empty?
+        raise "postgres.host not found through either properties or links"
       end
     end
 
-    if postgres_host.empty?
-      raise "postgres.host not set and no 'db', 'postgres' or 'concourse_db' link available"
+    if_link("concourse_db") do |cdb|
+      if postgres_database.empty?
+        postgres_database = cdb.p("postgresql.database")
+      end
+
+      if not postgres_port.zero?
+        postgres_port = cdb.p("postgresql.port")
+      end
+
+      if postgres_role_name.empty?
+        postgres_role_name = cdb.p("postgresql.role.name")
+      end
+
+      if postgres_role_password.empty?
+        postgres_role_password = cdb.p("postgresql.role.password")
+      end
+
+      postgres_tls_enabled = cdb.p("postgresql.sslmode", postgres_tls_enabled)
+      if postgres_tls_enabled
+        if postgres_tls_ca.empty?
+          postgres_tls_ca = cdb.p("postgresql.ca_cert")
+        end
+
+        if postgres_tls_public_cert.empty?
+          postgres_tls_public_cert = cdb.p("postgresql.client_cert.certificate")
+        end
+
+        if postgres_tls_private_key.empty?
+          postgres_tls_private_key = cdb.p("postgresql.client_cert.private_key")
+        end
+      end
     end
 
     config_data = {
