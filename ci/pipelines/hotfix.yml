@@ -72,7 +72,7 @@ resources:
   source:
     uri: git@github.com:concourse/concourse-bosh-deployment.git
     branch: release/4.2.x
-    private_key: ((concourse_repo_private_key))
+    private_key: ((concourse_deployment_repo_private_key))
 
 - name: fly-rc
   type: gcs
