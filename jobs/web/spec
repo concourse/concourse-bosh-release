@@ -1121,7 +1121,7 @@ properties:
     example: 1000
 
   lets_encrypt.enabled:
-    env: CONCOURSE_LETS_ENCRYPT_ENABLE
+    env: CONCOURSE_ENABLE_LETS_ENCRYPT
     description: |
       Automatically configure TLS certificates via Let's Encrypt/ACME.
   lets_encrypt.acme_url:

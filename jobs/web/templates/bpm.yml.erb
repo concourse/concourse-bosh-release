@@ -596,7 +596,7 @@ processes:
 <% end -%>
 
 <% if_p("lets_encrypt.enabled") do |v| -%>
-    CONCOURSE_LETS_ENCRYPT_ENABLE: <%= env_flag(v).to_json %>
+    CONCOURSE_ENABLE_LETS_ENCRYPT: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("log_db_queries") do |v| -%>
