@@ -591,6 +591,14 @@ processes:
     CONCOURSE_LDAP_USER_SEARCH_USERNAME: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("lets_encrypt.acme_url") do |v| -%>
+    CONCOURSE_LETS_ENCRYPT_ACME_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("lets_encrypt.enabled") do |v| -%>
+    CONCOURSE_LETS_ENCRYPT_ENABLE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("log_db_queries") do |v| -%>
     CONCOURSE_LOG_DB_QUERIES: <%= env_flag(v).to_json %>
 <% end -%>

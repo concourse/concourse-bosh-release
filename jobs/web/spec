@@ -1120,6 +1120,16 @@ properties:
       jobs.
     example: 1000
 
+  lets_encrypt.enabled:
+    env: CONCOURSE_LETS_ENCRYPT_ENABLE
+    description: |
+      Automatically configure TLS certificates via Let's Encrypt/ACME.
+  lets_encrypt.acme_url:
+    env: CONCOURSE_LETS_ENCRYPT_ACME_URL
+    description: |
+      URL of the ACME CA directory endpoint.
+    default: https://acme-v01.api.letsencrypt.org/directory
+
   default_task_cpu_limit:
     env: CONCOURSE_DEFAULT_TASK_CPU_LIMIT
     description: |
