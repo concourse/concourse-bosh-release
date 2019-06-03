@@ -734,7 +734,7 @@ properties:
     description: |
       Method by which a worker is selected during container placement.
 
-      Options are "volume-locality", "random", and "least-build-containers".
+      Options are "volume-locality", "random", and "fewest-build-containers".
     default: "volume-locality"
 
   baggageclaim_response_header_timeout:
