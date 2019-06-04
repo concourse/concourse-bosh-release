@@ -76,7 +76,6 @@ properties:
       Maximum wait time in Go duration format (1m = 1 minute) for worker drain
       to be finished. Only applies when worker is getting shutdown.
 
-      If not specified, it will be indefinite.
     default: 1h
 
   ephemeral:
