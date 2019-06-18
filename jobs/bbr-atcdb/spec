@@ -45,7 +45,6 @@ properties:
   postgresql.role.name:
     description: |
       Name of role to connect with.
-    default: atc
 
   postgresql.role.password:
     description: |
