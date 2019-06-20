@@ -29,23 +29,15 @@ properties:
       Port on which to connect to the server specified by `postgresql.host`.
 
       If `postgresql.host` is not specified, this will be autodiscovered via
-      BOSH links, along with the host.
-    default: 5432
-
-  postgresql.address:
-    description: |
-      Deprecated. Shorthand for specifying `postgresql.host` and
-      `postgresql.port`.
+      BOSH links, along with the host. By default will use port 5432.
 
   postgresql.database:
     description: |
       Name of the database to use.
-    default: atc
 
   postgresql.role.name:
     description: |
       Name of role to connect with.
-    default: atc
 
   postgresql.role.password:
     description: |

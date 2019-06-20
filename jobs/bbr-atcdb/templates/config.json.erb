@@ -2,9 +2,9 @@
     require 'json'
 
     postgres_host = p("postgresql.host", "")
-    postgres_port = p("postgresql.port")
-    postgres_database = p("postgresql.database")
-    postgres_role_name = p("postgresql.role.name")
+    postgres_port = p("postgresql.port", 0)
+    postgres_database = p("postgresql.database", "")
+    postgres_role_name = p("postgresql.role.name", "")
     postgres_role_password = p("postgresql.role.password", "")
     postgres_tls_enabled = p("postgresql.tls.enabled", false)
     postgres_tls_skip_host_verify = false
@@ -25,8 +25,8 @@
       end
 
       if postgres_host.empty?
-        if_link("postgres") do |p|
-          postgres_host = p.instances.first.address
+        if_link("postgres") do |postgres|
+          postgres_host = postgres.instances.first.address
         end
       end
 
@@ -35,23 +35,53 @@
       end
     end
 
-    if_link("concourse_db") do |cdb|
-      if postgres_database.empty?
-        postgres_database = cdb.p("postgresql.database")
+    if postgres_database.empty?
+      if_link("concourse_db") do |cdb|
+        postgres_database = cdb.p("postgresql.database", "")
       end
 
-      if not postgres_port.zero?
-        postgres_port = cdb.p("postgresql.port")
+      if postgres_database.empty?
+        postgres_database = "atc"
+      end
+    end
+
+    if postgres_port.zero?
+      if_link("concourse_db") do |cdb|
+        postgres_port = cdb.p("postgresql.port", 0)
+      end
+
+      if postgres_port.zero?
+        if_link("postgres") do |postgres|
+          postgres_port = postgres.p("databases.port", 0)
+        end
+      end
+
+      if postgres_port.zero?
+        postgres_port = 5432
+      end
+    end
+
+    if postgres_role_name.empty?
+      if_link("concourse_db") do |cdb|
+        postgres_role_name = cdb.p("postgresql.role.name", "")
       end
 
       if postgres_role_name.empty?
-        postgres_role_name = cdb.p("postgresql.role.name")
+        raise "postgres.role.name not found through either properties or links"
+      end
+    end
+
+    if postgres_role_password.empty?
+      if_link("concourse_db") do |cdb|
+        postgres_role_password = cdb.p("postgresql.role.password", "")
       end
 
       if postgres_role_password.empty?
-        postgres_role_password = cdb.p("postgresql.role.password")
+        raise "postgres.role.password not found through either properties or links"
       end
+    end
 
+    if_link("concourse_db") do |cdb|
       postgres_tls_enabled = cdb.p("postgresql.sslmode", postgres_tls_enabled)
       if postgres_tls_enabled
         if postgres_tls_ca.empty?
