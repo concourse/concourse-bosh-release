@@ -197,6 +197,12 @@ properties:
       Allow containers to reach the worker VM's network.
     default: false
 
+  garden.max_containers:
+    env: CONCOURSE_GARDEN_MAX_CONTAINERS
+    description: |
+      Maximum container capacity to advertise.
+    default: 250
+
   debug.bind_ip:
     env: CONCOURSE_DEBUG_BIND_IP
     description: |
