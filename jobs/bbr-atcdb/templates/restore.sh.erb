@@ -8,4 +8,18 @@ JOB_PATH="/var/vcap/jobs/bbr-atcdb"
 BBR_ARTIFACT_FILE_PATH="${BBR_ARTIFACT_DIRECTORY}/atcdb-artifact-file"
 CONFIG_PATH="${JOB_PATH}/config/config.json"
 
+# config and install jq
+sudo apt-get update
+sudo apt-get install jq -y
+
+POSTGRES_PATH="/var/vcap/packages/postgres-11.4"
+POSTGRES="${POSTGRES_PATH}/bin/psql"
+DATABASE=`jq -r .database ${CONFIG_PATH}`
+USERNAME=`jq -r .username ${CONFIG_PATH}`
+if $POSTGRES -U ${USERNAME} -lqt | cut -d \| -f 1 | grep -qw "atc"; then
+  $POSTGRES -U ${USERNAME} postgres -c "ALTER DATABASE ${DATABASE} RENAME TO ${DATABASE}_`date +"%Y%m%d%H%M%S"`;"
+fi
+$POSTGRES -U ${USERNAME} postgres -c "CREATE DATABASE ${DATABASE};"
+$POSTGRES -U ${USERNAME} ${DATABASE} -c "CREATE EXTENSION pg_stat_statements;"
+
 "/var/vcap/jobs/database-backup-restorer/bin/restore" --config "${CONFIG_PATH}" --artifact-file "${BBR_ARTIFACT_FILE_PATH}"
