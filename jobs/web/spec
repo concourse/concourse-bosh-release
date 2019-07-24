@@ -734,8 +734,19 @@ properties:
     description: |
       Method by which a worker is selected during container placement.
 
-      Options are "volume-locality", "random", and "least-build-containers".
+      Supported options are "volume-locality", "random" and "fewest-build-containers".
+      Experimental option: "limit-active-tasks"
     default: "volume-locality"
+
+  max_active_tasks_per_worker:
+    env: CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER
+    description: |
+      Maximum allowed number of active build tasks per worker.
+
+      Has effect only when used with "limit-active-tasks" placement strategy.
+
+      0 means no limit.
+    default: 0
 
   baggageclaim_response_header_timeout:
     env: CONCOURSE_BAGGAGECLAIM_RESPONSE_HEADER_TIMEOUT
