@@ -734,7 +734,7 @@ properties:
     description: |
       Method by which a worker is selected during container placement.
 
-      Supported options are "volume-locality", "random" and "least-build-containers".
+      Supported options are "volume-locality", "random" and "fewest-build-containers".
       Experimental option: "limit-active-tasks"
     default: "volume-locality"
 
