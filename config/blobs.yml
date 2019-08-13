@@ -12,7 +12,9 @@ concourse/concourse-d2cc85e3718f6cd9094921b4f7ed0010dd239af8-windows-amd64.zip:
   sha: e28a3462308857fe0d251ab91b6035d937547c14
 containerd/containerd-1.2.7.tgz:
   size: 31902796
+  object_id: e53ebf1e-672a-4898-7d16-9eeb06e79cc2
   sha: 63bb308ff58f13239042e541eb773c8d7388da78
 containerd/runc.tgz:
   size: 10270256
+  object_id: 15c4d05a-7c89-40ab-7724-4ec59b6efce5
   sha: 3e1981e48c85eda85a692250ff9fa037465bd809
