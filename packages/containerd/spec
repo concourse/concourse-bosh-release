@@ -1,0 +1,6 @@
+---
+name: containerd
+
+files:
+- containerd/containerd*.tgz
+- containered/runc*.tgz
