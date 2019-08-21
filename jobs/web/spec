@@ -817,6 +817,12 @@ properties:
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
 
+  max_conns:
+    env: CONCOURSE_MAX_CONNS
+    description: |
+      The maximum number of open connections for a database connection pool.
+    default: 32
+
   datadog.agent_host:
     env: CONCOURSE_DATADOG_AGENT_HOST
     description: |
@@ -892,6 +898,17 @@ properties:
     description: |
       Skip SSL verification when emitting to InfluxDB.
     default: false
+  influxdb.batch_size:
+    env: CONCOURSE_INFLUXDB_BATCH_SIZE
+    description: |
+      Number of points to batch together when emitting to InfluxDB.
+    default: 5000
+  influxdb.batch_duration:
+    env: CONCOURSE_INFLUXDB_BATCH_DURATION
+    description: |
+      The duration to wait before emitting a batch of points to InfluxDB,
+      disregarding `influxdb.batch_size`.
+    default: 300s
 
   newrelic.account_id:
     env: CONCOURSE_NEWRELIC_ACCOUNT_ID
@@ -910,6 +927,12 @@ properties:
     env: CONCOURSE_CAPTURE_ERROR_METRICS
     description: |
       Enable capturing of error log metrics.
+
+  metrics_buffer_size:
+    env: CONCOURSE_METRICS_BUFFER_SIZE
+    description: |
+      The size of the buffer used in emitting event metrics.
+    default: 1000
 
   emit_metrics_to_logs:
     env: CONCOURSE_EMIT_TO_LOGS
