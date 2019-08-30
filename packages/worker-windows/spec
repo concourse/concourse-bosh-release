@@ -2,7 +2,7 @@
 name: worker-windows
 
 dependencies:
-- golang-1-windows
+- golang-1.11-windows
 
 files:
   - exiter.ps1
