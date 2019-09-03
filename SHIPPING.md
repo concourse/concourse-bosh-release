@@ -1,5 +1,7 @@
 # Shipping 4.2.x Patches
 
+NOTE: Before shipping, you must first trigger `promote-rc` and then run `shipit`.
+
 ## Testing the Windows worker
 
 ```bash
