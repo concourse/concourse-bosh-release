@@ -43,3 +43,7 @@ Architecture](https://concourse-ci.org/concepts.html).
 Please note that Concourse is released with a Contributor Code of Conduct.
 By participating in this project you agree to abide by its terms. You can review
 the Code of Code of Conduct in [`CODE_OF_CONDUCT.md`](https://github.com/concourse/concourse/blob/master/CODE_OF_CONDUCT.md) 
+
+## Shipping
+
+Mostly of concern to the core Concourse team -- you can get some tips about shipping the 4.2.x series in [`SHIPPING.md`](https://github.com/concourse/concourse-bosh-release/blob/release/4.2.x/SHIPPING.md).
