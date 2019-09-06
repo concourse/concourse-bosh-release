@@ -687,6 +687,10 @@ processes:
     CONCOURSE_MAIN_TEAM_OIDC_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("metrics_buffer_size") do |v| -%>
+    CONCOURSE_METRICS_BUFFER_SIZE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("newrelic.account_id") do |v| -%>
     CONCOURSE_NEWRELIC_ACCOUNT_ID: <%= env_flag(v).to_json %>
 <% end -%>
