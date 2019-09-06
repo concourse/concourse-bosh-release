@@ -672,6 +672,12 @@ properties:
       version history.
     default: false
 
+  enable_lidar:
+    env: CONCOURSE_ENABLE_LIDAR
+    description: |
+      Enable new resource checking which tracks checks in the database
+    default: false
+
   global_resource_check_timeout:
     env: CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT
     description: |
@@ -721,6 +727,12 @@ properties:
     env: CONCOURSE_GC_ONE_OFF_GRACE_PERIOD
     description: |
       Period after which one-off build containers will be garbage-collected.
+
+  gc.check_recycle_period:
+    env: CONCOURSE_GC_CHECK_RECYCLE_PERIOD
+    description: |
+      Period after which finished checks will get garbage-collected.
+    default: 6h
 
   build_tracker_interval:
     env: CONCOURSE_BUILD_TRACKER_INTERVAL
