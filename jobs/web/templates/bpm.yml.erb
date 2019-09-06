@@ -339,6 +339,10 @@ processes:
     CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("enable_lidar") do |v| -%>
+    CONCOURSE_ENABLE_LIDAR: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("encryption_key") do |v| -%>
     CONCOURSE_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
@@ -357,6 +361,10 @@ processes:
 
 <% if_p("gc.one_off_grace_period") do |v| -%>
     CONCOURSE_GC_ONE_OFF_GRACE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gc.check_recycle_period") do |v| -%>
+    CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("gc_interval") do |v| -%>
