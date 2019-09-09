@@ -483,6 +483,14 @@ processes:
     CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("influxdb.batch_duration") do |v| -%>
+    CONCOURSE_INFLUXDB_BATCH_DURATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("influxdb.batch_size") do |v| -%>
+    CONCOURSE_INFLUXDB_BATCH_SIZE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("influxdb.database") do |v| -%>
     CONCOURSE_INFLUXDB_DATABASE: <%= env_flag(v).to_json %>
 <% end -%>
@@ -677,6 +685,18 @@ processes:
 
 <% if_p("main_team.auth.oidc.users") do |v| -%>
     CONCOURSE_MAIN_TEAM_OIDC_USER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("max_active_tasks_per_worker") do |v| -%>
+    CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("max_conns") do |v| -%>
+    CONCOURSE_MAX_CONNS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("metrics_buffer_size") do |v| -%>
+    CONCOURSE_METRICS_BUFFER_SIZE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("newrelic.account_id") do |v| -%>
