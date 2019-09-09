@@ -197,6 +197,13 @@ properties:
       Allow containers to reach the worker VM's network.
     default: false
 
+  garden.network_pool:
+    env: CONCOURSE_GARDEN_NETWORK_POOL
+    description: |
+      Allow to configure the network pool. Make sure your container
+      network pool does not overlap with any other addresses in your network.
+    default: 10.254.0.0/22
+
   debug.bind_ip:
     env: CONCOURSE_DEBUG_BIND_IP
     description: |
