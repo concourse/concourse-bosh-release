@@ -260,7 +260,7 @@ processes:
 <% end -%>
 
 <% if_p("max_active_tasks_per_worker") do |v| -%>
-  CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <% env_flag(v).to)json %>
+  CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <% env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("cookie_secure") do |v| -%>
