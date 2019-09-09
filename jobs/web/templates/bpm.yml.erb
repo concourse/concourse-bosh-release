@@ -351,6 +351,10 @@ processes:
     CONCOURSE_EXTERNAL_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("gc.check_recycle_period") do |v| -%>
+    CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("gc.interval") do |v| -%>
     CONCOURSE_GC_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -361,10 +365,6 @@ processes:
 
 <% if_p("gc.one_off_grace_period") do |v| -%>
     CONCOURSE_GC_ONE_OFF_GRACE_PERIOD: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("gc.check_recycle_period") do |v| -%>
-    CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("gc_interval") do |v| -%>
@@ -753,6 +753,10 @@ processes:
 
 <% if_p("prometheus.bind_port") do |v| -%>
     CONCOURSE_PROMETHEUS_BIND_PORT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("redact_secrets") do |v| -%>
+    CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("riemann.host") do |v| -%>

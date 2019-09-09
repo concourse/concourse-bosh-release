@@ -213,6 +213,11 @@ properties:
     description: |
       Enable auditing of worker API requests.
 
+  redact_secrets:
+    env: CONCOURSE_ENABLE_REDACT_SECRETS
+    description: |
+      Enable redacting secrets in build logs.
+
   token_signing_key:
     type: rsa
     env_fields:
