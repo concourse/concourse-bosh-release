@@ -26,3 +26,8 @@ documentation](https://bosh.io/docs/) first.
 If you're just looking to get Concourse running quickly and kick the tires, you
 may want to try the [Quick Start](https://concourse-ci.org/install.html)
 instead.
+
+## Contributing
+
+Any time you make changes to one of the specs (like `jobs/web/spec`), be sure
+to run `scripts/generate-job-templates`.
