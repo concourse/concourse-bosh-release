@@ -259,10 +259,6 @@ processes:
     CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("max_active_tasks_per_worker") do |v| -%>
-  CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <% env_flag(v).to)json %>
-<% end -%>
-
 <% if_p("cookie_secure") do |v| -%>
     CONCOURSE_COOKIE_SECURE: <%= env_flag(v).to_json %>
 <% end -%>
@@ -355,6 +351,10 @@ processes:
     CONCOURSE_EXTERNAL_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("gc.check_recycle_period") do |v| -%>
+    CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("gc.interval") do |v| -%>
     CONCOURSE_GC_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -365,10 +365,6 @@ processes:
 
 <% if_p("gc.one_off_grace_period") do |v| -%>
     CONCOURSE_GC_ONE_OFF_GRACE_PERIOD: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("gc.check_recycle_period") do |v| -%>
-    CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("gc_interval") do |v| -%>
@@ -493,6 +489,14 @@ processes:
 
 <% if_p("global_resource_check_timeout") do |v| -%>
     CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("influxdb.batch_duration") do |v| -%>
+    CONCOURSE_INFLUXDB_BATCH_DURATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("influxdb.batch_size") do |v| -%>
+    CONCOURSE_INFLUXDB_BATCH_SIZE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("influxdb.database") do |v| -%>
@@ -691,6 +695,14 @@ processes:
     CONCOURSE_MAIN_TEAM_OIDC_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("max_active_tasks_per_worker") do |v| -%>
+    CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("max_conns") do |v| -%>
+    CONCOURSE_MAX_CONNS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("metrics_buffer_size") do |v| -%>
     CONCOURSE_METRICS_BUFFER_SIZE: <%= env_flag(v).to_json %>
 <% end -%>
@@ -761,6 +773,10 @@ processes:
 
 <% if_p("prometheus.bind_port") do |v| -%>
     CONCOURSE_PROMETHEUS_BIND_PORT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("redact_secrets") do |v| -%>
+    CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("riemann.host") do |v| -%>
