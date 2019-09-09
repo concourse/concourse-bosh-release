@@ -259,6 +259,10 @@ processes:
     CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("max_active_tasks_per_worker") do |v| -%>
+  CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <% env_flag(v).to)json %>
+<% end -%>
+
 <% if_p("cookie_secure") do |v| -%>
     CONCOURSE_COOKIE_SECURE: <%= env_flag(v).to_json %>
 <% end -%>
