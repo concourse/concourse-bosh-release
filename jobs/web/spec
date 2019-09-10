@@ -978,6 +978,12 @@ properties:
       Maximum duration for which to keep cached credentials.
     default: 1m
 
+  secrets.cache.duration_notfound:
+    env: CONCOURSE_SECRET_CACHE_DURATION_NOTFOUND
+    description: |
+      If the cache is enabled, secret not found responses will be cached for this duration.
+    default: 10s
+
   secrets.cache.purge_interval:
     env: CONCOURSE_SECRET_CACHE_PURGE_INTERVAL
     description: |
