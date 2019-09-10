@@ -799,6 +799,10 @@ processes:
     CONCOURSE_SECRET_CACHE_DURATION: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("secrets.cache.duration") do |v| -%>
+    CONCOURSE_SECRET_CACHE_DURATION_NOTFOUND: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("secrets.cache.enabled") do |v| -%>
     CONCOURSE_SECRET_CACHE_ENABLED: <%= env_flag(v).to_json %>
 <% end -%>
