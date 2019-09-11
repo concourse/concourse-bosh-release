@@ -615,6 +615,18 @@ processes:
     CONCOURSE_ENABLE_LETS_ENCRYPT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("lidar_checker_interval") do |v| -%>
+    CONCOURSE_LIDAR_CHECKER_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("lidar_scanner_interval") do |v| -%>
+    CONCOURSE_LIDAR_SCANNER_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("log_cluster_name") do |v| -%>
+    CONCOURSE_LOG_CLUSTER_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("log_db_queries") do |v| -%>
     CONCOURSE_LOG_DB_QUERIES: <%= env_flag(v).to_json %>
 <% end -%>
@@ -799,7 +811,7 @@ processes:
     CONCOURSE_SECRET_CACHE_DURATION: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("secrets.cache.duration") do |v| -%>
+<% if_p("secrets.cache.duration_notfound") do |v| -%>
     CONCOURSE_SECRET_CACHE_DURATION_NOTFOUND: <%= env_flag(v).to_json %>
 <% end -%>
 
@@ -931,12 +943,20 @@ processes:
     CONCOURSE_TSA_BIND_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("worker_gateway.cluster_name") do |v| -%>
+    CONCOURSE_TSA_CLUSTER_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("worker_gateway.heartbeat_interval") do |v| -%>
     CONCOURSE_TSA_HEARTBEAT_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("worker_gateway.host_key.private_key") do |v| -%>
     CONCOURSE_TSA_HOST_KEY: <%= env_file_flag(v, "CONCOURSE_TSA_HOST_KEY").to_json %>
+<% end -%>
+
+<% if_p("worker_gateway.log_cluster_name") do |v| -%>
+    CONCOURSE_TSA_LOG_CLUSTER_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("worker_gateway.log_level") do |v| -%>

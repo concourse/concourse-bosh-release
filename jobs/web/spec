@@ -133,6 +133,12 @@ properties:
       developers to analyze query counts.
     default: false
 
+  log_cluster_name:
+    env: CONCOURSE_LOG_CLUSTER_NAME
+    description: |
+      Add cluster name (CONCOURSE_CLUSTER_NAME) to logs.
+    default: false
+
   encryption_key:
     env: CONCOURSE_ENCRYPTION_KEY
     description: |
@@ -683,6 +689,18 @@ properties:
       Enable new resource checking which tracks checks in the database
     default: false
 
+  lidar_checker_interval:
+    env: CONCOURSE_LIDAR_CHECKER_INTERVAL
+    description: |
+      Interval on which the resource checker runs any scheduled checks
+    default: 10s
+
+  lidar_scanner_interval:
+    env: CONCOURSE_LIDAR_SCANNER_INTERVAL
+    description: |
+      Interval on which the resource scanner will run to see if new checks need to be scheduled
+    default: 1m
+
   global_resource_check_timeout:
     env: CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT
     description: |
@@ -1226,6 +1244,18 @@ properties:
     env_fields: {certificate: {env_file: CONCOURSE_SYSLOG_CA_CERT}}
     description: |
       A PEM-encoded CA cert to use to verify the Syslog server SSL cert.
+
+  worker_gateway.cluster_name:
+    env: CONCOURSE_TSA_CLUSTER_NAME
+    description: |
+      A name for this Concourse cluster, to be used in conjunction with (CONCOURSE_TSA_LOG_CLUSTER_NAME)
+    default: ""
+
+  worker_gateway.log_cluster_name:
+    env: CONCOURSE_TSA_LOG_CLUSTER_NAME
+    description: |
+      Include cluster name (CONCOURSE_TSA_CLUSTER_NAME) in the logs
+    default: false
 
   worker_gateway.heartbeat_interval:
     env: CONCOURSE_TSA_HEARTBEAT_INTERVAL
