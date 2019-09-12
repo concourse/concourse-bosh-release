@@ -943,20 +943,12 @@ processes:
     CONCOURSE_TSA_BIND_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("worker_gateway.cluster_name") do |v| -%>
-    CONCOURSE_TSA_CLUSTER_NAME: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("worker_gateway.heartbeat_interval") do |v| -%>
     CONCOURSE_TSA_HEARTBEAT_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("worker_gateway.host_key.private_key") do |v| -%>
     CONCOURSE_TSA_HOST_KEY: <%= env_file_flag(v, "CONCOURSE_TSA_HOST_KEY").to_json %>
-<% end -%>
-
-<% if_p("worker_gateway.log_cluster_name") do |v| -%>
-    CONCOURSE_TSA_LOG_CLUSTER_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("worker_gateway.log_level") do |v| -%>
