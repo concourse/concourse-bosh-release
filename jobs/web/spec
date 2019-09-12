@@ -1245,18 +1245,6 @@ properties:
     description: |
       A PEM-encoded CA cert to use to verify the Syslog server SSL cert.
 
-  worker_gateway.cluster_name:
-    env: CONCOURSE_TSA_CLUSTER_NAME
-    description: |
-      A name for this Concourse cluster, to be used in conjunction with (CONCOURSE_TSA_LOG_CLUSTER_NAME)
-    default: ""
-
-  worker_gateway.log_cluster_name:
-    env: CONCOURSE_TSA_LOG_CLUSTER_NAME
-    description: |
-      Include cluster name (CONCOURSE_TSA_CLUSTER_NAME) in the logs
-    default: false
-
   worker_gateway.heartbeat_interval:
     env: CONCOURSE_TSA_HEARTBEAT_INTERVAL
     description: |
