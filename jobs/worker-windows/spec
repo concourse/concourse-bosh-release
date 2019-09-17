@@ -85,6 +85,7 @@ properties:
       Addresses (host:port) of TSA servers to register with.
 
       If not specified, the `web` link is used.
+    example: ["localhost:2222", "example.com"]
 
   worker_gateway.host_public_key:
     env_file: CONCOURSE_TSA_PUBLIC_KEY

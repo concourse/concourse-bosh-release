@@ -1,0 +1,41 @@
+name: concourse
+version: 5.4.1-rc.2
+commit_hash: adc8c30
+uncommitted_changes: false
+jobs:
+- name: bbr-atcdb
+  version: 8dd6d356406f8e5e906a964b89f93d4456ce27ec
+  fingerprint: 8dd6d356406f8e5e906a964b89f93d4456ce27ec
+  sha1: 8d053b461257c6cc95732b33c3171baea5328e89
+- name: web
+  version: 25557879bf45b3f7cbb7ce9be3674df552b2cdad
+  fingerprint: 25557879bf45b3f7cbb7ce9be3674df552b2cdad
+  sha1: 28e5f37ada2f832497e57c664acd9a878450026d
+- name: worker
+  version: c02bb9b8dac1a8ae47da0538ef14233f1b8123d7
+  fingerprint: c02bb9b8dac1a8ae47da0538ef14233f1b8123d7
+  sha1: be2586a316dcbdbad2c975217ba24ef8ac33c771
+- name: worker-windows
+  version: 0a940e6d0fc792b12d2a8864a7c2b349196e93db
+  fingerprint: 0a940e6d0fc792b12d2a8864a7c2b349196e93db
+  sha1: e7190ad78603863f42ca8ba9fb0b0ba35fa7fb20
+packages:
+- name: btrfs_tools
+  version: 797f8df53d2881f034366408b3f043a57f8f4c51
+  fingerprint: 797f8df53d2881f034366408b3f043a57f8f4c51
+  sha1: 0ca2770ce8691498d5cb1aad85e6321876b9ce0a
+  dependencies: []
+- name: concourse
+  version: d9abc78979467e7fdc18ca986eeb2cd2b58e4861
+  fingerprint: d9abc78979467e7fdc18ca986eeb2cd2b58e4861
+  sha1: 9c92262c02c3f96188ce816bdb0702e31cb26f50
+  dependencies: []
+- name: concourse-windows
+  version: e7620d611615fc589fa31c3c5b96bd35da73c010
+  fingerprint: e7620d611615fc589fa31c3c5b96bd35da73c010
+  sha1: f89bf1cc5f7ee540cf9ea447b0324039749ab8ac
+  dependencies: []
+license:
+  version: fbc11a170152f85b095f8955865d0576a2194513
+  fingerprint: fbc11a170152f85b095f8955865d0576a2194513
+  sha1: 11b37d07251f9c12f7c4c5a6d9259f5fa6e20b91

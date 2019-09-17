@@ -339,12 +339,20 @@ processes:
     CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("enable_lidar") do |v| -%>
+    CONCOURSE_ENABLE_LIDAR: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("encryption_key") do |v| -%>
     CONCOURSE_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("external_url") do |v| -%>
     CONCOURSE_EXTERNAL_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gc.check_recycle_period") do |v| -%>
+    CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("gc.interval") do |v| -%>
@@ -483,6 +491,14 @@ processes:
     CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("influxdb.batch_duration") do |v| -%>
+    CONCOURSE_INFLUXDB_BATCH_DURATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("influxdb.batch_size") do |v| -%>
+    CONCOURSE_INFLUXDB_BATCH_SIZE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("influxdb.database") do |v| -%>
     CONCOURSE_INFLUXDB_DATABASE: <%= env_flag(v).to_json %>
 <% end -%>
@@ -599,6 +615,18 @@ processes:
     CONCOURSE_ENABLE_LETS_ENCRYPT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("lidar_checker_interval") do |v| -%>
+    CONCOURSE_LIDAR_CHECKER_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("lidar_scanner_interval") do |v| -%>
+    CONCOURSE_LIDAR_SCANNER_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("log_cluster_name") do |v| -%>
+    CONCOURSE_LOG_CLUSTER_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("log_db_queries") do |v| -%>
     CONCOURSE_LOG_DB_QUERIES: <%= env_flag(v).to_json %>
 <% end -%>
@@ -679,6 +707,18 @@ processes:
     CONCOURSE_MAIN_TEAM_OIDC_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("max_active_tasks_per_worker") do |v| -%>
+    CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("max_conns") do |v| -%>
+    CONCOURSE_MAX_CONNS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("metrics_buffer_size") do |v| -%>
+    CONCOURSE_METRICS_BUFFER_SIZE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("newrelic.account_id") do |v| -%>
     CONCOURSE_NEWRELIC_ACCOUNT_ID: <%= env_flag(v).to_json %>
 <% end -%>
@@ -747,6 +787,10 @@ processes:
     CONCOURSE_PROMETHEUS_BIND_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("redact_secrets") do |v| -%>
+    CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("riemann.host") do |v| -%>
     CONCOURSE_RIEMANN_HOST: <%= env_flag(v).to_json %>
 <% end -%>
@@ -765,6 +809,10 @@ processes:
 
 <% if_p("secrets.cache.duration") do |v| -%>
     CONCOURSE_SECRET_CACHE_DURATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("secrets.cache.duration_notfound") do |v| -%>
+    CONCOURSE_SECRET_CACHE_DURATION_NOTFOUND: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("secrets.cache.enabled") do |v| -%>

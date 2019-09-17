@@ -133,6 +133,12 @@ properties:
       developers to analyze query counts.
     default: false
 
+  log_cluster_name:
+    env: CONCOURSE_LOG_CLUSTER_NAME
+    description: |
+      Add cluster name (CONCOURSE_CLUSTER_NAME) to logs.
+    default: false
+
   encryption_key:
     env: CONCOURSE_ENCRYPTION_KEY
     description: |
@@ -212,6 +218,11 @@ properties:
     env: CONCOURSE_ENABLE_WORKER_AUDITING
     description: |
       Enable auditing of worker API requests.
+
+  redact_secrets:
+    env: CONCOURSE_ENABLE_REDACT_SECRETS
+    description: |
+      Enable redacting secrets in build logs.
 
   token_signing_key:
     type: rsa
@@ -672,6 +683,24 @@ properties:
       version history.
     default: false
 
+  enable_lidar:
+    env: CONCOURSE_ENABLE_LIDAR
+    description: |
+      Enable new resource checking which tracks checks in the database
+    default: false
+
+  lidar_checker_interval:
+    env: CONCOURSE_LIDAR_CHECKER_INTERVAL
+    description: |
+      Interval on which the resource checker runs any scheduled checks
+    default: 10s
+
+  lidar_scanner_interval:
+    env: CONCOURSE_LIDAR_SCANNER_INTERVAL
+    description: |
+      Interval on which the resource scanner will run to see if new checks need to be scheduled
+    default: 1m
+
   global_resource_check_timeout:
     env: CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT
     description: |
@@ -722,6 +751,12 @@ properties:
     description: |
       Period after which one-off build containers will be garbage-collected.
 
+  gc.check_recycle_period:
+    env: CONCOURSE_GC_CHECK_RECYCLE_PERIOD
+    description: |
+      Period after which finished checks will get garbage-collected.
+    default: 6h
+
   build_tracker_interval:
     env: CONCOURSE_BUILD_TRACKER_INTERVAL
     description: |
@@ -734,8 +769,19 @@ properties:
     description: |
       Method by which a worker is selected during container placement.
 
-      Options are "volume-locality", "random", and "least-build-containers".
+      Supported options are "volume-locality", "random" and "fewest-build-containers".
+      Experimental option: "limit-active-tasks"
     default: "volume-locality"
+
+  max_active_tasks_per_worker:
+    env: CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER
+    description: |
+      Maximum allowed number of active build tasks per worker.
+
+      Has effect only when used with "limit-active-tasks" placement strategy.
+
+      0 means no limit.
+    default: 0
 
   baggageclaim_response_header_timeout:
     env: CONCOURSE_BAGGAGECLAIM_RESPONSE_HEADER_TIMEOUT
@@ -805,6 +851,12 @@ properties:
     description: |
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
+
+  max_conns:
+    env: CONCOURSE_MAX_CONNS
+    description: |
+      The maximum number of open connections for a database connection pool.
+    default: 32
 
   datadog.agent_host:
     env: CONCOURSE_DATADOG_AGENT_HOST
@@ -881,6 +933,17 @@ properties:
     description: |
       Skip SSL verification when emitting to InfluxDB.
     default: false
+  influxdb.batch_size:
+    env: CONCOURSE_INFLUXDB_BATCH_SIZE
+    description: |
+      Number of points to batch together when emitting to InfluxDB.
+    default: 5000
+  influxdb.batch_duration:
+    env: CONCOURSE_INFLUXDB_BATCH_DURATION
+    description: |
+      The duration to wait before emitting a batch of points to InfluxDB,
+      disregarding `influxdb.batch_size`.
+    default: 300s
 
   newrelic.account_id:
     env: CONCOURSE_NEWRELIC_ACCOUNT_ID
@@ -899,6 +962,12 @@ properties:
     env: CONCOURSE_CAPTURE_ERROR_METRICS
     description: |
       Enable capturing of error log metrics.
+
+  metrics_buffer_size:
+    env: CONCOURSE_METRICS_BUFFER_SIZE
+    description: |
+      The size of the buffer used in emitting event metrics.
+    default: 1000
 
   emit_metrics_to_logs:
     env: CONCOURSE_EMIT_TO_LOGS
@@ -926,6 +995,12 @@ properties:
     description: |
       Maximum duration for which to keep cached credentials.
     default: 1m
+
+  secrets.cache.duration_notfound:
+    env: CONCOURSE_SECRET_CACHE_DURATION_NOTFOUND
+    description: |
+      If the cache is enabled, secret not found responses will be cached for this duration.
+    default: 10s
 
   secrets.cache.purge_interval:
     env: CONCOURSE_SECRET_CACHE_PURGE_INTERVAL
