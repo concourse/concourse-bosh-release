@@ -197,6 +197,12 @@ properties:
       Allow containers to reach the worker VM's network.
     default: false
 
+  garden.max_containers:
+    env: CONCOURSE_GARDEN_MAX_CONTAINERS
+    description: |
+      Maximum container capacity to advertise. Note: Not tested over 250.
+    default: 250
+
   garden.network_pool:
     env: CONCOURSE_GARDEN_NETWORK_POOL
     description: |
