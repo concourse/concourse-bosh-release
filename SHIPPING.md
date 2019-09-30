@@ -5,7 +5,7 @@ NOTE: Before shipping, you must first trigger `promote-rc` and then run `shipit`
 ## Testing the Windows worker
 
 ```bash
-# cook up some windows-worker-only bosh deployment 
+# cook up some windows-worker-only bosh deployment
 
 
 # hit garden, expect a 404
@@ -121,3 +121,5 @@ update:
 ## changing the version of golang
 
 https://github.com/bosh-packages/golang-release has some pretty tidy steps.
+
+Note: To bump the version of a package, BOSH will need to upload the blobs to the [blobstore](https://bosh.io/docs/release-blobstore/) configured under `config/final.yml`. To get the credentials for it, BOSH will look for a `private.yml`. To fill it with the credentials to the blobstore, you can retrieve that from Vault (see https://github.com/pivotal/concourse-ops/wiki/Operating-Vault#reading-secrets), currently at the key  `/concourse/main/concourse/concourse_artifacts_json_key`.
