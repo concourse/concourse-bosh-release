@@ -2,7 +2,7 @@
 name: atc
 
 dependencies:
-  - golang
+  - golang-1.13-linux
   - packr
   - concourse_version
   - worker_version

@@ -10,7 +10,7 @@ $ErrorActionPreference = "Stop";
 trap { $host.SetShouldExit(1) }
 
 Write-Host "configuring env"
-. C:\var\vcap\packages\golang-1.11-windows\bosh\compile.ps1
+. C:\var\vcap\packages\golang-1.13-windows\bosh\compile.ps1
 $env:GOPATH = Resolve-Path "${env:BOSH_INSTALL_TARGET}"
 
 Write-Host "dumping env"

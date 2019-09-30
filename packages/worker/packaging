@@ -2,9 +2,9 @@ set -e
 
 REPO_NAME=github.com/concourse/worker
 
-export GOROOT=$(readlink -nf /var/vcap/packages/golang)
+source /var/vcap/packages/golang-1.13-linux/bosh/compile.env
+
 export GOPATH=$BOSH_INSTALL_TARGET
-export PATH=$GOROOT/bin:$PATH
 
 mkdir ${BOSH_INSTALL_TARGET}/src
 cp -a * ${BOSH_INSTALL_TARGET}/src

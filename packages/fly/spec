@@ -3,7 +3,7 @@ name: fly
 
 dependencies:
   - concourse_version
-  - golang
+  - golang-1.13-linux
 
 files:
   - fly_binaries/*

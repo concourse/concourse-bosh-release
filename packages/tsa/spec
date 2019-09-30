@@ -2,7 +2,7 @@
 name: tsa
 
 dependencies:
-  - golang
+  - golang-1.13-linux
 
 files:
   # crypto/ssh depends on curve25519 which is implemented in assembly

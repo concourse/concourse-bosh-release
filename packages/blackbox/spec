@@ -2,7 +2,7 @@
 name: blackbox
 
 dependencies:
-  - golang
+  - golang-1.13-linux
 
 files:
   - github.com/concourse/blackbox/*.{go,s,c,h} # gosub

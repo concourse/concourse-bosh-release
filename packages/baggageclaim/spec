@@ -2,7 +2,7 @@
 name: baggageclaim
 
 dependencies:
-  - golang
+  - golang-1.13-linux
 
 files:
   - code.cloudfoundry.org/clock/*.{go,s,c,h} # gosub

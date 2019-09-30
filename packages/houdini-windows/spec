@@ -2,7 +2,7 @@
 name: houdini-windows
 
 dependencies:
-- golang-1.11-windows
+- golang-1.13-windows
 
 files:
   - exiter.ps1
