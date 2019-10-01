@@ -1,8 +1,51 @@
 # Shipping 4.2.x Patches
 
-NOTE: Before shipping, you must first trigger `promote-rc` and then run `shipit`.
+There are certain steps to be taken before shipping, this doc is intended to
+help you out with following the right steps.
 
-## Testing the Windows worker
+
+## Before
+
+Make sure that `version` is currently set to a release-candidate of the version
+that you're aiming to ship.
+
+For instance, if the last release was `4.2.5`, you should make sure that the
+pipeline is currently running on `4.2.6-rc.N`.
+
+If you notice that the pipeline is not running on RCs of the target version, run
+`bump-patch`.
+
+
+## During
+
+The jobs will be kicked off whenever a new version of `rc` gets bumped.
+
+To do so, run `bump-rc`.
+
+
+## Ready to ship
+
+Once you're sure that you got a working version that you want to ship (e.g.,
+`4.2.6-rc.42`), the next step is promoting that RC to a final release version
+(i.e., 4.2.6).
+
+To do so, run `promote-rc`.
+
+Once the pipeline finishes running, run the `shipit` job to get the contents of
+that version published.
+
+
+## After
+
+Once the pipeline finished, make sure you leave the pipeline in a good state for
+next iterations (i.e., continuously running release-candidates on what the next
+patch will be).
+
+To do so, run `bump-patch`.
+
+
+
+# Testing the Windows worker
 
 ```bash
 # cook up some windows-worker-only bosh deployment
@@ -118,7 +161,7 @@ update:
   update_watch_time: 1000-300000
 ```
 
-## changing the version of golang
+# changing the version of golang
 
 https://github.com/bosh-packages/golang-release has some pretty tidy steps.
 
