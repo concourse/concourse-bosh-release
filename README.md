@@ -26,3 +26,7 @@ documentation](https://bosh.io/docs/) first.
 If you're just looking to get Concourse running quickly and kick the tires, you
 may want to try the [Quick Start](https://concourse-ci.org/install.html)
 instead.
+
+## Developing
+
+If you are adding new Concourse flags to one of the job specs you must run `scripts/generate-job-templates` to add the new flags to the job templates.
