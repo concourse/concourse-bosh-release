@@ -606,14 +606,42 @@ properties:
   main_team.auth.cf.spaces:
     env: CONCOURSE_MAIN_TEAM_CF_SPACE
     description: |
-      List of CloudFoundry Spaces that are authorized for the main team
+      (Deprecated) List of CloudFoundry Spaces whose 'developer' users are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_any_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_ANY_ROLE
+    description: |
+      List of CloudFoundry Spaces whose users with any role are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_developer_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_DEVELOPER_ROLE
+    description: |
+      List of CloudFoundry Spaces whose 'developer' users are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_auditor_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_AUDITOR_ROLE
+    description: |
+      List of CloudFoundry Spaces whose 'auditor' users are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_manager_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_MANAGER_ROLE
+    description: |
+      List of CloudFoundry Spaces whose 'manager' users are authorized for the main team
     example:
     - myorg:myspace
 
   main_team.auth.cf.space_guids:
     env: CONCOURSE_MAIN_TEAM_CF_SPACE_GUID
     description: |
-      List of CloudFoundry Space GUIDs that are authorized for the main team
+      (Deprecated) List of CloudFoundry Space GUIDs that are authorized for the main team
 
   main_team.auth.ldap.users:
     env: CONCOURSE_MAIN_TEAM_LDAP_USER

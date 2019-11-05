@@ -655,6 +655,22 @@ processes:
     CONCOURSE_MAIN_TEAM_CF_SPACE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("main_team.auth.cf.spaces_with_any_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_ANY_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.spaces_with_auditor_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_AUDITOR_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.spaces_with_developer_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_DEVELOPER_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.spaces_with_manager_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_MANAGER_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("main_team.auth.cf.users") do |v| -%>
     CONCOURSE_MAIN_TEAM_CF_USER: <%= env_flag(v).to_json %>
 <% end -%>
