@@ -777,11 +777,11 @@ properties:
       version history.
     default: false
 
-  enable_lidar:
-    env: CONCOURSE_ENABLE_LIDAR
+  max_jobs_in_flight:
+    env: CONCOURSE_MAX_JOBS_IN_FLIGHT
     description: |
-      Enable new resource checking which tracks checks in the database
-    default: false
+      Maximum number of jobs to be scheduling at the same time.
+    default: 32
 
   lidar_checker_interval:
     env: CONCOURSE_LIDAR_CHECKER_INTERVAL
@@ -953,11 +953,17 @@ properties:
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
 
-  max_conns:
-    env: CONCOURSE_MAX_CONNS
+  api_max_conns:
+    env: CONCOURSE_API_MAX_CONNS
     description: |
-      The maximum number of open connections for a database connection pool.
-    default: 32
+      The maximum number of open connections for the api connection pool.
+    default: 10
+
+  backend_max_conns:
+    env: CONCOURSE_BACKEND_MAX_CONNS
+    description: |
+      The maximum number of open connections for the backend connection pool.
+    default: 50
 
   datadog.agent_host:
     env: CONCOURSE_DATADOG_AGENT_HOST
