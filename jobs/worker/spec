@@ -178,6 +178,12 @@ properties:
 
       If specified, the other garden.* properties have no effect.
 
+  garden.request_timeout:
+    env: CONCOURSE_GARDEN_REQUEST_TIMEOUT
+    description: |
+      How long to wait for requests to Garden to complete, in Go duration format (48h = 48 hours).
+      0 means no timeout.
+
   garden.deny_networks:
     env: CONCOURSE_GARDEN_DENY_NETWORK
     description: |
