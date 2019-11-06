@@ -727,6 +727,18 @@ processes:
     CONCOURSE_NEWRELIC_API_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("newrelic.batch_duration") do |v| -%>
+    CONCOURSE_NEWRELIC_BATCH_DURATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("newrelic.batch_size") do |v| -%>
+    CONCOURSE_NEWRELIC_BATCH_SIZE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("newrelic.disable_compression") do |v| -%>
+    CONCOURSE_NEWRELIC_DISABLE_COMPRESSION: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("newrelic.service_prefix") do |v| -%>
     CONCOURSE_NEWRELIC_SERVICE_PREFIX: <%= env_flag(v).to_json %>
 <% end -%>

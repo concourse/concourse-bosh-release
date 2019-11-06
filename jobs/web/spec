@@ -957,6 +957,21 @@ properties:
     env: CONCOURSE_NEWRELIC_SERVICE_PREFIX
     description: |
       An optional prefix for emitted New Relic events.
+  newrelic.batch_size:
+    env: CONCOURSE_NEWRELIC_BATCH_SIZE
+    description: |
+      Number of events to batch together before emitting.
+    example: 2000
+  newrelic.batch_duration:
+    env: CONCOURSE_NEWRELIC_BATCH_DURATION
+    description: |
+      Length of time to wait between emitting until all currently batched events are emitted.
+    example: 60s
+  newrelic.disable_compression:
+    env: CONCOURSE_NEWRELIC_DISABLE_COMPRESSION
+    description: |
+      Disables compression of the batch before sending it.
+    example: false
 
   capture_error_metrics:
     env: CONCOURSE_CAPTURE_ERROR_METRICS
