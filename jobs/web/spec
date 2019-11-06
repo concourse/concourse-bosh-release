@@ -795,6 +795,7 @@ properties:
     description: |
       How long to wait for requests to Garden to complete, in Go duration format (48h = 48 hours).
       0 means no timeout.
+    example: 5m
 
   postgresql.host:
     env: CONCOURSE_POSTGRES_HOST
