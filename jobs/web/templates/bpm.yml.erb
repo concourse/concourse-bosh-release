@@ -351,6 +351,10 @@ processes:
     CONCOURSE_EXTERNAL_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("garden_request_timeout") do |v| -%>
+    CONCOURSE_GARDEN_REQUEST_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("gc.check_recycle_period") do |v| -%>
     CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
