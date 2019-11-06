@@ -91,6 +91,10 @@ processes:
     CONCOURSE_ADD_LOCAL_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("api_max_conns") do |v| -%>
+    CONCOURSE_API_MAX_CONNS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("audit.build") do |v| -%>
     CONCOURSE_ENABLE_BUILD_AUDITING: <%= env_flag(v).to_json %>
 <% end -%>
@@ -177,6 +181,10 @@ processes:
 
 <% if_p("aws_ssm.team_secret_template") do |v| -%>
     CONCOURSE_AWS_SSM_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("backend_max_conns") do |v| -%>
+    CONCOURSE_BACKEND_MAX_CONNS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("baggageclaim_response_header_timeout") do |v| -%>
@@ -337,10 +345,6 @@ processes:
 
 <% if_p("enable_global_resources") do |v| -%>
     CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("enable_lidar") do |v| -%>
-    CONCOURSE_ENABLE_LIDAR: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("encryption_key") do |v| -%>
@@ -711,8 +715,8 @@ processes:
     CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("max_conns") do |v| -%>
-    CONCOURSE_MAX_CONNS: <%= env_flag(v).to_json %>
+<% if_p("max_jobs_in_flight") do |v| -%>
+    CONCOURSE_MAX_JOBS_IN_FLIGHT: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("metrics_buffer_size") do |v| -%>
