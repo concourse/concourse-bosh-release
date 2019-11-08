@@ -740,7 +740,7 @@ processes:
 <% end -%>
 
 <% if_p("newrelic.disable_compression") do |v| -%>
-    CONCOURSE_NEWRELIC_DISABLE_COMPRESSION: <%= env_flag(v).to_json %>
+    CONCOURSE_NEWRELIC_BATCH_DISABLE_COMPRESSION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("newrelic.service_prefix") do |v| -%>

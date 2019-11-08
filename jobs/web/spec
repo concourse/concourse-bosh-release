@@ -975,7 +975,7 @@ properties:
       Length of time to wait between emitting until all currently batched events are emitted.
     example: 60s
   newrelic.disable_compression:
-    env: CONCOURSE_NEWRELIC_DISABLE_COMPRESSION
+    env: CONCOURSE_NEWRELIC_BATCH_DISABLE_COMPRESSION
     description: |
       Disables compression of the batch before sending it.
     example: false
