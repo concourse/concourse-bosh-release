@@ -549,6 +549,31 @@ properties:
     description: |
       GitLab client secret to use for OAuth.
 
+  microsoft_auth.client_id:
+    env: CONCOURSE_MICROSOFT_CLIENT_ID
+    description: |
+      Microsoft client ID to use for OAuth.
+
+  microsoft_auth.client_secret:
+    env: CONCOURSE_MICROSOFT_CLIENT_SECRET
+    description: |
+      Microsoft client secret to use for OAuth.
+
+  microsoft_auth.tenant:
+    env: CONCOURSE_MICROSOFT_TENANT
+    description: |
+      Microsoft tenant limitation to use for OAuth (common, consumers, organizations, tenant name or tenant uuid).
+
+  microsoft_auth.groups:
+    env: CONCOURSE_MICROSOFT_GROUPS
+    description: |
+      Allowed Active Directory groups to use for Microsoft OAuth.
+
+  microsoft_auth.only_security_groups:
+    env: CONCOURSE_MICROSOFT_ONLY_SECURITY_GROUPS
+    description: |
+      Only fetch security groups for Microsoft OAuth.
+
   main_team.auth.local.users:
     env: CONCOURSE_MAIN_TEAM_LOCAL_USER
     description: |
@@ -670,6 +695,20 @@ properties:
       List of whitelisted Bitbucket Cloud teams.
     example:
     - my-bitbucket-cloud-team
+
+  main_team.auth.microsoft.users:
+    env: CONCOURSE_MAIN_TEAM_MICROSOFT_USER
+    description: |
+      List of whitelisted Microsoft users for the main team.
+    example:
+    - my-username
+
+  main_team.auth.microsoft.groups:
+    env: CONCOURSE_MAIN_TEAM_MICROSOFT_GROUP
+    description: |
+      List of whitelisted Microsoft groups for the main team.
+    example:
+    - my-group
 
   intercept_idle_timeout:
     env: CONCOURSE_INTERCEPT_IDLE_TIMEOUT
