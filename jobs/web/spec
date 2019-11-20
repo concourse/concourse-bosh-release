@@ -240,6 +240,15 @@ properties:
          ...
          -----END PUBLIC KEY-----
 
+  config_rbac:
+    env_file: CONCOURSE_CONFIG_RBAC
+    description: |
+      YAML file content to customize RBAC role-action mapping.
+    example: |
+      pipeline-operator:
+      - OrderPipelines
+      - PausePipelines
+
   add_local_users:
     env: CONCOURSE_ADD_LOCAL_USER
     description: |
