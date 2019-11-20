@@ -255,6 +255,10 @@ processes:
     CONCOURSE_CLUSTER_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("config_rbac") do |v| -%>
+    CONCOURSE_CONFIG_RBAC: <%= env_file_flag(v, "CONCOURSE_CONFIG_RBAC").to_json %>
+<% end -%>
+
 <% if_p("container_placement_strategy") do |v| -%>
     CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
