@@ -715,14 +715,6 @@ processes:
     CONCOURSE_MAIN_TEAM_LOCAL_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("main_team.auth.microsoft.groups") do |v| -%>
-    CONCOURSE_MAIN_TEAM_MICROSOFT_GROUP: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("main_team.auth.microsoft.users") do |v| -%>
-    CONCOURSE_MAIN_TEAM_MICROSOFT_USER: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("main_team.auth.oauth.groups") do |v| -%>
     CONCOURSE_MAIN_TEAM_OAUTH_GROUP: <%= env_flag(v).to_json %>
 <% end -%>
@@ -749,26 +741,6 @@ processes:
 
 <% if_p("metrics_buffer_size") do |v| -%>
     CONCOURSE_METRICS_BUFFER_SIZE: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("microsoft_auth.client_id") do |v| -%>
-    CONCOURSE_MICROSOFT_CLIENT_ID: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("microsoft_auth.client_secret") do |v| -%>
-    CONCOURSE_MICROSOFT_CLIENT_SECRET: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("microsoft_auth.groups") do |v| -%>
-    CONCOURSE_MICROSOFT_GROUPS: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("microsoft_auth.only_security_groups") do |v| -%>
-    CONCOURSE_MICROSOFT_ONLY_SECURITY_GROUPS: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("microsoft_auth.tenant") do |v| -%>
-    CONCOURSE_MICROSOFT_TENANT: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("newrelic.account_id") do |v| -%>
