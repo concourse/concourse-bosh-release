@@ -623,16 +623,20 @@ processes:
     CONCOURSE_MAIN_TEAM_BITBUCKET_CLOUD_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("main_team.auth.cf.orgs") do |v| -%>
-    CONCOURSE_MAIN_TEAM_CF_ORG: <%= env_flag(v).to_json %>
+<% if_p("main_team.auth.cf.insecure_orgs") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_INSECURE_ORG: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.insecure_spaces") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_INSECURE_SPACE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.org_guids") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_ORG_GUID: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("main_team.auth.cf.space_guids") do |v| -%>
     CONCOURSE_MAIN_TEAM_CF_SPACE_GUID: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("main_team.auth.cf.spaces") do |v| -%>
-    CONCOURSE_MAIN_TEAM_CF_SPACE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("main_team.auth.cf.users") do |v| -%>
