@@ -605,11 +605,6 @@ properties:
     description: |
       List of CloudFoundry Space GUIDs that are authorized for the main team
 
-  main_team.auth.cf.org_guids:
-    env: CONCOURSE_MAIN_TEAM_CF_ORG_GUID
-    description: |
-      List of CloudFoundry Org GUIDs that are authorized for the main team
-
   main_team.auth.ldap.users:
     env: CONCOURSE_MAIN_TEAM_LDAP_USER
     description: |
