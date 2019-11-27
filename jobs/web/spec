@@ -549,6 +549,24 @@ properties:
     description: |
       GitLab client secret to use for OAuth.
 
+  main_team.auth.config:
+    env_file: CONCOURSE_MAIN_TEAM_CONFIG
+    description: |
+      YAML file content for the main team's role configuration.
+    example: |
+      roles:
+      - name: owner
+        github:
+          users: ["admin"]
+      - name: member
+        github:
+          teams: ["org:team"]
+      - name: viewer
+        github:
+          orgs: ["org"]
+        local:
+          users: ["visitor"]
+
   main_team.auth.local.users:
     env: CONCOURSE_MAIN_TEAM_LOCAL_USER
     description: |

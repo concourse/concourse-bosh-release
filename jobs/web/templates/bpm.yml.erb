@@ -663,6 +663,10 @@ processes:
     CONCOURSE_MAIN_TEAM_CF_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("main_team.auth.config") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CONFIG: <%= env_file_flag(v, "CONCOURSE_MAIN_TEAM_CONFIG").to_json %>
+<% end -%>
+
 <% if_p("main_team.auth.github.orgs") do |v| -%>
     CONCOURSE_MAIN_TEAM_GITHUB_ORG: <%= env_flag(v).to_json %>
 <% end -%>
