@@ -585,15 +585,15 @@ properties:
     example:
     - my-username
 
-  main_team.auth.cf.insecure_orgs:
-    env: CONCOURSE_MAIN_TEAM_CF_INSECURE_ORG
+  main_team.auth.cf.orgs:
+    env: CONCOURSE_MAIN_TEAM_CF_ORG
     description: |
       List of CloudFoundry Orgs that are authorized for the main team
     example:
     - myorg
 
-  main_team.auth.cf.insecure_spaces:
-    env: CONCOURSE_MAIN_TEAM_CF_INSECURE_SPACE
+  main_team.auth.cf.spaces:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE
     description: |
       List of CloudFoundry Spaces that are authorized for the main team
     example:
@@ -603,11 +603,6 @@ properties:
     env: CONCOURSE_MAIN_TEAM_CF_SPACE_GUID
     description: |
       List of CloudFoundry Space GUIDs that are authorized for the main team
-
-  main_team.auth.cf.org_guids:
-    env: CONCOURSE_MAIN_TEAM_CF_ORG_GUID
-    description: |
-      List of CloudFoundry Org GUIDs that are authorized for the main team
 
   main_team.auth.ldap.users:
     env: CONCOURSE_MAIN_TEAM_LDAP_USER
