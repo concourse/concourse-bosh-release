@@ -935,6 +935,10 @@ processes:
     CONCOURSE_VAULT_AUTH_PARAM: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.namespace") do |v| -%>
+    CONCOURSE_VAULT_NAMESPACE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.path_prefix") do |v| -%>
     CONCOURSE_VAULT_PATH_PREFIX: <%= env_flag(v).to_json %>
 <% end -%>

@@ -1098,6 +1098,10 @@ properties:
     env: CONCOURSE_VAULT_SHARED_PATH
     description: |
       Path under which to lookup shared credentials.
+  vault.namespace:
+    env: CONCOURSE_VAULT_NAMESPACE
+    description: |
+      Vault namespace to use for authentication and secret lookup.
   vault.tls.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_VAULT_CA_CERT}}
