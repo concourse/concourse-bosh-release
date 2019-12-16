@@ -1217,17 +1217,14 @@ properties:
     env: CONCOURSE_CONJUR_PIPELINE_SECRET_TEMPLATE
     description: |
       Conjur secret identifier template used for pipeline specific parameter.
-    default: "concourse/{{.Team}}/{{.Pipeline}}/{{.Secret}}"
   conjur.team_secret_template:
     env: CONCOURSE_CONJUR_TEAM_SECRET_TEMPLATE
     description: |
       Conjur secret identifier template used for team specific parameter.
-    default: "concourse/{{.Team}}/{{.Secret}}"
   conjur.secret_template:
     env: CONCOURSE_CONJUR_SECRET_TEMPLATE
     description: |
       Conjur secret identifier template used for full path conjur secrets
-    default: "vaultName/{{.Secret}}"
 
   credhub.url:
     env: CONCOURSE_CREDHUB_URL
