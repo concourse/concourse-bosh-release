@@ -1131,7 +1131,7 @@ properties:
   vault.path_prefix:
     env: CONCOURSE_VAULT_PATH_PREFIX
     description: |
-      Path under which to namespace team/pipeline credentials.
+      Path under which to look up shared team/pipeline credentials.
     default: /concourse
   vault.shared_path:
     env: CONCOURSE_VAULT_SHARED_PATH
@@ -1140,7 +1140,7 @@ properties:
   vault.namespace:
     env: CONCOURSE_VAULT_NAMESPACE
     description: |
-      Vault namespace to use for authentication and secret lookup.
+      Vault namespace to use for authentication and secret lookup. Currently only supported for Enterprise Vault.
   vault.tls.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_VAULT_CA_CERT}}
@@ -1188,6 +1188,46 @@ properties:
     env: CONCOURSE_VAULT_RETRY_MAX
     description: |
       The maximum time between retries when logging in or re-authing a secret.
+
+  conjur.appliance_interval:
+    env: CONCOURSE_CONJUR_APPLIANCE_URL
+    description: |
+      URL of the Conjur instance.
+  conjur.account:
+    env: CONCOURSE_CONJUR_ACCOUNT
+    description: |
+      Conjur account name.
+  conjur.cert_file:
+    env: CONCOURSE_CONJUR_CERT_FILE
+    description: |
+      Path to cert file used if conjur instance is using a self-signed cert.
+  conjur.auth.login:
+    env: CONCOURSE_CONJUR_AUTHN_LOGIN
+    description: |
+      Host username. Example: host/concourse
+  conjur.auth.api_key:
+    env: CONCOURSE_CONJUR_AUTHN_API_KEY
+    description: |
+      API key related to the host.
+  conjur.auth.token_file:
+    env: CONCOURSE_CONJUR_AUTHN_TOKEN_FILE
+    description: |
+      Path to token file used if Conjur instance is running in Kubernetes or IAM.
+  conjur.pipeline_secret_template:
+    env: CONCOURSE_CONJUR_PIPELINE_SECRET_TEMPLATE
+    description: |
+      Conjur secret identifier template used for pipeline specific parameter.
+    default: "concourse/{{.Team}}/{{.Pipeline}}/{{.Secret}}"
+  conjur.team_secret_template:
+    env: CONCOURSE_CONJUR_TEAM_SECRET_TEMPLATE
+    description: |
+      Conjur secret identifier template used for team specific parameter.
+    default: "concourse/{{.Team}}/{{.Secret}}"
+  conjur.secret_template:
+    env: CONCOURSE_CONJUR_SECRET_TEMPLATE
+    description: |
+      Conjur secret identifier template used for full path conjur secrets
+    default: "vaultName/{{.Secret}}"
 
   credhub.url:
     env: CONCOURSE_CREDHUB_URL

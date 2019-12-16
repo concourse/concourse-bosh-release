@@ -259,6 +259,42 @@ processes:
     CONCOURSE_CONFIG_RBAC: <%= env_file_flag(v, "CONCOURSE_CONFIG_RBAC").to_json %>
 <% end -%>
 
+<% if_p("conjur.account") do |v| -%>
+    CONCOURSE_CONJUR_ACCOUNT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.appliance_interval") do |v| -%>
+    CONCOURSE_CONJUR_APPLIANCE_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.auth.api_key") do |v| -%>
+    CONCOURSE_CONJUR_AUTHN_API_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.auth.login") do |v| -%>
+    CONCOURSE_CONJUR_AUTHN_LOGIN: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.auth.token_file") do |v| -%>
+    CONCOURSE_CONJUR_AUTHN_TOKEN_FILE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.cert_file") do |v| -%>
+    CONCOURSE_CONJUR_CERT_FILE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.pipeline_secret_template") do |v| -%>
+    CONCOURSE_CONJUR_PIPELINE_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.secret_template") do |v| -%>
+    CONCOURSE_CONJUR_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.team_secret_template") do |v| -%>
+    CONCOURSE_CONJUR_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("container_placement_strategy") do |v| -%>
     CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
