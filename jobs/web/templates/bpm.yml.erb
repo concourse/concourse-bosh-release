@@ -263,6 +263,46 @@ processes:
     CONCOURSE_CLUSTER_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("config_rbac") do |v| -%>
+    CONCOURSE_CONFIG_RBAC: <%= env_file_flag(v, "CONCOURSE_CONFIG_RBAC").to_json %>
+<% end -%>
+
+<% if_p("conjur.account") do |v| -%>
+    CONCOURSE_CONJUR_ACCOUNT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.appliance_interval") do |v| -%>
+    CONCOURSE_CONJUR_APPLIANCE_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.auth.api_key") do |v| -%>
+    CONCOURSE_CONJUR_AUTHN_API_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.auth.login") do |v| -%>
+    CONCOURSE_CONJUR_AUTHN_LOGIN: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.auth.token_file") do |v| -%>
+    CONCOURSE_CONJUR_AUTHN_TOKEN_FILE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.cert_file") do |v| -%>
+    CONCOURSE_CONJUR_CERT_FILE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.pipeline_secret_template") do |v| -%>
+    CONCOURSE_CONJUR_PIPELINE_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.secret_template") do |v| -%>
+    CONCOURSE_CONJUR_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.team_secret_template") do |v| -%>
+    CONCOURSE_CONJUR_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("container_placement_strategy") do |v| -%>
     CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
@@ -353,6 +393,10 @@ processes:
 
 <% if_p("external_url") do |v| -%>
     CONCOURSE_EXTERNAL_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("garden_request_timeout") do |v| -%>
+    CONCOURSE_GARDEN_REQUEST_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("gc.check_recycle_period") do |v| -%>
@@ -659,8 +703,28 @@ processes:
     CONCOURSE_MAIN_TEAM_CF_SPACE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("main_team.auth.cf.spaces_with_any_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_ANY_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.spaces_with_auditor_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_AUDITOR_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.spaces_with_developer_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_DEVELOPER_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.cf.spaces_with_manager_role") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_MANAGER_ROLE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("main_team.auth.cf.users") do |v| -%>
     CONCOURSE_MAIN_TEAM_CF_USER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.config") do |v| -%>
+    CONCOURSE_MAIN_TEAM_CONFIG: <%= env_file_flag(v, "CONCOURSE_MAIN_TEAM_CONFIG").to_json %>
 <% end -%>
 
 <% if_p("main_team.auth.github.orgs") do |v| -%>
@@ -695,6 +759,14 @@ processes:
     CONCOURSE_MAIN_TEAM_LOCAL_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("main_team.auth.microsoft.groups") do |v| -%>
+    CONCOURSE_MAIN_TEAM_MICROSOFT_GROUP: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.microsoft.users") do |v| -%>
+    CONCOURSE_MAIN_TEAM_MICROSOFT_USER: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("main_team.auth.oauth.groups") do |v| -%>
     CONCOURSE_MAIN_TEAM_OAUTH_GROUP: <%= env_flag(v).to_json %>
 <% end -%>
@@ -723,6 +795,26 @@ processes:
     CONCOURSE_METRICS_BUFFER_SIZE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("microsoft_auth.client_id") do |v| -%>
+    CONCOURSE_MICROSOFT_CLIENT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("microsoft_auth.client_secret") do |v| -%>
+    CONCOURSE_MICROSOFT_CLIENT_SECRET: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("microsoft_auth.groups") do |v| -%>
+    CONCOURSE_MICROSOFT_GROUPS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("microsoft_auth.only_security_groups") do |v| -%>
+    CONCOURSE_MICROSOFT_ONLY_SECURITY_GROUPS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("microsoft_auth.tenant") do |v| -%>
+    CONCOURSE_MICROSOFT_TENANT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("newrelic.account_id") do |v| -%>
     CONCOURSE_NEWRELIC_ACCOUNT_ID: <%= env_flag(v).to_json %>
 <% end -%>
@@ -740,7 +832,7 @@ processes:
 <% end -%>
 
 <% if_p("newrelic.disable_compression") do |v| -%>
-    CONCOURSE_NEWRELIC_DISABLE_COMPRESSION: <%= env_flag(v).to_json %>
+    CONCOURSE_NEWRELIC_BATCH_DISABLE_COMPRESSION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("newrelic.service_prefix") do |v| -%>
@@ -909,6 +1001,10 @@ processes:
 
 <% if_p("vault.auth.params") do |v| -%>
     CONCOURSE_VAULT_AUTH_PARAM: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("vault.namespace") do |v| -%>
+    CONCOURSE_VAULT_NAMESPACE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("vault.path_prefix") do |v| -%>

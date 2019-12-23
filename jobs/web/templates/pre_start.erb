@@ -48,6 +48,9 @@ mkdir -p /var/vcap/jobs/web/config/env
 <% if_p("cf_auth.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_CF_CA_CERT") %>
 <% end -%>
+<% if_p("config_rbac") do |v| -%>
+<%= env_file_writer(v, "CONCOURSE_CONFIG_RBAC") %>
+<% end -%>
 <% if_p("credhub.tls.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_CREDHUB_CA_CERT") %>
 <% end -%>
@@ -68,6 +71,9 @@ mkdir -p /var/vcap/jobs/web/config/env
 <% end -%>
 <% if_p("ldap_auth.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_LDAP_CA_CERT") %>
+<% end -%>
+<% if_p("main_team.auth.config") do |v| -%>
+<%= env_file_writer(v, "CONCOURSE_MAIN_TEAM_CONFIG") %>
 <% end -%>
 <% if_p("postgresql.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_POSTGRES_CA_CERT") %>

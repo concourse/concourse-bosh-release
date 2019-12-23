@@ -240,6 +240,15 @@ properties:
          ...
          -----END PUBLIC KEY-----
 
+  config_rbac:
+    env_file: CONCOURSE_CONFIG_RBAC
+    description: |
+      YAML file content to customize RBAC role-action mapping.
+    example: |
+      pipeline-operator:
+      - OrderPipelines
+      - PausePipelines
+
   add_local_users:
     env: CONCOURSE_ADD_LOCAL_USER
     description: |
@@ -549,6 +558,49 @@ properties:
     description: |
       GitLab client secret to use for OAuth.
 
+  microsoft_auth.client_id:
+    env: CONCOURSE_MICROSOFT_CLIENT_ID
+    description: |
+      Microsoft client ID to use for OAuth.
+
+  microsoft_auth.client_secret:
+    env: CONCOURSE_MICROSOFT_CLIENT_SECRET
+    description: |
+      Microsoft client secret to use for OAuth.
+
+  microsoft_auth.tenant:
+    env: CONCOURSE_MICROSOFT_TENANT
+    description: |
+      Microsoft tenant limitation to use for OAuth (common, consumers, organizations, tenant name or tenant uuid).
+
+  microsoft_auth.groups:
+    env: CONCOURSE_MICROSOFT_GROUPS
+    description: |
+      Allowed Active Directory groups to use for Microsoft OAuth.
+
+  microsoft_auth.only_security_groups:
+    env: CONCOURSE_MICROSOFT_ONLY_SECURITY_GROUPS
+    description: |
+      Only fetch security groups for Microsoft OAuth.
+
+  main_team.auth.config:
+    env_file: CONCOURSE_MAIN_TEAM_CONFIG
+    description: |
+      YAML file content for the main team's role configuration.
+    example: |
+      roles:
+      - name: owner
+        github:
+          users: ["admin"]
+      - name: member
+        github:
+          teams: ["org:team"]
+      - name: viewer
+        github:
+          orgs: ["org"]
+        local:
+          users: ["visitor"]
+
   main_team.auth.local.users:
     env: CONCOURSE_MAIN_TEAM_LOCAL_USER
     description: |
@@ -606,14 +658,42 @@ properties:
   main_team.auth.cf.spaces:
     env: CONCOURSE_MAIN_TEAM_CF_SPACE
     description: |
-      List of CloudFoundry Spaces that are authorized for the main team
+      (Deprecated) List of CloudFoundry Spaces whose 'developer' users are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_any_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_ANY_ROLE
+    description: |
+      List of CloudFoundry Spaces whose users with any role are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_developer_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_DEVELOPER_ROLE
+    description: |
+      List of CloudFoundry Spaces whose 'developer' users are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_auditor_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_AUDITOR_ROLE
+    description: |
+      List of CloudFoundry Spaces whose 'auditor' users are authorized for the main team
+    example:
+    - myorg:myspace
+
+  main_team.auth.cf.spaces_with_manager_role:
+    env: CONCOURSE_MAIN_TEAM_CF_SPACE_WITH_MANAGER_ROLE
+    description: |
+      List of CloudFoundry Spaces whose 'manager' users are authorized for the main team
     example:
     - myorg:myspace
 
   main_team.auth.cf.space_guids:
     env: CONCOURSE_MAIN_TEAM_CF_SPACE_GUID
     description: |
-      List of CloudFoundry Space GUIDs that are authorized for the main team
+      (Deprecated) List of CloudFoundry Space GUIDs that are authorized for the main team
 
   main_team.auth.ldap.users:
     env: CONCOURSE_MAIN_TEAM_LDAP_USER
@@ -670,6 +750,20 @@ properties:
       List of whitelisted Bitbucket Cloud teams.
     example:
     - my-bitbucket-cloud-team
+
+  main_team.auth.microsoft.users:
+    env: CONCOURSE_MAIN_TEAM_MICROSOFT_USER
+    description: |
+      List of whitelisted Microsoft users for the main team.
+    example:
+    - my-username
+
+  main_team.auth.microsoft.groups:
+    env: CONCOURSE_MAIN_TEAM_MICROSOFT_GROUP
+    description: |
+      List of whitelisted Microsoft groups for the main team.
+    example:
+    - my-group
 
   intercept_idle_timeout:
     env: CONCOURSE_INTERCEPT_IDLE_TIMEOUT
@@ -789,6 +883,13 @@ properties:
       How long to wait for Baggageclaim to send the response header. Use Go duration
       format (1m = 1 minute).
     default: 1m
+
+  garden_request_timeout:
+    env: CONCOURSE_GARDEN_REQUEST_TIMEOUT
+    description: |
+      How long to wait for requests to Garden to complete, in Go duration format (48h = 48 hours).
+      0 means no timeout.
+    example: 5m
 
   postgresql.host:
     env: CONCOURSE_POSTGRES_HOST
@@ -974,7 +1075,7 @@ properties:
       Length of time to wait between emitting until all currently batched events are emitted.
     example: 60s
   newrelic.disable_compression:
-    env: CONCOURSE_NEWRELIC_DISABLE_COMPRESSION
+    env: CONCOURSE_NEWRELIC_BATCH_DISABLE_COMPRESSION
     description: |
       Disables compression of the batch before sending it.
     example: false
@@ -1036,12 +1137,16 @@ properties:
   vault.path_prefix:
     env: CONCOURSE_VAULT_PATH_PREFIX
     description: |
-      Path under which to namespace team/pipeline credentials.
+      Path under which to look up shared team/pipeline credentials.
     default: /concourse
   vault.shared_path:
     env: CONCOURSE_VAULT_SHARED_PATH
     description: |
       Path under which to lookup shared credentials.
+  vault.namespace:
+    env: CONCOURSE_VAULT_NAMESPACE
+    description: |
+      Vault namespace to use for authentication and secret lookup. Currently only supported for Enterprise Vault.
   vault.tls.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_VAULT_CA_CERT}}
@@ -1089,6 +1194,43 @@ properties:
     env: CONCOURSE_VAULT_RETRY_MAX
     description: |
       The maximum time between retries when logging in or re-authing a secret.
+
+  conjur.appliance_interval:
+    env: CONCOURSE_CONJUR_APPLIANCE_URL
+    description: |
+      URL of the Conjur instance.
+  conjur.account:
+    env: CONCOURSE_CONJUR_ACCOUNT
+    description: |
+      Conjur account name.
+  conjur.cert_file:
+    env: CONCOURSE_CONJUR_CERT_FILE
+    description: |
+      Path to cert file used if conjur instance is using a self-signed cert.
+  conjur.auth.login:
+    env: CONCOURSE_CONJUR_AUTHN_LOGIN
+    description: |
+      Host username. Example: host/concourse
+  conjur.auth.api_key:
+    env: CONCOURSE_CONJUR_AUTHN_API_KEY
+    description: |
+      API key related to the host.
+  conjur.auth.token_file:
+    env: CONCOURSE_CONJUR_AUTHN_TOKEN_FILE
+    description: |
+      Path to token file used if Conjur instance is running in Kubernetes or IAM.
+  conjur.pipeline_secret_template:
+    env: CONCOURSE_CONJUR_PIPELINE_SECRET_TEMPLATE
+    description: |
+      Conjur secret identifier template used for pipeline specific parameter.
+  conjur.team_secret_template:
+    env: CONCOURSE_CONJUR_TEAM_SECRET_TEMPLATE
+    description: |
+      Conjur secret identifier template used for team specific parameter.
+  conjur.secret_template:
+    env: CONCOURSE_CONJUR_SECRET_TEMPLATE
+    description: |
+      Conjur secret identifier template used for full path conjur secrets
 
   credhub.url:
     env: CONCOURSE_CREDHUB_URL
