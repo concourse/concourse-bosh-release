@@ -777,8 +777,8 @@ properties:
       version history.
     default: false
 
-  max_jobs_in_flight:
-    env: CONCOURSE_MAX_JOBS_IN_FLIGHT
+  job_scheduling_max_in_flight:
+    env: CONCOURSE_JOB_SCHEDULING_MAX_IN_FLIGHT
     description: |
       Maximum number of jobs to be scheduling at the same time.
     default: 32

@@ -571,6 +571,10 @@ processes:
     CONCOURSE_INTERCEPT_IDLE_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("job_scheduling_max_in_flight") do |v| -%>
+    CONCOURSE_JOB_SCHEDULING_MAX_IN_FLIGHT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("ldap_auth.bind_dn") do |v| -%>
     CONCOURSE_LDAP_BIND_DN: <%= env_flag(v).to_json %>
 <% end -%>
@@ -785,10 +789,6 @@ processes:
 
 <% if_p("max_active_tasks_per_worker") do |v| -%>
     CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("max_jobs_in_flight") do |v| -%>
-    CONCOURSE_MAX_JOBS_IN_FLIGHT: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("metrics_buffer_size") do |v| -%>
