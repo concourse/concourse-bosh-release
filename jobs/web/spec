@@ -1074,6 +1074,27 @@ properties:
       Disables compression of the batch before sending it.
     example: false
 
+  tracing.jaeger_endpoint:
+    env: CONCOURSE_TRACING_JAEGER_ENDPOINT
+    description: |
+      jaeger HTTP-based Thrift collector.
+    example: http://jaeger:14268/api/traces
+  tracing.jaeger_service:
+    env: CONCOURSE_TRACING_JAEGER_SERVICE
+    description: |
+      Name of the service being traced.
+    example: web
+  tracing.jaeger_tags:
+    env: CONCOURSE_TRACING_JAEGER_TAGS
+    description: |
+      Tags to include in components.
+    example: foo:bar,caz:zaz
+  tracing.stackdriver_projectid:
+    env: CONCOURSE_TRACING_STACKDRIVER_PROJECTID
+    description: |
+      GCP's Project ID
+    example: my-projectid
+
   capture_error_metrics:
     env: CONCOURSE_CAPTURE_ERROR_METRICS
     description: |

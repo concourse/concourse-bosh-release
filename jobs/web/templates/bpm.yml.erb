@@ -983,6 +983,22 @@ processes:
     CONCOURSE_SESSION_SIGNING_KEY: <%= env_file_flag(v, "CONCOURSE_SESSION_SIGNING_KEY").to_json %>
 <% end -%>
 
+<% if_p("tracing.jaeger_endpoint") do |v| -%>
+    CONCOURSE_TRACING_JAEGER_ENDPOINT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("tracing.jaeger_service") do |v| -%>
+    CONCOURSE_TRACING_JAEGER_SERVICE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("tracing.jaeger_tags") do |v| -%>
+    CONCOURSE_TRACING_JAEGER_TAGS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("tracing.stackdriver_projectid") do |v| -%>
+    CONCOURSE_TRACING_STACKDRIVER_PROJECTID: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.auth.backend") do |v| -%>
     CONCOURSE_VAULT_AUTH_BACKEND: <%= env_flag(v).to_json %>
 <% end -%>
