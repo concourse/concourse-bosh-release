@@ -135,3 +135,9 @@ properties:
     description: |
       Port on which Baggageclaim should listen for HTTP traffic.
     default: 7788
+
+  external_garden_url:
+    env: CONCOURSE_EXTERNAL_GARDEN_URL
+    description: |
+      API endpoint of an externally managed Garden server to use instead of
+      running the embedded Garden server.
