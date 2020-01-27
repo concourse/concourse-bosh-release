@@ -1154,6 +1154,10 @@ properties:
     description: |
       Path under which to look up shared team/pipeline credentials.
     default: /concourse
+  vault.lookup_templates:
+    env: CONCOURSE_VAULT_LOOKUP_TEMPLATES
+    description: |
+      Path templates for credential lookup.
   vault.shared_path:
     env: CONCOURSE_VAULT_SHARED_PATH
     description: |

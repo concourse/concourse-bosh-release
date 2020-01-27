@@ -1015,6 +1015,10 @@ processes:
     CONCOURSE_VAULT_AUTH_PARAM: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.lookup_templates") do |v| -%>
+    CONCOURSE_VAULT_LOOKUP_TEMPLATES: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.namespace") do |v| -%>
     CONCOURSE_VAULT_NAMESPACE: <%= env_flag(v).to_json %>
 <% end -%>
