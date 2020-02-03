@@ -957,13 +957,11 @@ properties:
     env: CONCOURSE_API_MAX_CONNS
     description: |
       The maximum number of open connections for the api connection pool.
-    default: 10
 
   backend_max_conns:
     env: CONCOURSE_BACKEND_MAX_CONNS
     description: |
       The maximum number of open connections for the backend connection pool.
-    default: 50
 
   datadog.agent_host:
     env: CONCOURSE_DATADOG_AGENT_HOST
