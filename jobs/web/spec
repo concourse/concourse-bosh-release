@@ -693,7 +693,7 @@ properties:
   main_team.auth.cf.space_guids:
     env: CONCOURSE_MAIN_TEAM_CF_SPACE_GUID
     description: |
-      (Deprecated) List of CloudFoundry Space GUIDs that are authorized for the main team
+      List of CloudFoundry Space GUIDs that are authorized for the main team
 
   main_team.auth.ldap.users:
     env: CONCOURSE_MAIN_TEAM_LDAP_USER
