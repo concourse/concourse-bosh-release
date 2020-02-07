@@ -144,6 +144,7 @@ properties:
 
       If not specified, the worker will not rebalance over time, and instead
       stick with whichever SSH gateway it initially connected to.
+    default: 4h
 
   connection_drain_timeout:
     env: CONCOURSE_CONNECTION_DRAIN_TIMEOUT
