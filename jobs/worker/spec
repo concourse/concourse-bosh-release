@@ -69,7 +69,7 @@ properties:
     description: |
       A path to a directory on the instance to create the resource certificates
       volume from.
-    default: "/etc/ssl/certs"
+    default: "/usr/local/share/ca-certificates"
 
   drain_timeout:
     description: |
