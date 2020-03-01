@@ -18,7 +18,7 @@ bosh sync-blobs
 by "extracting current rc..."
 rm -rf ./dev/base
 mkdir -p ./dev/base
-tar -C ./dev/base -zxf blobs/concourse/concourse-*-linux-amd64.tgz
+tar -C ./dev/base -zxf blobs/concourse/concourse-*-linux-ubuntu-amd64.tgz
 echo done
 
 docker run -v $src:/src -v $(pwd):/release --entrypoint /release/dev/build-concourse-inner concourse/dev
