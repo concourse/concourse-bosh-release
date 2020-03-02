@@ -75,7 +75,12 @@ fi
 
 if ! bosh -e vbox releases | grep credhub >/dev/null; then
   by "uploading an initial credhub release..."
-  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/pivotal-cf/credhub-release?v=1.9.5"
+  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/pivotal-cf/credhub-release"
+fi
+
+if ! bosh -e vbox releases | grep uaa >/dev/null; then
+  by "uploading an initial uaa release..."
+  bosh -n -e vbox upload-release "https://bosh.io/d/github.com/cloudfoundry/uaa-release"
 fi
 
 by "updating route table for single-vm deployment..."
