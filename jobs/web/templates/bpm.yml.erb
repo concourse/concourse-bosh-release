@@ -367,10 +367,6 @@ processes:
     CONCOURSE_RESOURCE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("default_resource_type_check_interval") do |v| -%>
-    CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("default_task_cpu_limit") do |v| -%>
     CONCOURSE_DEFAULT_TASK_CPU_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
@@ -897,22 +893,6 @@ processes:
 
 <% if_p("redact_secrets") do |v| -%>
     CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("riemann.host") do |v| -%>
-    CONCOURSE_RIEMANN_HOST: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("riemann.port") do |v| -%>
-    CONCOURSE_RIEMANN_PORT: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("riemann.service_prefix") do |v| -%>
-    CONCOURSE_RIEMANN_SERVICE_PREFIX: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("riemann.tags") do |v| -%>
-    CONCOURSE_RIEMANN_TAG: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("secrets.cache.duration") do |v| -%>

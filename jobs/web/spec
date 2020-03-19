@@ -811,16 +811,6 @@ properties:
       `check_every` on the resource config.
     default: 1m
 
-  default_resource_type_check_interval:
-    env: CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL
-    description: |
-      The interval, in Go duration format (1m = 1 minute), on which to check
-      for new versions of resource types.
-
-      This can also be specified on a per-resource_type basis by specifying
-      `check_every` on the resource type config.
-    default: 1m
-
   gc_interval:
     env: CONCOURSE_GC_INTERVAL
     description: |
@@ -979,32 +969,6 @@ properties:
     env: CONCOURSE_DATADOG_PREFIX
     description: |
       An optional prefix for emitted Datadog events.
-
-  riemann.host:
-    env: CONCOURSE_RIEMANN_HOST
-    description: |
-      If configured, detailed metrics will be emitted to the specified Riemann
-      server.
-    default: ""
-
-  riemann.port:
-    env: CONCOURSE_RIEMANN_PORT
-    description: |
-      Port of the Riemann server to emit events to.
-    default: 5555
-
-  riemann.service_prefix:
-    env: CONCOURSE_RIEMANN_SERVICE_PREFIX
-    description: |
-      An optional prefix for emitted Riemann services
-
-  riemann.tags:
-    env: CONCOURSE_RIEMANN_TAG
-    description: |
-      An optional map of tags in key: value format
-    example:
-      env: dev
-      foo: bar
 
   prometheus.bind_ip:
     env: CONCOURSE_PROMETHEUS_BIND_IP
