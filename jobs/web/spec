@@ -117,6 +117,12 @@ properties:
       The value to set for X-Frame-Options.
     default: deny
 
+  disable_list_all_jobs:
+    env: CONCOURSE_DISABLE_LIST_ALL_JOBS
+    description: |
+      Disable /api/v1/jobs endpoint, which is known to have performance issues.
+    example: true
+
   log_level:
     env: CONCOURSE_LOG_LEVEL
     description: |
