@@ -331,6 +331,10 @@ processes:
     CONCOURSE_DEFAULT_TASK_MEMORY_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("disable_list_all_jobs") do |v| -%>
+    CONCOURSE_DISABLE_LIST_ALL_JOBS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("emit_metrics_to_logs") do |v| -%>
     CONCOURSE_EMIT_TO_LOGS: <%= env_flag(v).to_json %>
 <% end -%>
