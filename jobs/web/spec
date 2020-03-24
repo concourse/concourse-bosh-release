@@ -783,6 +783,11 @@ properties:
       Maximum number of jobs to be scheduling at the same time.
     default: 32
 
+  runner_interval:
+    env: CONCOURSE_RUNNER_INTERVAL
+    description: |
+      Interval on which runners are kicked off for builds, locks, scans, and checks
+
   lidar_checker_interval:
     env: CONCOURSE_LIDAR_CHECKER_INTERVAL
     description: |
