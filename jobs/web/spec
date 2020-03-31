@@ -838,7 +838,7 @@ properties:
   gc.hijack_grace_period:
     env: CONCOURSE_GC_HIJACK_GRACE_PERIOD
     description: |
-      Period after which hijacked containers will be garbage collected
+      Period after which hijacked containers will be garbage-collected.
 
   gc.one_off_grace_period:
     env: CONCOURSE_GC_ONE_OFF_GRACE_PERIOD
