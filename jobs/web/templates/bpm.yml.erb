@@ -399,6 +399,10 @@ processes:
     CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("gc.hijack_grace_period") do |v| -%>
+    CONCOURSE_GC_HIJACK_GRACE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("gc.interval") do |v| -%>
     CONCOURSE_GC_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
