@@ -16,6 +16,7 @@ templates:
   env.sh.erb: config/env.sh
   concourse.service: config/concourse.service
   worker_gateway_host_key.pub.erb: config/worker_gateway_host_key.pub
+  garden.ini.erb: config/garden.ini
 
 packages:
 - concourse
@@ -177,6 +178,12 @@ properties:
       Use the insecure Houdini Garden backend.
 
       If specified, the other garden.* properties have no effect.
+
+  garden.config_ini:
+    description: |
+      Contents of the Garden configuration. Use to customize the container runtime.
+      This may over-ride any other environment variables specified.
+      See: https://concourse-ci.org/concourse-worker.html#configuring-gdn-server
 
   garden.request_timeout:
     env: CONCOURSE_GARDEN_REQUEST_TIMEOUT
