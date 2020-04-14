@@ -899,8 +899,8 @@ processes:
     CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("runner_interval") do |v| -%>
-    CONCOURSE_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
+<% if_p("component_runner_interval") do |v| -%>
+    CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("secrets.cache.duration") do |v| -%>
