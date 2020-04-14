@@ -783,8 +783,8 @@ properties:
       Maximum number of jobs to be scheduling at the same time.
     default: 32
 
-  runner_interval:
-    env: CONCOURSE_RUNNER_INTERVAL
+  component_runner_interval:
+    env: CONCOURSE_COMPONENT_RUNNER_INTERVAL
     description: |
       Interval on which runners are kicked off for builds, locks, scans, and checks
 
