@@ -123,7 +123,7 @@ properties:
 
       If not specified, the worker will not rebalance over time, and instead
       stick with whichever SSH gateway it initially connected to.
-    default: 4h
+    example: 4h
 
   baggageclaim.driver:
     env: CONCOURSE_BAGGAGECLAIM_DRIVER
