@@ -263,6 +263,14 @@ processes:
     CONCOURSE_CLUSTER_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("component_runner_interval") do |v| -%>
+    CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("concurrent_request_limits") do |v| -%>
+    CONCOURSE_CONCURRENT_REQUEST_LIMIT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("config_rbac") do |v| -%>
     CONCOURSE_CONFIG_RBAC: <%= env_file_flag(v, "CONCOURSE_CONFIG_RBAC").to_json %>
 <% end -%>
@@ -897,10 +905,6 @@ processes:
 
 <% if_p("redact_secrets") do |v| -%>
     CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("component_runner_interval") do |v| -%>
-    CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("secrets.cache.duration") do |v| -%>
