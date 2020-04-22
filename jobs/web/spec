@@ -123,6 +123,12 @@ properties:
       Disable /api/v1/jobs endpoint, which is known to have performance issues.
     example: true
 
+  concurrent_request_limits:
+    env: CONCOURSE_CONCURRENT_REQUEST_LIMIT
+    description: |
+      Limit the number of concurrent requests to an API endpoint.
+    example: ListAllJobs:5
+
   log_level:
     env: CONCOURSE_LOG_LEVEL
     description: |
