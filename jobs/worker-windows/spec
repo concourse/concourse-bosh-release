@@ -120,9 +120,7 @@ properties:
       The interval on which the worker will connect to a new SSH gateway and
       drain the old connection. This has the effect of rebalancing the
       forwarded workers across the SSH gateways over time.
-
-      If not specified, the worker will not rebalance over time, and instead
-      stick with whichever SSH gateway it initially connected to.
+    example: 4h
 
   baggageclaim.driver:
     env: CONCOURSE_BAGGAGECLAIM_DRIVER
