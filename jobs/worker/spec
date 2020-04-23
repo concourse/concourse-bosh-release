@@ -169,7 +169,7 @@ properties:
       Disable remapping of user/group IDs in unprivileged volumes.
 
       For use in combination with 'garden.use_houdini'.
-    default: detect
+    default: false
 
   garden.use_houdini:
     env: CONCOURSE_GARDEN_USE_HOUDINI
