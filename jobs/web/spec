@@ -1449,7 +1449,6 @@ properties:
     example:
       concourse: |
         ssh-rsa key key@pivotal.io
-    default: {}
 
   worker_gateway.log_level:
     env: CONCOURSE_TSA_LOG_LEVEL
