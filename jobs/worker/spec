@@ -97,6 +97,11 @@ properties:
     description: |
       Maximum number of containers which can be swept in parallel.
 
+  container_network_pool:
+    env: CONCOURSE_CONTAINER_NETWORK_POOL
+    description: |
+      Network range to use for dynamically allocated container subnets.
+
   volume_sweeper_max_in_flight:
     env: CONCOURSE_VOLUME_SWEEPER_MAX_IN_FLIGHT
     description: |
@@ -218,8 +223,7 @@ properties:
   garden.network_pool:
     env: CONCOURSE_GARDEN_NETWORK_POOL
     description: |
-      Allow to configure the network pool. Make sure your container
-      network pool does not overlap with any other addresses in your network.
+      Deprecated in favor of container_network_pool.
     default: 10.254.0.0/22
 
   debug.bind_ip:
