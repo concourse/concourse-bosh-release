@@ -260,6 +260,16 @@ properties:
       some-other-user: $2a$10$.YIYH.5EWQcCvfE49xH/.OhIhGFiNtn.tQq.4pznpcrqZvoLxuKeC
       some-plaintext-user: a-plaintext-password
 
+  client_id:
+    env: CONCOURSE_CLIENT_ID
+    description: |
+      The concourse client_id to use when logging into the web interface
+
+  client_secret:
+    env: CONCOURSE_CLIENT_SECRET
+    description: |
+      The concourse client_secret to use when logging into the web interface
+
   github_auth.client_id:
     env: CONCOURSE_GITHUB_CLIENT_ID
     description: |
@@ -777,6 +787,16 @@ properties:
       version history.
     default: false
 
+  enable_archive_pipeline:
+    env: CONCOURSE_ENABLE_ARCHIVE_PIPELINE
+    description: |
+      Enable pipeline archiving functionality in the API
+
+  streaming_artifacts_compression:
+    env: CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION
+    description: |
+      Compression to use when streaming artifacts (values: zstd, gzip)
+
   job_scheduling_max_in_flight:
     env: CONCOURSE_JOB_SCHEDULING_MAX_IN_FLIGHT
     description: |
@@ -816,6 +836,13 @@ properties:
       `check_every` on the resource config.
     default: 1m
 
+  default_check_interval_with_webhook:
+    env: CONCOURSE_RESOURCE_WITH_WEBHOOK_CHECKING_INTERVAL
+    description: |
+      The interval, in Go duration format (1m = 1 minute), on which to check
+      for new versions of resources which have a webhook token configured.
+    default: 1m
+
   gc_interval:
     env: CONCOURSE_GC_INTERVAL
     description: |
@@ -850,6 +877,11 @@ properties:
     description: |
       Period after which finished checks will get garbage-collected.
     default: 6h
+
+  gc.failed_grace_period:
+    env: CONCOURSE_GC_FAILED_GRACE_PERIOD
+    description: |
+      Period after which failed builds will get garbage collected
 
   build_tracker_interval:
     env: CONCOURSE_BUILD_TRACKER_INTERVAL
@@ -1400,6 +1432,16 @@ properties:
     env_fields: {certificate: {env_file: CONCOURSE_SYSLOG_CA_CERT}}
     description: |
       A PEM-encoded CA cert to use to verify the Syslog server SSL cert.
+
+  worker_gateway.client_id:
+    env: CONCOURSE_TSA_CLIENT_ID
+    description: |
+      Configure the client_id to use when requesting a token
+
+  worker_gateway.client_secret:
+    env: CONCOURSE_TSA_CLIENT_SECRET
+    description: |
+      Configure the client_secret to use when requesting a token
 
   worker_gateway.heartbeat_interval:
     env: CONCOURSE_TSA_HEARTBEAT_INTERVAL
