@@ -841,7 +841,7 @@ properties:
     description: |
       The interval, in Go duration format (1m = 1 minute), on which to check
       for new versions of resources which have a webhook token configured.
-    default: 1m
+    example: 1m
 
   gc_interval:
     env: CONCOURSE_GC_INTERVAL
