@@ -226,11 +226,6 @@ properties:
       Deprecated in favor of container_network_pool.
     default: 10.254.0.0/22
 
-  garden.dns_server:
-    env: CONCOURSE_GARDEN_DNS_SERVER
-    description: |
-      Custom DNS server to use inside worker containers
-
   debug.bind_ip:
     env: CONCOURSE_DEBUG_BIND_IP
     description: |
