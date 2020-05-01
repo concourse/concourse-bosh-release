@@ -259,8 +259,20 @@ processes:
     CONCOURSE_CF_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("client_id") do |v| -%>
+    CONCOURSE_CLIENT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("client_secret") do |v| -%>
+    CONCOURSE_CLIENT_SECRET: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("cluster_name") do |v| -%>
     CONCOURSE_CLUSTER_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("component_runner_interval") do |v| -%>
+    CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("config_rbac") do |v| -%>
@@ -367,6 +379,10 @@ processes:
     CONCOURSE_RESOURCE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("default_check_interval_with_webhook") do |v| -%>
+    CONCOURSE_RESOURCE_WITH_WEBHOOK_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("default_task_cpu_limit") do |v| -%>
     CONCOURSE_DEFAULT_TASK_CPU_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
@@ -377,6 +393,10 @@ processes:
 
 <% if_p("emit_metrics_to_logs") do |v| -%>
     CONCOURSE_EMIT_TO_LOGS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("enable_archive_pipeline") do |v| -%>
+    CONCOURSE_ENABLE_ARCHIVE_PIPELINE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("enable_global_resources") do |v| -%>
@@ -397,6 +417,10 @@ processes:
 
 <% if_p("gc.check_recycle_period") do |v| -%>
     CONCOURSE_GC_CHECK_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gc.failed_grace_period") do |v| -%>
+    CONCOURSE_GC_FAILED_GRACE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("gc.hijack_grace_period") do |v| -%>
@@ -899,10 +923,6 @@ processes:
     CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("component_runner_interval") do |v| -%>
-    CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("secrets.cache.duration") do |v| -%>
     CONCOURSE_SECRET_CACHE_DURATION: <%= env_flag(v).to_json %>
 <% end -%>
@@ -925,6 +945,10 @@ processes:
 
 <% if_p("secrets.retry_interval") do |v| -%>
     CONCOURSE_SECRET_RETRY_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("streaming_artifacts_compression") do |v| -%>
+    CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("syslog.address") do |v| -%>
@@ -1057,6 +1081,14 @@ processes:
 
 <% if_p("worker_gateway.bind_port") do |v| -%>
     CONCOURSE_TSA_BIND_PORT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("worker_gateway.client_id") do |v| -%>
+    CONCOURSE_TSA_CLIENT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("worker_gateway.client_secret") do |v| -%>
+    CONCOURSE_TSA_CLIENT_SECRET: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("worker_gateway.heartbeat_interval") do |v| -%>
