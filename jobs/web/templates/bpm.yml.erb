@@ -275,6 +275,10 @@ processes:
     CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("concurrent_request_limits") do |v| -%>
+    CONCOURSE_CONCURRENT_REQUEST_LIMIT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("config_rbac") do |v| -%>
     CONCOURSE_CONFIG_RBAC: <%= env_file_flag(v, "CONCOURSE_CONFIG_RBAC").to_json %>
 <% end -%>

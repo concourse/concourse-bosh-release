@@ -117,6 +117,13 @@ properties:
       The value to set for X-Frame-Options.
     default: deny
 
+  concurrent_request_limits:
+    env: CONCOURSE_CONCURRENT_REQUEST_LIMIT
+    description: |
+      Limit the number of concurrent requests to an API endpoint.
+    example:
+      ListAllJobs: 5
+
   log_level:
     env: CONCOURSE_LOG_LEVEL
     description: |
