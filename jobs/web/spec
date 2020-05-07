@@ -1071,6 +1071,10 @@ properties:
     env: CONCOURSE_NEWRELIC_API_KEY
     description: |
       New Relic Insights API Key.
+  newrelic.url:
+    env: CONCOURSE_NEWRELIC_INSIGHTS_API_URL
+    description: |
+      New Relic Insights Base Url
   newrelic.service_prefix:
     env: CONCOURSE_NEWRELIC_SERVICE_PREFIX
     description: |
