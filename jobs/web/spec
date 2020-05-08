@@ -1075,6 +1075,7 @@ properties:
     env: CONCOURSE_NEWRELIC_INSIGHTS_API_URL
     description: |
       New Relic Insights Base Url
+    example: https://insights-collector.newrelic.com
   newrelic.service_prefix:
     env: CONCOURSE_NEWRELIC_SERVICE_PREFIX
     description: |
