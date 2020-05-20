@@ -799,6 +799,11 @@ properties:
     description: |
       Enable pipeline archiving functionality in the API
 
+  enable_rerun_when_worker_disappears:
+    env: CONCOURSE_ENABLE_RERUN_WHEN_WORKER_DISAPPEARS
+    description: |
+      Enable rerunning of builds when worker disappears.
+
   streaming_artifacts_compression:
     env: CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION
     description: |

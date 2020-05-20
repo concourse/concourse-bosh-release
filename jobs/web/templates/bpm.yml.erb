@@ -407,6 +407,10 @@ processes:
     CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("enable_rerun_when_worker_disappears") do |v| -%>
+    CONCOURSE_ENABLE_RERUN_WHEN_WORKER_DISAPPEARS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("encryption_key") do |v| -%>
     CONCOURSE_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
