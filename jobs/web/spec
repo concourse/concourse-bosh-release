@@ -1237,7 +1237,7 @@ properties:
     description: |
       The maximum time between retries when logging in or re-authing a secret.
 
-  conjur.appliance_interval:
+  conjur.appliance_url:
     env: CONCOURSE_CONJUR_APPLIANCE_URL
     description: |
       URL of the Conjur instance.
@@ -1249,6 +1249,10 @@ properties:
     env: CONCOURSE_CONJUR_CERT_FILE
     description: |
       Path to cert file used if conjur instance is using a self-signed cert.
+  conjur.ssl_certificate:
+    env: CONCOURSE_CONJUR_SSL_CERTIFICATE
+    description: |
+      Content of the SSL cert used if conjur instance is using a self-signed cert.
   conjur.auth.login:
     env: CONCOURSE_CONJUR_AUTHN_LOGIN
     description: |
