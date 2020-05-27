@@ -287,7 +287,7 @@ processes:
     CONCOURSE_CONJUR_ACCOUNT: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("conjur.appliance_interval") do |v| -%>
+<% if_p("conjur.appliance_url") do |v| -%>
     CONCOURSE_CONJUR_APPLIANCE_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
@@ -313,6 +313,10 @@ processes:
 
 <% if_p("conjur.secret_template") do |v| -%>
     CONCOURSE_CONJUR_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("conjur.ssl_certificate") do |v| -%>
+    CONCOURSE_CONJUR_SSL_CERTIFICATE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("conjur.team_secret_template") do |v| -%>
@@ -855,10 +859,6 @@ processes:
     CONCOURSE_NEWRELIC_API_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("newrelic.url") do |v| -%>
-    CONCOURSE_NEWRELIC_INSIGHTS_API_URL: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("newrelic.batch_duration") do |v| -%>
     CONCOURSE_NEWRELIC_BATCH_DURATION: <%= env_flag(v).to_json %>
 <% end -%>
@@ -873,6 +873,10 @@ processes:
 
 <% if_p("newrelic.service_prefix") do |v| -%>
     CONCOURSE_NEWRELIC_SERVICE_PREFIX: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("newrelic.url") do |v| -%>
+    CONCOURSE_NEWRELIC_INSIGHTS_API_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("old_encryption_key") do |v| -%>
