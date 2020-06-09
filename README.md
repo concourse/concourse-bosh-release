@@ -30,4 +30,4 @@ instead.
 ## Developing
 
 - If you are adding new Concourse flags to one of the job specs you must run `scripts/generate-job-templates` to add the new flags to the job templates.
-- When adding a new Concourse flag, don't define a `default` value that mirrors a default set by the Concourse binary. Instead, you may use the `example`. This prevents the possiblity of drift if the Concourse binary default value changes.
+- When adding a new Concourse flag, don't define a `default` value that mirrors a default set by the Concourse binary. Instead, you may use the `example`. This prevents the possibility of drift if the Concourse binary default value changes.
