@@ -51,6 +51,9 @@ mkdir -p /var/vcap/jobs/web/config/env
 <% if_p("config_rbac") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_CONFIG_RBAC") %>
 <% end -%>
+<% if_p("conjur.tls.ca_cert.certificate") do |v| -%>
+<%= env_file_writer(v, "CONCOURSE_CONJUR_CERT_FILE") %>
+<% end -%>
 <% if_p("credhub.tls.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_CREDHUB_CA_CERT") %>
 <% end -%>
