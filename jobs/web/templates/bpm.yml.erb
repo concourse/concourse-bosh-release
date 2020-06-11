@@ -823,6 +823,10 @@ processes:
     CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("max_checks_per_second") do |v| -%>
+    CONCOURSE_MAX_CHECKS_PER_SECOND: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("metrics_buffer_size") do |v| -%>
     CONCOURSE_METRICS_BUFFER_SIZE: <%= env_flag(v).to_json %>
 <% end -%>
