@@ -841,10 +841,9 @@ properties:
   max_checks_per_second:
     env: CONCOURSE_MAX_CHECKS_PER_SECOND
     description: |
-      Maximum number of checks that can run in one second. If not specified,
-      this will be calculated as (# of resources)/(resource checking interval).
-      -1 value will remove this maximum limit of checks per second.
-    default: 0
+      Maximum number of checks that can be started per second. If not
+      specified, this will be calculated as (# of resources)/(resource checking
+      interval). -1 value will remove this maximum limit of checks per second.
 
   default_check_interval:
     env: CONCOURSE_RESOURCE_CHECKING_INTERVAL
