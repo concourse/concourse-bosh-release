@@ -1463,6 +1463,31 @@ properties:
     description: |
       A PEM-encoded CA cert to use to verify the Syslog server SSL cert.
 
+  opa.url:
+    env: CONCOURSE_OPA_URL
+    description: |
+      Open Policy Agent policy check endpoint.
+    example: http://opa.example.com:8181/v1/data/concourse/allow
+  opa.timeout:
+    env: CONCOURSE_OPA_TIMEOUT
+    description: |
+      Open Policy Agent API request timeout.
+  policy_check.filter_http_methods:
+    env: CONCOURSE_POLICY_CHECK_FILTER_HTTP_METHOD
+    description: |
+      Array of HTTP methods to filter through policy checking.
+    example: [PUT, POST]
+  policy_check.filter_actions:
+    env: CONCOURSE_POLICY_CHECK_FILTER_ACTION
+    description: |
+      Array of ATC API actions to filter through policy checking.
+    example: [SaveConfig, UseImage]
+  policy_check.skip_actions:
+    env: CONCOURSE_POLICY_CHECK_FILTER_ACTION_SKIP
+    description: |
+      Array of ATC API actions to skip policy checking.
+    example: [PausePipeline, UnpausePipeline]
+
   worker_gateway.client_id:
     env: CONCOURSE_TSA_CLIENT_ID
     description: |

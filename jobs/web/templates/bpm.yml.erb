@@ -883,6 +883,26 @@ processes:
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("opa.timeout") do |v| -%>
+    CONCOURSE_OPA_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("opa.url") do |v| -%>
+    CONCOURSE_OPA_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("policy_check.filter_actions") do |v| -%>
+    CONCOURSE_POLICY_CHECK_FILTER_ACTION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("policy_check.filter_http_methods") do |v| -%>
+    CONCOURSE_POLICY_CHECK_FILTER_HTTP_METHOD: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("policy_check.skip_actions") do |v| -%>
+    CONCOURSE_POLICY_CHECK_FILTER_ACTION_SKIP: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("postgresql.ca_cert.certificate") do |v| -%>
     CONCOURSE_POSTGRES_CA_CERT: <%= env_file_flag(v, "CONCOURSE_POSTGRES_CA_CERT").to_json %>
 <% end -%>
