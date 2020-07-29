@@ -172,15 +172,15 @@ properties:
     description: |
       Disable remapping of user/group IDs in unprivileged volumes.
 
-      For use in combination with 'garden.use_houdini'.
+      For use in combination with 'runtime.type=houdini'.
     default: false
 
-  garden.use_houdini:
-    env: CONCOURSE_GARDEN_USE_HOUDINI
+  runtime.type:
+    env: CONCOURSE_RUNTIME_TYPE
     description: |
-      Use the insecure Houdini Garden backend.
-
-      If specified, the other garden.* properties have no effect.
+      Container runtime for worker. Possible values are "guardian", "containerd", and "houdini".
+      Please note that Houdini is insecure and does not run tasks in containers.
+    default: guardian
 
   garden.config_ini:
     description: |
