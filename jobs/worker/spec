@@ -97,11 +97,6 @@ properties:
     description: |
       Maximum number of containers which can be swept in parallel.
 
-  container_network_pool:
-    env: CONCOURSE_CONTAINER_NETWORK_POOL
-    description: |
-      Network range to use for dynamically allocated container subnets.
-
   volume_sweeper_max_in_flight:
     env: CONCOURSE_VOLUME_SWEEPER_MAX_IN_FLIGHT
     description: |
@@ -180,7 +175,6 @@ properties:
     description: |
       Container runtime for worker. Possible values are "guardian", "containerd", and "houdini".
       Please note that Houdini is insecure and does not run tasks in containers.
-    default: guardian
 
   garden.config_ini:
     description: |
@@ -225,6 +219,48 @@ properties:
     description: |
       Deprecated in favor of container_network_pool.
     default: 10.254.0.0/22
+
+  containerd.bin:
+    env: CONCOURSE_CONTAINERD_BIN
+    description: |
+      Path to a containerd executable (non-absolute names get resolved from $PATH).
+
+  containerd.config:
+    env: CONCOURSE_CONTAINERD_CONFIG
+    description: |
+      Path to a config file to use for the Containerd daemon.
+
+  containerd.dnsProxyEnable:
+    env: CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE
+    description: |
+      Enable a proxy DNS server for Garden
+
+  containerd.dnsServers:
+    env: CONCOURSE_CONTAINERD_DNS_SERVER
+    description: |
+      List of DNS server IP addresses to use instead of automatically determined servers.
+
+  containerd.restrictedNetworks:
+    env: CONCOURSE_CONTAINERD_RESTRICTED_NETWORK
+    description: |
+      List of network ranges to which traffic from containers will be restricted.
+
+  containerd.maxContainers:
+    env: CONCOURSE_CONTAINERD_MAX_CONTAINERS
+    description: |
+      Max container capacity. 0 means no limit.
+
+  containerd.networkPool:
+    env: CONCOURSE_CONTAINERD_NETWORK_POOL
+    description: |
+      Network range to use for dynamically allocated container subnets, defaults to "10.80.0.0/16"
+
+  containerd.requestTimeout:
+    env: CONCOURSE_CONTAINERD_REQUEST_TIMEOUT
+    description: |
+      Time to wait for requests to Containerd to complete. 0 means no timeout.
+
+
 
   debug.bind_ip:
     env: CONCOURSE_DEBUG_BIND_IP
