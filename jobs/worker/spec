@@ -230,32 +230,32 @@ properties:
     description: |
       Path to a config file to use for the Containerd daemon.
 
-  containerd.dnsProxyEnable:
+  containerd.dns_proxy_enable:
     env: CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE
     description: |
       Enable a proxy DNS server for Garden
 
-  containerd.dnsServers:
+  containerd.dns_servers:
     env: CONCOURSE_CONTAINERD_DNS_SERVER
     description: |
       List of DNS server IP addresses to use instead of automatically determined servers.
 
-  containerd.restrictedNetworks:
+  containerd.restricted_networks:
     env: CONCOURSE_CONTAINERD_RESTRICTED_NETWORK
     description: |
       List of network ranges to which traffic from containers will be restricted.
 
-  containerd.maxContainers:
+  containerd.max_containers:
     env: CONCOURSE_CONTAINERD_MAX_CONTAINERS
     description: |
       Max container capacity. 0 means no limit.
 
-  containerd.networkPool:
+  containerd.network_pool:
     env: CONCOURSE_CONTAINERD_NETWORK_POOL
     description: |
       Network range to use for dynamically allocated container subnets, defaults to "10.80.0.0/16"
 
-  containerd.requestTimeout:
+  containerd.request_timeout:
     env: CONCOURSE_CONTAINERD_REQUEST_TIMEOUT
     description: |
       Time to wait for requests to Containerd to complete. 0 means no timeout.
