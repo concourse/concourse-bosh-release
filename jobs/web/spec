@@ -794,11 +794,6 @@ properties:
       version history.
     default: false
 
-  enable_archive_pipeline:
-    env: CONCOURSE_ENABLE_ARCHIVE_PIPELINE
-    description: |
-      Enable pipeline archiving functionality in the API
-
   enable_rerun_when_worker_disappears:
     env: CONCOURSE_ENABLE_RERUN_WHEN_WORKER_DISAPPEARS
     description: |
