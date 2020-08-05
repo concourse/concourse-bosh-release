@@ -399,10 +399,6 @@ processes:
     CONCOURSE_EMIT_TO_LOGS: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("enable_archive_pipeline") do |v| -%>
-    CONCOURSE_ENABLE_ARCHIVE_PIPELINE: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("enable_global_resources") do |v| -%>
     CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
 <% end -%>
