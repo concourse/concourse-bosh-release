@@ -1499,6 +1499,12 @@ properties:
       Interval on which to register workers with the ATC.
     default: 30s
 
+  worker_gateway.garden_request_timeout:
+    env: CONCOURSE_TSA_GARDEN_REQUEST_TIMEOUT
+    description: |
+      How long to wait for requests to Garden to complete. 0 means no timeout.
+    example: 5m
+
   worker_gateway.bind_port:
     env: CONCOURSE_TSA_BIND_PORT
     description: |
