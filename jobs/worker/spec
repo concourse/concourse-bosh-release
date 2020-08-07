@@ -170,11 +170,12 @@ properties:
       For use in combination with 'runtime.type=houdini'.
     default: false
 
-  runtime.type:
-    env: CONCOURSE_RUNTIME_TYPE
+  runtime:
+    env: CONCOURSE_RUNTIME
     description: |
       Container runtime for worker. Possible values are "guardian", "containerd", and "houdini".
       Please note that Houdini is insecure and does not run tasks in containers.
+    example: guardian
 
   garden.config_ini:
     description: |
