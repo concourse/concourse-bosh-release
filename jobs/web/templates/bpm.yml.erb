@@ -1127,6 +1127,10 @@ processes:
     CONCOURSE_TSA_CLIENT_SECRET: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("worker_gateway.garden_request_timeout") do |v| -%>
+    CONCOURSE_TSA_GARDEN_REQUEST_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("worker_gateway.heartbeat_interval") do |v| -%>
     CONCOURSE_TSA_HEARTBEAT_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
