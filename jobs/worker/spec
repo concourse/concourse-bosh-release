@@ -178,12 +178,14 @@ properties:
     example: guardian
 
   garden.config_ini:
+    runtime: guardian
     description: |
       Contents of the Garden configuration. Use to customize the container runtime.
       This may over-ride any other environment variables specified.
       See: https://concourse-ci.org/concourse-worker.html#configuring-gdn-server
 
   garden.request_timeout:
+    runtime: guardian
     env: CONCOURSE_GARDEN_REQUEST_TIMEOUT
     description: |
       How long to wait for requests to Garden to complete, in Go duration format (48h = 48 hours).
@@ -191,12 +193,14 @@ properties:
     example: 5m
 
   garden.deny_networks:
+    runtime: guardian
     env: CONCOURSE_GARDEN_DENY_NETWORK
     description: |
       Network ranges to which traffic from containers will be denied.
     example: []
 
   garden.dns_servers:
+    runtime: guardian
     env: CONCOURSE_GARDEN_DNS_SERVER
     description: |
       DNS servers IP addresses to use instead of automatically
@@ -204,59 +208,70 @@ properties:
     example: []
 
   garden.allow_host_access:
+    runtime: guardian
     env: CONCOURSE_GARDEN_ALLOW_HOST_ACCESS
     description: |
       Allow containers to reach the worker VM's network.
     default: false
 
   garden.max_containers:
+    runtime: guardian
     env: CONCOURSE_GARDEN_MAX_CONTAINERS
     description: |
       Maximum container capacity to advertise. Note: Not tested over 250.
     default: 250
 
   garden.network_pool:
+    runtime: guardian
     env: CONCOURSE_GARDEN_NETWORK_POOL
     description: |
       Deprecated in favor of container_network_pool.
     default: 10.254.0.0/22
 
   containerd.bin:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_BIN
     description: |
       Path to a containerd executable (non-absolute names get resolved from $PATH).
 
   containerd.config:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_CONFIG
     description: |
       Path to a config file to use for the Containerd daemon.
 
   containerd.dns_proxy_enable:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE
     description: |
       Enable a proxy DNS server for Garden
 
   containerd.dns_servers:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_DNS_SERVER
     description: |
       List of DNS server IP addresses to use instead of automatically determined servers.
 
   containerd.restricted_networks:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_RESTRICTED_NETWORK
     description: |
       List of network ranges to which traffic from containers will be restricted.
 
   containerd.max_containers:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_MAX_CONTAINERS
     description: |
       Max container capacity. 0 means no limit.
 
   containerd.network_pool:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_NETWORK_POOL
     description: |
       Network range to use for dynamically allocated container subnets, defaults to "10.80.0.0/16"
 
   containerd.request_timeout:
+    runtime: containerd
     env: CONCOURSE_CONTAINERD_REQUEST_TIMEOUT
     description: |
       Time to wait for requests to Containerd to complete. 0 means no timeout.

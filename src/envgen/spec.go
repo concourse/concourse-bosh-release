@@ -13,4 +13,5 @@ type Property struct {
 type EnvConfig struct {
 	Env     string `yaml:"env"`
 	EnvFile string `yaml:"env_file"`
+	Runtime string `yaml:"runtime"`
 }
