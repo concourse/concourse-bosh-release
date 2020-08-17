@@ -799,6 +799,11 @@ properties:
     description: |
       Enable rerunning of builds when worker disappears.
 
+  enable_across_step:
+    env: CONCOURSE_ENABLE_ACROSS_STEP
+    description: |
+      Enable the experimental across step to be used in jobs. The API is subject to change.
+
   streaming_artifacts_compression:
     env: CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION
     description: |
