@@ -399,6 +399,10 @@ processes:
     CONCOURSE_EMIT_TO_LOGS: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("enable_across_step") do |v| -%>
+    CONCOURSE_ENABLE_ACROSS_STEP: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("enable_global_resources") do |v| -%>
     CONCOURSE_ENABLE_GLOBAL_RESOURCES: <%= env_flag(v).to_json %>
 <% end -%>
