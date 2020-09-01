@@ -810,6 +810,20 @@ properties:
     example:
     - my-group
 
+  main_team.auth.saml.users:
+    env: CONCOURSE_MAIN_TEAM_SAML_USER
+    description: |
+      List of SAML users that are authorized for the main team
+    example:
+    - my-username
+
+  main_team.auth.saml.groups:
+    env: CONCOURSE_MAIN_TEAM_SAML_GROUP
+    description: |
+      List of SAML groups that are authorized for the main team
+    example:
+    - my-group
+
   main_team.auth.oauth.users:
     env: CONCOURSE_MAIN_TEAM_OAUTH_USER
     description: |
