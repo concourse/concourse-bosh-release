@@ -207,19 +207,16 @@ properties:
     env: CONCOURSE_GARDEN_ALLOW_HOST_ACCESS
     description: |
       Allow containers to reach the worker VM's network.
-    default: false
 
   garden.max_containers:
     env: CONCOURSE_GARDEN_MAX_CONTAINERS
     description: |
-      Maximum container capacity to advertise. Note: Not tested over 250.
-    default: 250
+      Maximum container capacity to advertise. 0 means no limit. Defaults to 250.
 
   garden.network_pool:
     env: CONCOURSE_GARDEN_NETWORK_POOL
     description: |
-      Deprecated in favor of container_network_pool.
-    default: 10.254.0.0/22
+      Network range to use for dynamically allocated container subnets. Defaults to "10.80.0.0/16".
 
   containerd.bin:
     env: CONCOURSE_CONTAINERD_BIN
@@ -249,12 +246,12 @@ properties:
   containerd.max_containers:
     env: CONCOURSE_CONTAINERD_MAX_CONTAINERS
     description: |
-      Max container capacity. 0 means no limit.
+      Maximum container capacity. 0 means no limit. Defaults to 250.
 
   containerd.network_pool:
     env: CONCOURSE_CONTAINERD_NETWORK_POOL
     description: |
-      Network range to use for dynamically allocated container subnets, defaults to "10.80.0.0/16"
+      Network range to use for dynamically allocated container subnets. Defaults to "10.80.0.0/16".
 
   containerd.request_timeout:
     env: CONCOURSE_CONTAINERD_REQUEST_TIMEOUT
