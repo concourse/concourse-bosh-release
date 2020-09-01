@@ -453,6 +453,90 @@ properties:
     description: |
       The attribute of the group that represents its name.
 
+  saml_auth.display_name:
+    env: CONCOURSE_SAML_DISPLAY_NAME
+    description: |
+      The auth provider name displayed to users on the login page.
+
+  saml_auth.ca_cert:
+    type: certificate
+    env_fields: {certificate: {env_file: CONCOURSE_SAML_CA_CERT}}
+    description: |
+      The CA certificate to use when verifying the signature of the SAML
+      response.
+
+  saml_auth.sso_url:
+    env: CONCOURSE_SAML_SSO_URL
+    description: |
+      SSO URL used for POST value.
+
+  saml_auth.sso_issuer:
+    env: CONCOURSE_SAML_SSO_ISSUER
+    description: |
+      Issuer value expected in the SAML response.
+
+  saml_auth.entity_issuer:
+    env: CONCOURSE_SAML_ENTITY_ISSUER
+    description: |
+      Manually specify Concourse's Issuer value. When provided Concourse will
+      include this as the Issuer value during AuthnRequest. If not provided, will
+      default to the redirect URI when evaluating AudienceRestriction elements
+      in the response.
+
+  saml_auth.username_attr:
+    env: CONCOURSE_SAML_USERNAME_ATTR
+    description: |
+      Name of the username attribute in the returned assertions to map to ID
+      token claims.
+    example: name
+
+  saml_auth.email_attr:
+    env: CONCOURSE_SAML_EMAIL_ATTR
+    description: |
+      Name of the email attribute in the returned assertions to map to ID token
+      claims.
+    example: email
+
+  saml_auth.groups_attr:
+    env: CONCOURSE_SAML_GROUPS_ATTR
+    description: |
+      Name of the groups attribute in the returned assertions to map to ID
+      token claims.
+    example: groups
+
+  saml_auth.groups_delim:
+    env: CONCOURSE_SAML_GROUPS_DELIM
+    description: |
+      Delimiter for splitting groups returned as a single string.
+
+      By default, multiple groups are assumed to be represented as multiple
+      attributes with the same name.
+
+      If "groups_delim" is provided groups are assumed to be represented as a
+      single attribute and the delimiter is used to split the attribute's value
+      into multiple groups.
+
+  saml_auth.name_id_policy_format:
+    env: CONCOURSE_SAML_NAME_ID_POLICY_FORMAT
+    description: |
+      Requested format of the NameID.
+
+      The NameID value is is mapped to the user ID of the user. This can be an
+      abbreviated form of the full URI with just the last component. For example,
+      if this value is set to "emailAddress" the format will resolve to:
+
+          urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress
+
+      If no value is specified, this value defaults to:
+
+          urn:oasis:names:tc:SAML:2.0:nameid-format:persistent
+    example: persistent
+
+  saml_auth.insecure_skip_verify:
+    env: CONCOURSE_SAML_SKIP_SSL_VALIDATION
+    description: |
+      Skip signature verification.
+
   generic_oauth.client_id:
     env: CONCOURSE_OAUTH_CLIENT_ID
     description: |

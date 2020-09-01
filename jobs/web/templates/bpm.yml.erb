@@ -959,6 +959,50 @@ processes:
     CONCOURSE_ENABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("saml_auth.ca_cert.certificate") do |v| -%>
+    CONCOURSE_SAML_CA_CERT: <%= env_file_flag(v, "CONCOURSE_SAML_CA_CERT").to_json %>
+<% end -%>
+
+<% if_p("saml_auth.display_name") do |v| -%>
+    CONCOURSE_SAML_DISPLAY_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.email_attr") do |v| -%>
+    CONCOURSE_SAML_EMAIL_ATTR: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.entity_issuer") do |v| -%>
+    CONCOURSE_SAML_ENTITY_ISSUER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.groups_attr") do |v| -%>
+    CONCOURSE_SAML_GROUPS_ATTR: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.groups_delim") do |v| -%>
+    CONCOURSE_SAML_GROUPS_DELIM: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.insecure_skip_verify") do |v| -%>
+    CONCOURSE_SAML_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.name_id_policy_format") do |v| -%>
+    CONCOURSE_SAML_NAME_ID_POLICY_FORMAT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.sso_issuer") do |v| -%>
+    CONCOURSE_SAML_SSO_ISSUER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.sso_url") do |v| -%>
+    CONCOURSE_SAML_SSO_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("saml_auth.username_attr") do |v| -%>
+    CONCOURSE_SAML_USERNAME_ATTR: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("secrets.cache.duration") do |v| -%>
     CONCOURSE_SECRET_CACHE_DURATION: <%= env_flag(v).to_json %>
 <% end -%>
