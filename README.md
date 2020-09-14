@@ -29,5 +29,20 @@ instead.
 
 ## Developing
 
-- If you are adding new Concourse flags to one of the job specs you must run `scripts/generate-job-templates` to add the new flags to the job templates.
-- When adding a new Concourse flag, don't define a `default` value that mirrors a default set by the Concourse binary. Instead, you may use the `example`. This prevents the possibility of drift if the Concourse binary default value changes.
+If you are adding new Concourse flags to one of the job specs you must run `scripts/generate-job-templates` to add the new flags to the job templates.
+
+**Default values**
+
+When adding a new Concourse flag, don't define a `default` value that mirrors a default set by the Concourse binary. 
+
+Instead, mention the default in the description. This prevents the possibility of drift if the Concourse binary default value changes.
+
+```
+containerd.max_containers:
+    env: CONCOURSE_CONTAINERD_MAX_CONTAINERS
+    description: |
+      Maximum container capacity. 0 means no limit. Defaults to 250.
+```
+
+We understand that the comment stating the binary's default can become stale. The current solution is a suboptimal one. It may be improved in the future by generating a list of the default values from the binary.
+
