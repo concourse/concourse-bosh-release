@@ -258,7 +258,11 @@ properties:
     description: |
       Time to wait for requests to Containerd to complete. 0 means no timeout.
 
-
+  containerd.init_bin:
+    env: CONCOURSE_CONTAINERD_INIT_BIN
+    description: |
+      Path to a dumb init executable. For BOSH this defaults to /var/vcap/packages/concourse/bin/init when containerd
+      is selected as the runtime.
 
   debug.bind_ip:
     env: CONCOURSE_DEBUG_BIND_IP
