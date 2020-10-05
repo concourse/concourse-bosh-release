@@ -918,12 +918,6 @@ properties:
     description: |
       Interval on which runners are kicked off for builds, locks, scans, and checks
 
-  lidar_checker_interval:
-    env: CONCOURSE_LIDAR_CHECKER_INTERVAL
-    description: |
-      Interval on which the resource checker runs any scheduled checks
-    default: 10s
-
   lidar_scanner_interval:
     env: CONCOURSE_LIDAR_SCANNER_INTERVAL
     description: |
