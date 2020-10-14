@@ -191,6 +191,10 @@ processes:
     CONCOURSE_BAGGAGECLAIM_RESPONSE_HEADER_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("base_resource_type_defaults") do |v| -%>
+    CONCOURSE_BASE_RESOURCE_TYPE_DEFAULTS: <%= env_file_flag(v, "CONCOURSE_BASE_RESOURCE_TYPE_DEFAULTS").to_json %>
+<% end -%>
+
 <% if_p("bind_ip") do |v| -%>
     CONCOURSE_BIND_IP: <%= env_flag(v).to_json %>
 <% end -%>

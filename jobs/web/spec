@@ -960,6 +960,15 @@ properties:
       for new versions of resources which have a webhook token configured.
     example: 1m
 
+  base_resource_type_defaults:
+    env_file: CONCOURSE_BASE_RESOURCE_TYPE_DEFAULTS
+    description: |
+      YAML file for specifying defaults for base resource types
+    example: |
+      registry-image:
+        registry_mirror:
+          host: https://registry.mirror.example.com
+
   gc_interval:
     env: CONCOURSE_GC_INTERVAL
     description: |
