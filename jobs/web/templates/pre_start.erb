@@ -45,6 +45,9 @@ mkdir -p /var/vcap/jobs/web/config/env
   end
 -%>
 
+<% if_p("base_resource_type_defaults") do |v| -%>
+<%= env_file_writer(v, "CONCOURSE_BASE_RESOURCE_TYPE_DEFAULTS") %>
+<% end -%>
 <% if_p("cf_auth.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_CF_CA_CERT") %>
 <% end -%>
