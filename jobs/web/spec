@@ -1235,6 +1235,20 @@ properties:
     description: |
       GCP's Project ID
     example: my-projectid
+  tracing.honeycomb_api_key:
+    env: CONCOURSE_TRACING_HONEYCOMB_API_KEY
+    description: |
+      Honeycomb.io API Key.
+  tracing.honeycomb_dataset:
+    env: CONCOURSE_TRACING_HONEYCOMB_DATASET
+    description: |
+      Name of dataset.
+    example: web
+  tracing.honeycomb_service_name:
+    env: CONCOURSE_TRACING_HONEYCOMB_SERVICE_NAME
+    description: |
+      Name of the service being traced.
+    example: concourse
 
   capture_error_metrics:
     env: CONCOURSE_CAPTURE_ERROR_METRICS
