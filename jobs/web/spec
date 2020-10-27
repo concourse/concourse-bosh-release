@@ -1229,6 +1229,17 @@ properties:
       Disables compression of the batch before sending it.
     example: false
 
+  tracing.service_name:
+    env: CONCOURSE_TRACING_SERVICE_NAME
+    description: |
+      Service name to attach to traces as metadata.
+    example: concourse-web
+  tracing.attributes:
+    env: CONCOURSE_TRACING_ATTRIBUTE
+    description: |
+      Attributes to attach to traces as metadata.
+    example:
+      environment: ci
   tracing.jaeger_endpoint:
     env: CONCOURSE_TRACING_JAEGER_ENDPOINT
     description: |
@@ -1263,6 +1274,21 @@ properties:
     description: |
       Name of the service being traced.
     example: concourse
+  tracing.otlp_address:
+    env: CONCOURSE_TRACING_OTLP_ADDRESS
+    description: |
+      OTLP address to send traces to.
+    example: otel-collector:55860
+  tracing.otlp_headers:
+    env: CONCOURSE_TRACING_OTLP_HEADER
+    description: |
+      Headers to attach to each tracing message.
+    example:
+      lightstep-access-token: mysecrettoken
+  tracing.otlp_use_tls:
+    env: CONCOURSE_TRACING_OTLP_USE_TLS
+    description: |
+      Whether to use TLS for the OTLP connection.
 
   capture_error_metrics:
     env: CONCOURSE_CAPTURE_ERROR_METRICS
