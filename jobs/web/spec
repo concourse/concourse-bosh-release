@@ -100,6 +100,11 @@ properties:
       Port on which to listen for the pprof debugger endpoints.
     default: 8079
 
+  debug.godebug:
+    env: GODEBUG
+    description: |
+      A list of name=value pairs separated by commas, where each name is a runtime debugging facility.
+
   external_url:
     env: CONCOURSE_EXTERNAL_URL
     description: |

@@ -391,6 +391,10 @@ processes:
     CONCOURSE_DEBUG_BIND_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("debug.godebug") do |v| -%>
+    GODEBUG: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("default_check_interval") do |v| -%>
     CONCOURSE_RESOURCE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
