@@ -1099,6 +1099,10 @@ processes:
     CONCOURSE_SESSION_SIGNING_KEY: <%= env_file_flag(v, "CONCOURSE_SESSION_SIGNING_KEY").to_json %>
 <% end -%>
 
+<% if_p("tracing.attributes") do |v| -%>
+    CONCOURSE_TRACING_ATTRIBUTE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("tracing.honeycomb_api_key") do |v| -%>
     CONCOURSE_TRACING_HONEYCOMB_API_KEY: <%= env_flag(v).to_json %>
 <% end -%>
@@ -1121,6 +1125,22 @@ processes:
 
 <% if_p("tracing.jaeger_tags") do |v| -%>
     CONCOURSE_TRACING_JAEGER_TAGS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("tracing.otlp_address") do |v| -%>
+    CONCOURSE_TRACING_OTLP_ADDRESS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("tracing.otlp_headers") do |v| -%>
+    CONCOURSE_TRACING_OTLP_HEADER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("tracing.otlp_use_tls") do |v| -%>
+    CONCOURSE_TRACING_OTLP_USE_TLS: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("tracing.service_name") do |v| -%>
+    CONCOURSE_TRACING_SERVICE_NAME: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("tracing.stackdriver_projectid") do |v| -%>
