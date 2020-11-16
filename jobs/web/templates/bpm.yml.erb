@@ -415,6 +415,10 @@ processes:
     CONCOURSE_ENABLE_RERUN_WHEN_WORKER_DISAPPEARS: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("enable_skip_checking_not_in_use_resources") do |v| -%>
+    CONCOURSE_ENABLE_SKIP_CHECKING_NOT_IN_USE_RESOURCES: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("encryption_key") do |v| -%>
     CONCOURSE_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
