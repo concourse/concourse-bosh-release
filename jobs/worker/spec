@@ -170,6 +170,21 @@ properties:
       For use in combination with 'runtime.type=houdini'.
     default: false
 
+  baggageclaim.p2p.interface_name_pattern:
+    env: CONCOURSE_BAGGAGECLAIM_P2P_INTERFACE_NAME_PATTERN
+    description: |
+      Regex for determining the network interface to use for peer-to-peer
+      volume streaming.
+    example: eth0
+
+  baggageclaim.p2p.interface_family:
+    env: CONCOURSE_BAGGAGECLAIM_P2P_INTERFACE_FAMILY
+    description: |
+      Interface family to use for peer-to-peer volume streaming.
+
+      Set 4 for IPv4 or 6 for IPv6.
+    example: 4
+
   runtime:
     env: CONCOURSE_RUNTIME
     description: |

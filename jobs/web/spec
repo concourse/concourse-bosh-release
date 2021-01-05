@@ -186,6 +186,18 @@ properties:
       Use Go duration format (48h = 48 hours).
     default: 24h
 
+  p2p.enable:
+    env: CONCOURSE_ENABLE_P2P_VOLUME_STREAMING
+    description: |
+      Enable peer-to-peer volume streaming between workers.
+
+  p2p.stream_timeout:
+    env: CONCOURSE_P2P_VOLUME_STREAMING_TIMEOUT
+    description: |
+      Timeout for peer-to-peer volume streaming. Use Go duration format (15m =
+      15 minutes).
+    example: 15m
+
   audit.build:
     env: CONCOURSE_ENABLE_BUILD_AUDITING
     description: |

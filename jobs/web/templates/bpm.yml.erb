@@ -915,6 +915,14 @@ processes:
     CONCOURSE_OPA_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("p2p.enable") do |v| -%>
+    CONCOURSE_ENABLE_P2P_VOLUME_STREAMING: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("p2p.stream_timeout") do |v| -%>
+    CONCOURSE_P2P_VOLUME_STREAMING_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("policy_check.filter_actions") do |v| -%>
     CONCOURSE_POLICY_CHECK_FILTER_ACTION: <%= env_flag(v).to_json %>
 <% end -%>
