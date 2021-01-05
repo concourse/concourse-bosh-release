@@ -211,14 +211,6 @@ processes:
     CONCOURSE_BITBUCKET_CLOUD_CLIENT_SECRET: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("build_events_bigint_batch_size") do |v| -%>
-    CONCOURSE_BUILD_EVENTS_BIGINT_BATCH_SIZE: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("build_events_bigint_interval") do |v| -%>
-    CONCOURSE_BUILD_EVENTS_BIGINT_INTERVAL: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("build_log_retention.default") do |v| -%>
     CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN: <%= env_flag(v).to_json %>
 <% end -%>

@@ -986,20 +986,6 @@ properties:
         registry_mirror:
           host: https://registry.mirror.example.com
 
-  build_events_bigint_batch_size:
-    env: CONCOURSE_BUILD_EVENTS_BIGINT_BATCH_SIZE
-    description: |
-      The number of build events to migrate to use bigints in a single interval.
-      Used as part of the build events batch migration added in 6.7.0.
-    example: 100000
-
-  build_events_bigint_interval:
-    env: CONCOURSE_BUILD_EVENTS_BIGINT_INTERVAL
-    description: |
-      The interval, in Go duration format (1m = 1 minute), on which to batch migrate
-      build events to bigint. Used as part of the build events batch migration added in 6.7.0.
-    example: 10s
-
   gc_interval:
     env: CONCOURSE_GC_INTERVAL
     description: |
