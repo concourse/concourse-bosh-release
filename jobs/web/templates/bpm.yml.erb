@@ -323,6 +323,10 @@ processes:
     CONCOURSE_CONJUR_CERT_FILE: <%= env_file_flag(v, "CONCOURSE_CONJUR_CERT_FILE").to_json %>
 <% end -%>
 
+<% if_p("container_placement_strategies") do |v| -%>
+    CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("container_placement_strategy") do |v| -%>
     CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
@@ -835,8 +839,16 @@ processes:
     CONCOURSE_MAIN_TEAM_SAML_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("max_active_containers_per_worker") do |v| -%>
+    CONCOURSE_MAX_ACTIVE_CONTAINERS_PER_WORKER: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("max_active_tasks_per_worker") do |v| -%>
     CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("max_active_volumes_per_worker") do |v| -%>
+    CONCOURSE_MAX_ACTIVE_VOLUMES_PER_WORKER: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("max_checks_per_second") do |v| -%>

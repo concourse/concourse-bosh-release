@@ -1038,9 +1038,21 @@ properties:
     description: |
       Method by which a worker is selected during container placement.
 
-      Supported options are "volume-locality", "random" and "fewest-build-containers".
-      Experimental option: "limit-active-tasks"
-    default: "volume-locality"
+      Supported options are "volume-locality", "random",
+      "fewest-build-containers", "limit-active-tasks",
+      "limit-active-containers", and "limit-active-volumes".
+    example: volume-locality
+
+  container_placement_strategies:
+    env: CONCOURSE_CONTAINER_PLACEMENT_STRATEGY
+    description: |
+      Chained strategies by which a worker is selected during container
+      placement.
+
+      Supported options are "volume-locality", "fewest-build-containers",
+      "limit-active-tasks", "limit-active-containers", and
+      "limit-active-volumes".
+    example: [limit-active-tasks, volume-locality]
 
   max_active_tasks_per_worker:
     env: CONCOURSE_MAX_ACTIVE_TASKS_PER_WORKER
@@ -1048,6 +1060,26 @@ properties:
       Maximum allowed number of active build tasks per worker.
 
       Has effect only when used with "limit-active-tasks" placement strategy.
+
+      0 means no limit.
+    default: 0
+
+  max_active_containers_per_worker:
+    env: CONCOURSE_MAX_ACTIVE_CONTAINERS_PER_WORKER
+    description: |
+      Maximum allowed number of active containers per worker.
+
+      Has effect only when used with "limit-active-containers" placement strategy.
+
+      0 means no limit.
+    default: 0
+
+  max_active_volumes_per_worker:
+    env: CONCOURSE_MAX_ACTIVE_VOLUMES_PER_WORKER
+    description: |
+      Maximum allowed number of active volumes per worker.
+
+      Has effect only when used with "limit-active-volumes" placement strategy.
 
       0 means no limit.
     default: 0
