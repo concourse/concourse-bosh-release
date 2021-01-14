@@ -455,6 +455,10 @@ processes:
     CONCOURSE_GC_ONE_OFF_GRACE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("gc.var_source_recycle_period") do |v| -%>
+    CONCOURSE_GC_VAR_SOURCE_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("gc_interval") do |v| -%>
     CONCOURSE_GC_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -1131,6 +1135,10 @@ processes:
     CONCOURSE_VAULT_AUTH_PARAM: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.login_timeout") do |v| -%>
+    CONCOURSE_VAULT_LOGIN_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.lookup_templates") do |v| -%>
     CONCOURSE_VAULT_LOOKUP_TEMPLATES: <%= env_flag(v).to_json %>
 <% end -%>
@@ -1141,6 +1149,10 @@ processes:
 
 <% if_p("vault.path_prefix") do |v| -%>
     CONCOURSE_VAULT_PATH_PREFIX: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("vault.query_timeout") do |v| -%>
+    CONCOURSE_VAULT_QUERY_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("vault.retry.initial") do |v| -%>
