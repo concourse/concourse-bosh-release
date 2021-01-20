@@ -634,6 +634,10 @@ properties:
     env: CONCOURSE_OIDC_SKIP_SSL_VALIDATION
     description: Skip SSL validation.
 
+  generic_oidc.disable_groups:
+    env: CONCOURSE_OIDC_DISABLE_GROUPS
+    description: Disable groups claim fetching.
+
   bitbucket_cloud_auth.client_id:
     env: CONCOURSE_BITBUCKET_CLOUD_CLIENT_ID
     description: |
