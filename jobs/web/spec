@@ -1024,7 +1024,13 @@ properties:
   gc.failed_grace_period:
     env: CONCOURSE_GC_FAILED_GRACE_PERIOD
     description: |
-      Period after which failed builds will get garbage collected
+      Period after which failed builds will get garbage-collected.
+
+  gc.var_source_recycle_period:
+    env: CONCOURSE_GC_VAR_SOURCE_RECYCLE_PERIOD
+    description: |
+      Period after which unused var_sources will get garbage-collected.
+    example: 5m
 
   build_tracker_interval:
     env: CONCOURSE_BUILD_TRACKER_INTERVAL
@@ -1443,6 +1449,16 @@ properties:
     env: CONCOURSE_VAULT_RETRY_MAX
     description: |
       The maximum time between retries when logging in or re-authing a secret.
+  vault.login_timeout:
+    env: CONCOURSE_VAULT_LOGIN_TIMEOUT
+    description: |
+      The maximum time to wait to authenticate with Vault.
+    example: 60s
+  vault.query_timeout:
+    env: CONCOURSE_VAULT_QUERY_TIMEOUT
+    description: |
+      The maximum time to wait for Vault queries to resolve.
+    example: 60s
 
   conjur.appliance_url:
     env: CONCOURSE_CONJUR_APPLIANCE_URL
