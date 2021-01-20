@@ -559,6 +559,10 @@ processes:
     CONCOURSE_OIDC_USER_NAME_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("generic_oidc.disable_groups") do |v| -%>
+    CONCOURSE_OIDC_DISABLE_GROUPS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("github_auth.ca_cert.certificate") do |v| -%>
     CONCOURSE_GITHUB_CA_CERT: <%= env_file_flag(v, "CONCOURSE_GITHUB_CA_CERT").to_json %>
 <% end -%>
