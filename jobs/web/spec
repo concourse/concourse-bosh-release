@@ -294,6 +294,11 @@ properties:
     description: |
       The concourse client_secret to use when logging into the web interface
 
+  displayer_user_id_per_connector:
+    env: CONCOURSE_DISPLAY_USER_ID_PER_CONNECTOR
+    description: |
+      Define how to display user ID for each authentication connector. Format is <connector>:<fieldname>. Valid field names are user_id, name, username and email, where name maps to claims field username, and username maps to claims field preferred username
+
   github_auth.client_id:
     env: CONCOURSE_GITHUB_CLIENT_ID
     description: |
