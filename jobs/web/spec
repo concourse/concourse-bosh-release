@@ -638,6 +638,12 @@ properties:
     env: CONCOURSE_OIDC_DISABLE_GROUPS
     description: Disable groups claim fetching.
 
+  generic_oidc.skip_email_verified_validation:
+    env: CONCOURSE_OIDC_SKIP_EMAIL_VERIFIED_VALIDATION
+    description: |
+      Ignore the email_verified claim from the upstream provider, treating all
+      users as if email_verified were true.
+
   bitbucket_cloud_auth.client_id:
     env: CONCOURSE_BITBUCKET_CLOUD_CLIENT_ID
     description: |

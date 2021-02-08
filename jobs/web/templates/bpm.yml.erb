@@ -523,6 +523,10 @@ processes:
     CONCOURSE_OIDC_CLIENT_SECRET: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("generic_oidc.disable_groups") do |v| -%>
+    CONCOURSE_OIDC_DISABLE_GROUPS: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("generic_oidc.display_name") do |v| -%>
     CONCOURSE_OIDC_DISPLAY_NAME: <%= env_flag(v).to_json %>
 <% end -%>
@@ -543,16 +547,16 @@ processes:
     CONCOURSE_OIDC_SCOPE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("generic_oidc.skip_email_verified_validation") do |v| -%>
+    CONCOURSE_OIDC_SKIP_EMAIL_VERIFIED_VALIDATION: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("generic_oidc.skip_ssl_validation") do |v| -%>
     CONCOURSE_OIDC_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("generic_oidc.user_name_key") do |v| -%>
     CONCOURSE_OIDC_USER_NAME_KEY: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("generic_oidc.disable_groups") do |v| -%>
-    CONCOURSE_OIDC_DISABLE_GROUPS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("github_auth.ca_cert.certificate") do |v| -%>
