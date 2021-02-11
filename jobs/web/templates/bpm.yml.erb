@@ -1107,6 +1107,10 @@ processes:
     CONCOURSE_TLS_BIND_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("tls.cert.ca") do |v| -%>
+    CONCOURSE_TLS_CA_CERT: <%= env_file_flag(v, "CONCOURSE_TLS_CA_CERT").to_json %>
+<% end -%>
+
 <% if_p("tls.cert.certificate") do |v| -%>
     CONCOURSE_TLS_CERT: <%= env_file_flag(v, "CONCOURSE_TLS_CERT").to_json %>
 <% end -%>

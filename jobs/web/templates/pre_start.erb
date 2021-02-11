@@ -96,6 +96,9 @@ mkdir -p /var/vcap/jobs/web/config/env
 <% if_p("syslog.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_SYSLOG_CA_CERT") %>
 <% end -%>
+<% if_p("tls.cert.ca") do |v| -%>
+<%= env_file_writer(v, "CONCOURSE_TLS_CA_CERT") %>
+<% end -%>
 <% if_p("tls.cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_TLS_CERT") %>
 <% end -%>
