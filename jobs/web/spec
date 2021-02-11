@@ -68,6 +68,7 @@ properties:
     env_fields:
       certificate: {env_file: CONCOURSE_TLS_CERT}
       private_key: {env_file: CONCOURSE_TLS_KEY}
+      ca: {env_file: CONCOURSE_TLS_CA_CERT}
     description: |
       SSL cert to use for HTTPS.
 
