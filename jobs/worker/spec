@@ -161,7 +161,7 @@ properties:
     description: |
       IP on which Baggageclaim should listen for HTTP traffic.
       When p2p is enabled this needs to be set to 0.0.0.0
-    example: 0.0.0.0
+    default: 127.0.0.1
 
   baggageclaim.bind_port:
     env: CONCOURSE_BAGGAGECLAIM_BIND_PORT
