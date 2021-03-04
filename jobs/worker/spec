@@ -255,6 +255,16 @@ properties:
     description: |
       Enable a proxy DNS server for Garden
 
+  containerd.mtu:
+    env: CONCOURSE_CONTAINERD_MTU
+    description: |
+      MTU size for container network interfaces. Defaults to the MTU of the interface used for outbound access by the host.
+
+  containerd.external_ip:
+    env: CONCOURSE_CONTAINERD_EXTERNAL_IP
+    description: |
+      IP address to use to reach container's mapped ports. Autodetected if not specified.
+
   containerd.dns_servers:
     env: CONCOURSE_CONTAINERD_DNS_SERVER
     description: |
