@@ -1486,7 +1486,7 @@ properties:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_CONJUR_CERT_FILE}}
     description: |
-      A PEM-encoded CA cert to use to verify the Conjur server SSL cert. 
+      A PEM-encoded CA cert to use to verify the Conjur server SSL cert.
   conjur.auth.login:
     env: CONCOURSE_CONJUR_AUTHN_LOGIN
     description: |
@@ -1619,12 +1619,12 @@ properties:
   build_log_retention.default_builds:
     env: CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN
     description: |
-      Default days to retain build logs. 0 means unlimited.
+      Default build logs to retain. 0 means unlimited.
     example: 100
   build_log_retention.maximum_builds:
     env: CONCOURSE_MAX_BUILD_LOGS_TO_RETAIN
     description: |
-      Maximum builds logs to retain. Will override values configured in jobs.
+      Maximum build logs to retain. Will override values configured in jobs.
     example: 1000
   build_log_retention.default_days:
     env: CONCOURSE_DEFAULT_DAYS_TO_RETAIN_BUILD_LOGS
