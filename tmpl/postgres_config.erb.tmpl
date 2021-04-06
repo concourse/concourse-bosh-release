@@ -98,24 +98,3 @@
       end
     end
 %>
-
-
-<%=
-  config_data = {
-    'username' => postgres_role_name,
-    'password' => postgres_role_password,
-    'host' => postgres_host,
-    'port' => postgres_port,
-    'database' => postgres_database,
-    'adapter' => 'postgres'
-  }
-
-  if postgres_tls_enabled
-    config_data['tls.skip_host_verify'] = postgres_tls_skip_host_verify
-    config_data['tls.cert.ca'] = postgres_tls_ca
-    config_data['tls.cert.certificate'] = postgres_tls_public_cert
-    config_data['tls.cert.private_key'] = postgres_tls_private_key
-  end
-
-  JSON.pretty_generate(config_data)
-%>
