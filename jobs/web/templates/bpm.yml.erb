@@ -723,6 +723,10 @@ processes:
     CONCOURSE_LDAP_USER_SEARCH_USERNAME: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("ldap_auth.username_prompt") do |v| -%>
+    CONCOURSE_LDAP_USERNAME_PROMPT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("lets_encrypt.acme_url") do |v| -%>
     CONCOURSE_LETS_ENCRYPT_ACME_URL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -941,6 +945,10 @@ processes:
 
 <% if_p("p2p.stream_timeout") do |v| -%>
     CONCOURSE_P2P_VOLUME_STREAMING_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("password_connector") do |v| -%>
+    CONCOURSE_PASSWORD_CONNECTOR: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("policy_check.filter_actions") do |v| -%>
