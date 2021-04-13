@@ -187,6 +187,13 @@ properties:
       Use Go duration format (48h = 48 hours).
     default: 24h
 
+  password_connector:
+    env: CONCOURSE_PASSWORD_CONNECTOR
+    description: |
+      The connector to use for password authentication for `fly login -u ... -p ...`.
+      Either "local" or "ldap".
+    example: local
+
   p2p.enable:
     env: CONCOURSE_ENABLE_P2P_VOLUME_STREAMING
     description: |
@@ -397,6 +404,13 @@ properties:
     env_fields: {certificate: {env_file: CONCOURSE_LDAP_CA_CERT}}
     description: |
       The CA certificate for the LDAP auth provider's endpoints.
+
+  ldap_auth.username_prompt:
+    env: CONCOURSE_LDAP_USERNAME_PROMPT
+    description: |
+      The prompt that's displayed when logging in through the UI when
+      password_connector is set to "ldap".
+    example: Username
 
   ldap_auth.user_search_base_dn:
     env: CONCOURSE_LDAP_USER_SEARCH_BASE_DN
