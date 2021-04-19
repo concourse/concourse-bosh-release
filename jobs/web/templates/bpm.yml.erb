@@ -1155,10 +1155,6 @@ processes:
     CONCOURSE_TRACING_HONEYCOMB_DATASET: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("tracing.honeycomb_service_name") do |v| -%>
-    CONCOURSE_TRACING_HONEYCOMB_SERVICE_NAME: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("tracing.jaeger_endpoint") do |v| -%>
     CONCOURSE_TRACING_JAEGER_ENDPOINT: <%= env_flag(v).to_json %>
 <% end -%>

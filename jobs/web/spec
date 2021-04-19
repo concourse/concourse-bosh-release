@@ -1338,11 +1338,6 @@ properties:
     description: |
       Name of dataset.
     example: web
-  tracing.honeycomb_service_name:
-    env: CONCOURSE_TRACING_HONEYCOMB_SERVICE_NAME
-    description: |
-      Name of the service being traced.
-    example: concourse
   tracing.otlp_address:
     env: CONCOURSE_TRACING_OTLP_ADDRESS
     description: |
