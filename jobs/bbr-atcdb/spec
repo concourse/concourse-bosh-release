@@ -4,6 +4,7 @@ name: bbr-atcdb
 
 templates:
   config.json.erb: config/config.json
+  connection_data.erb: config/connection_data
   backup.sh.erb: bin/bbr/backup
   restore.sh.erb: bin/bbr/restore
 

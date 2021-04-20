@@ -1,3 +1,51 @@
+#!/bin/bash
+# vim: ft=sh
+
+set -e -u -x
+
+ENV_FILE_OWNER=vcap
+
+mkdir -p /var/vcap/jobs/bbr-atcdb/config/env
+
+<%
+  # vim: ft=eruby
+
+  def env_file_perms(fn)
+    <<~EOS
+      if [[ "${ENV_FILE_OWNER:-}" != "" ]] ; then
+        chown ${ENV_FILE_OWNER}:${ENV_FILE_OWNER} #{fn}
+      fi
+      chmod 0600 #{fn}
+    EOS
+  end
+
+  def env_file_content(v)
+    case v
+    when Array
+      v.collect(&:chomp).join("\n").chomp + "\n"
+    when String
+      v.chomp + "\n"
+    else
+      v.to_json + "\n"
+    end
+  end
+
+  def env_file_writer(v, env)
+    path = "/var/vcap/jobs/bbr-atcdb/config/env/#{env}"
+
+    case v
+    when Hash
+      v.collect do |k, v|
+        fn = "#{path}_#{k}"
+        "cat > #{fn} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n#{env_file_perms(fn)}"
+      end.join("\n\n")
+    else
+      "cat > #{path} <<\"ENVGEN_EOF\"\n#{env_file_content(v)}ENVGEN_EOF\n#{env_file_perms(path)}"
+    end
+  end
+-%>
+
+
 <%
     require 'json'
 
@@ -85,7 +133,7 @@
       postgres_tls_enabled = cdb.p("postgresql.sslmode", postgres_tls_enabled)
       if postgres_tls_enabled
         if postgres_tls_ca.empty?
-          postgres_tls_ca = cdb.p("postgresql.ca_cert")
+          postgres_tls_ca = cdb.p("postgresql.ca_cert.ca")
         end
 
         if postgres_tls_public_cert.empty?
@@ -97,25 +145,44 @@
         end
       end
     end
-%>
+-%>
 
 
-<%=
-  config_data = {
-    'username' => postgres_role_name,
-    'password' => postgres_role_password,
-    'host' => postgres_host,
-    'port' => postgres_port,
-    'database' => postgres_database,
-    'adapter' => 'postgres'
-  }
+<%
+  connection_string = "host="+postgres_host \
+    +" user="+postgres_role_name \
+    +" password="+postgres_role_password \
+    +" port="+postgres_port.to_s() \
+    +" dbname="+postgres_database
 
-  if postgres_tls_enabled
-    config_data['tls.skip_host_verify'] = postgres_tls_skip_host_verify
-    config_data['tls.cert.ca'] = postgres_tls_ca
-    config_data['tls.cert.certificate'] = postgres_tls_public_cert
-    config_data['tls.cert.private_key'] = postgres_tls_private_key
-  end
+    sslmode = "disable"
 
-  JSON.pretty_generate(config_data)
-%>
+    unless postgres_tls_skip_host_verify
+      sslmode = "require"
+
+      unless postgres_tls_ca.empty?
+-%>
+<%=        env_file_writer(postgres_tls_ca, "POSTGRES_TLS_CA") %>
+<%
+        connection_string += " sslrootcert=/var/vcap/jobs/bbr-atcdb/config/env/POSTGRES_TLS_CA"
+      end
+
+      unless postgres_tls_public_cert.empty?
+-%>
+<%=        env_file_writer(postgres_tls_public_cert, "POSTGRES_TLS_CERTIFICATE") %>
+<%
+        connection_string += " sslcert=/var/vcap/jobs/bbr-atcdb/config/env/POSTGRES_TLS_CERTIFICATE"
+      end
+
+      unless postgres_tls_private_key.empty?
+-%>
+<%=        env_file_writer(postgres_tls_private_key, "POSTGRES_TLS_PRIVATE_KEY") %>
+<%
+        connection_string += " sslkey=/var/vcap/jobs/bbr-atcdb/config/env/POSTGRES_TLS_PRIVATE_KEY"
+      end
+    end
+
+    connection_string += " sslmode="+sslmode
+-%>
+
+<%= "PG_CONNECTION_STRING=\""+connection_string+"\"" %>

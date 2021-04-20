@@ -3,9 +3,35 @@ set -e
 
 JOB_PATH="/var/vcap/jobs/bbr-atcdb"
 
+source ${JOB_PATH}/config/connection_data
+
 # Anything placed in the BBR_ARTIFACT_DIRECTORY by the backup script will be available to the restore script at restore time.
 # The BBR CLI is responsible for setting the BBR_ARTIFACT_DIRECTORY
 BBR_ARTIFACT_FILE_PATH="${BBR_ARTIFACT_DIRECTORY}/atcdb-artifact-file"
 CONFIG_PATH="${JOB_PATH}/config/config.json"
+PAUSE_WEB_COMPONENTS="UPDATE components SET paused = true WHERE name IN ('tracker','collector_pipelines');"
+UNPAUSE_WEB_COMPONENTS="UPDATE components SET paused = false WHERE name IN ('tracker','collector_pipelines');"
 
-"/var/vcap/jobs/database-backup-restorer/bin/backup" --config "${CONFIG_PATH}" --artifact-file "${BBR_ARTIFACT_FILE_PATH}"
+function unpause() {
+  "/var/vcap/packages/database-backup-restorer-postgres-11/bin/psql" "${PG_CONNECTION_STRING}" -c "${UNPAUSE_WEB_COMPONENTS}"
+}
+
+# paused all concourse components to ensure bbr success
+"/var/vcap/packages/database-backup-restorer-postgres-11/bin/psql" "${PG_CONNECTION_STRING}" -c "${PAUSE_WEB_COMPONENTS}"
+# unpause all concourse components to after bbr finishes
+trap unpause EXIT
+sleep 30
+
+ticks=0
+
+until "/var/vcap/jobs/database-backup-restorer/bin/backup" --config "${CONFIG_PATH}" --artifact-file "${BBR_ARTIFACT_FILE_PATH}"; do
+  ((ticks++))
+
+  if [[ $ticks -ge 3 ]]; then
+    echo "Backup failed three times. Giving up."
+    exit 1
+  fi
+
+  echo "backup failed. Trying again in 10s"
+  sleep 10
+done
