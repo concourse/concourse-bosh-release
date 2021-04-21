@@ -184,12 +184,12 @@ mkdir -p /var/vcap/jobs/bbr-atcdb/config/env
       unless postgres_tls_private_key.empty?
 -%>
 <%=     env_file_writer(postgres_tls_private_key, "CONCOURSE_TLS_PRIVATE_KEY") %>
-<%=
+<%
         connection_string += " sslkey=/var/vcap/jobs/bbr-atcdb/config/env/CONCOURSE_TLS_PRIVATE_KEY"
       end
     end
 
     connection_string += " sslmode="+sslmode
+-%>
 
-    puts "PG_CONNECTION_STRING=\""+connection_string+"\""
-%>
+<%= "PG_CONNECTION_STRING=\""+connection_string+"\"" %>
