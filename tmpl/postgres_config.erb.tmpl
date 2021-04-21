@@ -85,7 +85,7 @@
       postgres_tls_enabled = cdb.p("postgresql.sslmode", postgres_tls_enabled)
       if postgres_tls_enabled
         if postgres_tls_ca.empty?
-          postgres_tls_ca = cdb.p("postgresql.ca_cert")
+          postgres_tls_ca = cdb.p("postgresql.ca_cert.ca")
         end
 
         if postgres_tls_public_cert.empty?
@@ -97,4 +97,4 @@
         end
       end
     end
-%>
+-%>

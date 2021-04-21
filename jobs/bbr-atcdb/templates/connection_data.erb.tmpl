@@ -8,7 +8,7 @@ ENV_FILE_OWNER=vcap
 {{template "create_env_files.erb.tmpl" .}}
 {{template "postgres_config.erb.tmpl" .}}
 
-<%=
+<%
   connection_string = "host="+postgres_host \
     +" user="+postgres_role_name \
     +" password="+postgres_role_password \
@@ -17,21 +17,34 @@ ENV_FILE_OWNER=vcap
 
     sslmode = "disable"
 
-    unless postgres_tls_skip_host_verify
-      sslmode = "require"
+    if postgres_tls_enabled
+      # verify ca and host cert
+      sslmode = "verify-full"
 
+      if postgres_tls_skip_host_verify
+        # still verify ca but not the host certificate
+        sslmode = "verify-ca"
+      end
+-%>
+<%
       unless postgres_tls_ca.empty?
-        env_file_writer(postgres_tls_ca, "CONCOURSE_TLS_CA")
+-%>
+<%=     env_file_writer(postgres_tls_ca, "CONCOURSE_TLS_CA") %>
+<%
         connection_string += " sslrootcert=/var/vcap/jobs/bbr-atcdb/config/env/CONCOURSE_TLS_CA" \
       end
 
       unless postgres_tls_public_cert.empty?
-        env_file_writer(postgres_tls_public_cert, "CONCOURSE_TLS_CERTIFICATE")
+-%>
+<%=     env_file_writer(postgres_tls_public_cert, "CONCOURSE_TLS_CERTIFICATE") %>
+<%
         connection_string += " sslcert=/var/vcap/jobs/bbr-atcdb/config/env/CONCOURSE_TLS_CERTIFICATE" \
       end
 
       unless postgres_tls_private_key.empty?
-        env_file_writer(postgres_tls_private_key, "CONCOURSE_TLS_PRIVATE_KEY")
+-%>
+<%=     env_file_writer(postgres_tls_private_key, "CONCOURSE_TLS_PRIVATE_KEY") %>
+<%=
         connection_string += " sslkey=/var/vcap/jobs/bbr-atcdb/config/env/CONCOURSE_TLS_PRIVATE_KEY"
       end
     end
