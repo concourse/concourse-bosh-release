@@ -331,6 +331,10 @@ processes:
     CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("content_security_policy") do |v| -%>
+    CONCOURSE_CONTENT_SECURITY_POLICY: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("cookie_secure") do |v| -%>
     CONCOURSE_COOKIE_SECURE: <%= env_flag(v).to_json %>
 <% end -%>

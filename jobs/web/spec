@@ -120,8 +120,14 @@ properties:
   x_frame_options:
     env: CONCOURSE_X_FRAME_OPTIONS
     description: |
-      The value to set for X-Frame-Options.
-    default: deny
+      The value to set for X-Frame-Options header.
+    example: deny
+
+  content_security_policy:
+    env: CONCOURSE_CONTENT_SECURITY_POLICY
+    description: |
+      The value to set for Content-Security-Policy header.
+    example: "no-store, private"
 
   concurrent_request_limits:
     env: CONCOURSE_CONCURRENT_REQUEST_LIMIT
