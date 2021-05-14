@@ -411,6 +411,10 @@ processes:
     CONCOURSE_DEFAULT_TASK_MEMORY_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("disable_cache_streamed_volumes") do |v| -%>
+    CONCOURSE_DISABLE_CACHE_STREAMED_VOLUMES: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("displayer_user_id_per_connector") do |v| -%>
     CONCOURSE_DISPLAY_USER_ID_PER_CONNECTOR: <%= env_flag(v).to_json %>
 <% end -%>

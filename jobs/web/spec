@@ -958,6 +958,12 @@ properties:
     description: |
       Enable the creation of instanced pipelines.
 
+  disable_cache_streamed_volumes:
+    env: CONCOURSE_DISABLE_CACHE_STREAMED_VOLUMES
+    description: |
+      Disable the default behaviour of caching streamed resource volumes on the
+      destination worker.
+
   streaming_artifacts_compression:
     env: CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION
     description: |
