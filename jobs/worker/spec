@@ -253,7 +253,7 @@ properties:
   containerd.dns_proxy_enable:
     env: CONCOURSE_CONTAINERD_DNS_PROXY_ENABLE
     description: |
-      Enable a proxy DNS server for Garden
+      Enable a proxy DNS server for Garden. Note: this implicitly turns on container access to host network.
 
   containerd.mtu:
     env: CONCOURSE_CONTAINERD_MTU
@@ -274,6 +274,11 @@ properties:
     env: CONCOURSE_CONTAINERD_RESTRICTED_NETWORK
     description: |
       List of network ranges to which traffic from containers will be restricted.
+
+  containerd.restricted_networks:
+    env: CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS
+    description: |
+      Allows containers to reach host network
 
   containerd.max_containers:
     env: CONCOURSE_CONTAINERD_MAX_CONTAINERS
