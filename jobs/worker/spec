@@ -197,7 +197,7 @@ properties:
     description: |
       Container runtime for worker. Possible values are "guardian", "containerd", and "houdini".
       Please note that Houdini is insecure and does not run tasks in containers.
-    example: guardian
+    example: containerd
 
   garden.config_ini:
     description: |
