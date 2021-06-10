@@ -7,3 +7,4 @@ ExecStart=/var/vcap/jobs/worker/bin/concourse_start
 ExecStop=/var/vcap/jobs/worker/bin/concourse_stop
 Delegate=yes
 KillMode=none
+TasksMax=infinity
