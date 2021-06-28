@@ -939,6 +939,18 @@ processes:
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("opa.result_allowed_key") do |v| -%>
+    CONCOURSE_OPA_RESULT_ALLOWED_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("opa.result_messages_key") do |v| -%>
+    CONCOURSE_OPA_RESULT_MESSAGES_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("opa.result_should_block_key") do |v| -%>
+    CONCOURSE_OPA_RESULT_SHOULD_BLOCK_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("opa.timeout") do |v| -%>
     CONCOURSE_OPA_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
