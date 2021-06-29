@@ -1717,6 +1717,18 @@ properties:
     env: CONCOURSE_OPA_TIMEOUT
     description: |
       Open Policy Agent API request timeout.
+  opa.result.allowed_key:
+    env: CONCOURSE_OPA_RESULT_ALLOWED_KEY
+    description: |
+      Name of key in the Open Policy Agent result to check if the action is allowed.
+  opa.result.should_block_key:
+    env: CONCOURSE_OPA_RESULT_SHOULD_BLOCK_KEY
+    description: |
+      Name of key in the Open Policy Agent result to check if it should hard block and fail, or soft block and emit warning on failure.
+  opa.result.messages_key:
+    env: CONCOURSE_OPA_RESULT_MESSAGES_KEY
+    description: |
+      Name of key in the Open Policy Agent result to extract the messages from.
   policy_check.filter_http_methods:
     env: CONCOURSE_POLICY_CHECK_FILTER_HTTP_METHOD
     description: |

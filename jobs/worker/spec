@@ -275,7 +275,7 @@ properties:
     description: |
       List of network ranges to which traffic from containers will be restricted.
 
-  containerd.restricted_networks:
+  containerd.allow_host_access:
     env: CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS
     description: |
       Allows containers to reach host network
