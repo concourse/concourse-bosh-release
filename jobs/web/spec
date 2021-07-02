@@ -963,6 +963,11 @@ properties:
     description: |
       Enable caching of streamed resource volumes on the destination worker.
 
+  enable_resource_causality:
+    env: CONCOURSE_ENABLE_RESOURCE_CAUSALITY
+    description: |
+      Enable web UI and API endpoint for resource causality
+
   streaming_artifacts_compression:
     env: CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION
     description: |
