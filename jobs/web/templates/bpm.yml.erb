@@ -379,6 +379,10 @@ processes:
     CONCOURSE_DATADOG_AGENT_PORT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("datadog.agent_uds_filepath") do |v| -%>
+    CONCOURSE_DATADOG_AGENT_UDS_FILEPATH: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("datadog.prefix") do |v| -%>
     CONCOURSE_DATADOG_PREFIX: <%= env_flag(v).to_json %>
 <% end -%>
