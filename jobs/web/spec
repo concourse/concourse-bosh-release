@@ -1232,6 +1232,12 @@ properties:
       Port of the Datadog Agent's dogstatsd server to emit events to.
     default: 8125
 
+  datadog.agent_uds_filepath:
+    env: CONCOURSE_DATADOG_AGENT_UDS_FILEPATH
+    description: |
+      Datadog agent unix domain socket (uds) filepath to expose dogstatsd metrics
+    example: /tmp/datadog.socket
+
   datadog.prefix:
     env: CONCOURSE_DATADOG_PREFIX
     description: |
