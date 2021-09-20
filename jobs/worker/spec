@@ -333,3 +333,59 @@ properties:
     env: CONCOURSE_HEALTHCHECK_TIMEOUT
     description: |
       HTTP timeout for the full duration of health checking.
+
+  tracing.service_name:
+    env: CONCOURSE_TRACING_SERVICE_NAME
+    description: |
+      Service name to attach to traces as metadata.
+    example: concourse-web
+  tracing.attributes:
+    env: CONCOURSE_TRACING_ATTRIBUTE
+    description: |
+      Attributes to attach to traces as metadata.
+    example:
+      environment: ci
+  tracing.jaeger_endpoint:
+    env: CONCOURSE_TRACING_JAEGER_ENDPOINT
+    description: |
+      jaeger HTTP-based Thrift collector.
+    example: http://jaeger:14268/api/traces
+  tracing.jaeger_service:
+    env: CONCOURSE_TRACING_JAEGER_SERVICE
+    description: |
+      Name of the service being traced.
+    example: web
+  tracing.jaeger_tags:
+    env: CONCOURSE_TRACING_JAEGER_TAGS
+    description: |
+      Tags to include in components.
+    example: foo:bar,caz:zaz
+  tracing.stackdriver_projectid:
+    env: CONCOURSE_TRACING_STACKDRIVER_PROJECTID
+    description: |
+      GCP's Project ID
+    example: my-projectid
+  tracing.honeycomb_api_key:
+    env: CONCOURSE_TRACING_HONEYCOMB_API_KEY
+    description: |
+      Honeycomb.io API Key.
+  tracing.honeycomb_dataset:
+    env: CONCOURSE_TRACING_HONEYCOMB_DATASET
+    description: |
+      Name of dataset.
+    example: web
+  tracing.otlp_address:
+    env: CONCOURSE_TRACING_OTLP_ADDRESS
+    description: |
+      OTLP address to send traces to.
+    example: otel-collector:55860
+  tracing.otlp_headers:
+    env: CONCOURSE_TRACING_OTLP_HEADER
+    description: |
+      Headers to attach to each tracing message.
+    example:
+      lightstep-access-token: mysecrettoken
+  tracing.otlp_use_tls:
+    env: CONCOURSE_TRACING_OTLP_USE_TLS
+    description: |
+      Whether to use TLS for the OTLP connection.
