@@ -279,6 +279,18 @@ processes:
     CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("default_get_timeout") do |v| -%>
+    CONCOURSE_DEFAULT_GET_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("default_put_timeout") do |v| -%>
+    CONCOURSE_DEFAULT_PUT_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("default_task_timeout") do |v| -%>
+    CONCOURSE_DEFAULT_TASK_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("concurrent_request_limits") do |v| -%>
     CONCOURSE_CONCURRENT_REQUEST_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
