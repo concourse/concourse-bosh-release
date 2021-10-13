@@ -984,6 +984,21 @@ properties:
     description: |
       Interval on which runners are kicked off for builds, locks, scans, and checks
 
+  default_get_timeout:
+    env: CONCOURSE_DEFAULT_GET_TIMEOUT
+    description: |
+      Default timeout of get steps
+
+  default_put_timeout:
+    env: CONCOURSE_DEFAULT_PUT_TIMEOUT
+    description: |
+      Default timeout of put steps
+
+  default_task_timeout:
+    env: CONCOURSE_DEFAULT_TASK_TIMEOUT
+    description: |
+      Default timeout of task steps
+
   lidar_scanner_interval:
     env: CONCOURSE_LIDAR_SCANNER_INTERVAL
     description: |
