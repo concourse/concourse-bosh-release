@@ -1658,6 +1658,11 @@ properties:
     description: |
       AWS SecretsManager secret name template used to resolve team specific secrets.
     default: /concourse/{{.Team}}/{{.Secret}}
+  aws_secretsmanager.shared_secret_template:
+    env: CONCOURSE_AWS_SECRETSMANAGER_SHARED_SECRET_TEMPLATE
+    description: |
+      AWS SecretsManager secret name template used to resolve shared secrets.
+    default: /concourse/{{.Secret}}
 
   build_log_retention.default:
     env: CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN

@@ -139,10 +139,6 @@ processes:
     CONCOURSE_AWS_SECRETSMANAGER_ACCESS_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("aws_secretsmanager.pipeline_secret_template") do |v| -%>
-    CONCOURSE_AWS_SECRETSMANAGER_PIPELINE_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("aws_secretsmanager.region") do |v| -%>
     CONCOURSE_AWS_SECRETSMANAGER_REGION: <%= env_flag(v).to_json %>
 <% end -%>
@@ -155,8 +151,16 @@ processes:
     CONCOURSE_AWS_SECRETSMANAGER_SESSION_TOKEN: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("aws_secretsmanager.pipeline_secret_template") do |v| -%>
+    CONCOURSE_AWS_SECRETSMANAGER_PIPELINE_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("aws_secretsmanager.team_secret_template") do |v| -%>
     CONCOURSE_AWS_SECRETSMANAGER_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("aws_secretsmanager.shared_secret_template") do |v| -%>
+    CONCOURSE_AWS_SECRETSMANAGER_SHARED_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("aws_ssm.access_key") do |v| -%>
