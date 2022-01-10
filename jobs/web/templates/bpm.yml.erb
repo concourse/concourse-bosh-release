@@ -19,7 +19,7 @@ processes:
 -%>
     CONCOURSE_PEER_ADDRESS: <%= peer_address %>
 
-    CONCOURSE_METRICS_ATTRIBUTE: <%= "bosh-deployment:#{spec.deployment},bosh-job:#{name}".to_json %>
+    CONCOURSE_METRICS_ATTRIBUTE: <%= "bosh_deployment:#{spec.deployment},bosh_job:#{name}".to_json %>
 
 <%
   if_link("web") do |l|
