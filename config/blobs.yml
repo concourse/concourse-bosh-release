@@ -2,11 +2,11 @@ btrfs/btrfs-tools-4.4.tar.gz:
   size: 3062268
   object_id: 9c8e0f55-d9e0-4a6a-51f3-1b175f3b2551
   sha: 94279d010ebd4829396af9212f9c1e73e75d914e
-concourse/concourse-7.7.1-rc.2+473cbc808.linux.amd64.tgz:
-  size: 1386148232
-  object_id: 60eecebd-f0d3-4e7f-40f7-55871dd221f3
-  sha: sha256:2ca2162eab2de7e171b219b27e2f7098d9dfd9a0780bf5cb0ddb452b42f9022a
-concourse/concourse-7.7.1-rc.2+473cbc808.windows.amd64.zip:
-  size: 118702581
-  object_id: 0781c7cb-c73c-411d-58fc-92c02b5063f2
-  sha: sha256:d27d04094a640db36ac5782ae6a0972386786409f1b89831d85f9ad8cfbf8691
+concourse/concourse-7.7.1-rc.3+cb6afdc85.linux.amd64.tgz:
+  size: 1388381583
+  object_id: 5d821566-5982-4dad-4aee-2224da9d36fb
+  sha: sha256:f0f766b5f8aea418566e435f8bb6f505a76eba6573a3877a37f940f42ee5a352
+concourse/concourse-7.7.1-rc.3+cb6afdc85.windows.amd64.zip:
+  size: 118707998
+  object_id: e170126a-31fd-4887-609b-21ce5522b0d3
+  sha: sha256:347a2c16c1a410548e2255bbb5e3eb96b5ff60620226f3e99ebb1ab5802947ad
