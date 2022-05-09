@@ -959,6 +959,14 @@ processes:
     CONCOURSE_NEWRELIC_INSIGHTS_API_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("no_input_container_placement_strategies") do |v| -%>
+    NO_INPUT_CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("no_input_container_placement_strategy") do |v| -%>
+    NO_INPUT_CONCOURSE_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("old_encryption_key") do |v| -%>
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
