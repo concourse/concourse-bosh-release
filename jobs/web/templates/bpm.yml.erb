@@ -1315,6 +1315,10 @@ processes:
     CONCOURSE_VAULT_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.disable_srv_lookup") do |v| -%>
+    CONCOURSE_VAULT_DISABLE_SRV_LOOKUP: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("worker_gateway.authorized_keys") do |v| -%>
     CONCOURSE_TSA_AUTHORIZED_KEYS: <%= env_file_flag(v, "CONCOURSE_TSA_AUTHORIZED_KEYS").to_json %>
 <% end -%>
