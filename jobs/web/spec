@@ -1475,6 +1475,11 @@ properties:
     env: CONCOURSE_VAULT_URL
     description: |
       Vault server URL to use for parameterizing credentials.
+  vault.disable_srv_lookup:
+    env: CONCOURSE_VAULT_DISABLE_SRV_LOOKUP
+    description: |
+      When vault url does not include port, use this var to control vault SRV lookup. If vault url includes port, SRV lookup is disabled.
+    default: false
   vault.path_prefix:
     env: CONCOURSE_VAULT_PATH_PREFIX
     description: |
