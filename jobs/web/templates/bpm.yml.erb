@@ -571,6 +571,10 @@ processes:
     CONCOURSE_OIDC_DISABLE_GROUPS: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("generic_oidc.disable_get_user_info") do |v| -%>
+    CONCOURSE_OIDC_DISABLE_GET_USER_INFO: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("generic_oidc.display_name") do |v| -%>
     CONCOURSE_OIDC_DISPLAY_NAME: <%= env_flag(v).to_json %>
 <% end -%>
