@@ -199,6 +199,11 @@ properties:
       Please note that Houdini is insecure and does not run tasks in containers.
     example: guardian
 
+  garden.bin:
+    env: CONCOURSE_GARDEN_BIN
+    description: |
+      Path to a gdn executable (non-absolute names get resolved from $PATH).
+
   garden.config_ini:
     description: |
       Contents of the Garden configuration. Use to customize the container runtime.
