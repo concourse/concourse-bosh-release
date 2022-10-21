@@ -971,6 +971,14 @@ processes:
     CONCOURSE_NO_INPUT_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("check_container_placement_strategies") do |v| -%>
+    CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("check_container_placement_strategy") do |v| -%>
+    CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("old_encryption_key") do |v| -%>
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>

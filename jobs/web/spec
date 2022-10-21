@@ -1137,7 +1137,7 @@ properties:
       A second method by which a worker is selected during container placement
       that is used for get and nested check steps.
 
-      Supported options are "volume-locality", "random",
+      Supported options are "random",
       "fewest-build-containers", "limit-active-tasks",
       "limit-active-containers", and "limit-active-volumes".
     example: fewest-build-containers
@@ -1148,7 +1148,29 @@ properties:
       Chained strategies by which a worker is selected during container
       placement that is used for get and nested check steps.
 
-      Supported options are "volume-locality", "fewest-build-containers",
+      Supported options are "fewest-build-containers",
+      "limit-active-tasks", "limit-active-containers", and
+      "limit-active-volumes".
+    example: [limit-active-containers, fewest-build-containers]
+
+  check_container_placement_strategy:
+    env: CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY
+    description: |
+      A third method by which a worker is selected during container placement
+      that is used for resource checks.
+
+      Supported options are "random",
+      "fewest-build-containers", "limit-active-tasks",
+      "limit-active-containers", and "limit-active-volumes".
+    example: random
+
+  check_container_placement_strategies:
+    env: CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY
+    description: |
+      Chained strategies by which a worker is selected during container
+      placement that is used for resource checks.
+
+      Supported options are "fewest-build-containers",
       "limit-active-tasks", "limit-active-containers", and
       "limit-active-volumes".
     example: [limit-active-containers, fewest-build-containers]
