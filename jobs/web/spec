@@ -618,12 +618,6 @@ properties:
     env: CONCOURSE_OIDC_DISPLAY_NAME
     description: Name of the authentication method to be displayed on the Web UI
 
-  generic_oidc.hosted_domains:
-    env: CONCOURSE_OIDC_HOSTED_DOMAINS
-    description: |
-      List of whitelisted domains when using Google, only users from a listed
-      domain will be allowed to log in
-
   generic_oidc.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_OIDC_CA_CERT}}
