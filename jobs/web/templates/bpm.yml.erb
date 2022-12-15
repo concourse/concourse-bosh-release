@@ -583,10 +583,6 @@ processes:
     CONCOURSE_OIDC_GROUPS_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("generic_oidc.hosted_domains") do |v| -%>
-    CONCOURSE_OIDC_HOSTED_DOMAINS: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("generic_oidc.issuer") do |v| -%>
     CONCOURSE_OIDC_ISSUER: <%= env_flag(v).to_json %>
 <% end -%>
