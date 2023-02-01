@@ -306,6 +306,16 @@ properties:
       Path to an init executable. For BOSH this defaults to /var/vcap/packages/concourse/bin/init when containerd
       is selected as the runtime.
 
+  containerd.oci_hooks_dir:
+    env: CONCOURSE_CONTAINERD_OCI_HOOKS_DIR
+    description: |
+      Path to the oci hooks dir. By default none is provided.
+
+  containerd.seccomp_profile:
+    env: CONCOURSE_CONTAINERD_SECCOMP_PROFILE
+    description: |
+      Path to a seccomp filter override. By default will use a restrictive default set.
+
   containerd.cni_bin:
     env: CONCOURSE_CONTAINERD_CNI_PLUGINS_DIR
     description: |
