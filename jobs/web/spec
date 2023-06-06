@@ -1005,6 +1005,11 @@ properties:
     description: |
       Default timeout of task steps
 
+  num_goroutine_threshold:
+    env: CONCOURSE_NUM_GOROUTINE_THRESHOLD
+    description: |
+      Work will be distributed to other ATCs when this number of go routines is reached.
+
   lidar_scanner_interval:
     env: CONCOURSE_LIDAR_SCANNER_INTERVAL
     description: |

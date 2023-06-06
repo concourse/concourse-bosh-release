@@ -431,6 +431,10 @@ processes:
     CONCOURSE_DEFAULT_TASK_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("num_goroutine_threshold") do |v| -%>
+    CONCOURSE_NUM_GOROUTINE_THRESHOLD: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("displayer_user_id_per_connector") do |v| -%>
     CONCOURSE_DISPLAY_USER_ID_PER_CONNECTOR: <%= env_flag(v).to_json %>
 <% end -%>
