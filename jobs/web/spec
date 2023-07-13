@@ -977,7 +977,13 @@ properties:
   streaming_artifacts_compression:
     env: CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION
     description: |
-      Compression to use when streaming artifacts (values: zstd, gzip)
+      Compression to use when streaming artifacts (values: zstd, gzip, raw)
+
+  streaming_size_limitation:
+    env: CONCOURSE_STREAMING_SIZE_LIMITATION
+    description: |
+      Internal volume streaming size limitation in MB. In case of small limitation
+      needed, float can be used like 0.01.
 
   job_scheduling_max_in_flight:
     env: CONCOURSE_JOB_SCHEDULING_MAX_IN_FLIGHT
@@ -1771,6 +1777,13 @@ properties:
       Default limit for memory used per task. This can be overridden by specifying
       a different limit in the task yaml.
     example: 200mb
+
+  db_notification_bus_queue_size:
+    env: CONCOURSE_DB_NOTIFICATION_BUS_QUEUE_SIZE
+    description: |
+      DB notification bus queue size, default is 10000. If UI often misses loading
+      running build logs, then consider to increase the queue size.
+    example: 10000
 
   syslog.address:
     env: CONCOURSE_SYSLOG_ADDRESS

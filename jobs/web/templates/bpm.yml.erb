@@ -435,6 +435,10 @@ processes:
     CONCOURSE_NUM_GOROUTINE_THRESHOLD: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("db_notification_bus_queue_size") do |v| -%>
+    CONCOURSE_DB_NOTIFICATION_BUS_QUEUE_SIZE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("displayer_user_id_per_connector") do |v| -%>
     CONCOURSE_DISPLAY_USER_ID_PER_CONNECTOR: <%= env_flag(v).to_json %>
 <% end -%>
@@ -1157,6 +1161,10 @@ processes:
 
 <% if_p("streaming_artifacts_compression") do |v| -%>
     CONCOURSE_STREAMING_ARTIFACTS_COMPRESSION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("streaming_size_limitation") do |v| -%>
+    CONCOURSE_STREAMING_SIZE_LIMITATION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("syslog.address") do |v| -%>
