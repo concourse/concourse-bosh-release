@@ -1062,12 +1062,6 @@ properties:
         registry_mirror:
           host: https://registry.mirror.example.com
 
-  gc_interval:
-    env: CONCOURSE_GC_INTERVAL
-    description: |
-      The interval, in Go duration format (1m = 1 minute), on which to garbage
-      collect containers, volumes, and other internal data.
-
   gc.interval:
     env: CONCOURSE_GC_INTERVAL
     description: |

@@ -511,10 +511,6 @@ processes:
     CONCOURSE_GC_VAR_SOURCE_RECYCLE_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("gc_interval") do |v| -%>
-    CONCOURSE_GC_INTERVAL: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("generic_oauth.auth_url") do |v| -%>
     CONCOURSE_OAUTH_AUTH_URL: <%= env_flag(v).to_json %>
 <% end -%>
