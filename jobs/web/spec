@@ -1683,6 +1683,10 @@ properties:
       to start it with a /. Maximum 5 slashes are permitted by AWS in parameter names.
       names.
     default: /concourse/{{.Team}}/{{.Secret}}
+  aws_ssm.shared_path:
+    env: CONCOURSE_AWS_SSM_SHARED_PATH
+    description: |
+      Path under which to lookup shared credentials.
 
   aws_secretsmanager.region:
     env: CONCOURSE_AWS_SECRETSMANAGER_REGION
