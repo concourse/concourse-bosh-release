@@ -187,6 +187,10 @@ processes:
     CONCOURSE_AWS_SSM_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("aws_ssm.shared_path") do |v| -%>
+    CONCOURSE_AWS_SSM_SHARED_PATH: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("backend_max_conns") do |v| -%>
     CONCOURSE_BACKEND_MAX_CONNS: <%= env_flag(v).to_json %>
 <% end -%>
