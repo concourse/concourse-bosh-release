@@ -1547,6 +1547,10 @@ properties:
     env: CONCOURSE_VAULT_CLIENT_TOKEN
     description: |
       Client token to use for accessing your Vault server.
+  vault.auth.client_token_path:
+    env: CONCOURSE_VAULT_CLIENT_TOKEN_PATH
+    description: |
+        Path to a file containing a Vault client authentication token
   vault.auth.backend:
     env: CONCOURSE_VAULT_AUTH_BACKEND
     description: |
