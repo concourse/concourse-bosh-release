@@ -295,6 +295,21 @@ properties:
     description: |
       Network range to use for dynamically allocated container subnets. Defaults to "10.80.0.0/16".
 
+  containerd.ipv6.enabled:
+    env: CONCOURSE_CONTAINERD_V6_ENABLE
+    description: |
+      Enable IPv6 networking for worker containers
+
+  containerd.ipv6.pool:
+    env: CONCOURSE_CONTAINERD_V6_POOL
+    description: |
+      Network range to use for dynamically allocated container subnets. Defaults to "fd9c:31a6:c759::/64".
+
+  containerd.ipv6.disable_masquerade:
+    env: CONCOURSE_CONTAINERD_V6_DISABLE_MASQUERADE
+    description: |
+      Disable masquerading of container traffic with the worker's address
+
   containerd.request_timeout:
     env: CONCOURSE_CONTAINERD_REQUEST_TIMEOUT
     description: |

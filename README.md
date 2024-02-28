@@ -29,9 +29,13 @@ instead.
 
 ## Developing
 
-If you are adding new Concourse flags to one of the job specs you must run `scripts/generate-job-templates` to add the new flags to the job templates.
+To add new Concourse flags/env vars to one of the job specs, do the
+following:
 
-**Default values**
+1. Update the `spec` file located in the relevant `jobs/<job>/` directory
+2. Run `./scripts/generate-job-templates` to add the flags to the job template(s)
+
+**Note about default values**
 
 When adding a new Concourse flag, don't define a `default` value that mirrors a default set by the Concourse binary. 
 
