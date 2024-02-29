@@ -1275,6 +1275,10 @@ processes:
     CONCOURSE_VAULT_CLIENT_TOKEN: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.auth.client_token_path") do |v| -%>
+    CONCOURSE_VAULT_CLIENT_TOKEN_PATH: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.auth.params") do |v| -%>
     CONCOURSE_VAULT_AUTH_PARAM: <%= env_flag(v).to_json %>
 <% end -%>
