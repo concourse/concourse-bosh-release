@@ -411,6 +411,10 @@ processes:
     CONCOURSE_RESOURCE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("default_resource_type_check_interval") do |v| -%>
+    CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("default_check_interval_with_webhook") do |v| -%>
     CONCOURSE_RESOURCE_WITH_WEBHOOK_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>

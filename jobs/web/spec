@@ -1046,6 +1046,16 @@ properties:
       `check_every` on the resource config.
     default: 1m
 
+  default_resource_type_check_interval:
+    env: CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL
+    description: |
+      The interval, in Go duration format (1m = 1 minute), on which to check
+      for new versions of resource types.
+
+      This can also be specified on a per-resource-type basis by specifying
+      `check_every` on the resource type config.
+    default: 1m
+
   default_check_interval_with_webhook:
     env: CONCOURSE_RESOURCE_WITH_WEBHOOK_CHECKING_INTERVAL
     description: |
