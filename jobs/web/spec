@@ -1162,17 +1162,6 @@ properties:
       "limit-active-volumes".
     example: [limit-active-containers, fewest-build-containers]
 
-  check_container_placement_strategy:
-    env: CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY
-    description: |
-      A third method by which a worker is selected during container placement
-      that is used for resource checks.
-
-      Supported options are "random",
-      "fewest-build-containers", "limit-active-tasks",
-      "limit-active-containers", and "limit-active-volumes".
-    example: random
-
   check_container_placement_strategies:
     env: CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY
     description: |
@@ -1289,6 +1278,12 @@ properties:
     description: |
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
+
+  postgresql.binary_parameters:
+    env: CONCOURSE_POSTGRES_BINARY_PARAMETERS
+    description: |
+      Whether to use the binary_parameter option from the lib/pq driver that
+      Concourse uses to connect to PostgreSQL
 
   api_max_conns:
     env: CONCOURSE_API_MAX_CONNS

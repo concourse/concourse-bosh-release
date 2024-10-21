@@ -183,12 +183,12 @@ processes:
     CONCOURSE_AWS_SSM_SESSION_TOKEN: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("aws_ssm.team_secret_template") do |v| -%>
-    CONCOURSE_AWS_SSM_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("aws_ssm.shared_path") do |v| -%>
     CONCOURSE_AWS_SSM_SHARED_PATH: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("aws_ssm.team_secret_template") do |v| -%>
+    CONCOURSE_AWS_SSM_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("backend_max_conns") do |v| -%>
@@ -269,6 +269,10 @@ processes:
 
 <% if_p("cf_auth.skip_ssl_validation") do |v| -%>
     CONCOURSE_CF_SKIP_SSL_VALIDATION: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("check_container_placement_strategies") do |v| -%>
+    CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("client_id") do |v| -%>
@@ -395,6 +399,10 @@ processes:
     CONCOURSE_DATADOG_PREFIX: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("db_notification_bus_queue_size") do |v| -%>
+    CONCOURSE_DB_NOTIFICATION_BUS_QUEUE_SIZE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("debug.bind_ip") do |v| -%>
     CONCOURSE_DEBUG_BIND_IP: <%= env_flag(v).to_json %>
 <% end -%>
@@ -411,10 +419,6 @@ processes:
     CONCOURSE_RESOURCE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("default_resource_type_check_interval") do |v| -%>
-    CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("default_check_interval_with_webhook") do |v| -%>
     CONCOURSE_RESOURCE_WITH_WEBHOOK_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -427,6 +431,10 @@ processes:
     CONCOURSE_DEFAULT_PUT_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("default_resource_type_check_interval") do |v| -%>
+    CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("default_task_cpu_limit") do |v| -%>
     CONCOURSE_DEFAULT_TASK_CPU_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
@@ -437,14 +445,6 @@ processes:
 
 <% if_p("default_task_timeout") do |v| -%>
     CONCOURSE_DEFAULT_TASK_TIMEOUT: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("num_goroutine_threshold") do |v| -%>
-    CONCOURSE_NUM_GOROUTINE_THRESHOLD: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("db_notification_bus_queue_size") do |v| -%>
-    CONCOURSE_DB_NOTIFICATION_BUS_QUEUE_SIZE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("displayer_user_id_per_connector") do |v| -%>
@@ -979,12 +979,8 @@ processes:
     CONCOURSE_NO_INPUT_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("check_container_placement_strategies") do |v| -%>
-    CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("check_container_placement_strategy") do |v| -%>
-    CONCOURSE_CHECK_CONTAINER_PLACEMENT_STRATEGY: <%= env_flag(v).to_json %>
+<% if_p("num_goroutine_threshold") do |v| -%>
+    CONCOURSE_NUM_GOROUTINE_THRESHOLD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("old_encryption_key") do |v| -%>
@@ -1037,6 +1033,10 @@ processes:
 
 <% if_p("policy_check.skip_actions") do |v| -%>
     CONCOURSE_POLICY_CHECK_FILTER_ACTION_SKIP: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.binary_parameters") do |v| -%>
+    CONCOURSE_POSTGRES_BINARY_PARAMETERS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("postgresql.ca_cert.certificate") do |v| -%>
