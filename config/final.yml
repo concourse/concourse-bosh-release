@@ -1,6 +1,7 @@
 ---
 final_name: concourse
 blobstore:
-  provider: gcs
+  provider: s3
   options:
-    bucket_name: concourse-bosh-blobs
+    bucket_name: concourse-bosh
+    host: https://fsn1.your-objectstorage.com
