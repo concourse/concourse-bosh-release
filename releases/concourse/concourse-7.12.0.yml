@@ -1,0 +1,49 @@
+name: concourse
+version: 7.12.0
+commit_hash: 528ebc882
+uncommitted_changes: false
+jobs:
+- name: bbr-atcdb
+  version: 2055a217140c5b9044ef4d91829fb1280f3d1173497795f62e35932e8e5878b0
+  fingerprint: 2055a217140c5b9044ef4d91829fb1280f3d1173497795f62e35932e8e5878b0
+  sha1: sha256:ed14c44949592cc8f2ecddd1331ff8451485723b0d13d949bc05dceaf8e6c96d
+  packages: []
+- name: web
+  version: a59ad5de52a804717dd14a44096df938aabe4853385d1cfe7299465d6cc7dd00
+  fingerprint: a59ad5de52a804717dd14a44096df938aabe4853385d1cfe7299465d6cc7dd00
+  sha1: sha256:fb109b7fbc34287146c07a74f851ca863cd37157ec896a20b8ee628e8f2fe167
+  packages:
+  - concourse
+- name: worker
+  version: a5abb5523b166969651615f3805117f9bc57a9336a1c151c80bc7b2f877627bd
+  fingerprint: a5abb5523b166969651615f3805117f9bc57a9336a1c151c80bc7b2f877627bd
+  sha1: sha256:77564d651a989af7b61d8c6789543afcbf25a798baa12427df62a8c5dd3168b3
+  packages:
+  - concourse
+  - btrfs_tools
+- name: worker-windows
+  version: c9b804c796b207c80be5dd056c4c4d320f42b2ed1eefa87086069a4770ff23e6
+  fingerprint: c9b804c796b207c80be5dd056c4c4d320f42b2ed1eefa87086069a4770ff23e6
+  sha1: sha256:fd98b0579fa0f2bc0b8932af65b7ba17b5365f933f42e60d4c2242a20606aaca
+  packages:
+  - concourse-windows
+packages:
+- name: btrfs_tools
+  version: d37b82a1ca83db7fac4af6212c981ec5e23eafd0cd8774b032bf4f0b0939a39b
+  fingerprint: d37b82a1ca83db7fac4af6212c981ec5e23eafd0cd8774b032bf4f0b0939a39b
+  sha1: sha256:bb5481fc8e3064b41b5b43cd7598540b440cbb4a7fd4386ee562042332545afe
+  dependencies: []
+- name: concourse
+  version: 0fb58cbae51239d1a713cefc79f9d074ed84af1b3ee16ebad0f03f48d60aec25
+  fingerprint: 0fb58cbae51239d1a713cefc79f9d074ed84af1b3ee16ebad0f03f48d60aec25
+  sha1: sha256:8c6dbb54a2175e89156c9c47663d98587feb8c774d09ddb4da8c7e42347a0511
+  dependencies: []
+- name: concourse-windows
+  version: 6ed41e7a3ed1b78ad2843298d553d9b2e123761efceee97cff4d6c5d00722929
+  fingerprint: 6ed41e7a3ed1b78ad2843298d553d9b2e123761efceee97cff4d6c5d00722929
+  sha1: sha256:9a5abc2607c0d702a008c48450a3d09303d7e5edf359df73043e5b1564604314
+  dependencies: []
+license:
+  version: d851dc6c4cd644a0d78d6bee718ae6c196503bdc4718526e7807bed602142769
+  fingerprint: d851dc6c4cd644a0d78d6bee718ae6c196503bdc4718526e7807bed602142769
+  sha1: sha256:bec2832d162f3c61d6e92f9fc27caea144605d02900f2920b8fb0826c7ed6ced
