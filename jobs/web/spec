@@ -1099,7 +1099,6 @@ properties:
     env: CONCOURSE_GC_CHECK_RECYCLE_PERIOD
     description: |
       Period after which finished checks will get garbage-collected.
-    default: 6h
 
   gc.failed_grace_period:
     env: CONCOURSE_GC_FAILED_GRACE_PERIOD
