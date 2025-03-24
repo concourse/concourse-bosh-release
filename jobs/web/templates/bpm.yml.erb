@@ -291,6 +291,10 @@ processes:
     CONCOURSE_COMPONENT_RUNNER_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("concourse_strict_transport_security") do |v| -%>
+    CONCOURSE_STRICT_TRANSPORT_SECURITY: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("concurrent_request_limits") do |v| -%>
     CONCOURSE_CONCURRENT_REQUEST_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
@@ -1033,10 +1037,6 @@ processes:
 
 <% if_p("policy_check.skip_actions") do |v| -%>
     CONCOURSE_POLICY_CHECK_FILTER_ACTION_SKIP: <%= env_flag(v).to_json %>
-<% end -%>
-
-<% if_p("postgresql.binary_parameters") do |v| -%>
-    CONCOURSE_POSTGRES_BINARY_PARAMETERS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("postgresql.ca_cert.certificate") do |v| -%>
