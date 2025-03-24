@@ -129,6 +129,11 @@ properties:
       The value to set for Content-Security-Policy header.
     example: "no-store, private"
 
+  concourse_strict_transport_security:
+    env: CONCOURSE_STRICT_TRANSPORT_SECURITY
+    description: |
+      The value to set for the Strict-Transport-Security header.
+
   concurrent_request_limits:
     env: CONCOURSE_CONCURRENT_REQUEST_LIMIT
     description: |
@@ -1277,12 +1282,6 @@ properties:
     description: |
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
-
-  postgresql.binary_parameters:
-    env: CONCOURSE_POSTGRES_BINARY_PARAMETERS
-    description: |
-      Whether to use the binary_parameter option from the lib/pq driver that
-      Concourse uses to connect to PostgreSQL
 
   api_max_conns:
     env: CONCOURSE_API_MAX_CONNS

@@ -337,6 +337,14 @@ properties:
       Path to CNI network plugins. For BOSH this defaults to /var/vcap/packages/concourse/bin when containerd is
       selected as the runtime.
 
+  containerd.privileged_mode:
+    env: CONCOURSE_CONTAINERD_PRIVILEGED_MODE
+    description: |
+      How many privileges privileged containers get. Options are 'full'
+      (default), 'fuse-only', 'ignore'. 'full' is equivalent to root on host.
+      'ignore' means no extra privileges. 'fuse-only' means enough privileges
+      to use fuse-overlayfs.
+
   debug.bind_ip:
     env: CONCOURSE_DEBUG_BIND_IP
     description: |
