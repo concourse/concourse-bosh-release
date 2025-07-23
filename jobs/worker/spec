@@ -280,6 +280,14 @@ properties:
     description: |
       List of network ranges to which traffic from containers will be restricted.
 
+  containerd.additional_hosts:
+    env: CONCOURSE_CONTAINERD_ADDITIONAL_HOSTS
+    description: |
+      List of hosts to be added to /etc/hosts file.
+      Example:
+        - 1.1.1.1 example.com
+        - 2.2.2.2 another.example.com
+
   containerd.allow_host_access:
     env: CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS
     description: |
