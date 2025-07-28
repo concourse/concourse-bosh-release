@@ -1263,6 +1263,12 @@ properties:
       Whether or not to use SSL. Defaults to `verify-ca` when `postgresql.address`
       or `postgresql.host` is provided. Otherwise, defaults to `disable`.
 
+  postgresql.sslnegotiation:
+    env: CONCOURSE_POSTGRES_SSLNEGOTIATION
+    description: |
+      Controls how SSL encryption is negotiated with the server. Can be set to a
+      value of `postgres` or `direct`. Defaults to `postgres`.
+
   postgresql.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_POSTGRES_CA_CERT}}
@@ -1726,6 +1732,22 @@ properties:
     description: |
       AWS SecretsManager secret name template used to resolve shared secrets.
     default: /concourse/{{.Secret}}
+
+  id_token.signing_key.check_interval:
+    env: CONCOURSE_SIGNING_KEY_CHECK_INTERVAL
+    description: |
+      AWS SecretsManager secret name template used to resolve shared secrets.
+      Defaults to 10m.
+  id_token.signing_key.rotation_period:
+    env: CONCOURSE_SIGNING_KEY_ROTATION_PERIOD
+    description: |
+      After which time a new signing key for the idtoken secrets provider should
+      be generated. 0 turns off generation of new keys. Defaults to 168h
+  id_token.signing_key.grace_period:
+    env: CONCOURSE_SIGNING_KEY_GRACE_PERIOD
+    description: |
+      How long a key should still be published for the idtoken secrets provider
+      after a new key has been generated. Defaults to 24h.
 
   build_log_retention.default:
     env: CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN

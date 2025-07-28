@@ -651,6 +651,18 @@ processes:
     CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("id_token.signing_key.check_interval") do |v| -%>
+    CONCOURSE_SIGNING_KEY_CHECK_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("id_token.signing_key.grace_period") do |v| -%>
+    CONCOURSE_SIGNING_KEY_GRACE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("id_token.signing_key.rotation_period") do |v| -%>
+    CONCOURSE_SIGNING_KEY_ROTATION_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("influxdb.batch_duration") do |v| -%>
     CONCOURSE_INFLUXDB_BATCH_DURATION: <%= env_flag(v).to_json %>
 <% end -%>
@@ -1081,6 +1093,10 @@ processes:
 
 <% if_p("postgresql.sslmode") do |v| -%>
     CONCOURSE_POSTGRES_SSLMODE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.sslnegotiation") do |v| -%>
+    CONCOURSE_POSTGRES_SSLNEGOTIATION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("prometheus.bind_ip") do |v| -%>
