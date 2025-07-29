@@ -1736,7 +1736,7 @@ properties:
   id_token.signing_key.check_interval:
     env: CONCOURSE_SIGNING_KEY_CHECK_INTERVAL
     description: |
-      AWS SecretsManager secret name template used to resolve shared secrets.
+      How often to check for outdated or expired signing keys for the idtoken secrets provider.
       Defaults to 10m.
   id_token.signing_key.rotation_period:
     env: CONCOURSE_SIGNING_KEY_ROTATION_PERIOD
