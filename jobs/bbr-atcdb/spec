@@ -19,6 +19,11 @@ consumes:
   optional: true
 
 properties:
+  postgresql.version:
+    description: |
+      Which version of postgresql is used.
+    default: 13
+
   postgresql.host:
     description: |
       IP address or DNS name of a PostgreSQL server to connect to.
