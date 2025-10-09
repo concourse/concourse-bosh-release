@@ -345,6 +345,11 @@ properties:
       Path to CNI network plugins. For BOSH this defaults to /var/vcap/packages/concourse/bin when containerd is
       selected as the runtime.
 
+  containerd.log_level:
+    env: CONCOURSE_CONTAINERD_LOG_LEVEL
+    description: |
+      Minimum level of logs to see. Defaults to 'info'.
+
   containerd.privileged_mode:
     env: CONCOURSE_CONTAINERD_PRIVILEGED_MODE
     description: |
