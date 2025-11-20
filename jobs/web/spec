@@ -117,6 +117,15 @@ properties:
       For multiple ATCs it would go to some sort of load balancer.
     example: https://ci.concourse-ci.org
 
+  oidc_issuer_url:
+    env: CONCOURSE_OIDC_ISSUER_URL
+    description: |
+      URL to use as the OIDC issuer for IDToken generation. If not set,
+      defaults to externalUrl. Useful for when your Concourse is not available
+      over the public internet but you need the OIDC endpoints publicly
+      available.
+    example: http://oidc.example.com
+
   x_frame_options:
     env: CONCOURSE_X_FRAME_OPTIONS
     description: |

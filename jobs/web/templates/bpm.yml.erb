@@ -999,6 +999,10 @@ processes:
     CONCOURSE_NUM_GOROUTINE_THRESHOLD: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("oidc_issuer_url") do |v| -%>
+    CONCOURSE_OIDC_ISSUER_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("old_encryption_key") do |v| -%>
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
