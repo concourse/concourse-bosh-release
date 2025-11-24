@@ -1055,6 +1055,10 @@ processes:
     CONCOURSE_POLICY_CHECK_FILTER_ACTION_SKIP: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("postgresql.application_name") do |v| -%>
+    CONCOURSE_POSTGRES_APPLICATION_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("postgresql.ca_cert.certificate") do |v| -%>
     CONCOURSE_POSTGRES_CA_CERT: <%= env_file_flag(v, "CONCOURSE_POSTGRES_CA_CERT").to_json %>
 <% end -%>

@@ -1298,6 +1298,12 @@ properties:
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
 
+  postgresql.application_name:
+    env: CONCOURSE_POSTGRES_APPLICATION_NAME
+    description: |
+      Application name for connection tracking in pg_stat_activity.
+    default: concourse
+
   api_max_conns:
     env: CONCOURSE_API_MAX_CONNS
     description: |
