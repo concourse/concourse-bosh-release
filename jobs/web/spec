@@ -282,7 +282,12 @@ properties:
   redact_secrets:
     env: CONCOURSE_ENABLE_REDACT_SECRETS
     description: |
-      Enable redacting secrets in build logs.
+      DEPRECATED - Enable redacting secrets in build logs.
+
+  disable_redact_secrets:
+    env: CONCOURSE_DISABLE_REDACT_SECRETS
+    description: |
+      Disable redacting secrets in build logs.
 
   token_signing_key:
     type: rsa
@@ -971,12 +976,12 @@ properties:
   enable_across_step:
     env: CONCOURSE_ENABLE_ACROSS_STEP
     description: |
-      Enable the experimental across step to be used in jobs. The API is subject to change.
+      DEPRECATED - Across step is always enabled
 
   enable_pipeline_instances:
     env: CONCOURSE_ENABLE_PIPELINE_INSTANCES
     description: |
-      Enable the creation of instanced pipelines.
+      DEPRECATED - Instance pipelines is always enabled
 
   enable_cache_streamed_volumes:
     env: CONCOURSE_ENABLE_CACHE_STREAMED_VOLUMES
