@@ -288,6 +288,12 @@ properties:
         - 1.1.1.1 example.com
         - 2.2.2.2 another.example.com
 
+  containerd.allowed_devices:
+    env: CONCOURSE_CONTAINERD_ALLOWED_DEVICE
+    description: |
+      List of allowed devices for worker containers.
+    example: ["b *:* rwm", "c 1:3 rwm"]
+
   containerd.allow_host_access:
     env: CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS
     description: |
