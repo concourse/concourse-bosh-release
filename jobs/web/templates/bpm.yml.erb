@@ -1319,6 +1319,10 @@ processes:
     CONCOURSE_VAULT_DISABLE_SRV_LOOKUP: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("vault.enable_kv_mount_cache") do |v| -%>
+    CONCOURSE_VAULT_ENABLE_KV_MOUNT_CACHE: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("vault.login_timeout") do |v| -%>
     CONCOURSE_VAULT_LOGIN_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
