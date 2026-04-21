@@ -491,6 +491,14 @@ processes:
     CONCOURSE_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("encryption_key_base64") do |v| -%>
+    CONCOURSE_ENCRYPTION_KEY_BASE64: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("encryption_key_hex") do |v| -%>
+    CONCOURSE_ENCRYPTION_KEY_HEX: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("external_url") do |v| -%>
     CONCOURSE_EXTERNAL_URL: <%= env_flag(v).to_json %>
 <% end -%>
@@ -1009,6 +1017,14 @@ processes:
 
 <% if_p("old_encryption_key") do |v| -%>
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("old_encryption_key_base64") do |v| -%>
+    CONCOURSE_OLD_ENCRYPTION_KEY_BASE64: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("old_encryption_key_hex") do |v| -%>
+    CONCOURSE_OLD_ENCRYPTION_KEY_HEX: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("opa.result.allowed_key") do |v| -%>
