@@ -184,13 +184,57 @@ properties:
     env: CONCOURSE_ENCRYPTION_KEY
     description: |
       A 16 or 32 byte passphrase. This is used to generate an AES key to encrypt
-      sensitive iinformation in the database.
+      sensitive information in the database.
+
+      If specified, all existing data will be encrypted on start and any new
+      data will be encrypted.
+
+  encryption_key_base64:
+    env: CONCOURSE_ENCRYPTION_KEY_BASE64
+    description: |
+      A base64-encoded 16 or 32 byte passphrase. This is used to generate an
+      AES key to encrypt sensitive information in the database.
+
+      If specified, all existing data will be encrypted on start and any new
+      data will be encrypted.
+
+  encryption_key_hex:
+    env: CONCOURSE_ENCRYPTION_KEY_HEX
+    description: |
+      A hex-encoded 16 or 32 byte passphrase. This is used to generate an
+      AES key to encrypt sensitive information in the database.
 
       If specified, all existing data will be encrypted on start and any new
       data will be encrypted.
 
   old_encryption_key:
     env: CONCOURSE_OLD_ENCRYPTION_KEY
+    description: |
+      The key used previously to encrypt sensitive information in the database.
+
+      To rotate your encryption key, set both old_encryption_key and
+      encryption_key. This will result in the ATC re-encrypting all data on
+      start.
+
+      To disable encryption, specify old_encryption_key and do *not* set
+      encryption_key. This will result in the ATC decrypting all data on start,
+      restoring it to plaintext.
+
+  old_encryption_key_base64:
+    env: CONCOURSE_OLD_ENCRYPTION_KEY_BASE64
+    description: |
+      The key used previously to encrypt sensitive information in the database.
+
+      To rotate your encryption key, set both old_encryption_key and
+      encryption_key. This will result in the ATC re-encrypting all data on
+      start.
+
+      To disable encryption, specify old_encryption_key and do *not* set
+      encryption_key. This will result in the ATC decrypting all data on start,
+      restoring it to plaintext.
+
+  old_encryption_key_hex:
+    env: CONCOURSE_OLD_ENCRYPTION_KEY_HEX
     description: |
       The key used previously to encrypt sensitive information in the database.
 
