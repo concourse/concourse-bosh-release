@@ -1612,6 +1612,12 @@ properties:
     description: |
       The maximum time to wait for Vault queries to resolve.
     example: 60s
+  vault.enable_kv_mount_cache:
+    env: CONCOURSE_VAULT_ENABLE_KV_MOUNT_CACHE
+    description: |
+      Enable caching of KV mount metadata from Vault. This reduces Vault API calls
+      by fetching mount information once and reusing it for subsequent lookups.
+    default: false
 
   conjur.appliance_url:
     env: CONCOURSE_CONJUR_APPLIANCE_URL
