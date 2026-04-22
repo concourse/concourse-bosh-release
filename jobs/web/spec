@@ -1074,6 +1074,12 @@ properties:
     description: |
       Default timeout of task steps
 
+  default_task_cache_ttl:
+    env: CONCOURSE_DEFAULT_TASK_CACHE_TTL
+    description: |
+      Default TTL for task caches. Defaults to task caches never expiring. Uses
+      Go duration format (1m = 1 minute).
+
   num_goroutine_threshold:
     env: CONCOURSE_NUM_GOROUTINE_THRESHOLD
     description: |
