@@ -439,6 +439,10 @@ processes:
     CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("default_task_cache_ttl") do |v| -%>
+    CONCOURSE_DEFAULT_TASK_CACHE_TTL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("default_task_cpu_limit") do |v| -%>
     CONCOURSE_DEFAULT_TASK_CPU_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
