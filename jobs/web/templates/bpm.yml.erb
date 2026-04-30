@@ -635,6 +635,22 @@ processes:
     CONCOURSE_OIDC_USER_NAME_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("gitea_auth.client_id") do |v| -%>
+    CONCOURSE_GITEA_CLIENT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitea_auth.client_secret") do |v| -%>
+    CONCOURSE_GITEA_CLIENT_SECRET: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitea_auth.display_name") do |v| -%>
+    CONCOURSE_GITEA_DISPLAY_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitea_auth.host") do |v| -%>
+    CONCOURSE_GITEA_HOST: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("github_auth.ca_cert.certificate") do |v| -%>
     CONCOURSE_GITHUB_CA_CERT: <%= env_file_flag(v, "CONCOURSE_GITHUB_CA_CERT").to_json %>
 <% end -%>
@@ -869,6 +885,18 @@ processes:
 
 <% if_p("main_team.auth.config") do |v| -%>
     CONCOURSE_MAIN_TEAM_CONFIG: <%= env_file_flag(v, "CONCOURSE_MAIN_TEAM_CONFIG").to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.gitea.orgs") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITEA_ORG: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.gitea.teams") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITEA_TEAM: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.gitea.users") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITEA_USER: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("main_team.auth.github.orgs") do |v| -%>
