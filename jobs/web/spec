@@ -779,6 +779,27 @@ properties:
     description: |
       GitLab client secret to use for OAuth.
 
+  gitea_auth.client_id:
+    env: CONCOURSE_GITEA_CLIENT_ID
+    description: |
+      Gitea client ID to use for OAuth.
+
+  gitea_auth.client_secret:
+    env: CONCOURSE_GITEA_CLIENT_SECRET
+    description: |
+      Gitea client secret to use for OAuth.
+
+  gitea_auth.host:
+    env: CONCOURSE_GITEA_HOST
+    description: |
+      Hostname of Gitea deployment (Include scheme, No trailing slash)
+
+  gitea_auth.display_name:
+    env: CONCOURSE_GITEA_DISPLAY_NAME
+    description: |
+      The auth provider name displayed to users on the login page.
+
+
   microsoft_auth.client_id:
     env: CONCOURSE_MICROSOFT_CLIENT_ID
     description: |
@@ -841,6 +862,13 @@ properties:
     example:
     - my-github-org
 
+  main_team.auth.github.teams:
+    env: CONCOURSE_MAIN_TEAM_GITHUB_TEAM
+    description: |
+      An array of GitHub teams that are authorized for the main team
+    example:
+    - my-github-org:my-github-team
+
   main_team.auth.gitlab.users:
     env: CONCOURSE_MAIN_TEAM_GITLAB_USER
     description: |
@@ -855,12 +883,26 @@ properties:
     example:
     - my-gitlab-group
 
-  main_team.auth.github.teams:
-    env: CONCOURSE_MAIN_TEAM_GITHUB_TEAM
+  main_team.auth.gitea.users:
+    env: CONCOURSE_MAIN_TEAM_GITEA_USER
     description: |
-      An array of GitHub teams that are authorized for the main team
+      An array of Gitea userids/logins that are authorized for the main team
     example:
-    - my-github-org:my-github-team
+    - my-gitea-login
+
+  main_team.auth.gitea.orgs:
+    env: CONCOURSE_MAIN_TEAM_GITEA_ORG
+    description: |
+      An array of Gitea orgs that are authorized for the main team
+    example:
+    - my-gitea-org
+
+  main_team.auth.gitea.teams:
+    env: CONCOURSE_MAIN_TEAM_GITEA_TEAM
+    description: |
+      An array of Gitea teams that are authorized for the main team
+    example:
+    - my-gitea-org:my-gitea-team
 
   main_team.auth.cf.users:
     env: CONCOURSE_MAIN_TEAM_CF_USER
