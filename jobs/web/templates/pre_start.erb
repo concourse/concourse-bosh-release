@@ -133,3 +133,5 @@ mkdir -p /var/vcap/jobs/web/config/env
 <%= env_file_writer(v, "CONCOURSE_TSA_TEAM_AUTHORIZED_KEYS") %>
 <% end -%>
 
+
+/var/vcap/packages/concourse/bin/concourse migrate --migrate-to-latest-version
