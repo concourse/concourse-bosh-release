@@ -117,6 +117,15 @@ properties:
       For multiple ATCs it would go to some sort of load balancer.
     example: https://ci.concourse-ci.org
 
+  oidc_issuer_url:
+    env: CONCOURSE_OIDC_ISSUER_URL
+    description: |
+      URL to use as the OIDC issuer for IDToken generation. If not set,
+      defaults to externalUrl. Useful for when your Concourse is not available
+      over the public internet but you need the OIDC endpoints publicly
+      available.
+    example: http://oidc.example.com
+
   x_frame_options:
     env: CONCOURSE_X_FRAME_OPTIONS
     description: |
@@ -175,13 +184,57 @@ properties:
     env: CONCOURSE_ENCRYPTION_KEY
     description: |
       A 16 or 32 byte passphrase. This is used to generate an AES key to encrypt
-      sensitive iinformation in the database.
+      sensitive information in the database.
+
+      If specified, all existing data will be encrypted on start and any new
+      data will be encrypted.
+
+  encryption_key_base64:
+    env: CONCOURSE_ENCRYPTION_KEY_BASE64
+    description: |
+      A base64-encoded 16 or 32 byte passphrase. This is used to generate an
+      AES key to encrypt sensitive information in the database.
+
+      If specified, all existing data will be encrypted on start and any new
+      data will be encrypted.
+
+  encryption_key_hex:
+    env: CONCOURSE_ENCRYPTION_KEY_HEX
+    description: |
+      A hex-encoded 16 or 32 byte passphrase. This is used to generate an
+      AES key to encrypt sensitive information in the database.
 
       If specified, all existing data will be encrypted on start and any new
       data will be encrypted.
 
   old_encryption_key:
     env: CONCOURSE_OLD_ENCRYPTION_KEY
+    description: |
+      The key used previously to encrypt sensitive information in the database.
+
+      To rotate your encryption key, set both old_encryption_key and
+      encryption_key. This will result in the ATC re-encrypting all data on
+      start.
+
+      To disable encryption, specify old_encryption_key and do *not* set
+      encryption_key. This will result in the ATC decrypting all data on start,
+      restoring it to plaintext.
+
+  old_encryption_key_base64:
+    env: CONCOURSE_OLD_ENCRYPTION_KEY_BASE64
+    description: |
+      The key used previously to encrypt sensitive information in the database.
+
+      To rotate your encryption key, set both old_encryption_key and
+      encryption_key. This will result in the ATC re-encrypting all data on
+      start.
+
+      To disable encryption, specify old_encryption_key and do *not* set
+      encryption_key. This will result in the ATC decrypting all data on start,
+      restoring it to plaintext.
+
+  old_encryption_key_hex:
+    env: CONCOURSE_OLD_ENCRYPTION_KEY_HEX
     description: |
       The key used previously to encrypt sensitive information in the database.
 
@@ -273,7 +326,12 @@ properties:
   redact_secrets:
     env: CONCOURSE_ENABLE_REDACT_SECRETS
     description: |
-      Enable redacting secrets in build logs.
+      DEPRECATED - Enable redacting secrets in build logs.
+
+  disable_redact_secrets:
+    env: CONCOURSE_DISABLE_REDACT_SECRETS
+    description: |
+      Disable redacting secrets in build logs.
 
   token_signing_key:
     type: rsa
@@ -721,6 +779,27 @@ properties:
     description: |
       GitLab client secret to use for OAuth.
 
+  gitea_auth.client_id:
+    env: CONCOURSE_GITEA_CLIENT_ID
+    description: |
+      Gitea client ID to use for OAuth.
+
+  gitea_auth.client_secret:
+    env: CONCOURSE_GITEA_CLIENT_SECRET
+    description: |
+      Gitea client secret to use for OAuth.
+
+  gitea_auth.host:
+    env: CONCOURSE_GITEA_HOST
+    description: |
+      Hostname of Gitea deployment (Include scheme, No trailing slash)
+
+  gitea_auth.display_name:
+    env: CONCOURSE_GITEA_DISPLAY_NAME
+    description: |
+      The auth provider name displayed to users on the login page.
+
+
   microsoft_auth.client_id:
     env: CONCOURSE_MICROSOFT_CLIENT_ID
     description: |
@@ -783,6 +862,13 @@ properties:
     example:
     - my-github-org
 
+  main_team.auth.github.teams:
+    env: CONCOURSE_MAIN_TEAM_GITHUB_TEAM
+    description: |
+      An array of GitHub teams that are authorized for the main team
+    example:
+    - my-github-org:my-github-team
+
   main_team.auth.gitlab.users:
     env: CONCOURSE_MAIN_TEAM_GITLAB_USER
     description: |
@@ -797,12 +883,26 @@ properties:
     example:
     - my-gitlab-group
 
-  main_team.auth.github.teams:
-    env: CONCOURSE_MAIN_TEAM_GITHUB_TEAM
+  main_team.auth.gitea.users:
+    env: CONCOURSE_MAIN_TEAM_GITEA_USER
     description: |
-      An array of GitHub teams that are authorized for the main team
+      An array of Gitea userids/logins that are authorized for the main team
     example:
-    - my-github-org:my-github-team
+    - my-gitea-login
+
+  main_team.auth.gitea.orgs:
+    env: CONCOURSE_MAIN_TEAM_GITEA_ORG
+    description: |
+      An array of Gitea orgs that are authorized for the main team
+    example:
+    - my-gitea-org
+
+  main_team.auth.gitea.teams:
+    env: CONCOURSE_MAIN_TEAM_GITEA_TEAM
+    description: |
+      An array of Gitea teams that are authorized for the main team
+    example:
+    - my-gitea-org:my-gitea-team
 
   main_team.auth.cf.users:
     env: CONCOURSE_MAIN_TEAM_CF_USER
@@ -962,12 +1062,12 @@ properties:
   enable_across_step:
     env: CONCOURSE_ENABLE_ACROSS_STEP
     description: |
-      Enable the experimental across step to be used in jobs. The API is subject to change.
+      DEPRECATED - Across step is always enabled
 
   enable_pipeline_instances:
     env: CONCOURSE_ENABLE_PIPELINE_INSTANCES
     description: |
-      Enable the creation of instanced pipelines.
+      DEPRECATED - Instance pipelines is always enabled
 
   enable_cache_streamed_volumes:
     env: CONCOURSE_ENABLE_CACHE_STREAMED_VOLUMES
@@ -1015,6 +1115,12 @@ properties:
     env: CONCOURSE_DEFAULT_TASK_TIMEOUT
     description: |
       Default timeout of task steps
+
+  default_task_cache_ttl:
+    env: CONCOURSE_DEFAULT_TASK_CACHE_TTL
+    description: |
+      Default TTL for task caches. Defaults to task caches never expiring. Uses
+      Go duration format (1m = 1 minute).
 
   num_goroutine_threshold:
     env: CONCOURSE_NUM_GOROUTINE_THRESHOLD
@@ -1263,6 +1369,12 @@ properties:
       Whether or not to use SSL. Defaults to `verify-ca` when `postgresql.address`
       or `postgresql.host` is provided. Otherwise, defaults to `disable`.
 
+  postgresql.sslnegotiation:
+    env: CONCOURSE_POSTGRES_SSLNEGOTIATION
+    description: |
+      Controls how SSL encryption is negotiated with the server. Can be set to a
+      value of `postgres` or `direct`. Defaults to `postgres`.
+
   postgresql.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_POSTGRES_CA_CERT}}
@@ -1282,6 +1394,12 @@ properties:
     description: |
       Dialing timeout, in Go duration format (1m = 1 minute). 0 means wait indefinitely.
     default: 5m
+
+  postgresql.application_name:
+    env: CONCOURSE_POSTGRES_APPLICATION_NAME
+    description: |
+      Application name for connection tracking in pg_stat_activity.
+    default: concourse
 
   api_max_conns:
     env: CONCOURSE_API_MAX_CONNS
@@ -1586,6 +1704,12 @@ properties:
     description: |
       The maximum time to wait for Vault queries to resolve.
     example: 60s
+  vault.enable_kv_mount_cache:
+    env: CONCOURSE_VAULT_ENABLE_KV_MOUNT_CACHE
+    description: |
+      Enable caching of KV mount metadata from Vault. This reduces Vault API calls
+      by fetching mount information once and reusing it for subsequent lookups.
+    default: false
 
   conjur.appliance_url:
     env: CONCOURSE_CONJUR_APPLIANCE_URL
@@ -1726,6 +1850,22 @@ properties:
     description: |
       AWS SecretsManager secret name template used to resolve shared secrets.
     default: /concourse/{{.Secret}}
+
+  id_token.signing_key.check_interval:
+    env: CONCOURSE_SIGNING_KEY_CHECK_INTERVAL
+    description: |
+      How often to check for outdated or expired signing keys for the idtoken secrets provider.
+      Defaults to 10m.
+  id_token.signing_key.rotation_period:
+    env: CONCOURSE_SIGNING_KEY_ROTATION_PERIOD
+    description: |
+      After which time a new signing key for the idtoken secrets provider should
+      be generated. 0 turns off generation of new keys. Defaults to 168h
+  id_token.signing_key.grace_period:
+    env: CONCOURSE_SIGNING_KEY_GRACE_PERIOD
+    description: |
+      How long a key should still be published for the idtoken secrets provider
+      after a new key has been generated. Defaults to 24h.
 
   build_log_retention.default:
     env: CONCOURSE_DEFAULT_BUILD_LOGS_TO_RETAIN

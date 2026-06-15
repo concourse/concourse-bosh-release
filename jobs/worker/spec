@@ -288,6 +288,12 @@ properties:
         - 1.1.1.1 example.com
         - 2.2.2.2 another.example.com
 
+  containerd.allowed_devices:
+    env: CONCOURSE_CONTAINERD_ALLOWED_DEVICE
+    description: |
+      List of allowed devices for worker containers.
+    example: ["b *:* rwm", "c 1:3 rwm"]
+
   containerd.allow_host_access:
     env: CONCOURSE_CONTAINERD_ALLOW_HOST_ACCESS
     description: |
@@ -344,6 +350,11 @@ properties:
     description: |
       Path to CNI network plugins. For BOSH this defaults to /var/vcap/packages/concourse/bin when containerd is
       selected as the runtime.
+
+  containerd.log_level:
+    env: CONCOURSE_CONTAINERD_LOG_LEVEL
+    description: |
+      Minimum level of logs to see. Defaults to 'info'.
 
   containerd.privileged_mode:
     env: CONCOURSE_CONTAINERD_PRIVILEGED_MODE

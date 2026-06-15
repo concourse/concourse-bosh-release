@@ -439,6 +439,10 @@ processes:
     CONCOURSE_RESOURCE_TYPE_CHECKING_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("default_task_cache_ttl") do |v| -%>
+    CONCOURSE_DEFAULT_TASK_CACHE_TTL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("default_task_cpu_limit") do |v| -%>
     CONCOURSE_DEFAULT_TASK_CPU_LIMIT: <%= env_flag(v).to_json %>
 <% end -%>
@@ -449,6 +453,10 @@ processes:
 
 <% if_p("default_task_timeout") do |v| -%>
     CONCOURSE_DEFAULT_TASK_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("disable_redact_secrets") do |v| -%>
+    CONCOURSE_DISABLE_REDACT_SECRETS: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("displayer_user_id_per_connector") do |v| -%>
@@ -485,6 +493,14 @@ processes:
 
 <% if_p("encryption_key") do |v| -%>
     CONCOURSE_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("encryption_key_base64") do |v| -%>
+    CONCOURSE_ENCRYPTION_KEY_BASE64: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("encryption_key_hex") do |v| -%>
+    CONCOURSE_ENCRYPTION_KEY_HEX: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("external_url") do |v| -%>
@@ -619,6 +635,22 @@ processes:
     CONCOURSE_OIDC_USER_NAME_KEY: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("gitea_auth.client_id") do |v| -%>
+    CONCOURSE_GITEA_CLIENT_ID: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitea_auth.client_secret") do |v| -%>
+    CONCOURSE_GITEA_CLIENT_SECRET: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitea_auth.display_name") do |v| -%>
+    CONCOURSE_GITEA_DISPLAY_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("gitea_auth.host") do |v| -%>
+    CONCOURSE_GITEA_HOST: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("github_auth.ca_cert.certificate") do |v| -%>
     CONCOURSE_GITHUB_CA_CERT: <%= env_file_flag(v, "CONCOURSE_GITHUB_CA_CERT").to_json %>
 <% end -%>
@@ -649,6 +681,18 @@ processes:
 
 <% if_p("global_resource_check_timeout") do |v| -%>
     CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("id_token.signing_key.check_interval") do |v| -%>
+    CONCOURSE_SIGNING_KEY_CHECK_INTERVAL: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("id_token.signing_key.grace_period") do |v| -%>
+    CONCOURSE_SIGNING_KEY_GRACE_PERIOD: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("id_token.signing_key.rotation_period") do |v| -%>
+    CONCOURSE_SIGNING_KEY_ROTATION_PERIOD: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("influxdb.batch_duration") do |v| -%>
@@ -843,6 +887,18 @@ processes:
     CONCOURSE_MAIN_TEAM_CONFIG: <%= env_file_flag(v, "CONCOURSE_MAIN_TEAM_CONFIG").to_json %>
 <% end -%>
 
+<% if_p("main_team.auth.gitea.orgs") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITEA_ORG: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.gitea.teams") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITEA_TEAM: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("main_team.auth.gitea.users") do |v| -%>
+    CONCOURSE_MAIN_TEAM_GITEA_USER: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("main_team.auth.github.orgs") do |v| -%>
     CONCOURSE_MAIN_TEAM_GITHUB_ORG: <%= env_flag(v).to_json %>
 <% end -%>
@@ -987,8 +1043,20 @@ processes:
     CONCOURSE_NUM_GOROUTINE_THRESHOLD: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("oidc_issuer_url") do |v| -%>
+    CONCOURSE_OIDC_ISSUER_URL: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("old_encryption_key") do |v| -%>
     CONCOURSE_OLD_ENCRYPTION_KEY: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("old_encryption_key_base64") do |v| -%>
+    CONCOURSE_OLD_ENCRYPTION_KEY_BASE64: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("old_encryption_key_hex") do |v| -%>
+    CONCOURSE_OLD_ENCRYPTION_KEY_HEX: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("opa.result.allowed_key") do |v| -%>
@@ -1039,6 +1107,10 @@ processes:
     CONCOURSE_POLICY_CHECK_FILTER_ACTION_SKIP: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("postgresql.application_name") do |v| -%>
+    CONCOURSE_POSTGRES_APPLICATION_NAME: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("postgresql.ca_cert.certificate") do |v| -%>
     CONCOURSE_POSTGRES_CA_CERT: <%= env_file_flag(v, "CONCOURSE_POSTGRES_CA_CERT").to_json %>
 <% end -%>
@@ -1081,6 +1153,10 @@ processes:
 
 <% if_p("postgresql.sslmode") do |v| -%>
     CONCOURSE_POSTGRES_SSLMODE: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("postgresql.sslnegotiation") do |v| -%>
+    CONCOURSE_POSTGRES_SSLNEGOTIATION: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("prometheus.bind_ip") do |v| -%>
@@ -1289,6 +1365,10 @@ processes:
 
 <% if_p("vault.disable_srv_lookup") do |v| -%>
     CONCOURSE_VAULT_DISABLE_SRV_LOOKUP: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("vault.enable_kv_mount_cache") do |v| -%>
+    CONCOURSE_VAULT_ENABLE_KV_MOUNT_CACHE: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("vault.login_timeout") do |v| -%>

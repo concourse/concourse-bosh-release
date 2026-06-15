@@ -50,3 +50,12 @@ containerd.max_containers:
 
 We understand that the comment stating the binary's default can become stale. The current solution is a suboptimal one. It may be improved in the future by generating a list of the default values from the binary.
 
+## Tests
+
+Some Ruby RSpec tests were added in [#183](https://github.com/concourse/concourse-bosh-release/pull/183). You can run them by:
+
+```sh
+bundle install
+bundle exec rspec --init
+bundle exec rspec
+```
