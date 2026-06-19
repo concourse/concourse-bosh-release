@@ -1047,6 +1047,15 @@ properties:
     description: Length of time for a intercepted session to be idle before terminating, in Go duration format.
     example: 5m
 
+  stalled_worker_timeout:
+    env: CONCOURSE_STALLED_WORKER_TIMEOUT
+    description: |
+      Period after which stalled (unresponsive, non-ephemeral) workers will be
+      automatically pruned along with their cache state. 0s (the default) means
+      stalled workers are never automatically pruned and must be removed
+      manually with 'fly prune-worker'.
+    example: 10m
+
   enable_global_resources:
     env: CONCOURSE_ENABLE_GLOBAL_RESOURCES
     description: |
