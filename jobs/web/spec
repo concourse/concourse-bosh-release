@@ -158,6 +158,23 @@ properties:
       of zero disables this component.
     example: 90
 
+  health.min_worker_count:
+    env: CONCOURSE_HEALTH_MIN_WORKER_COUNT
+    description: |
+      Minimum number of running workers before the health endpoint reports
+      degraded. Below this threshold the status is degraded (HTTP 200).
+      Zero running workers is always failing (HTTP 503). Set  this to 0 to skip
+      the degraded state entirely - status goes directly from healthy to failing. Defaults to 1 in the code.
+    example: 1
+
+  health.component_stale_multiplier:
+    env: CONCOURSE_HEALTH_COMPONENT_STALE_MULTIPLIER
+    description: |
+      A component is considered stale when it has not run for more than this
+      multiplier times its configured interval. Stale runtime components
+      (i.e scheduler) cause the overall status to become degraded. Defaults to 2.0 in the code.
+    example: 2.0
+
   log_level:
     env: CONCOURSE_LOG_LEVEL
     description: |
