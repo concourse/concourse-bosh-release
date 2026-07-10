@@ -683,6 +683,14 @@ processes:
     CONCOURSE_GLOBAL_RESOURCE_CHECK_TIMEOUT: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("health.component_stale_multiplier") do |v| -%>
+    CONCOURSE_HEALTH_COMPONENT_STALE_MULTIPLIER: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("health.min_worker_count") do |v| -%>
+    CONCOURSE_HEALTH_MIN_WORKER_COUNT: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("id_token.signing_key.check_interval") do |v| -%>
     CONCOURSE_SIGNING_KEY_CHECK_INTERVAL: <%= env_flag(v).to_json %>
 <% end -%>
