@@ -1785,6 +1785,10 @@ properties:
     description: |
       Path under which to namespace team/pipeline credentials.
     default: /concourse
+  credhub.shared_path:
+    env: CONCOURSE_CREDHUB_SHARED_PATH
+    description: |
+      Path under which to lookup shared credentials.
   credhub.tls.ca_cert:
     type: certificate
     env_fields: {certificate: {env_file: CONCOURSE_CREDHUB_CA_CERT}}
