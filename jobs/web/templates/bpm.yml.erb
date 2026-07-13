@@ -367,6 +367,10 @@ processes:
     CONCOURSE_CREDHUB_PATH_PREFIX: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("credhub.shared_path") do |v| -%>
+    CONCOURSE_CREDHUB_SHARED_PATH: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("credhub.tls.ca_cert.certificate") do |v| -%>
     CONCOURSE_CREDHUB_CA_CERT: <%= env_file_flag(v, "CONCOURSE_CREDHUB_CA_CERT").to_json %>
 <% end -%>
