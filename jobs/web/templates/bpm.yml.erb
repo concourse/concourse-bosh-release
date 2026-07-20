@@ -391,6 +391,10 @@ processes:
     CONCOURSE_CREDHUB_URL: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("custom_http_headers") do |v| -%>
+    CONCOURSE_CUSTOM_HTTP_HEADERS: <%= env_file_flag(v, "CONCOURSE_CUSTOM_HTTP_HEADERS").to_json %>
+<% end -%>
+
 <% if_p("datadog.agent_host") do |v| -%>
     CONCOURSE_DATADOG_AGENT_HOST: <%= env_flag(v).to_json %>
 <% end -%>

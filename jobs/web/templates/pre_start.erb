@@ -66,6 +66,9 @@ mkdir -p /var/vcap/jobs/web/config/env
 <% if_p("credhub.tls.client_cert.private_key") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_CREDHUB_CLIENT_KEY") %>
 <% end -%>
+<% if_p("custom_http_headers") do |v| -%>
+<%= env_file_writer(v, "CONCOURSE_CUSTOM_HTTP_HEADERS") %>
+<% end -%>
 <% if_p("generic_oauth.ca_cert.certificate") do |v| -%>
 <%= env_file_writer(v, "CONCOURSE_OAUTH_CA_CERT") %>
 <% end -%>
