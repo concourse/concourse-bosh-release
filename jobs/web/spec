@@ -142,6 +142,14 @@ properties:
     env: CONCOURSE_STRICT_TRANSPORT_SECURITY
     description: |
       The value to set for the Strict-Transport-Security header.
+    
+  custom_http_headers:
+    env_file: CONCOURSE_CUSTOM_HTTP_HEADERS
+    description: |
+      YAML or JSON file content to customize HTTP headers to be set on all responses. The file should contain a mapping of header names to values.
+    example: |
+      Cross-Origin-Opener-Policy: "same-origin"
+      Referrer-Policy: "no-referrer"
 
   concurrent_request_limits:
     env: CONCOURSE_CONCURRENT_REQUEST_LIMIT
