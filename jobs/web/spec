@@ -142,7 +142,7 @@ properties:
     env: CONCOURSE_STRICT_TRANSPORT_SECURITY
     description: |
       The value to set for the Strict-Transport-Security header.
-    
+
   custom_http_headers:
     env_file: CONCOURSE_CUSTOM_HTTP_HEADERS
     description: |
@@ -165,6 +165,14 @@ properties:
       none of its jobs have run in less than the given number of days. A value
       of zero disables this component.
     example: 90
+
+  destroy_archived_pipelines_after:
+    env: CONCOURSE_DESTROY_ARCHIVED_PIPELINES_AFTER
+    description: |
+      The duration in Go's time.Duration format, after which an archived
+      pipeline will be automatically destroyed. A value of zero (default value)
+      means archived pipelines are never destroyed.
+    example: "720h"
 
   health.min_worker_count:
     env: CONCOURSE_HEALTH_MIN_WORKER_COUNT
@@ -1782,6 +1790,10 @@ properties:
     env: CONCOURSE_CONJUR_SECRET_TEMPLATE
     description: |
       Conjur secret identifier template used for full path conjur secrets
+  conjur.shared_path:
+    env: CONCOURSE_CONJUR_SHARED_PATH
+    description: |
+      Path under which to lookup shared credentials.
 
   credhub.url:
     env: CONCOURSE_CREDHUB_URL

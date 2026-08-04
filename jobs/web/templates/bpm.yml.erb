@@ -331,6 +331,10 @@ processes:
     CONCOURSE_CONJUR_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
 <% end -%>
 
+<% if_p("conjur.shared_path") do |v| -%>
+    CONCOURSE_CONJUR_SHARED_PATH: <%= env_flag(v).to_json %>
+<% end -%>
+
 <% if_p("conjur.team_secret_template") do |v| -%>
     CONCOURSE_CONJUR_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
 <% end -%>
@@ -461,6 +465,10 @@ processes:
 
 <% if_p("default_task_timeout") do |v| -%>
     CONCOURSE_DEFAULT_TASK_TIMEOUT: <%= env_flag(v).to_json %>
+<% end -%>
+
+<% if_p("destroy_archived_pipelines_after") do |v| -%>
+    CONCOURSE_DESTROY_ARCHIVED_PIPELINES_AFTER: <%= env_flag(v).to_json %>
 <% end -%>
 
 <% if_p("disable_redact_secrets") do |v| -%>
