@@ -93,7 +93,7 @@ properties:
       overriding the web's --max-active-tasks-per-worker for THIS worker. Web
       nodes must be using the limit-active-tasks placement strategy for this to
       have any effect.
-    default: 5
+    example: 5
 
   sweep_interval:
     env: CONCOURSE_SWEEP_INTERVAL

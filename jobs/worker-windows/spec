@@ -72,6 +72,16 @@ properties:
       If set, the worker will immediately disappear upon stalling.
     default: false
 
+  max_active_tasks:
+    env: CONCOURSE_MAX_ACTIVE_TASKS
+    description: |
+      If set, when the worker registers with the web node(s) it will specify
+      this value as the max number of active tasks that can be assigned to it,
+      overriding the web's --max-active-tasks-per-worker for THIS worker. Web
+      nodes must be using the limit-active-tasks placement strategy for this to
+      have any effect.
+    example: 5
+
   garden.request_timeout:
     env: CONCOURSE_GARDEN_REQUEST_TIMEOUT
     description: |
