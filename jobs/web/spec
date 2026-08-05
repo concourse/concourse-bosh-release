@@ -1790,10 +1790,6 @@ properties:
     env: CONCOURSE_CONJUR_SECRET_TEMPLATE
     description: |
       Conjur secret identifier template used for full path conjur secrets
-  conjur.shared_path:
-    env: CONCOURSE_CONJUR_SHARED_PATH
-    description: |
-      Path under which to lookup shared credentials.
 
   credhub.url:
     env: CONCOURSE_CREDHUB_URL
