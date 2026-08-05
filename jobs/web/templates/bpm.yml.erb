@@ -331,10 +331,6 @@ processes:
     CONCOURSE_CONJUR_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
 <% end -%>
 
-<% if_p("conjur.shared_path") do |v| -%>
-    CONCOURSE_CONJUR_SHARED_PATH: <%= env_flag(v).to_json %>
-<% end -%>
-
 <% if_p("conjur.team_secret_template") do |v| -%>
     CONCOURSE_CONJUR_TEAM_SECRET_TEMPLATE: <%= env_flag(v).to_json %>
 <% end -%>
