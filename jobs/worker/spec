@@ -95,6 +95,16 @@ properties:
       have any effect.
     example: 5
 
+  p2p_streaming_group:
+    env: CONCOURSE_P2P_STREAMING_GROUP
+    description: |
+      Assign this worker to a P2P streaming group. When P2P streaming is
+      enabled, workers in the same group stream directly to each other.
+      Workers with different groups stream through the ATC. Workers with
+      no group will only stream to other workers that also have no P2P
+      streaming group.
+    example: group-a
+
   sweep_interval:
     env: CONCOURSE_SWEEP_INTERVAL
     description: |
