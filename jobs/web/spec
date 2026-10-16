@@ -302,7 +302,9 @@ properties:
   p2p.enable:
     env: CONCOURSE_ENABLE_P2P_VOLUME_STREAMING
     description: |
-      Enable peer-to-peer volume streaming between workers.
+      Enable peer-to-peer volume streaming between workers within the same P2P streaming
+      group.  Workers with unset P2P streaming groups are considered to be in the same group.
+      NOTE: All workers in a P2P group must be on the same LAN network.
 
   p2p.stream_timeout:
     env: CONCOURSE_P2P_VOLUME_STREAMING_TIMEOUT
