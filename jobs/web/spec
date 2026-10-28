@@ -191,6 +191,24 @@ properties:
       (i.e scheduler) cause the overall status to become degraded. Defaults to 2.0 in the code.
     example: 2.0
 
+  health.min_worker_scopes:
+    env: CONCOURSE_HEALTH_MIN_WORKER_SCOPES
+    description: |
+      Per-pool minimum running-worker thresholds. Each entry has the format
+      kind:name:count:severity, where kind is platform, team, or tag; name is
+      the platform name (linux/darwin/windows), team name, or tag name; count is
+      the minimum number of running workers required; and severity controls what
+      health state is reported when the threshold is not met.
+
+      Severity values:
+        critical — zero running workers causes failing (HTTP 503); running but
+                   below minimum causes degraded.
+        warn     — any shortfall causes degraded; never causes HTTP 503.
+        info     — tracked in breakdowns only, no effect on overall status.
+
+      Entries are comma-separated. Repeatable.
+    example: "platform:linux:2:critical,platform:windows:1:warn,team:infra-team:1:critical,tag:gpu:1:critical"
+
   log_level:
     env: CONCOURSE_LOG_LEVEL
     description: |
